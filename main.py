@@ -22,10 +22,10 @@ class Game:
         self.running = True
 
         # Load fonts (must be in the same folder)
-        self.default_font = pygame.font.Font("Helvetica.ttf", FONT_SIZE)  # general text
+        self.default_font = pygame.font.Font("assets/fonts/Helvetica.ttf", FONT_SIZE)  # general text
 
-        self.special_font = pygame.font.Font("damnarc.ttf", FONT_SIZE + 10)  # specific text
-        self.small_font = pygame.font.Font("Helvetica.ttf", SMALL_FONT_SIZE)  # smaller text
+        self.special_font = pygame.font.Font("assets/fonts/damnarc.ttf", FONT_SIZE + 10)  # specific text
+        self.small_font = pygame.font.Font("assets/fonts/Helvetica.ttf", SMALL_FONT_SIZE)  # smaller text
         # Placeholder texts
         self.left_text = "Left info"
         self.right_text = "Right info"
