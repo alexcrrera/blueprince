@@ -1,6 +1,7 @@
 import pygame
 import sys
 import os
+import time
 
 # Constants
 SCREEN_WIDTH = 1920
@@ -78,4 +79,5 @@ if __name__ == "__main__":
     game = Game()
     game.run()
     pygame.quit()
+    time.sleep(1)
     sys.exit()
