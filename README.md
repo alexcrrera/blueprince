@@ -1,6 +1,6 @@
 # blueprince
 
-This is the repository for the BluePrince2D project, which aimsto create a simplified 2D version of the Blue Prince game. You will find the source code, assets, and documentation needed to build and run the game.
+This is the repository for the BluePrince2D project, which aims to create a simplified 2D version of the Blue Prince game. You will find the source code, assets, and documentation needed to build and run the game.
 
 ## Installation
 
