@@ -2,11 +2,10 @@ import pygame
 import sys
 import os
 import time
+import params
 
 # Constants
-SCREEN_WIDTH = 1920
-SCREEN_HEIGHT = 1080
-FPS = 60
+
 BG_COLOR = (30, 30, 30)
 TEXT_COLOR = (255, 255, 255)
 FONT_SIZE = 30
@@ -17,7 +16,7 @@ SMALL_FONT_SIZE = 10
 class Game:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.NOFRAME)
+        self.screen = pygame.display.set_mode((params.screenWidth, params.screenHeight), pygame.NOFRAME)
         pygame.display.set_caption("Blue Prince Emulation")
         self.clock = pygame.time.Clock()
         self.running = True
@@ -51,14 +50,14 @@ class Game:
     def draw(self):
         self.screen.fill(BG_COLOR)
         # Bottom-left
-        self.draw_text(self.left_text, (PADDING, SCREEN_HEIGHT - FONT_SIZE - PADDING))
+        self.draw_text(self.left_text, (PADDING,  params.screenHeight - FONT_SIZE - PADDING))
         # Bottom-right
-        right_pos = (SCREEN_WIDTH - PADDING - self.default_font.size(self.right_text)[0], SCREEN_HEIGHT - FONT_SIZE - PADDING)
+        right_pos = (params.screenWidth - PADDING - self.default_font.size(self.right_text)[0],  params.screenHeight - FONT_SIZE - PADDING)
         self.draw_text(self.right_text, right_pos)
         # Example of special text in a custom font at top-left
         self.draw_text(self.special_text, (PADDING, PADDING), font=self.special_font, color=(255, 200, 0))
         fps_text = f"FPS: {int(self.clock.get_fps())}"
-        self.draw_text(fps_text, (SCREEN_WIDTH//2 - PADDING -  self.small_font.size(fps_text)[0], SCREEN_HEIGHT - PADDING),font=self.small_font)
+        self.draw_text(fps_text, (params.screenWidth//2 - PADDING -  self.small_font.size(fps_text)[0],  params.screenHeight - PADDING),font=self.small_font)
 
         pygame.display.flip()
 
@@ -73,7 +72,7 @@ class Game:
             self.draw()
        
 
-            self.clock.tick(FPS)
+            self.clock.tick(params.fps)
 
 if __name__ == "__main__":
     game = Game()
