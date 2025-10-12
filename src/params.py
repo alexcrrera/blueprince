@@ -17,12 +17,13 @@ splitRatioScreen = 0.33 # ratio entre côté gauche et droite
 SFX_LEVEL =0.5
 MUSIC_LEVEL = 0.4
 
-AUDIO_DIR = "/assets/audio"
+AUDIO_DIR = "assets/audio"
 
 MUSIC_TRACK_DIR = AUDIO_DIR +"/music" "/mainTrack.mp3" 
 
 SFX_DIR =  AUDIO_DIR + "/mainTrack.mp3" 
 
+PLAY_MUSIC = True
 
 def getScreenSize(screenW:int,screenH:int)->int:
     """   
