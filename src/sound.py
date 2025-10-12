@@ -27,7 +27,7 @@ class HandleSound:
         """Pause la musique"""
         pygame.mixer.music.set_volume(0)
 
-    def set_music_volume(self, volume):
+    def set_music_volume(self, volume=params.MUSIC_LEVEL):
         """Permet d'ajuster la musique"""
         self.music_volume = volume
         pygame.mixer.music.set_volume(volume)
@@ -43,4 +43,6 @@ class HandleSound:
     def update(self):
         if(not(params.PLAY_MUSIC)):
             self.stop_music()
+        else:
+            self.set_music_volume()
         pass
