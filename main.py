@@ -51,6 +51,7 @@ class Game:
 
     def update(self):
         self.bg.draw()
+        self.audio.update()
         pass
 
     def draw(self):
