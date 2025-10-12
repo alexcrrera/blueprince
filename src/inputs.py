@@ -15,9 +15,7 @@ class inputHandling:
         self.key_pressed = {}  # reset for this frame
 
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.key_pressed["QUIT"] = True
-
+   
             if event.type == pygame.KEYDOWN:
                 self.key_pressed[event.key] = True
                 
