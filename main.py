@@ -6,6 +6,7 @@ import time
 
 from src import params
 from src import ui
+from src import sound
 # Constants
 
 BG_COLOR = (30, 30, 30)
@@ -23,6 +24,7 @@ class Game:
         params.screenWidth, params.screenHeight = params.getScreenSize( info.current_w, info.current_h)
         self.screen = pygame.display.set_mode((params.screenWidth, params.screenHeight), pygame.NOFRAME)
         self.bg = ui.handleBackground(self.screen)
+        self.audio = sound.
         pygame.display.set_caption("Blue Prince Emulation")
         self.clock = pygame.time.Clock()
         self.running = True
