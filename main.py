@@ -7,6 +7,7 @@ import time
 from src import params
 from src import ui
 from src import sound
+from src import inputs
 # Constants
 
 BG_COLOR = (30, 30, 30)
@@ -22,9 +23,11 @@ class Game:
         # permet d'ajuster l'écran afin de maximiser la taille tout en conservant un aspect ratio de 16:9
         info = pygame.display.Info()
         params.screenWidth, params.screenHeight = params.getScreenSize( info.current_w, info.current_h)
-        self.screen = pygame.display.set_mode((params.screenWidth, params.screenHeight), pygame.NOFRAME)
+        self.screen = pygame.display.set_mode((params.screenWidth, params.screenHeight))
         self.bg = ui.handleBackground(self.screen)
         self.audio = sound.HandleSound()
+        self.input = inputs.inputHandling()
+
         pygame.display.set_caption("Blue Prince Emulation")
         self.clock = pygame.time.Clock()
         self.running = True
@@ -50,8 +53,10 @@ class Game:
                 self.running = False
 
     def update(self):
+        self.input.update()
         self.bg.draw()
         self.audio.update()
+        
         pass
 
     def draw(self):
