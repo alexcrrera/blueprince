@@ -1,5 +1,6 @@
 import pygame
 from src import params
+import random
 
 class HandleSound:
     def __init__(self):
@@ -11,6 +12,7 @@ class HandleSound:
 
 
         self.sfx = {}
+        self.randomStartMusic = random.uniform(0,3500) # un peu moins d'une heure au cas où
         self.play_music()
 
 
@@ -19,7 +21,7 @@ class HandleSound:
         
         pygame.mixer.music.load(params.MUSIC_TRACK_DIR)
         pygame.mixer.music.set_volume(params.MUSIC_LEVEL)
-        pygame.mixer.music.play(loops=-1)
+        pygame.mixer.music.play(loops=-1, start = self.randomStartMusic)
 
     def stop_music(self):
         """Pause la musique"""
