@@ -26,6 +26,9 @@ SFX_DIR =  AUDIO_DIR + "/mainTrack.mp3"
 
 PLAY_MUSIC = True
 
+
+KEEP_RUNNING = True
+
 def getScreenSize(screenW:int,screenH:int)->int:
     """   
     Fonction qui vérifie quelle taille (en pixels) maximale on peut avoir de sorte à avoir un ratio
