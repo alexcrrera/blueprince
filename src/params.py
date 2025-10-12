@@ -2,8 +2,8 @@ import math
 
 # Screen settings
 
-screenWidth = 1920
-screenHeight = 1080
+screenWidth = 1920 #taille image horizontal par défaut
+screenHeight = 1080 #taille image vertical par défaut
 
 
 #Colors (R, G, B)
@@ -12,7 +12,7 @@ WHITE = (255, 255, 255)
 
 # Game settings
 fps = 60
-
+splitRatioScreen = 0.33 # ratio entre côté gauche et droite
 
 def getScreenSize(screenW:int,screenH:int)->int:
     """   
