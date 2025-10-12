@@ -24,7 +24,7 @@ class Game:
         params.screenWidth, params.screenHeight = params.getScreenSize( info.current_w, info.current_h)
         self.screen = pygame.display.set_mode((params.screenWidth, params.screenHeight), pygame.NOFRAME)
         self.bg = ui.handleBackground(self.screen)
-        self.audio = sound.
+        self.audio = sound.HandleSound()
         pygame.display.set_caption("Blue Prince Emulation")
         self.clock = pygame.time.Clock()
         self.running = True
