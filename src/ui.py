@@ -4,17 +4,21 @@ from src import params
 class handleBackground:
     """
     Création de la base de l'interface
-    - Gauche 33%: noir
-    - Doite 67%: blanc
+
     """
 
     def __init__(self, surface: pygame.Surface):
+        """Initialisation"""
         self.surface = surface
         self.leftColor = params.BLACK
         self.rightColor = params.WHITE
-        self.splitRatio = 0.33  # 33%
+        self.splitRatio = params.splitRatioScreen  # 33%
 
     def draw(self):
+        """
+        Crée le fond de l'interface
+        - Gauche 33%: noir
+        - Doite 67%: blanc"""
         width, height = self.surface.get_size()
         leftWidth = int(width * self.splitRatio)
 
