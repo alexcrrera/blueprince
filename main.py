@@ -47,12 +47,10 @@ class Game:
         rendered_text = font.render(text, True, color)
         self.screen.blit(rendered_text, position)
 
-    def handle_events(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.running = False
+  
 
     def update(self):
+        self.running = params.KEEP_RUNNING
         self.input.update()
         self.bg.draw()
         self.audio.update()
@@ -77,7 +75,7 @@ class Game:
 
     def run(self):
         while self.running:
-            self.handle_events()
+     
             self.update()
             self.draw()
        
