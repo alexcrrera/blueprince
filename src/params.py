@@ -14,6 +14,16 @@ WHITE = (255, 255, 255)
 fps = 60
 splitRatioScreen = 0.33 # ratio entre côté gauche et droite
 
+SFX_LEVEL =0.5
+MUSIC_LEVEL = 0.4
+
+AUDIO_DIR = "/assets/audio"
+
+MUSIC_TRACK_DIR = AUDIO_DIR +"/music" "/mainTrack.mp3" 
+
+SFX_DIR =  AUDIO_DIR + "/mainTrack.mp3" 
+
+
 def getScreenSize(screenW:int,screenH:int)->int:
     """   
     Fonction qui vérifie quelle taille (en pixels) maximale on peut avoir de sorte à avoir un ratio
