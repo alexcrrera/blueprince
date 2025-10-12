@@ -2,8 +2,9 @@ import pygame
 import sys
 import os
 import time
-import params
 
+
+from src import params
 # Constants
 
 BG_COLOR = (30, 30, 30)
