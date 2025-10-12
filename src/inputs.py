@@ -15,22 +15,23 @@ class inputHandling:
         self.key_pressed = {}  # reset for this frame
 
         for event in pygame.event.get():
-   
+            if event.type == pygame.QUIT:
+                self.key_pressed["QUIT"] = True
+                params.KEEP_RUNNING = False
+
             if event.type == pygame.KEYDOWN:
                 self.key_pressed[event.key] = True
                 
                 if event.key == pygame.K_m:
                     params.PLAY_MUSIC = not params.PLAY_MUSIC
-                    if params.PLAY_MUSIC:
-                        print("Music unmuted")
-                    else:
-                        print("Music muted")
-                if event.key == pygame.F_m:
-                    
+               
+                   
+                if event.key == pygame.K_f:
+                    pass
                    
              
                
-                    print("F PRESSED")
+                   
 
 
             if event.type == pygame.KEYUP:
