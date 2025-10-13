@@ -7,7 +7,6 @@ class HandleSound:
         self.data = data
         self.music_path = params.MUSIC_TRACK_DIR
         self.sfx_folder_path = params.SFX_DIR
-        self.music_volume = params.MUSIC_LEVEL
         self.sfx_volume = params.SFX_LEVEL
 
 
