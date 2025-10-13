@@ -28,7 +28,8 @@ class HandleBackground:
 
         pygame.draw.rect(self.surface, self.leftColor, (0, 0, leftWidth, height))
         pygame.draw.rect(self.surface, self.rightColor, (leftWidth, 0, width - leftWidth, height))
-
+    def update(self):
+        self.draw()
 
 
 class HandleScreen:
