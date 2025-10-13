@@ -23,7 +23,7 @@ MUSIC_LEVEL = 0.4
 
 AUDIO_DIR = "assets/audio"
 
-MUSIC_TRACK_DIR = AUDIO_DIR +"/music" "/mainTrack.mp3" 
+MUSIC_TRACK_DIR = AUDIO_DIR +"/music" +"/mainTrack.mp3" 
 
 SFX_DIR =  AUDIO_DIR + "/mainTrack.mp3" 
 
