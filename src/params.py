@@ -32,7 +32,6 @@ PLAY_MUSIC = True
 
 KEEP_RUNNING = True
 
-
 # FLAGS
 
-changeScreenSizeFlag = False
+changeScreenSizeFlag = False # raise it when pressing F
