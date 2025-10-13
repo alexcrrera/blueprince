@@ -23,66 +23,31 @@ class Game:
         # permet d'ajuster l'écran afin de maximiser la taille tout en conservant un aspect ratio de 16:9
         info = pygame.display.Info()
         self.screenHandler = ui.handleScreen(info.current_w, info.current_h)
-        
+        self.textHandler = ui.handleText(self.screenHandler.screen)
       
  
         self.bg = ui.handleBackground(self.screenHandler.screen)
         self.audio = sound.HandleSound()
         self.input = inputs.inputHandling()
 
-        
+
         self.clock = pygame.time.Clock()
         self.running = True
-
-        # Load fonts (must be in the same folder)
-        self.default_font = pygame.font.Font("assets/fonts/Helvetica.ttf", FONT_SIZE)  # general text
-        self.special_font = pygame.font.Font("assets/fonts/damnarc.ttf", FONT_SIZE + 10)  # specific text
-        self.small_font = pygame.font.Font("assets/fonts/Helvetica.ttf", SMALL_FONT_SIZE)  # smaller text
-        # Placeholder texts
-        self.left_text = "Left info"
-        self.right_text = "Right info"
-        self.special_text = "Day One"
-
-    def draw_text(self, text, position, font=None, color=TEXT_COLOR):
-        """Draw text with optional font and color."""
-        font = font or self.default_font
-        rendered_text = font.render(text, True, color)
-        self.screenHandler.screen.blit(rendered_text, position)
-
-  
 
     def update(self):
         self.running = params.KEEP_RUNNING
         self.screenHandler.update()
+        self.textHandler.update()
         self.input.update()
         self.bg.draw()
         self.audio.update()
         
         pass
 
-    def draw(self):
-        #self.screen.fill(BG_COLOR)
-        # Bottom-left
-        self.draw_text(self.left_text, (PADDING,  params.screenHeight - FONT_SIZE - PADDING))
-        # Bottom-right
-        right_pos = (params.screenWidth - PADDING - self.default_font.size(self.right_text)[0],  params.screenHeight - FONT_SIZE - PADDING)
-        self.draw_text(self.right_text, right_pos)
-        # Example of special text in a custom font at top-left
-        self.draw_text(self.special_text, (PADDING, PADDING), font=self.special_font, color=(255, 200, 0))
-        fps_text = f"FPS: {int(self.clock.get_fps())}"
-        self.draw_text(fps_text, (params.screenWidth//2 - PADDING -  self.small_font.size(fps_text)[0],  params.screenHeight - PADDING),font=self.small_font)
-
-        pygame.display.flip()
-
-
 
     def run(self):
         while self.running:
-     
             self.update()
-            self.draw()
-       
-
             self.clock.tick(params.fps)
 
 if __name__ == "__main__":
