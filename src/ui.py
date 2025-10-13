@@ -5,7 +5,7 @@ import math
 
 import os
 
-class handleBackground:
+class HandleBackground:
     """
     Création de la base de l'interface
 
@@ -31,7 +31,7 @@ class handleBackground:
 
 
 
-class handleScreen:
+class HandleScreen:
     def __init__(self,width,height):
         """Initialisation"""
         self.maxWidth = width
@@ -76,7 +76,7 @@ class handleScreen:
 
 
 
-class handleText():
+class HandleText():
     def __init__(self,screen):
         self.screen = screen
 

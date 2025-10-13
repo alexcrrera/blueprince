@@ -3,7 +3,7 @@ from src import params
 import pygame
 
 
-class inputHandling:
+class HandleInputs:
     def __init__(self):
         # Dictionary to track key presses
         self.key_pressed = {}
