@@ -27,13 +27,6 @@ class HandleInputs:
                     self.data.music_play = not self.data.music_play
                
                    
-                
-
-                   
-             
-               
-                   
-
 
             if event.type == pygame.KEYUP:
                 self.key_pressed[event.key] = False
