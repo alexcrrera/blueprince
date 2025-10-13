@@ -72,3 +72,43 @@ class handleScreen:
             params.screenWidtht = self.width
 
             os.environ['SDL_VIDEO_CENTERED'] = '1'
+
+
+
+
+class handleText():
+    def __init__(self,screen):
+        self.screen = screen
+
+       
+        self.default_text_size = params.DEFAULT_FONT_SIZE
+        self.special_text_size = params.SPECIAL_FONT_SIZE
+        self.small_text_size = params.SMALL_FONT_SIZE
+
+
+        self.left_text = "Left info"
+        self.right_text = "Right info"
+        self.special_text = "Day One"
+
+        self.default_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, params.DEFAULT_FONT_SIZE)  
+        self.special_font = pygame.font.Font(params.SPECIAL_TEXT_DIR, params.SPECIAL_FONT_SIZE)  
+        self.small_font = pygame.font.Font(params.SMALL_TEXT_DIR, params.SMALL_FONT_SIZE) 
+    
+    def draw_text(self, text, position, font=None, color=params.TEXT_COLOR):
+        font = font or self.default_font
+
+        rendered_text = font.render(text, True, color)
+        self.screen.blit(rendered_text, position)
+
+    def draw(self):
+            
+        self.draw_text(self.special_text, (params.PADDING, params.PADDING), font=self.special_font, color=(255, 200, 0))
+
+       # fps_text = f"FPS: {int(self.clock.get_fps())}"
+        #self.draw_text(fps_text, (params.screenWidth//2 - params.PADDING -  self.small_font.size(fps_text)[0],  params.screenHeight - params.PADDING),font=self.small_font)
+
+    def update(self):
+        self.draw()
+        pygame.display.flip()
+
+        pass
