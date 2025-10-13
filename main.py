@@ -21,8 +21,7 @@ SMALL_FONT_SIZE = 10
 class Game:
     def __init__(self):
         pygame.init()
-        # permet d'ajuster l'écran afin de maximiser la taille tout en conservant un aspect ratio de 16:9
-      
+
         self.screenHandler = ui.HandleScreen()
         self.clock = pygame.time.Clock()
         self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock)
