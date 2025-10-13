@@ -25,7 +25,7 @@ MUSIC_TRACK_DIR = AUDIO_DIR +"/music" +"/mainTrack.mp3"
 
 SFX_DIR =  AUDIO_DIR + "/mainTrack.mp3" 
 
-PLAY_MUSIC = True
+PLAY_MUSIC_START = True
 
 
 KEEP_RUNNING = True

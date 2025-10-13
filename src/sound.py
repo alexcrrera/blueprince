@@ -3,8 +3,8 @@ from src import params
 import random
 
 class HandleSound:
-    def __init__(self):
-  
+    def __init__(self,data):
+        self.data = data
         self.music_path = params.MUSIC_TRACK_DIR
         self.sfx_folder_path = params.SFX_DIR
         self.music_volume = params.MUSIC_LEVEL
@@ -41,7 +41,7 @@ class HandleSound:
 
     
     def update(self):
-        if(not(params.PLAY_MUSIC)):
+        if(not(self.data.music_play)):
             self.stop_music()
         else:
             self.set_music_volume()

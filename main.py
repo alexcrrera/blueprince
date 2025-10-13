@@ -29,13 +29,13 @@ class Game:
         
         self.dataHandler = data.HandleData()
         self.backgroundHandler = ui.HandleBackground(self.screenHandler.screen)
-        self.audioHandler = sound.HandleSound()
+        self.audioHandler = sound.HandleSound(self.dataHandler)
         self.inputHandler = inputs.HandleInputs(self.dataHandler)
 
         self.running = True
 
     def update(self):
-        self.running = params.KEEP_RUNNING
+        self.running = self.dataHandler.keep_running
         self.screenHandler.update()
         self.textHandler.update()
         self.inputHandler.update()

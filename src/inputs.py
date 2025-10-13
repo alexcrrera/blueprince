@@ -24,7 +24,7 @@ class HandleInputs:
                 self.key_pressed[event.key] = True
                 
                 if event.key == pygame.K_m:
-                    params.PLAY_MUSIC = not params.PLAY_MUSIC
+                    self.data.music_play = not self.data.music_play
                
                    
                 
