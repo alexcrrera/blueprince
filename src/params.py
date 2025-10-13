@@ -1,5 +1,5 @@
 import math
-
+import pygame
 # Screen settings
 DEFAULT_SCREEN_WIDTH= 1920
 DEFAULT_SCREEN_HEIGHT = 1080
@@ -31,6 +31,28 @@ PLAY_MUSIC = True
 
 
 KEEP_RUNNING = True
+
+
+
+# UI
+
+BG_COLOR = (30, 30, 30)
+
+TEXT_COLOR = (255, 255, 255)
+
+FONT_SIZE = 30
+
+PADDING = 20
+
+SMALL_FONT_SIZE = 10
+DEFAULT_FONT_SIZE = 20
+SPECIAL_FONT_SIZE = 10
+# Fonts
+
+SMALL_TEXT_DIR = "assets/fonts/Helvetica.ttf"
+DEFAULT_TEXT_DIR = "assets/fonts/Helvetica.ttf"
+SPECIAL_TEXT_DIR = "assets/fonts/damnarc.ttf"
+
 
 # FLAGS
 
