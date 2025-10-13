@@ -8,6 +8,7 @@ from src import params
 from src import ui
 from src import sound
 from src import inputs
+from src import data
 # Constants
 
 BG_COLOR = (30, 30, 30)
@@ -26,10 +27,10 @@ class Game:
         self.clock = pygame.time.Clock()
         self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock)
         
- 
+        self.dataHandler = data.HandleData()
         self.backgroundHandler = ui.HandleBackground(self.screenHandler.screen)
         self.audioHandler = sound.HandleSound()
-        self.inputHandler = inputs.HandleInputs()
+        self.inputHandler = inputs.HandleInputs(self.dataHandler)
 
         self.running = True
 
