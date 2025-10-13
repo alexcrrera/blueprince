@@ -77,7 +77,9 @@ class HandleScreen:
 
 
 class HandleText():
-    def __init__(self,screen):
+    def __init__(self,screen,clock):
+
+        self.clock = clock
         self.screen = screen
 
        
@@ -104,8 +106,8 @@ class HandleText():
             
         self.draw_text(self.special_text, (params.PADDING, params.PADDING), font=self.special_font, color=(255, 200, 0))
 
-       # fps_text = f"FPS: {int(self.clock.get_fps())}"
-        #self.draw_text(fps_text, (params.screenWidth//2 - params.PADDING -  self.small_font.size(fps_text)[0],  params.screenHeight - params.PADDING),font=self.small_font)
+        fps_text = f"FPS: {int(self.clock.get_fps())}"
+        self.draw_text(fps_text, (params.screenWidth//2 - params.PADDING -  self.small_font.size(fps_text)[0],  params.screenHeight - params.PADDING),font=self.small_font,color=params.BLACK)
 
     def update(self):
         self.draw()

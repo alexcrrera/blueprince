@@ -23,15 +23,16 @@ class Game:
         # permet d'ajuster l'écran afin de maximiser la taille tout en conservant un aspect ratio de 16:9
         info = pygame.display.Info()
         self.screenHandler = ui.HandleScreen(info.current_w, info.current_h)
-        self.textHandler = ui.HandleText(self.screenHandler.screen)
-      
+        self.clock = pygame.time.Clock()
+        self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock)
+        
  
         self.bg = ui.HandleBackground(self.screenHandler.screen)
         self.audio = sound.HandleSound()
         self.input = inputs.HandleInputs()
 
 
-        self.clock = pygame.time.Clock()
+        
         self.running = True
 
     def update(self):
