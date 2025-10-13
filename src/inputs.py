@@ -26,10 +26,7 @@ class HandleInputs:
                     params.PLAY_MUSIC = not params.PLAY_MUSIC
                
                    
-                if event.key == pygame.K_f:
-                    params.FULL_SCREEN = not(params.FULL_SCREEN)
-                    
-                    params.changeScreenSizeFlag = True
+                
 
                    
              
