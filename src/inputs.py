@@ -4,7 +4,8 @@ import pygame
 
 
 class HandleInputs:
-    def __init__(self):
+    def __init__(self,data):
+        self.data = data
         # Dictionary to track key presses
         self.key_pressed = {}
 
@@ -17,7 +18,7 @@ class HandleInputs:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.key_pressed["QUIT"] = True
-                params.KEEP_RUNNING = False
+                self.data.keep_running = False
 
             if event.type == pygame.KEYDOWN:
                 self.key_pressed[event.key] = True
