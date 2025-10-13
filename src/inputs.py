@@ -27,7 +27,10 @@ class inputHandling:
                
                    
                 if event.key == pygame.K_f:
-                    pass
+                    params.FULL_SCREEN = not(params.FULL_SCREEN)
+                    
+                    params.changeScreenSizeFlag = True
+
                    
              
                
