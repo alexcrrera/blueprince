@@ -50,6 +50,3 @@ DEFAULT_TEXT_DIR = "assets/fonts/Helvetica.ttf"
 SPECIAL_TEXT_DIR = "assets/fonts/damnarc.ttf"
 
 
-# FLAGS
-
-changeScreenSizeFlag = False # raise it when pressing F
