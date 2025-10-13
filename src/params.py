@@ -5,10 +5,6 @@ DEFAULT_SCREEN_WIDTH= 1920
 DEFAULT_SCREEN_HEIGHT = 1080
 screenWidth = DEFAULT_SCREEN_WIDTH #taille image horizontal par défaut
 screenHeight = DEFAULT_SCREEN_HEIGHT #taille image vertical par défaut
-USE_DEFAULT_SCREEN_SIZE = True
-
-FULL_SCREEN = not(USE_DEFAULT_SCREEN_SIZE)
-
 
 #TODO: TIDY UP TOUT ÇA
 
