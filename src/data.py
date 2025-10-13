@@ -9,4 +9,5 @@ class HandleData:
         self.keep_running = True
 
         self.music_play = params.PLAY_MUSIC_START
+        self.music_level = params.MUSIC_LEVEL
         pass
