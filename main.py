@@ -27,9 +27,9 @@ class Game:
         self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock)
         
  
-        self.bg = ui.HandleBackground(self.screenHandler.screen)
-        self.audio = sound.HandleSound()
-        self.input = inputs.HandleInputs()
+        self.backgroundHandler = ui.HandleBackground(self.screenHandler.screen)
+        self.audioHandler = sound.HandleSound()
+        self.inputHandler = inputs.HandleInputs()
 
 
         
@@ -39,9 +39,9 @@ class Game:
         self.running = params.KEEP_RUNNING
         self.screenHandler.update()
         self.textHandler.update()
-        self.input.update()
-        self.bg.draw()
-        self.audio.update()
+        self.inputHandler.update()
+        self.backgroundHandler.update()
+        self.audioHandler.update()
         
         pass
 
