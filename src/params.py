@@ -17,7 +17,7 @@ fps = 60
 splitRatioScreen = 0.33 # ratio entre côté gauche et droite
 
 SFX_LEVEL =0.5
-MUSIC_LEVEL = 0.4
+MUSIC_LEVEL = 1
 
 AUDIO_DIR = "assets/audio"
 
