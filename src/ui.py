@@ -41,7 +41,7 @@ class HandleScreen:
 
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("Blue Prince Emulation")
-        
+        os.environ['SDL_VIDEO_CENTERED'] = '1'
     
 
     def update(self):
