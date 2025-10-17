@@ -56,3 +56,7 @@ SPECIAL_TEXT_DIR = "assets/fonts/damnarc.ttf"
 
 ROOM_GRID_SIZE_HORIZONTAL = 5
 ROOM_GRID_SIZE_VERTICAL = 9
+
+ROOM_TILE_SIZE = 5
+
+ORIGIN_TILE = [0,screenHeight]
