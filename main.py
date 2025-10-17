@@ -9,6 +9,7 @@ from src import ui
 from src import sound
 from src import inputs
 from src import data
+from src import manor
 # Constants
 
 BG_COLOR = (30, 30, 30)
@@ -33,6 +34,8 @@ class Game:
 
         self.running = True
 
+        self.gridHandler = manor.RoomGrid(data)
+
     def update(self):
         self.running = self.dataHandler.keep_running
         self.screenHandler.update()
@@ -40,6 +43,7 @@ class Game:
         self.inputHandler.update()
         self.backgroundHandler.update()
         self.audioHandler.update()
+        self.gridHandler.update()
         
         pass
 
