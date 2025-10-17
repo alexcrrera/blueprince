@@ -10,6 +10,8 @@ from src import sound
 from src import inputs
 from src import data
 from src import manor
+from src import room  # import the class Room from room.py
+
 # Constants
 
 BG_COLOR = (30, 30, 30)
@@ -35,6 +37,9 @@ class Game:
         self.running = True
 
         self.gridHandler = manor.RoomGrid(data)
+
+        print(self.gridHandler.__repr__())
+ 
 
     def update(self):
         self.running = self.dataHandler.keep_running
