@@ -15,7 +15,8 @@ class Room:
     """
 
     def __init__(self, name: str, color: str,x,y, rarity: int = 0, cost: int = 0):
-        self.position = [x,y]
+        self.x = x
+        self.y = y
         self.name = name # nom de la pièce (a"Chambre", "Cuisine", etc.)
         self.color = color # couleur ("bleue", "verte", "rouge", etc.) -> TODO Gerer proba tirage + effet au joueur
         self.rarity = rarity # rareté (0 à 3)
