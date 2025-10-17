@@ -50,3 +50,9 @@ DEFAULT_TEXT_DIR = "assets/fonts/Helvetica.ttf"
 SPECIAL_TEXT_DIR = "assets/fonts/damnarc.ttf"
 
 
+
+
+
+
+ROOM_GRID_SIZE_HORIZONTAL = 5
+ROOM_GRID_SIZE_VERTICAL = 9
