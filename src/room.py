@@ -1,7 +1,17 @@
 from src.door import Door
 from src.item import Item
 
+from src import params
+
+
+
 import random
+
+
+
+
+
+
 
 class Room:
     """
@@ -17,6 +27,7 @@ class Room:
     def __init__(self, name: str, color: str,x,y, rarity: int = 0, cost: int = 0):
         self.x = x
         self.y = y
+        #self.icon_dir  = params.DICT_DIRECTORIES.get(name)
         self.name = name # nom de la pièce (a"Chambre", "Cuisine", etc.)
         self.color = color # couleur ("bleue", "verte", "rouge", etc.) -> TODO Gerer proba tirage + effet au joueur
         self.rarity = rarity # rareté (0 à 3)

@@ -32,7 +32,7 @@ INTIAL_DICE = 0
 
 
 
-
+DICT_DIRECTORIES = {}
 
 
 SFX_LEVEL =0.5
