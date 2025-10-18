@@ -167,13 +167,18 @@ class HandleGridUI():
                     )
                     self.screen.blit(scaled_image, (x, y))
                 
+
+
                 if(row==self.data.roomY and col == self.data.roomX):
 
                 
                     scaled_image = pygame.transform.scale(
                         params.SELECTOR_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)
                     )
-                    self.screen.blit(scaled_image, (x, y))
+                    rot =  90*(self.data.arrow_dir-1)
+                    
+                    rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
+                    self.screen.blit(rotated_image, (x, y))
                 else:
                     
                 #self.screen.blit(room_image, (x, y))

@@ -27,8 +27,17 @@ class HandleInputs:
                     self.data.music_play = not self.data.music_play
                 if event.key == pygame.K_SPACE:
                     self.data.click_play = True
-               
-                   
+
+
+                if event.key == pygame.K_d:   
+                    self.data.arrow_dir = 0
+                if event.key == pygame.K_w:
+                    self.data.arrow_dir = 1
+                if event.key == pygame.K_a:
+                    self.data.arrow_dir = 2
+                       
+                if event.key == pygame.K_s:
+                    self.data.arrow_dir = 3
 
             if event.type == pygame.KEYUP:
                 self.key_pressed[event.key] = False

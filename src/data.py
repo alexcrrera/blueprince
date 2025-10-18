@@ -15,6 +15,8 @@ class HandleData:
         self.roomY = 8
 
         self.click_play = False
+        self.toggle_up = False
+        self.arrow_dir = 1 #up
 
         self.manor = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
 
