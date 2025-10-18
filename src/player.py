@@ -10,9 +10,9 @@ class Player:
     - steps_left : nombre de pas restants
     - inventory : objets et ressources
     """
-
+   # test alexxx2
     def __init__(self, start_pos=(2, 8)):
-
+            # test alexxx
         #lool
         self.position = start_pos
         self.x = self.position[0]
