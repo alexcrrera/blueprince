@@ -1,6 +1,7 @@
 import math
 import pygame
-
+import json
+import os
 
 if not pygame.get_init():
     pygame.init()
@@ -31,8 +32,11 @@ INTIAL_DICE = 0
 
 
 
-
+json_path = os.path.join("src", "rooms.json")
 DICT_DIRECTORIES = {}
+with open(json_path, "r") as file:
+    DICT_DIRECTORIES = json.load(file)
+
 
 
 SFX_LEVEL =0.5
