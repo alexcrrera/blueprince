@@ -47,7 +47,6 @@ ANTECHAMBER_IMAGE_DIR = "assets/images/Antechamber.jpg"
 ANTECHAMBER_HALL_IMAGE = pygame.image.load(ANTECHAMBER_IMAGE_DIR).convert_alpha()
 
 
-
 # UI
 
 BG_COLOR = (30, 30, 30)

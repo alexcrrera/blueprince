@@ -104,9 +104,19 @@ class HandleGridUI():
                 x = col * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
                 y = row * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
                 if(row ==8 and col ==2):
-                    self.screen.blit(params.ENTRANCE_HALL_IMAGE, (x, y))
+                    scaled_image = pygame.transform.scale(
+                        params.ENTRANCE_HALL_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)
+                    )
+
+                    self.screen.blit(scaled_image, (x, y))
+
+            
                 elif(row==0 and col == 2):
-                    self.screen.blit(params.ANTECHAMBER_HALL_IMAGE, (x, y))
+                    scaled_image = pygame.transform.scale(
+                        params.ANTECHAMBER_HALL_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)
+                    )
+
+                    self.screen.blit(scaled_image, (x, y))
                 else:
                     
                 #self.screen.blit(room_image, (x, y))
