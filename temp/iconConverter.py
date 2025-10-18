@@ -12,7 +12,7 @@ import params  # Now params.py is accessible
 
 # --- Configuration ---
 INPUT_FOLDER = os.path.join(parent_dir, "assets", "images", "images_webp")
-OUTPUT_FOLDER = os.path.join(parent_dir, "assets", "images")
+OUTPUT_FOLDER = os.path.join(parent_dir, "assets", "images","rooms")
 JSON_FILE = os.path.join(parent_dir, "src", "rooms.json")
 
 FORCED_SIZE = (params.IMAGE_CONVERSION_SIZE, params.IMAGE_CONVERSION_SIZE)
