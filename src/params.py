@@ -23,6 +23,18 @@ WHITE = (255, 255, 255)
 fps = 60
 splitRatioScreen = 0.33 # ratio entre côté gauche et droite
 
+INITIAL_STEPS = 70
+INTIAL_GOLD = 0
+INITIAL_GEMS = 2
+INTIAL_KEY =0
+INTIAL_DICE = 0
+
+
+
+
+
+
+
 SFX_LEVEL =0.5
 MUSIC_LEVEL = 1
 

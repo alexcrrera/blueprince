@@ -1,5 +1,7 @@
 from src.item import Item
 
+from src import params
+
 class Inventory:
     """
     Représente l'inventaire du joueur uniquement.
@@ -10,10 +12,11 @@ class Inventory:
     
     def __init__(self):
         # Ressources de base
-        self.gems = 2 # Initialement à 2 (énoncé)
-        self.keys = 0
-        self.dice = 0
-        self.gold = 0
+        self.gems = params.INITIAL_GEMS # Initialement à 2 (énoncé)
+        self.keys = params.INTIAL_KEY
+        self.dice = params.INTIAL_DICE
+        self.gold = params.INTIAL_GOLD
+
 
         # Objets permanents (pelle, marteau, etc.)
         self.permanent_items = []
