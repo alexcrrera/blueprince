@@ -14,6 +14,9 @@ class HandleSound:
         self.randomStartMusic = random.uniform(0,3500) # un peu moins d'une heure au cas où
         self.play_music()
 
+        self.sounds = {"click1":params.CLICK_1_AUDIO_DIR}
+
+
 
     # ----------------- Music -----------------
     def play_music(self):
@@ -35,11 +38,13 @@ class HandleSound:
         pygame.mixer.music.set_volume(volume)
 
     # ----------------- Sound Effects -----------------
-    def load_sfx(self, name):
-        pass
+    def load_sfx(self, name,dir):
+        self.sounds[name] = dir
 
     def play_sfx(self, name):
-        pass
+        sound = pygame.mixer.Sound(self.sounds.get(name))
+        sound.play()
+    
 
     
     def update(self):
@@ -48,4 +53,8 @@ class HandleSound:
         else:
             self.data.music_level = params.MUSIC_LEVEL
             self.set_music_volume()
+
+        if( self.data.click_play):
+             self.data.click_play = False
+             self.play_sfx("click1")
         pass

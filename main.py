@@ -39,7 +39,6 @@ class Game:
         self.gridHandler = manor.RoomGrid(self.dataHandler)
         self.gridUIHandler = ui.HandleGridUI(self.dataHandler,self.screenHandler.screen)
         
-
     def update(self):
         
         self.backgroundHandler.update()

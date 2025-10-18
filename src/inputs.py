@@ -25,6 +25,8 @@ class HandleInputs:
                 
                 if event.key == pygame.K_m:
                     self.data.music_play = not self.data.music_play
+                if event.key == pygame.K_SPACE:
+                    self.data.click_play = True
                
                    
 

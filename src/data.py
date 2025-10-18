@@ -14,6 +14,8 @@ class HandleData:
         self.roomX = 2
         self.roomY = 8
 
+        self.click_play = False
+
         self.manor = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
 
         pass
