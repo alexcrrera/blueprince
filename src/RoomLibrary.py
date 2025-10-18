@@ -1,1 +1,0 @@
-# TODO: Classe qui a tous les pièces possibles et leurs caractéristiques
