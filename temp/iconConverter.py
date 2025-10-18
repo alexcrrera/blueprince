@@ -9,19 +9,16 @@ sys.path.append(os.path.join(parent_dir, "src"))
 
 import params  # Now params.py is accessible
 
-
 # --- Configuration ---
 INPUT_FOLDER = os.path.join(parent_dir, "assets", "images", "images_webp")
-OUTPUT_FOLDER = os.path.join(parent_dir, "assets", "images","rooms")
+OUTPUT_FOLDER = os.path.join(parent_dir, "assets", "images", "rooms")
 JSON_FILE = os.path.join(parent_dir, "src", "rooms.json")
 
 FORCED_SIZE = (params.IMAGE_CONVERSION_SIZE, params.IMAGE_CONVERSION_SIZE)
-PRESERVE_ASPECT = True  # Set False to stretch
-
+PRESERVE_ASPECT = True  # Keep aspect ratio but fill the square (no black border)
 
 # --- Ensure output folder exists ---
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
-
 
 def load_or_create_json(json_path):
     """Loads existing JSON or creates a new one."""
@@ -34,9 +31,7 @@ def load_or_create_json(json_path):
                 data = {}
     else:
         data = {}
-
     return data
-
 
 def save_json(data, json_path):
     """Saves the JSON dictionary neatly formatted."""
@@ -44,12 +39,33 @@ def save_json(data, json_path):
         json.dump(data, f, indent=4, ensure_ascii=False)
     print(f"💾 Updated JSON file: {json_path}")
 
+def resize_and_crop(img, size):
+    """Resize the image to fill the target size and crop excess (no black borders)."""
+    target_w, target_h = size
+    img_ratio = img.width / img.height
+    target_ratio = target_w / target_h
+
+    if img_ratio > target_ratio:
+        # Image trop large → on ajuste la hauteur
+        new_height = target_h
+        new_width = int(new_height * img_ratio)
+    else:
+        # Image trop haute → on ajuste la largeur
+        new_width = target_w
+        new_height = int(new_width / img_ratio)
+
+    img = img.resize((new_width, new_height), Image.LANCZOS)
+
+    # Crop au centre pour garder un carré parfait
+    left = (new_width - target_w) // 2
+    top = (new_height - target_h) // 2
+    right = left + target_w
+    bottom = top + target_h
+
+    return img.crop((left, top, right, bottom))
 
 def convert_webp_to_jpg(input_folder, output_folder):
-    """
-    Converts all .webp images to .jpg and forces them to a fixed square size.
-    Also updates rooms.json with {room_name: image_file}.
-    """
+    """Convert all .webp images to .jpg and update rooms.json."""
     room_data = load_or_create_json(JSON_FILE)
 
     for filename in os.listdir(input_folder):
@@ -67,19 +83,13 @@ def convert_webp_to_jpg(input_folder, output_folder):
                 img = img.convert("RGB")
 
                 if PRESERVE_ASPECT:
-                    img.thumbnail(FORCED_SIZE, Image.LANCZOS)
-                    square_img = Image.new("RGB", FORCED_SIZE, (0, 0, 0))
-                    x = (FORCED_SIZE[0] - img.width) // 2
-                    y = (FORCED_SIZE[1] - img.height) // 2
-                    square_img.paste(img, (x, y))
-                    output_img = square_img
+                    output_img = resize_and_crop(img, FORCED_SIZE)
                 else:
                     output_img = img.resize(FORCED_SIZE, Image.LANCZOS)
 
                 output_img.save(jpg_path, "JPEG", quality=95)
                 print(f"✅ Converted: {filename} → {jpg_filename}")
 
-                # --- Update JSON if missing ---
                 if base_name not in room_data:
                     room_data[base_name] = jpg_filename
                     print(f"➕ Added to JSON: {base_name} → {jpg_filename}")
@@ -87,10 +97,8 @@ def convert_webp_to_jpg(input_folder, output_folder):
         except Exception as e:
             print(f"❌ Error converting {filename}: {e}")
 
-    # Save updated JSON file
     save_json(room_data, JSON_FILE)
     print("🎉 Conversion complete!")
-
 
 # --- Run conversion ---
 if __name__ == "__main__":

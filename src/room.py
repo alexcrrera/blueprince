@@ -1,16 +1,8 @@
 from src.door import Door
 from src.item import Item
-
 from src import params
-
-
-
 import random
-
-
-
-
-
+import pygame
 
 
 class Room:
@@ -24,19 +16,20 @@ class Room:
     - des portes (nord, sud, est, ouest)
     """
 
-    def __init__(self, name: str, color: str,x,y, rarity: int = 0, cost: int = 0):
-        self.x = x
-        self.y = y
-        #self.icon_dir  = params.DICT_DIRECTORIES.get(name)
-        self.name = name # nom de la pièce (a"Chambre", "Cuisine", etc.)
-        self.color = color # couleur ("bleue", "verte", "rouge", etc.) -> TODO Gerer proba tirage + effet au joueur
-        self.rarity = rarity # rareté (0 à 3)
-        self.cost = cost # coût en gemmes
-        self.objects = [] # liste d'objets dans la pièce (Item)
-        # TODO: Attribut image vers l'image de la pièce
+    def __init__(self, name, data, x, y):
+        """
+        data = dictionnaire venant du JSON
+        """
+        self.name = name
+        self.color = data["color"]
+        self.rarity = data["rarity"]
+        self.cost = data["cost"]
+        self.image_path = f"assets/images/rooms/{data['image']}"
+        self.image = pygame.image.load(self.image_path).convert_alpha()
+        self.doors = {d: Door() for d in data["doors"]}
+        self.items = [Item(i, "consommable") for i in data["items"]]
+        self.x, self.y = x, y
 
-        # Dictionnaire de portes : None au départ
-        self.doors = {"N": None, "S": None, "E": None, "W": None}
 
     def add_door(self, direction: str, level_lock: int = 0):
         """Ajoute une porte dans une direction donnée."""
@@ -44,6 +37,37 @@ class Room:
             self.doors[direction] = Door(level_lock)
         else:
             raise ValueError("Direction invalide (utilise N, S, E ou W).")
+        
+    def has_open_door(self, direction: str) -> bool:
+        """Retourne True si la porte dans la direction donnée existe et est ouverte."""
+        door = self.doors.get(direction)
+        return door is not None and getattr(door, "is_open", True)
+    
+        
+    def rotate_doors_90(self):
+        """Fait pivoter les portes de la pièce de 90° dans le sens horaire."""
+        rotation_map = {"N": "E", "E": "S", "S": "W", "W": "N"}
+        new_doors = {}
+        for direction, door in self.doors.items():
+            new_doors[rotation_map[direction]] = door
+        self.doors = new_doors
+
+        # Fait aussi tourner l’image visuellement
+        self.image = pygame.transform.rotate(self.image, -90)  # -90 = rotation horaire
+
+    def is_compatible_with(self, direction_from_prev: str) -> bool:
+        """Vérifie si cette pièce a une porte du côté opposé à la direction d’où on vient."""
+        opposite = {"N": "S", "S": "N", "E": "W", "W": "E"}
+        return opposite[direction_from_prev] in self.doors
+
+
+
+    def draw(self, screen, x, y):
+        scaled = pygame.transform.scale(self.image, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
+        screen.blit(scaled, (x, y))
+
+    def __repr__(self):
+        return f"<Room {self.name} color={self.color} rarity={self.rarity} cost={self.cost}>"
 
     def connect(self, direction: str, other_room):
         """Connecte cette pièce à une autre dans une direction donnée."""
@@ -87,7 +111,4 @@ class Room:
             # Pièce dangereuse: retirent des pas, etc. (non implémenté)
             pass
 
-    def __repr__(self):
-        # Affiche le nom, la couleur, la rareté et le coût - TEST
-        return f"<Room {self.name} ({self.color}) r={self.rarity} c={self.cost}>"
     
