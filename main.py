@@ -28,7 +28,7 @@ class Game:
         self.screenHandler = ui.HandleScreen()
         self.clock = pygame.time.Clock()
         self.dataHandler = data.HandleData()
-        
+
         self.playerHandler = player.Player()
 
         self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock,self.playerHandler)
@@ -48,12 +48,13 @@ class Game:
     def update(self):
         
         self.backgroundHandler.update()
-       
+        
+        self.playerHandler.update()
         self.running = self.dataHandler.keep_running
         self.screenHandler.update()
         self.textHandler.update()
         self.inputHandler.update()
-      
+         
         self.audioHandler.update()
         self.gridHandler.update()
         self.gridUIHandler.update()

@@ -82,11 +82,14 @@ PADDING = 20
 SMALL_FONT_SIZE = 10
 DEFAULT_FONT_SIZE = 20
 SPECIAL_FONT_SIZE = 30
+
+ALT_DEFAULT_SIZE= DEFAULT_FONT_SIZE
 # Fonts
 
 SMALL_TEXT_DIR = "assets/fonts/Helvetica.ttf"
 DEFAULT_TEXT_DIR = "assets/fonts/Helvetica.ttf"
 SPECIAL_TEXT_DIR = "assets/fonts/damnarc.ttf"
+ALT_DEFAULT_TEXT_DIR = "assets/fonts/Coolvetica Rg.otf"
 
 ORIGIN_INVENTORY = [1750,75]
 INVENTORY_TEXT = "Inventory"

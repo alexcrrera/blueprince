@@ -16,7 +16,9 @@ class Inventory:
         self.keys = params.INTIAL_KEY
         self.dice = params.INTIAL_DICE
         self.gold = params.INTIAL_GOLD
+        self.steps_left = params.INITIAL_STEPS 
 
+        self.ui_items = [self.steps_left,self.gold,self.gems, self.keys,self.dice] #for inventory ui
 
         # Objets permanents (pelle, marteau, etc.)
         self.permanent_items = []
@@ -92,6 +94,10 @@ class Inventory:
 
         # 3 Si rien trouvé
         return False
+
+    def update(self):
+        self.ui_items = [self.steps_left,self.gold,self.gems, self.keys,self.dice]
+
 
     def __repr__(self):
         # Affiche les objets de l'inventaire - TEST

@@ -13,7 +13,7 @@ class Player:
 
     def __init__(self, start_pos=(2, 8)):
         self.position = start_pos
-        self.steps_left = params.INITIAL_STEPS  # valeur par défaut d’après l’énoncé
+         # valeur par défaut d’après l’énoncé
         self.inventory = Inventory()
 
     # Le joueur peut se déplacer n'importe où dans la grille (même en dehors du manoir)
@@ -27,3 +27,6 @@ class Player:
     def __repr__(self):
         
         return f"Player pos={self.position} steps={self.steps_left} inv={self.inventory}"
+    
+    def update(self):
+        self.inventory.update()

@@ -66,6 +66,8 @@ class HandleText():
         self.special_text_size = params.SPECIAL_FONT_SIZE
         self.small_text_size = params.SMALL_FONT_SIZE
 
+        self.alt_default_text = params.ALT_DEFAULT_SIZE
+
 
         self.left_text = "Left info"
         self.right_text = "Right info"
@@ -75,7 +77,7 @@ class HandleText():
         self.default_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, params.DEFAULT_FONT_SIZE)  
         self.special_font = pygame.font.Font(params.SPECIAL_TEXT_DIR, params.SPECIAL_FONT_SIZE)  
         self.small_font = pygame.font.Font(params.SMALL_TEXT_DIR, params.SMALL_FONT_SIZE) 
-    
+        self.alt_default_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.ALT_DEFAULT_SIZE) 
 
 
     def draw_text(self, text, position, font=None, color=params.TEXT_COLOR):
@@ -94,8 +96,13 @@ class HandleText():
 
     def updateInventory(self):
         self.draw_text(params.INVENTORY_TEXT, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]), font=self.default_font, color=params.BLACK)
-        self.draw_text(params.INVENTORY_TEXT, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]), font=self.default_font, color=params.BLACK)
-        INVENTORY_ITEMS_PADDING
+        
+        padding = [i*params.INVENTORY_ITEMS_PADDING for i in range(1,6)]
+        
+        for i in range(0,5):
+            text = str(self.player.inventory.ui_items[i])
+            self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[i]), font=self.alt_default_font, color=params.BLACK)
+        
     def update(self):
 
         self.draw()
