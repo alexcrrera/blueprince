@@ -27,6 +27,7 @@ class Game:
 
         self.screenHandler = ui.HandleScreen()
         self.clock = pygame.time.Clock()
+        self.dataHandler = data.HandleData()
         self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock)
         
         self.dataHandler = data.HandleData()
@@ -36,26 +37,29 @@ class Game:
 
         self.running = True
 
-        self.gridHandler = manor.RoomGrid(data)
-
-        print(self.gridHandler.__repr__())
- 
+        self.gridHandler = manor.RoomGrid(self.dataHandler)
+        self.gridUIHandler = ui.HandleGridUI(self.dataHandler,self.screenHandler.screen)
+        
 
     def update(self):
+        
+        self.backgroundHandler.update()
+       
         self.running = self.dataHandler.keep_running
         self.screenHandler.update()
         self.textHandler.update()
         self.inputHandler.update()
-        self.backgroundHandler.update()
+      
         self.audioHandler.update()
         self.gridHandler.update()
-        
-        pass
+        self.gridUIHandler.update()
+        pygame.display.flip()
 
 
     def run(self):
         while self.running:
             self.update()
+            
             self.clock.tick(params.fps)
 
 if __name__ == "__main__":
