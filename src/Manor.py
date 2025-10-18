@@ -8,13 +8,11 @@ from src import params
 
 class RoomGrid():
     def __init__(self,data):
-        self.grid_vertical = params.ROOM_GRID_SIZE_VERTICAL
-        self.grid_horizontal = params.ROOM_GRID_SIZE_HORIZONTAL
-    
-  
-        self.mansion = [[None for _ in range( self.grid_horizontal)] for _ in range(self.grid_vertical)]
 
-        entranceHallPos = [2,0]
+  
+        self.mansion = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
+
+        entranceHallPos = [2,8]
         entranceHall = Room("Etrance Hall","blue",entranceHallPos[0],entranceHallPos[1], rarity = 0, cost = 0)
 
         self.mansion[entranceHall.x][entranceHall.y] = entranceHall
