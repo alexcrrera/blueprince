@@ -28,11 +28,19 @@ SFX_DIR =  AUDIO_DIR + "/mainTrack.mp3"
 PLAY_MUSIC_START = False #play music at start
 
 
+#IMAGES
+
+ENTRANCE_HALL_IMAGE = "assets/images/Entrance_Hall_Icon.jpg"
+
+
+
 
 
 # UI
 
 BG_COLOR = (30, 30, 30)
+
+DARK_BLUE_COLOR = (30,70,136)
 
 TEXT_COLOR = (255, 255, 255)
 
@@ -59,4 +67,7 @@ ROOM_GRID_SIZE_VERTICAL = 9
 
 ROOM_TILE_SIZE = 100
 
-ORIGIN_TILE = [120,75]
+ORIGIN_TILE = [70,90]
+
+BIG_TILE = 360
+ORIGIN_BIG_TILE = [685,185]
