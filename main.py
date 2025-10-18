@@ -3,7 +3,7 @@ import sys
 import os
 import time
 
-
+from src import player
 from src import params
 from src import ui
 from src import sound
@@ -28,8 +28,12 @@ class Game:
         self.screenHandler = ui.HandleScreen()
         self.clock = pygame.time.Clock()
         self.dataHandler = data.HandleData()
-        self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock)
         
+        self.playerHandler = player.Player()
+
+        self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock,self.playerHandler)
+        
+     
         self.dataHandler = data.HandleData()
         self.backgroundHandler = ui.HandleBackground(self.screenHandler.screen)
         self.audioHandler = sound.HandleSound(self.dataHandler)
@@ -60,7 +64,7 @@ class Game:
         while self.running:
             self.update()
             
-            self.clock.tick(params.fps)
+            self.clock.tick(params.TARGET_FPS)
 
 if __name__ == "__main__":
     game = Game()

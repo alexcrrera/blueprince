@@ -20,7 +20,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 # Game settings
-fps = 60
+TARGET_FPS = 60
 splitRatioScreen = 0.33 # ratio entre côté gauche et droite
 
 INITIAL_STEPS = 70
@@ -88,9 +88,9 @@ SMALL_TEXT_DIR = "assets/fonts/Helvetica.ttf"
 DEFAULT_TEXT_DIR = "assets/fonts/Helvetica.ttf"
 SPECIAL_TEXT_DIR = "assets/fonts/damnarc.ttf"
 
-
-
-
+ORIGIN_INVENTORY = [1750,75]
+INVENTORY_TEXT = "Inventory"
+INVENTORY_ITEMS_PADDING = 20
 
 
 ROOM_GRID_SIZE_HORIZONTAL = 5

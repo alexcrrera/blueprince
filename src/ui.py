@@ -55,7 +55,8 @@ class HandleScreen:
 
 
 class HandleText():
-    def __init__(self,screen,clock):
+    def __init__(self,screen,clock,player):
+        self.player  = player
 
         self.clock = clock
         self.screen = screen
@@ -70,10 +71,13 @@ class HandleText():
         self.right_text = "Right info"
         self.special_text = "Day One"
 
+
         self.default_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, params.DEFAULT_FONT_SIZE)  
         self.special_font = pygame.font.Font(params.SPECIAL_TEXT_DIR, params.SPECIAL_FONT_SIZE)  
         self.small_font = pygame.font.Font(params.SMALL_TEXT_DIR, params.SMALL_FONT_SIZE) 
     
+
+
     def draw_text(self, text, position, font=None, color=params.TEXT_COLOR):
         font = font or self.default_font
 
@@ -81,14 +85,21 @@ class HandleText():
         self.screen.blit(rendered_text, position)
 
     def draw(self):
-            
+        
         self.draw_text(self.special_text, (params.PADDING, params.PADDING), font=self.special_font, color=(255, 200, 0))
 
         fps_text = f"FPS: {int(self.clock.get_fps())}"
         self.draw_text(fps_text, (params.screenWidth//2 - params.PADDING -  self.small_font.size(fps_text)[0],  params.screenHeight - params.PADDING),font=self.small_font,color=params.BLACK)
 
+
+    def updateInventory(self):
+        self.draw_text(params.INVENTORY_TEXT, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]), font=self.default_font, color=params.BLACK)
+        self.draw_text(params.INVENTORY_TEXT, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]), font=self.default_font, color=params.BLACK)
+        INVENTORY_ITEMS_PADDING
     def update(self):
+
         self.draw()
+        self.updateInventory()
         
 
         
@@ -108,6 +119,7 @@ class HandleGridUI():
 
                 x = col * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
                 y = row * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
+                
                 if(row ==8 and col ==2):
                     scaled_image = pygame.transform.scale(
                         params.ENTRANCE_HALL_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)

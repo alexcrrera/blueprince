@@ -1,5 +1,8 @@
 from src.inventory import Inventory
 
+from src import params
+
+
 class Player:
     """
     Représente le joueur.
@@ -8,9 +11,9 @@ class Player:
     - inventory : objets et ressources
     """
 
-    def __init__(self, start_pos=(0, 0)):
+    def __init__(self, start_pos=(2, 8)):
         self.position = start_pos
-        self.steps_left = 70  # valeur par défaut d’après l’énoncé
+        self.steps_left = params.INITIAL_STEPS  # valeur par défaut d’après l’énoncé
         self.inventory = Inventory()
 
     # Le joueur peut se déplacer n'importe où dans la grille (même en dehors du manoir)
