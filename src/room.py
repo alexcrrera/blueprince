@@ -9,10 +9,6 @@ import random
 
 
 
-
-
-
-
 class Room:
     """
     Représente une pièce du manoir.
@@ -24,10 +20,10 @@ class Room:
     - des portes (nord, sud, est, ouest)
     """
 
-    def __init__(self, name: str, color: str,x,y, rarity: int = 0, cost: int = 0):
+    def __init__(self, name: str, color: str,x,y, rarity: int = 0, cost: int = 0,src="E"):
         self.x = x
         self.y = y
-        #self.icon_dir  = params.DICT_DIRECTORIES.get(name)
+        #self.icon_dir  = params.DICT_ROOM_DIRECTORIES.get(name)
         self.name = name # nom de la pièce (a"Chambre", "Cuisine", etc.)
         self.color = color # couleur ("bleue", "verte", "rouge", etc.) -> TODO Gerer proba tirage + effet au joueur
         self.rarity = rarity # rareté (0 à 3)
@@ -37,6 +33,7 @@ class Room:
 
         # Dictionnaire de portes : None au départ
         self.doors = {"N": None, "S": None, "E": None, "W": None}
+        
 
     def add_door(self, direction: str, level_lock: int = 0):
         """Ajoute une porte dans une direction donnée."""
