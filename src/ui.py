@@ -130,17 +130,15 @@ class HandleText():
 
         self.draw()
         self.updateInventory()
-        
-
-        
-
 
 
 
 class HandleGridUI():
-    def __init__(self,data,screen):
+    def __init__(self,data,screen,player):
         self.data = data
         self.screen = screen
+        self.player = player
+
 
     def updateGrid(self):
 
@@ -185,6 +183,54 @@ class HandleGridUI():
 
                 # Optional: draw borders
                     pygame.draw.rect(self.screen, (80, 80, 80), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
+
+
+                room = self.data.manor[col][row]
+                if room:
+                    room.draw(self.screen, x, y)
+                else:
+                    pygame.draw.rect(self.screen, (80, 80, 80), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
+
+
+        # Afficher le selector si actif
+        if self.player.selector_visible:
+            direction = self.player.selector_direction
+
+            # Le selector reste sur la salle actuelle du joueur
+            target_x, target_y = self.player.x, self.player.y
+
+            # Détermine juste l'angle selon la direction choisie
+            if direction == "N":
+                angle = 0
+            elif direction == "S":
+                angle = 180
+            elif direction == "E":
+                angle = -90
+            elif direction == "W":
+                angle = 90
+            else:
+                angle = 0
+
+            # Convertir coordonnées grille → pixels
+            x = target_x * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
+            y = target_y * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
+
+            # Redimensionne le selector à la taille d’une room
+            scaled_selector = pygame.transform.scale(
+                params.SELECTOR_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)
+            )
+
+            # Applique la rotation
+            rotated_selector = pygame.transform.rotate(scaled_selector, angle)
+            rotated_selector.set_alpha(180)
+
+            # Centre le selector sur la case actuelle du joueur
+            selector_rect = rotated_selector.get_rect(
+                center=(x + params.ROOM_TILE_SIZE // 2, y + params.ROOM_TILE_SIZE // 2)
+            )
+
+            # Affiche le selector
+            self.screen.blit(rotated_selector, selector_rect)
 
         #big room item placeholder
         pygame.draw.rect(self.screen, (80, 80, 80), (params.ORIGIN_BIG_TILE[0], params.ORIGIN_BIG_TILE[1], params.BIG_TILE, params.BIG_TILE), 1)

@@ -13,14 +13,14 @@ class HandleInputs:
         """
         Call this every frame to update key presses.
         """
-        self.key_pressed = {}  # reset for this frame
+        self.key_pressed = {}
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.key_pressed["QUIT"] = True
                 self.data.keep_running = False
 
-            if event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN:
                 self.key_pressed[event.key] = True
                 
                 if event.key == pygame.K_m:
@@ -39,7 +39,7 @@ class HandleInputs:
                 if event.key == pygame.K_s:
                     self.data.arrow_dir = 3
 
-            if event.type == pygame.KEYUP:
+            elif event.type == pygame.KEYUP:
                 self.key_pressed[event.key] = False
 
         

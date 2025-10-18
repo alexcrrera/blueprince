@@ -1,6 +1,84 @@
 {
-    "Antechamber": "Antechamber.jpg",
-    "Entrance_Hall": "Entrance_Hall.jpg",
-    "Parlor": "Parlor.jpg",
-    "Spare_Room": "Spare_Room.jpg"
+    
+    "Entrance_Hall": {
+        "image": "Entrance_Hall.jpg",
+        "color": "bleue",
+        "rarity": 0,
+        "cost": 0,
+        "doors": ["N", "E", "W"],
+        "items": []
+    },
+
+    "Antechamber": {
+        "image": "Antechamber.jpg",
+        "color": "blanche",
+        "rarity": 0,
+        "cost": 0,
+        "doors": ["N", "S", "E", "W"],
+        "items": []
+    },
+
+    "Hallway": {
+        "image": "Hallway.jpg",
+        "color": "marron",
+        "rarity": 0,
+        "cost": 0,
+        "doors": ["S", "E", "W"],
+        "items": []
+    },
+
+    "Boudoir": {
+        "image": "Boudoir.jpg",
+        "color": "rose",
+        "rarity": 1,
+        "cost": 1,
+        "doors": ["S", "W"],
+        "items": ["clé"]
+    },
+
+    "Parlor": {
+        "image": "Parlor.jpg",
+        "color": "gris",
+        "rarity": 1,
+        "cost": 1,
+        "doors": ["S", "W"],
+        "items": ["gemme"]
+    },
+
+    "Mail_Room": {
+        "image": "Mail_Room.jpg",
+        "color": "bleue",
+        "rarity": 1,
+        "cost": 2,
+        "doors": ["S"],
+        "items": ["or"]
+    },
+
+    "Workshop": {
+        "image": "Workshop.jpg",
+        "color": "brune",
+        "rarity": 2,
+        "cost": 2,
+        "doors": ["S", "N"],
+        "items": ["pelle"]
+    },
+
+    "Security": {
+        "image": "Security.jpg",
+        "color": "verte",
+        "rarity": 2,
+        "cost": 3,
+        "doors": ["E", "S", "W"],
+        "items": ["clé"]
+    },
+
+    "Billiard_Room": {
+        "image": "Billiard_Room.jpg",
+        "color": "verte",
+        "rarity": 3,
+        "cost": 3,
+        "doors": ["S", "W"],
+        "items": ["gemme", "clé"]
+    }
+
 }

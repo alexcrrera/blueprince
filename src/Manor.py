@@ -1,30 +1,28 @@
-# TODO: Gère la grille complète du manoir et la génération des pièces.
-# -> Fonction generate_room()
-
-from src.room import Room  # import the class Room from room.py
-
+import json
+from src.room import Room
 from src import params
 
-
-class RoomGrid():
-    def __init__(self,data):
-
-        self.data = data
+class RoomGrid:
+    def __init__(self, data):
+        # Grille vide
         self.mansion = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
 
-        entranceHallPos = [2,8]
-        entranceHall = Room("Etrance_Hall","blue",entranceHallPos[0],entranceHallPos[1], rarity = 0, cost = 0)
-        #antichamber = Room("Antechambre","blue",entranceHallPos[0],entranceHallPos[1], rarity = 0, cost = 0)
+        # Position du joueur au début
+        x, y = data.roomX, data.roomY
 
-        self.mansion[entranceHall.x][entranceHall.y] = entranceHall
-        
+        # Charger le JSON des rooms
+        with open("src/rooms.json", "r") as f:
+            rooms_data = json.load(f)
 
+        # 🔹 Au lancement : on place uniquement l’Entrance Hall, sans tirage
+        entrance_data = rooms_data.get("Entrance_Hall")
+        if entrance_data:
+            entrance_room = Room("Entrance_Hall", entrance_data, x, y)
+            self.mansion[x][y] = entrance_room
+            print("🏰 Salle de départ : Entrance_Hall")
+        else:
+            print("Erreur : 'Entrance_Hall' introuvable dans rooms.json !")
 
-    def __repr__(self):
-        
-        return "\n".join(room.__repr__() for room in self.mansion)
-        
-            
-    def update(self):   
-        self.data.manor = self.mansion
+    def update(self):
+        pass
  
