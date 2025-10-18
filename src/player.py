@@ -12,7 +12,11 @@ class Player:
     """
 
     def __init__(self, start_pos=(2, 8)):
+
+        #lool
         self.position = start_pos
+        self.x = self.position[0]
+        self.y = self.position[1]
          # valeur par défaut d’après l’énoncé
         self.inventory = Inventory()
 
@@ -29,4 +33,6 @@ class Player:
         return f"Player pos={self.position} steps={self.steps_left} inv={self.inventory}"
     
     def update(self):
+        self.x = self.position[0]
+        self.y = self.position[1]
         self.inventory.update()
