@@ -36,14 +36,15 @@ PLAY_MUSIC_START = False #play music at start
 
 
 #IMAGES
+IMAGE_CONVERSION_SIZE = 500
 
-ENTRANCE_HALL_IMAGE_DIR = "assets/images/Entrance_Hall_Icon.jpg"
+#TODO REPLACE WITH DICT
+ENTRANCE_HALL_IMAGE_DIR = "assets/images/Entrance_Hall.jpg"
 ENTRANCE_HALL_IMAGE = pygame.image.load(ENTRANCE_HALL_IMAGE_DIR).convert_alpha()
 
 
-ANTECHAMBER_IMAGE_DIR = "assets/images/Antechamber_Icon.jpg"
+ANTECHAMBER_IMAGE_DIR = "assets/images/Antechamber.jpg"
 ANTECHAMBER_HALL_IMAGE = pygame.image.load(ANTECHAMBER_IMAGE_DIR).convert_alpha()
-
 
 
 
