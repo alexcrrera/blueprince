@@ -14,11 +14,6 @@ from src import room  # import the class Room from room.py
 
 # Constants
 
-BG_COLOR = (30, 30, 30)
-TEXT_COLOR = (255, 255, 255)
-FONT_SIZE = 30
-PADDING = 20
-SMALL_FONT_SIZE = 10
 
 
 class Game:
