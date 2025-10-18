@@ -1,5 +1,12 @@
 import math
 import pygame
+
+
+if not pygame.get_init():
+    pygame.init()
+pygame.display.set_mode((1, 1))  # Hidden 1×1 window just for convert()
+
+
 # Screen settings
 DEFAULT_SCREEN_WIDTH= 1920
 DEFAULT_SCREEN_HEIGHT = 1080
@@ -30,8 +37,12 @@ PLAY_MUSIC_START = False #play music at start
 
 #IMAGES
 
-ENTRANCE_HALL_IMAGE = "assets/images/Entrance_Hall_Icon.jpg"
+ENTRANCE_HALL_IMAGE_DIR = "assets/images/Entrance_Hall_Icon.jpg"
+ENTRANCE_HALL_IMAGE = pygame.image.load(ENTRANCE_HALL_IMAGE_DIR).convert_alpha()
 
+
+ANTECHAMBER_IMAGE_DIR = "assets/images/Antechamber_Icon.jpg"
+ANTECHAMBER_HALL_IMAGE = pygame.image.load(ANTECHAMBER_IMAGE_DIR).convert_alpha()
 
 
 
