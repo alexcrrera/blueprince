@@ -14,7 +14,7 @@ class HandleBackground:
     def __init__(self, surface: pygame.Surface):
         """Initialisation"""
         self.surface = surface
-        self.leftColor = params.BLACK
+        self.leftColor = params.DARK_BLUE_COLOR
         self.rightColor = params.WHITE
         self.splitRatio = params.splitRatioScreen  # 33%
 
@@ -28,6 +28,7 @@ class HandleBackground:
 
         pygame.draw.rect(self.surface, self.leftColor, (0, 0, leftWidth, height))
         pygame.draw.rect(self.surface, self.rightColor, (leftWidth, 0, width - leftWidth, height))
+    
     def update(self):
         self.draw()
 
@@ -85,6 +86,41 @@ class HandleText():
 
     def update(self):
         self.draw()
-        pygame.display.flip()
+        
 
-        pass
+        
+
+
+
+
+class HandleGridUI():
+    def __init__(self,data,screen):
+        self.data = data
+        self.screen = screen
+
+    def updateGrid(self):
+        for row in range(params.ROOM_GRID_SIZE_VERTICAL):
+            for col in range(params.ROOM_GRID_SIZE_HORIZONTAL):
+                x = col * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
+                y = row * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
+                if(row ==8 and col ==2):
+                    self.screen.blit(params.ENTRANCE_HALL_IMAGE, (x, y))
+                elif(row==0 and col == 2):
+                    self.screen.blit(params.ANTECHAMBER_HALL_IMAGE, (x, y))
+                else:
+                    
+                #self.screen.blit(room_image, (x, y))
+
+                # Optional: draw borders
+                    pygame.draw.rect(self.screen, (80, 80, 80), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
+
+        #big room item placeholder
+        pygame.draw.rect(self.screen, (80, 80, 80), (params.ORIGIN_BIG_TILE[0], params.ORIGIN_BIG_TILE[1], params.BIG_TILE, params.BIG_TILE), 1)
+        
+       # pygame.display.flip()
+
+    def update(self):
+        if(self.data.update_tiles):
+           
+            self.updateGrid()
+        
