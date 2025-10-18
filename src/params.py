@@ -42,6 +42,11 @@ IMAGE_CONVERSION_SIZE = 500
 ICON_IMAGE_DIR = "assets/images/icon.png"
 ICON_IMAGE  = pygame.image.load(ICON_IMAGE_DIR)
 
+
+SELECTOR_IMAGE_DIR =  "assets/images/selector.png"
+SELECTOR_IMAGE = pygame.image.load(SELECTOR_IMAGE_DIR).convert_alpha()
+
+
 ENTRANCE_HALL_IMAGE_DIR = "assets/images/Entrance_Hall.jpg"
 ENTRANCE_HALL_IMAGE = pygame.image.load(ENTRANCE_HALL_IMAGE_DIR).convert_alpha()
 

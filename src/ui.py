@@ -104,6 +104,8 @@ class HandleGridUI():
     def updateGrid(self):
         for row in range(params.ROOM_GRID_SIZE_VERTICAL):
             for col in range(params.ROOM_GRID_SIZE_HORIZONTAL):
+
+
                 x = col * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
                 y = row * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
                 if(row ==8 and col ==2):
@@ -118,7 +120,14 @@ class HandleGridUI():
                     scaled_image = pygame.transform.scale(
                         params.ANTECHAMBER_HALL_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)
                     )
+                    self.screen.blit(scaled_image, (x, y))
+                
+                if(row==self.data.roomY and col == self.data.roomX):
 
+                
+                    scaled_image = pygame.transform.scale(
+                        params.SELECTOR_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)
+                    )
                     self.screen.blit(scaled_image, (x, y))
                 else:
                     
@@ -130,6 +139,8 @@ class HandleGridUI():
         #big room item placeholder
         pygame.draw.rect(self.screen, (80, 80, 80), (params.ORIGIN_BIG_TILE[0], params.ORIGIN_BIG_TILE[1], params.BIG_TILE, params.BIG_TILE), 1)
         
+        
+
        # pygame.display.flip()
 
     def update(self):
