@@ -19,6 +19,7 @@ class Player:
         self.y = self.position[1]
          # valeur par défaut d’après l’énoncé
         self.inventory = Inventory()
+        # test
 
     # Le joueur peut se déplacer n'importe où dans la grille (même en dehors du manoir)
     # TODO: ajouter vérif murs/portes
