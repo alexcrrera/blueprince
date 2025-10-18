@@ -14,7 +14,7 @@ INPUT_FOLDER = os.path.join(parent_dir, "assets", "images", "images_webp")
 OUTPUT_FOLDER = os.path.join(parent_dir, "assets", "images")
 
 # Get forced square size from params (e.g. ROOM_TILE_SIZE = 100)
-FORCED_SIZE = (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)
+FORCED_SIZE = (params.IMAGE_CONVERSION_SIZE, params.IMAGE_CONVERSION_SIZE)
 
 # If you want to preserve proportions instead of stretching:
 PRESERVE_ASPECT = True  # Set False to stretch
@@ -27,13 +27,18 @@ os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 def convert_webp_to_jpg(input_folder, output_folder):
     """
     Converts all .webp images to .jpg and forces them to a fixed square size.
+    Removes '_Icon' from filenames automatically.
     """
     for filename in os.listdir(input_folder):
         if not filename.lower().endswith(".webp"):
             continue
 
+        # Remove extension and "_Icon" suffix if present
+        base_name = os.path.splitext(filename)[0]
+        base_name = base_name.replace("_Icon", "")
+
+        jpg_filename = base_name + ".jpg"
         webp_path = os.path.join(input_folder, filename)
-        jpg_filename = os.path.splitext(filename)[0] + ".jpg"
         jpg_path = os.path.join(output_folder, jpg_filename)
 
         try:
