@@ -28,7 +28,16 @@ class HandleBackground:
 
         pygame.draw.rect(self.surface, self.leftColor, (0, 0, leftWidth, height))
         pygame.draw.rect(self.surface, self.rightColor, (leftWidth, 0, width - leftWidth, height))
-    
+        
+        
+        x0 =params.ORIGIN_SPECIAL_ITEMS[0]
+        y0 = params.ORIGIN_SPECIAL_ITEMS[1]
+        w = params.SPECIAL_ITEMS_SIZE[0]
+        h = params.SPECIAL_ITEMS_SIZE[1]
+        pygame.draw.rect(self.surface, params.SPECIAL_ITEMS_COLOR, (x0,y0,w,h))
+
+
+
     def update(self):
         self.draw()
 
@@ -67,7 +76,7 @@ class HandleText():
         self.small_text_size = params.SMALL_FONT_SIZE
 
         self.alt_default_text = params.ALT_DEFAULT_SIZE
-
+        
 
         self.left_text = "Left info"
         self.right_text = "Right info"
@@ -78,13 +87,27 @@ class HandleText():
         self.special_font = pygame.font.Font(params.SPECIAL_TEXT_DIR, params.SPECIAL_FONT_SIZE)  
         self.small_font = pygame.font.Font(params.SMALL_TEXT_DIR, params.SMALL_FONT_SIZE) 
         self.alt_default_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.ALT_DEFAULT_SIZE) 
+        self.inventory_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.INVENTORY_TEXT_SIZE) 
 
 
-    def draw_text(self, text, position, font=None, color=params.TEXT_COLOR):
-        font = font or self.default_font
 
+    def draw_text(self, text, position, font=None, color=params.TEXT_COLOR,center=False):
+          # Render the text surface
         rendered_text = font.render(text, True, color)
-        self.screen.blit(rendered_text, position)
+        text_rect = rendered_text.get_rect()
+
+       
+        rendered_text = font.render(text, True, color)
+        text_rect = rendered_text.get_rect()
+
+        if center:
+            # Center only horizontally
+            text_rect.centerx = position[0]
+            text_rect.top = position[1]
+        else:
+            text_rect.topleft = position
+
+        self.screen.blit(rendered_text, text_rect)
 
     def draw(self):
         
@@ -95,14 +118,14 @@ class HandleText():
 
 
     def updateInventory(self):
-        self.draw_text(params.INVENTORY_TEXT, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]), font=self.default_font, color=params.BLACK)
+        self.draw_text(params.INVENTORY_TEXT, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]), font=self.inventory_font, color=params.BLACK)
         
         padding = [i*params.INVENTORY_ITEMS_PADDING for i in range(1,6)]
         
         for i in range(0,5):
             text = str(self.player.inventory.ui_items[i])
-            self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[i]), font=self.alt_default_font, color=params.BLACK)
-        
+            self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[i]), font=self.inventory_font, color=params.BLACK,center=True)
+       
     def update(self):
 
         self.draw()
@@ -120,6 +143,9 @@ class HandleGridUI():
         self.screen = screen
 
     def updateGrid(self):
+
+        
+
         for row in range(params.ROOM_GRID_SIZE_VERTICAL):
             for col in range(params.ROOM_GRID_SIZE_HORIZONTAL):
 
