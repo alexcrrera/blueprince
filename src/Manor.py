@@ -14,8 +14,7 @@ class RoomGrid():
 
         entranceHallPos = [2,8]
         entranceHall = Room("Etrance_Hall","blue",entranceHallPos[0],entranceHallPos[1], rarity = 0, cost = 0)
-        #antichamber = Room("Antechambre","blue",entranceHallPos[0],entranceHallPos[1], rarity = 0, cost = 0)
-
+     
         self.mansion[entranceHall.x][entranceHall.y] = entranceHall
         
 
