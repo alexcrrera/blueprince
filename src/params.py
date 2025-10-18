@@ -59,11 +59,11 @@ SELECTOR_IMAGE_DIR =  "assets/images/selector.png"
 SELECTOR_IMAGE = pygame.image.load(SELECTOR_IMAGE_DIR).convert_alpha()
 
 
-ENTRANCE_HALL_IMAGE_DIR = "assets/images/Entrance_Hall.jpg"
+ENTRANCE_HALL_IMAGE_DIR = "assets/images/rooms/Entrance_Hall.jpg"
 ENTRANCE_HALL_IMAGE = pygame.image.load(ENTRANCE_HALL_IMAGE_DIR).convert_alpha()
 
 
-ANTECHAMBER_IMAGE_DIR = "assets/images/Antechamber.jpg"
+ANTECHAMBER_IMAGE_DIR = "assets/images/rooms/Antechamber.jpg"
 ANTECHAMBER_HALL_IMAGE = pygame.image.load(ANTECHAMBER_IMAGE_DIR).convert_alpha()
 
 
