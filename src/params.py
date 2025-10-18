@@ -39,6 +39,9 @@ PLAY_MUSIC_START = False #play music at start
 IMAGE_CONVERSION_SIZE = 500
 
 #TODO REPLACE WITH DICT
+ICON_IMAGE_DIR = "assets/images/icon.png"
+ICON_IMAGE  = pygame.image.load(ICON_IMAGE_DIR)
+
 ENTRANCE_HALL_IMAGE_DIR = "assets/images/Entrance_Hall.jpg"
 ENTRANCE_HALL_IMAGE = pygame.image.load(ENTRANCE_HALL_IMAGE_DIR).convert_alpha()
 
