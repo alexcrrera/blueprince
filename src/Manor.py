@@ -13,7 +13,8 @@ class RoomGrid():
         self.mansion = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
 
         entranceHallPos = [2,8]
-        entranceHall = Room("Etrance Hall","blue",entranceHallPos[0],entranceHallPos[1], rarity = 0, cost = 0)
+        entranceHall = Room("Etrance_Hall","blue",entranceHallPos[0],entranceHallPos[1], rarity = 0, cost = 0)
+        antichamber = Room("Antechambre","blue",entranceHallPos[0],entranceHallPos[1], rarity = 0, cost = 0)
 
         self.mansion[entranceHall.x][entranceHall.y] = entranceHall
         
@@ -25,4 +26,5 @@ class RoomGrid():
         
             
     def update(self):   
-        pass
+        self.data.manor = self.mansion
+ 
