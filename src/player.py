@@ -10,16 +10,16 @@ class Player:
     - steps_left : nombre de pas restants
     - inventory : objets et ressources
     """
-   # test alexxx2
+
     def __init__(self, start_pos=(2, 8)):
-            # test alexxx
+            
         #lool
         self.position = start_pos
         self.x = self.position[0]
         self.y = self.position[1]
          # valeur par défaut d’après l’énoncé
         self.inventory = Inventory()
-        # test
+     
 
     # Le joueur peut se déplacer n'importe où dans la grille (même en dehors du manoir)
     # TODO: ajouter vérif murs/portes
