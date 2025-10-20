@@ -33,6 +33,16 @@ class Room:
 
 
         self.doors = {d: Door() for d in data["doors"]}
+        self.door_status = random.randint(0, 2) 
+
+        # portes ouvertes au premier niveau
+        if(y==8): # 1er  niveau
+            self.door_status = 0 #ouverte
+
+        # portes fermees a double tour
+        if(y==0): ##final level
+            self.door_status = 2  #porte fermee a double tour
+
         self.items = [Item(i, "consommable") for i in data["items"]]
         self.x, self.y = x, y
         
