@@ -40,9 +40,6 @@ DICT_ROOM_ATTRIBUTES = {}
 with open(json_path, "r") as file:
     DICT_ROOM_ATTRIBUTES = json.load(file)
 
-print(DICT_ROOM_ATTRIBUTES)
-
-
 SFX_LEVEL =0.5
 MUSIC_LEVEL = 1
 

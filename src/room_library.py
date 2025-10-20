@@ -21,7 +21,7 @@ class RoomGrid():
         
         entranceHallPos = [2,8]
         entranceHall = Room("Entrance_Hall",self.rooms_data ,entranceHallPos[0],entranceHallPos[1],"")
-        antechamberPos = [0,1]
+        antechamberPos = [2,0]
         
         antechamber = Room("Antechamber",self.rooms_data ,antechamberPos[0],antechamberPos[1],"")
       

@@ -152,22 +152,20 @@ class HandleGridUI():
 
                 x = col * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
                 y = row * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
-                
-                if(row ==8 and col ==2):
-                    scaled_image = pygame.transform.scale(
-                        params.ENTRANCE_HALL_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)
+
+                current_room = self.data.manor[col][row]
+
+                if(current_room is not None):
+                    curr_room_image = current_room.image_path
+                    img = pygame.image.load(curr_room_image).convert_alpha()
+
+
+                    scaled_image = pygame.transform.scale(img, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)
                     )
 
                     self.screen.blit(scaled_image, (x, y))
 
             
-                elif(row==0 and col == 2):
-                    scaled_image = pygame.transform.scale(
-                        params.ANTECHAMBER_HALL_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)
-                    )
-                    self.screen.blit(scaled_image, (x, y))
-                
-
 
                 if(row==self.data.roomY and col == self.data.roomX):
 
