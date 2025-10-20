@@ -9,7 +9,7 @@ from src import ui
 from src import sound
 from src import inputs
 from src import data
-from src import room_library
+
 from src import room  # import the class Room from room.py
 
 from src import state_machine
@@ -37,7 +37,7 @@ class Game:
 
         self.running = True
 
-        self.gridHandler = room_library.RoomGrid(self.dataHandler)
+        
         self.gridUIHandler = ui.HandleGridUI(self.dataHandler,self.screenHandler.screen)
         
     def update(self):
@@ -54,7 +54,7 @@ class Game:
         self.inputHandler.update()
          
         self.audioHandler.update()
-        self.gridHandler.update()
+       
        
         pygame.display.flip()
 

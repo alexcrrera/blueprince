@@ -2,7 +2,7 @@
 
 
 from src import params
-
+from src import room_library
 from src import state_machine
 
 class HandleData:
@@ -10,6 +10,8 @@ class HandleData:
     def __init__(self,player):
         self.keep_running = True
         self.state_machine =  state_machine.StateMachineHandler(self)
+        self.gridHandler = room_library.RoomGrid(self)
+
         self.music_play = params.PLAY_MUSIC_START
         self.music_level = params.MUSIC_LEVEL
         self.update_tiles = True
@@ -28,3 +30,4 @@ class HandleData:
 
     def update(self):
         self.state_machine.update()
+        self.gridHandler.update()
