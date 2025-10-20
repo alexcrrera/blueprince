@@ -1,11 +1,14 @@
 
 
+from src import state_machine
 
 from src import params
 
 class HandleData:
     
     def __init__(self,player):
+
+        self.state_machine =  state_machine.StateMachineHandler(self)
         self.keep_running = True
 
         self.music_play = params.PLAY_MUSIC_START
@@ -20,10 +23,15 @@ class HandleData:
         self.small_click_play = False
         self.toggle_up = False
 
+        self.space_pressed = False
+        self.cursor_visible = True
+
 
         self.manor = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
 
-        pass
+   
+    def update(self):
+        self.state_machine.update()
 
 
     

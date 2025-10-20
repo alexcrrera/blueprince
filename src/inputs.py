@@ -23,9 +23,13 @@ class HandleInputs:
             if event.type == pygame.KEYDOWN:
                 self.key_pressed[event.key] = True
                 
+
                 if event.key == pygame.K_m:
                     self.data.music_play = not self.data.music_play
+
+
                 if event.key == pygame.K_SPACE:
+                    self.data.space_pressed = True
                     self.data.click_play = True
 
 

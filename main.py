@@ -12,6 +12,7 @@ from src import data
 from src import room_library
 from src import room  # import the class Room from room.py
 
+from src import state_machine
 # Constants
 
 
@@ -24,9 +25,9 @@ class Game:
         self.clock = pygame.time.Clock()
         self.playerHandler = player.Player()
 
+        
+       
         self.dataHandler = data.HandleData(self.playerHandler)
-
-     
 
         self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock,self.dataHandler)
         
@@ -41,9 +42,10 @@ class Game:
         self.gridUIHandler = ui.HandleGridUI(self.dataHandler,self.screenHandler.screen)
         
     def update(self):
-        
+        self.dataHandler.update()
         self.backgroundHandler.update()
-        
+        self.gridUIHandler.update()
+
         self.playerHandler.update()
         self.running = self.dataHandler.keep_running
         self.screenHandler.update()
@@ -52,7 +54,8 @@ class Game:
          
         self.audioHandler.update()
         self.gridHandler.update()
-        self.gridUIHandler.update()
+      
+      
         pygame.display.flip()
 
 
