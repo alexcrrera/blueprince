@@ -220,7 +220,7 @@ class HandleGridUI():
                 x = x0 + i*(params.RANDOM_GROUP_TILE_SIZE+params.HORIZONTAL_PADDING_RANDOM_GROUP)
                 curr_room_image = room.image_path
                 img = pygame.image.load(curr_room_image).convert_alpha()
-                scaled_image = pygame.transform.scale(img, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
+                scaled_image = pygame.transform.scale(img, (params.RANDOM_GROUP_TILE_SIZE, params.RANDOM_GROUP_TILE_SIZE))
 
                 rot =  90*(room.room_rotation)
                 rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)

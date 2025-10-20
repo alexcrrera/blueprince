@@ -39,5 +39,5 @@ class Player:
     
     def update(self):
         self.position = (self.x,self.y)
-        self.next_room_position = [self.x,self.y+1]
+     
         self.inventory.update()
