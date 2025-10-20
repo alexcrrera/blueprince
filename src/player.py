@@ -22,8 +22,6 @@ class Player:
 
         self.direction = 1
 
-  
-     
 
     # Le joueur peut se déplacer n'importe où dans la grille (même en dehors du manoir)
     # TODO: ajouter vérif murs/portes
@@ -38,6 +36,6 @@ class Player:
         return f"Player pos={self.position} steps={self.steps_left} inv={self.inventory}"
     
     def update(self):
-        self.x = self.position[0]
-        self.y = self.position[1]
+        self.position = (self.x,self.y)
+      
         self.inventory.update()

@@ -170,16 +170,20 @@ class HandleGridUI():
                 
 
 
-                if(row==self.data.roomY and col == self.data.roomX):
+                if(row==self.data.player.y and col == self.data.player.x):
 
                 
-                    scaled_image = pygame.transform.scale(
-                        params.SELECTOR_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)
-                    )
-                    rot = 90 * (self.data.player.direction - 1)
-
-                    rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
-                    self.screen.blit(rotated_image, (x, y))
+                    if(self.data.state_machine.cursor_selection_mode):
+                        scaled_image = pygame.transform.scale(
+                            params.SELECTOR_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)
+                        )
+                        rot =  90*(self.data.player.direction-1)
+                        
+                        rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
+                        self.screen.blit(rotated_image, (x, y))
+                    elif(self.data.state_machine.room_selection_mode):
+                        
+                        pygame.draw.rect(self.screen, (255, 0, 0), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
                 else:
                     
                 #self.screen.blit(room_image, (x, y))
@@ -195,7 +199,7 @@ class HandleGridUI():
        # pygame.display.flip()
 
     def update(self):
-        if(self.data.update_tiles):
+        
            
-            self.updateGrid()
+        self.updateGrid()
         
