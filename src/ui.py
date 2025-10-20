@@ -117,7 +117,7 @@ class HandleText():
         self.draw_text(fps_text, (params.screenWidth//2 - params.PADDING -  self.small_font.size(fps_text)[0],  params.screenHeight - params.PADDING),font=self.small_font,color=params.BLACK)
 
 
-    def updateInventory(self):
+    def updateInventoryUI(self):
         self.draw_text(params.INVENTORY_TEXT, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]), font=self.inventory_font, color=params.BLACK)
         
         padding = [i*params.INVENTORY_ITEMS_PADDING for i in range(1,7)]
@@ -131,7 +131,7 @@ class HandleText():
     def update(self):
 
         self.draw()
-        self.updateInventory()
+        self.updateInventoryUI()
         
 
         
