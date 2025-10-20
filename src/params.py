@@ -50,6 +50,8 @@ MUSIC_TRACK_DIR = AUDIO_DIR +"/music" +"/mainTrack.mp3"
 SFX_DIR =  AUDIO_DIR + "/mainTrack.mp3" 
 
 CLICK_1_AUDIO_DIR = AUDIO_DIR + "/longclick.mp3"
+SHORT_CLICK_AUDIO_DIR = AUDIO_DIR + "/click1.mp3"
+
 
 
 PLAY_MUSIC_START = False #play music at start

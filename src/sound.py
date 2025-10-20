@@ -14,7 +14,9 @@ class HandleSound:
         self.randomStartMusic = random.uniform(0,3500) # un peu moins d'une heure au cas où
         self.play_music()
 
+        #TODO AUTOMATE WITH JSON
         self.sounds = {"click1":params.CLICK_1_AUDIO_DIR}
+        self.sounds["shortclick"] = params.SHORT_CLICK_AUDIO_DIR
 
 
 
@@ -57,4 +59,7 @@ class HandleSound:
         if( self.data.click_play):
              self.data.click_play = False
              self.play_sfx("click1")
+        if(self.data.small_click_play):
+            self.data.small_click_play = False
+            self.play_sfx("shortclick")
         pass
