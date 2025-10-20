@@ -7,6 +7,7 @@ class StateMachineHandler():
         self.room_selection_mode = False
         self.cursor_selection_mode = True
         self.inventory_mode = False
+        self.generate_random_rooms_flag = False
 
     
     def update(self):
@@ -28,7 +29,6 @@ class StateMachineHandler():
 
             out =[self.data.player.x+dx,self.data.player.y+dy]
 
-   
 
             out[0] = min(out[0],params.ROOM_GRID_SIZE_HORIZONTAL-1)
             out[0] = max(0,out[0])
@@ -39,12 +39,14 @@ class StateMachineHandler():
             self.data.player.next_room_position = out
             
             if(self.data.space_pressed):
-                
-                self.data.player.x += dx
-                self.data.player.y += dy
-                self.data.player.y = min(8, self.data.player.y)
+                self.data.state_machine.generate_random_rooms_flag = True
+
+                self.data.player.x = self.data.player.next_room_position[0]
+                self.data.player.y =self.data.player.next_room_position[1]
                 
                 self.data.player.inventory.steps_left += -1
-                print(self.data.player.x,self.data.player.y)
                 self.cursor_selection_mode = False
-                self.room_selection_mode = True
+           
+        elif(self.room_selection_mode):
+            
+            pass

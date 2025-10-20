@@ -165,10 +165,12 @@ class HandleGridUI():
        
 
     def showCursor(self):
-        if(not(self.data.state_machine.cursor_selection_mode)):
-            return
         x = self.data.player.x*params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
         y =  self.data.player.y * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
+        if(not(self.data.state_machine.cursor_selection_mode)):
+            pygame.draw.rect(self.screen, (255, 0,0), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
+            return
+        
         scaled_image = pygame.transform.scale(params.SELECTOR_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
         rot =  90*(self.data.player.direction-1)
         rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
@@ -176,6 +178,9 @@ class HandleGridUI():
         self.screen.blit(rotated_image, (x, y))
         
     def drawNextRoom(self):
+        if(not(self.data.state_machine.cursor_selection_mode)):
+            
+            return
         x0 = self.data.player.next_room_position[0]
         y0 = self.data.player.next_room_position[1]
         x= x0*params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
@@ -200,6 +205,34 @@ class HandleGridUI():
        
         self.screen.blit(rotated_image, (x, y))
 
+
+
+
+    def showRandomRooms(self):
+        if(not(self.data.state_machine.room_selection_mode)):
+            return
+        x0 = params.ORIGIN_ROOM_RANDOM_GROUP[0]
+        y0 = params.ORIGIN_ROOM_RANDOM_GROUP[1]
+        y = y0 
+     
+        for i,room in enumerate(self.data.gridHandler.randomGeneratedRooms):
+            if(room is not None):
+                x = x0 + i*(params.RANDOM_GROUP_TILE_SIZE+params.HORIZONTAL_PADDING_RANDOM_GROUP)
+                curr_room_image = room.image_path
+                img = pygame.image.load(curr_room_image).convert_alpha()
+                scaled_image = pygame.transform.scale(img, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
+
+                rot =  90*(room.room_rotation)
+                rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
+       
+                self.screen.blit(rotated_image, (x, y))
+
+
+                
+            else:
+                pygame.draw.rect(self.screen, (150, 150,150), (x, y, params.RANDOM_GROUP_TILE_SIZE, params.RANDOM_GROUP_TILE_SIZE), 1)
+            
+
     def updateGrid(self):
 
         for row in range(params.ROOM_GRID_SIZE_VERTICAL):
@@ -218,4 +251,4 @@ class HandleGridUI():
         self.showBigTile()
         self.showCursor()
         self.drawNextRoom()
-        
+        self.showRandomRooms()

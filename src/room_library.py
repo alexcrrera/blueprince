@@ -26,7 +26,7 @@ class RoomGrid():
         
         self.grid[entranceHall.x][entranceHall.y] = entranceHall
         self.grid[antechamber.x][antechamber.y] = antechamber
-        
+        self.randomGeneratedRooms = []
         
 
     def draw_random_rooms(self, n=3):
@@ -44,15 +44,30 @@ class RoomGrid():
         return [name for name in names]
 
 
-    def create_room_instance(self, name, x, y):
+    def create_room_instance(self, name):
+        out = self.data.player.next_room_position
+        x = out[0]
+        y = out[1]
+
         """Instancie une Room à partir du JSON."""
-        return Room(name, self.rooms_data[name], x, y)
+        return Room(name,self.rooms_data, x, y,"")
+
+    def generateRandomRooms(self):
+        if(self.data.state_machine.generate_random_rooms_flag):
+            
+            self.data.state_machine.generate_random_rooms_flag = False
+            self.data.state_machine.room_selection_mode  = True
+
+            rooms = self.draw_random_rooms()
+            self.randomGeneratedRooms = [self.create_room_instance(r) for r in rooms]
+            
 
     def __repr__(self):
 
         return "\n".join(room.__repr__() for row in self.grid for room in row if room)
     
     def update(self):
+        self.generateRandomRooms()
         self.data.manor = self.grid
 
     
