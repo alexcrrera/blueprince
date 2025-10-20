@@ -20,19 +20,21 @@ class Room:
     - des portes (nord, sud, est, ouest)
     """
 
-    def __init__(self, name: str, color: str,x,y, rarity: int = 0, cost: int = 0,src="E"):
-        self.x = x
-        self.y = y
-        #self.icon_dir  = params.DICT_ROOM_DIRECTORIES.get(name)
-        self.name = name # nom de la pièce (a"Chambre", "Cuisine", etc.)
-        self.color = color # couleur ("bleue", "verte", "rouge", etc.) -> TODO Gerer proba tirage + effet au joueur
-        self.rarity = rarity # rareté (0 à 3)
-        self.cost = cost # coût en gemmes
-        self.objects = [] # liste d'objets dans la pièce (Item)
-        # TODO: Attribut image vers l'image de la pièce
+    def __init__(self, name,room_attributes,x,y,src):
+        """
+        data = dictionnaire venant du JSON
+        """
+        data =  room_attributes[name]
+        self.name = name
+        self.color = data["color"]
+        self.rarity = data["rarity"]
+        self.cost = data["cost"]
+        self.image_path = f"assets/images/rooms/{data['image']}"
 
-        # Dictionnaire de portes : None au départ
-        self.doors = {"N": None, "S": None, "E": None, "W": None}
+
+        self.doors = {d: Door() for d in data["doors"]}
+        self.items = [Item(i, "consommable") for i in data["items"]]
+        self.x, self.y = x, y
         
 
     def add_door(self, direction: str, level_lock: int = 0):

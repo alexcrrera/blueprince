@@ -9,7 +9,7 @@ from src import ui
 from src import sound
 from src import inputs
 from src import data
-from src import manor
+from src import room_library
 from src import room  # import the class Room from room.py
 
 # Constants
@@ -36,7 +36,7 @@ class Game:
 
         self.running = True
 
-        self.gridHandler = manor.RoomGrid(self.dataHandler)
+        self.gridHandler = room_library.RoomGrid(self.dataHandler)
         self.gridUIHandler = ui.HandleGridUI(self.dataHandler,self.screenHandler.screen)
         
     def update(self):

@@ -15,12 +15,17 @@ class RoomGrid():
         self.grid = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
         
         entranceHallPos = [2,8]
-        etranceHallName = "Entrance_Hall"
-        entranceHall = Room(etranceHallName,"blue",entranceHallPos[0],entranceHallPos[1], rarity = 0, cost = 0)
-
-        self.grid[entranceHall.x][entranceHall.y] = entranceHall
+        entranceHall = Room("Entrance_Hall",self.rooms_data ,entranceHallPos[0],entranceHallPos[1],"")
+        antechamberPos = [0,1]
         
-
+        antechamber = Room("Antechamber",self.rooms_data ,antechamberPos[0],antechamberPos[1],"")
+      
+        
+        self.grid[entranceHall.x][entranceHall.y] = entranceHall
+        self.grid[antechamber.x][antechamber.y] = antechamber
+        self.rooms_data  = params.DICT_ROOM_ATTRIBUTES #dict with room attributes
+        self.remaining_rooms = list(self.rooms_data.keys())
+        
 
     def draw_random_rooms(self, n=3):
         """Retourne n chambres tirées aléatoirement selon leur rareté."""
