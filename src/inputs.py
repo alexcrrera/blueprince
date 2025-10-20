@@ -30,14 +30,18 @@ class HandleInputs:
 
 
                 if event.key == pygame.K_d:   
-                    self.data.arrow_dir = 0
+                    self.data.player.direction = 0
+                    self.data.small_click_play = True
                 if event.key == pygame.K_w:
-                    self.data.arrow_dir = 1
+                    self.data.player.direction= 1
+                    self.data.small_click_play = True
                 if event.key == pygame.K_a:
-                    self.data.arrow_dir = 2
+                    self.data.small_click_play = True
+                    self.data.player.direction = 2
                        
                 if event.key == pygame.K_s:
-                    self.data.arrow_dir = 3
+                    self.data.small_click_play = True
+                    self.data.player.direction = 3
 
             if event.type == pygame.KEYUP:
                 self.key_pressed[event.key] = False

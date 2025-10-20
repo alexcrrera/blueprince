@@ -20,6 +20,8 @@ class Player:
          # valeur par défaut d’après l’énoncé
         self.inventory = Inventory()
 
+        self.direction = 1
+
   
      
 
@@ -29,7 +31,7 @@ class Player:
         """Déplace le joueur dans la grille (pour l’instant sans vérif de murs)."""
         x, y = self.position
         self.position = (x + dx, y + dy)
-        self.steps_left -= 1  # chaque déplacement coûte 1 pas
+        self.inventory.steps_left -= 1  # chaque déplacement coûte 1 pas
 
     def __repr__(self):
         

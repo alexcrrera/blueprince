@@ -49,6 +49,7 @@ MUSIC_TRACK_DIR = AUDIO_DIR +"/music" +"/mainTrack.mp3"
 SFX_DIR =  AUDIO_DIR + "/mainTrack.mp3" 
 
 CLICK_1_AUDIO_DIR = AUDIO_DIR + "/longclick.mp3"
+SHORT_CLICK_AUDIO_DIR = AUDIO_DIR + "/click1.mp3"
 
 
 PLAY_MUSIC_START = False #play music at start
@@ -75,6 +76,8 @@ ANTECHAMBER_HALL_IMAGE = pygame.image.load(ANTECHAMBER_IMAGE_DIR).convert_alpha(
 
 
 # UI
+
+DIRECTION_CARDINAL = ["E","N","W","S"] # 0 = East, 1 = North...
 
 BG_COLOR = (30, 30, 30)
 

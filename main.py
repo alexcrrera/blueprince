@@ -22,14 +22,13 @@ class Game:
 
         self.screenHandler = ui.HandleScreen()
         self.clock = pygame.time.Clock()
-        self.dataHandler = data.HandleData()
-
         self.playerHandler = player.Player()
+        self.dataHandler = data.HandleData(self.playerHandler)
 
-        self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock,self.playerHandler)
+
+        self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock,self.dataHandler)
         
      
-        self.dataHandler = data.HandleData()
         self.backgroundHandler = ui.HandleBackground(self.screenHandler.screen)
         self.audioHandler = sound.HandleSound(self.dataHandler)
         self.inputHandler = inputs.HandleInputs(self.dataHandler)

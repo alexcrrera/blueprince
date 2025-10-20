@@ -15,6 +15,7 @@ class HandleSound:
         self.play_music()
 
         self.sounds = {"click1":params.CLICK_1_AUDIO_DIR}
+        self.sounds["shortclick"] = params.SHORT_CLICK_AUDIO_DIR
 
 
 
@@ -57,4 +58,8 @@ class HandleSound:
         if( self.data.click_play):
              self.data.click_play = False
              self.play_sfx("click1")
+             
+        if(self.data.small_click_play):
+            self.data.small_click_play = False
+            self.play_sfx("shortclick")
         pass
