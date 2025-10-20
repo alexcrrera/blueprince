@@ -1,3 +1,4 @@
+from src import params
 
 class StateMachineHandler():
 
@@ -10,21 +11,35 @@ class StateMachineHandler():
     
     def update(self):
 
+
+
         if(self.cursor_selection_mode):
-         
+            direction = self.data.player.direction
+            dx,dy = 0,0
+
+            if(direction==0):
+                dx = 1
+            elif(direction==1):
+                dy = -1
+            elif(direction==2):
+                dx = -1
+            elif(direction==3):
+                dy = +1
+
+            out =[self.data.player.x+dx,self.data.player.y+dy]
+
+   
+
+            out[0] = min(out[0],params.ROOM_GRID_SIZE_HORIZONTAL-1)
+            out[0] = max(0,out[0])
+
+            out[1] = min(out[1],params.ROOM_GRID_SIZE_VERTICAL-1)
+            out[1] = max(0,out[1])
+           
+            self.data.player.next_room_position = out
+            
             if(self.data.space_pressed):
-                direction = self.data.player.direction
                 
-                
-                dx,dy = 0,0
-                if(direction==0):
-                    dx = 1
-                elif(direction==1):
-                    dy = -1
-                elif(direction==2):
-                    dx = +1
-                elif(direction==3):
-                    dy = -1
                 self.data.player.x += dx
                 self.data.player.y += dy
                 self.data.player.y = min(8, self.data.player.y)

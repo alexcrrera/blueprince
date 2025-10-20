@@ -21,6 +21,8 @@ class Player:
         self.inventory = Inventory()
 
         self.direction = 1
+        
+        self.next_room_position = [self.x,self.y+1]
 
 
     # Le joueur peut se déplacer n'importe où dans la grille (même en dehors du manoir)
@@ -37,5 +39,5 @@ class Player:
     
     def update(self):
         self.position = (self.x,self.y)
-      
+        self.next_room_position = [self.x,self.y+1]
         self.inventory.update()

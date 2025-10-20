@@ -34,7 +34,7 @@ class Room:
 
         self.doors = {d: Door() for d in data["doors"]}
         self.door_status = random.randint(0, 2) 
-
+        self.room_rotation = 0
         # portes ouvertes au premier niveau
         if(y==8): # 1er  niveau
             self.door_status = 0 #ouverte

@@ -109,6 +109,8 @@ class HandleText():
 
         self.screen.blit(rendered_text, text_rect)
 
+
+
     def draw(self):
         
         self.draw_text(self.special_text, (params.PADDING, params.PADDING), font=self.special_font, color=(255, 200, 0))
@@ -128,6 +130,8 @@ class HandleText():
         text = str(params.DIRECTION_CARDINAL[self.data.player.direction])
 
         self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[5]), font=self.inventory_font, color=params.BLACK,center=True)
+
+
     def update(self):
 
         self.draw()
@@ -144,62 +148,74 @@ class HandleGridUI():
         self.data = data
         self.screen = screen
 
-    def updateGrid(self):
 
+
+    def showBigTile(self):
+        curr_room = self.data.manor[self.data.player.x][self.data.player.y]
+        if(curr_room is None):
+            return
+  
+        curr_room_image = curr_room.image_path
+        img = pygame.image.load(curr_room_image).convert_alpha()
+        scaled_image = pygame.transform.scale(img, (params.BIG_TILE, params.BIG_TILE) )
+        rot =  90*(curr_room.room_rotation)
+                        
+        rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
+        self.screen.blit(rotated_image, (params.ORIGIN_BIG_TILE[0], params.ORIGIN_BIG_TILE[1]))
+       
+
+    def showCursor(self):
+        if(not(self.data.state_machine.cursor_selection_mode)):
+            return
+        x = self.data.player.x*params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
+        y =  self.data.player.y * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
+        scaled_image = pygame.transform.scale(params.SELECTOR_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
+        rot =  90*(self.data.player.direction-1)
+        rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
         
+        self.screen.blit(rotated_image, (x, y))
+        
+    def drawNextRoom(self):
+        x0 = self.data.player.next_room_position[0]
+        y0 = self.data.player.next_room_position[1]
+        x= x0*params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
+        y =  y0 * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
+        pygame.draw.rect(self.screen, (0, 255,0), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
+
+
+    def drawRoom(self,x0,y0):
+        curr_room = self.data.manor[x0][y0]
+        x = x0*params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
+        y =  y0 * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
+        if(curr_room is None):
+            pygame.draw.rect(self.screen, (150, 150,150), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
+            return
+    
+        curr_room_image = curr_room.image_path
+        img = pygame.image.load(curr_room_image).convert_alpha()
+        scaled_image = pygame.transform.scale(img, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
+
+        rot =  90*(curr_room.room_rotation)
+        rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
+       
+        self.screen.blit(rotated_image, (x, y))
+
+    def updateGrid(self):
 
         for row in range(params.ROOM_GRID_SIZE_VERTICAL):
             for col in range(params.ROOM_GRID_SIZE_HORIZONTAL):
-
-
-                x = col * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
-                y = row * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
-                current_room = self.data.manor[col][row]
+                self.drawRoom(col,row)
                 
-
                 
-
+                
             
-                if(current_room is not None):
-                    curr_room_image = current_room.image_path
-                    img = pygame.image.load(curr_room_image).convert_alpha()
-
-
-                    scaled_image = pygame.transform.scale(img, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
-                    self.screen.blit(scaled_image, (x, y))
                 
-
-
-                if(row==self.data.player.y and col == self.data.player.x):
-
-                
-                    if(self.data.state_machine.cursor_selection_mode):
-                        scaled_image = pygame.transform.scale(
-                            params.SELECTOR_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE)
-                        )
-                        rot =  90*(self.data.player.direction-1)
-                        
-                        rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
-                        self.screen.blit(rotated_image, (x, y))
-                    elif(self.data.state_machine.room_selection_mode):
-                        
-                        pygame.draw.rect(self.screen, (255, 0, 0), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
-                else:
-                    
-                #self.screen.blit(room_image, (x, y))
-
-                # Optional: draw borders
-                    pygame.draw.rect(self.screen, (80, 80, 80), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
-
-        #big room item placeholder
-        pygame.draw.rect(self.screen, (80, 80, 80), (params.ORIGIN_BIG_TILE[0], params.ORIGIN_BIG_TILE[1], params.BIG_TILE, params.BIG_TILE), 1)
-        
-        
-
+       
        # pygame.display.flip()
 
     def update(self):
-        
-           
         self.updateGrid()
+        self.showBigTile()
+        self.showCursor()
+        self.drawNextRoom()
         
