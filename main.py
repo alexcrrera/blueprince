@@ -28,7 +28,7 @@ class Game:
 
      
 
-        self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock,self.playerHandler)
+        self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock,self.dataHandler)
         
      
         self.backgroundHandler = ui.HandleBackground(self.screenHandler.screen)

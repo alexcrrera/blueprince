@@ -21,6 +21,9 @@ class Player:
         self.inventory = Inventory()
 
         self.direction = 1
+   
+
+       
 
   
      

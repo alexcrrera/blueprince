@@ -79,6 +79,8 @@ ANTECHAMBER_HALL_IMAGE = pygame.image.load(ANTECHAMBER_IMAGE_DIR).convert_alpha(
 
 # UI
 
+DIRECTION_CARDINAL = ["E","N","W","S"] # 0 = East, 1 = North...
+
 BG_COLOR = (30, 30, 30)
 
 DARK_BLUE_COLOR = (30,70,136)

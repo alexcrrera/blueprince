@@ -64,8 +64,9 @@ class HandleScreen:
 
 
 class HandleText():
-    def __init__(self,screen,clock,player):
-        self.player  = player
+    def __init__(self,screen,clock,data):
+        self.data = data
+    
 
         self.clock = clock
         self.screen = screen
@@ -120,12 +121,15 @@ class HandleText():
     def updateInventory(self):
         self.draw_text(params.INVENTORY_TEXT, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]), font=self.inventory_font, color=params.BLACK)
         
-        padding = [i*params.INVENTORY_ITEMS_PADDING for i in range(1,6)]
+        padding = [i*params.INVENTORY_ITEMS_PADDING for i in range(1,7)]
         
         for i in range(0,5):
-            text = str(self.player.inventory.ui_items[i])
+            text = str(self.data.player.inventory.ui_items[i])
             self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[i]), font=self.inventory_font, color=params.BLACK,center=True)
-       
+
+        text = str(params.DIRECTION_CARDINAL[self.data.player.direction])
+
+        self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[5]), font=self.inventory_font, color=params.BLACK,center=True)
     def update(self):
 
         self.draw()
