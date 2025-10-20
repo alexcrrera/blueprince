@@ -26,4 +26,3 @@ class RoomGrid():
             
     def update(self):   
         self.data.manor = self.mansion
- 
