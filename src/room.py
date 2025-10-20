@@ -20,10 +20,12 @@ class Room:
     - des portes (nord, sud, est, ouest)
     """
 
-    def __init__(self, name,data,x,y,src):
+    def __init__(self, name,room_attributes,x,y,src):
         """
         data = dictionnaire venant du JSON
         """
+
+        data =  room_attributes[name]
         self.name = name
         self.color = data["color"]
         self.rarity = data["rarity"]
