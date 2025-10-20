@@ -33,9 +33,9 @@ INTIAL_DICE = 0
 
 
 json_path = os.path.join("src", "rooms.json")
-DICT_DIRECTORIES = {}
+DICT_ROOM_ATTRIBUTES = {}
 with open(json_path, "r") as file:
-    DICT_DIRECTORIES = json.load(file)
+    DICT_ROOM_ATTRIBUTES = json.load(file)
 
 
 
