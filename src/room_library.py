@@ -22,8 +22,9 @@ class RoomGrid():
         antechamberPos = [2,0]
         
         antechamber = Room("Antechamber",self.rooms_data ,antechamberPos[0],antechamberPos[1],"")
-      
-        
+
+        testRoom = Room("Parlor",self.rooms_data,entranceHallPos[0]+1,entranceHallPos[1],"")
+        self.grid[testRoom.x][testRoom.y] = testRoom
         self.grid[entranceHall.x][entranceHall.y] = entranceHall
         self.grid[antechamber.x][antechamber.y] = antechamber
         self.randomGeneratedRooms = []
@@ -69,5 +70,10 @@ class RoomGrid():
     def update(self):
         self.generateRandomRooms()
         self.data.manor = self.grid
+        x,y = self.data.player.next_room_position
+        nextRoom = self.data.manor[x][y]
+        if(nextRoom is None):
+            self.data.player.next_room_status = 0
 
-    
+        else:
+            self.data.player.next_room_status = 1

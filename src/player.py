@@ -23,6 +23,7 @@ class Player:
         self.direction = 1
         
         self.next_room_position = [self.x,self.y+1]
+        self.next_room_status = 0 # 0 = vide, 1 = existe
 
 
     # Le joueur peut se déplacer n'importe où dans la grille (même en dehors du manoir)

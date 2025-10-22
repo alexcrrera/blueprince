@@ -109,9 +109,15 @@ class HandleText():
 
         self.screen.blit(rendered_text, text_rect)
 
+    def drawNextRoomInfo(self):
+       
+        txt = "Next room is empty" if  self.data.player.next_room_status == 0 else "Press space to enter next room"
+        self.draw_text(txt, (params.ROOM_INFO_ORIGIN[0], params.ROOM_INFO_ORIGIN[1]), font=self.small_font, color=(255, 200, 0))
+
 
 
     def draw(self):
+        self.drawNextRoomInfo()
         
         self.draw_text(self.special_text, (params.PADDING, params.PADDING), font=self.special_font, color=(255, 200, 0))
 
@@ -131,6 +137,7 @@ class HandleText():
 
         self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[5]), font=self.inventory_font, color=params.BLACK,center=True)
 
+        
 
     def update(self):
 
