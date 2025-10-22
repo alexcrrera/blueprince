@@ -23,12 +23,27 @@ class RoomGrid():
         
         antechamber = Room("Antechamber",self.rooms_data ,antechamberPos[0],antechamberPos[1],"")
 
+        testRoom2 = Room("Parlor",self.rooms_data,entranceHallPos[0]-1,entranceHallPos[1],"")
         testRoom = Room("Parlor",self.rooms_data,entranceHallPos[0]+1,entranceHallPos[1],"")
+        self.grid[testRoom2.x][testRoom2.y] = testRoom2
         self.grid[testRoom.x][testRoom.y] = testRoom
         self.grid[entranceHall.x][entranceHall.y] = entranceHall
         self.grid[antechamber.x][antechamber.y] = antechamber
         self.randomGeneratedRooms = []
+
+
+        self.current_room = self.grid[self.data.player.x][self.data.player.y]
+        self.next_room = self.grid[self.data.player.next_room_position[0]][self.data.player.next_room_position[1]]
+    
+        self.next_room_status = -1 # vide #0 ouverte
         
+    def checkRoomConnection(self):
+        
+        if(self.next_room is None):
+            return(-1)
+        
+
+        curr_room = self.data
 
     def draw_random_rooms(self, n=3):
         """Retourne n chambres tirées aléatoirement selon leur rareté."""
@@ -68,12 +83,12 @@ class RoomGrid():
         return "\n".join(room.__repr__() for row in self.grid for room in row if room)
     
     def update(self):
+
         self.generateRandomRooms()
         self.data.manor = self.grid
-        x,y = self.data.player.next_room_position
-        nextRoom = self.data.manor[x][y]
-        if(nextRoom is None):
-            self.data.player.next_room_status = 0
 
-        else:
-            self.data.player.next_room_status = 1
+        self.current_room = self.grid[self.data.player.x][self.data.player.y]
+
+        self.next_room = self.grid[self.data.player.next_room_position[0]][self.data.player.next_room_position[1]]
+       
+        self.data.player.next_room_status = self.checkRoomConnection()

@@ -110,8 +110,19 @@ class HandleText():
         self.screen.blit(rendered_text, text_rect)
 
     def drawNextRoomInfo(self):
+        stat = self.data.player.next_room_status
+        txt = ""
+        if(stat==-1):
+            txt = "Next room is empty"
+        elif(stat==0):
+            txt="Next room is unlocked - press  space to enter"
+        elif(stat==1):
+            txt="Next room is locked - press  space to enter to use a key"
+        elif(stat==2):
+             txt="Next room is locked twice - press  space to enter to use one key"
        
-        txt = "Next room is empty" if  self.data.player.next_room_status == 0 else "Press space to enter next room"
+        elif(stat==3):
+             txt="There's a wall..."
         self.draw_text(txt, (params.ROOM_INFO_ORIGIN[0], params.ROOM_INFO_ORIGIN[1]), font=self.small_font, color=(255, 200, 0))
 
 
