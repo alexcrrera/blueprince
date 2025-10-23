@@ -47,11 +47,16 @@ class RoomGrid():
 #               |                        
 #               S (3)                    
 #               ↓                           
-            
+        current_room = self.current_room   
         if self.next_room is None:
-            return -1
+            if(current_room.doors[self.data.player.direction]==1):
+              
+                return -2
+                
+            else:
+                return -1
 
-        current_room = self.current_room
+       
         next_room = self.next_room
 
         # Nord

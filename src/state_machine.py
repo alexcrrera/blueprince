@@ -41,6 +41,7 @@ class StateMachineHandler():
             if(self.data.space_pressed):
                 self.data.space_pressed = False
                 if( self.data.player.next_room_status ==-1):
+                  
                     print("Gen new rooms")
                     self.data.state_machine.generate_random_rooms_flag = True
                     self.cursor_selection_mode = False

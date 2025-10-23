@@ -9,8 +9,18 @@ pygame.display.set_mode((1, 1))  # Hidden 1×1 window just for convert()
 
 
 # Screen settings
-DEFAULT_SCREEN_WIDTH= 1080
-DEFAULT_SCREEN_HEIGHT = 720
+USE_DEFAULT = True
+
+if(USE_DEFAULT):
+        
+    DEFAULT_SCREEN_WIDTH= 1920
+    DEFAULT_SCREEN_HEIGHT = 1080
+else:
+    DEFAULT_SCREEN_WIDTH= 1080
+    DEFAULT_SCREEN_HEIGHT = 720
+
+
+    
 screenWidth = DEFAULT_SCREEN_WIDTH #taille image horizontal par défaut
 screenHeight = DEFAULT_SCREEN_HEIGHT #taille image vertical par défaut
 
