@@ -40,24 +40,41 @@ class RoomGrid():
         # -1 = empty, 0 = wall, 1 = unlocked, 2 = locked, 3 = locked twice
 
     def checkRoomConnection(self):
-        if(self.next_room is None):
-            return(-1)
-        if(self.data.player.direction == 1): # Nord
-            if(self.next_room.doors[3] == 1):
-                return(1)
+#               ↑                      
+#               N (1)                      
+#               |                      
+#     W (2) ← - ● - → E (0)            
+#               |                        
+#               S (3)                    
+#               ↓                           
+            
+        if self.next_room is None:
+            return -1
 
-        if(self.data.player.direction == 2): # Ouest
-            if(self.next_room.doors[0] == 1):
-                return(1)
+        current_room = self.current_room
+        next_room = self.next_room
 
-        if(self.data.player.direction == 3): # Sud
-            if(self.next_room.doors[1] == 1):
-                return(1)
+        # Nord
+        if self.data.player.direction == 1:
+            if current_room.doors[1] == 1 and next_room.doors[3] == 1:
+                return 1
 
-        if(self.data.player.direction == 0): # Est
-            if(self.next_room.doors[2] == 1):
-                return(1)
-        return(0)
+        # Ouest
+        if self.data.player.direction == 2:
+            if current_room.doors[2] == 1 and next_room.doors[0] == 1:
+                return 1
+
+        # Sud
+        if self.data.player.direction == 3:
+            if current_room.doors[3] == 1 and next_room.doors[1] == 1:
+                return 1
+
+        # Est
+        if self.data.player.direction == 0:
+            if current_room.doors[0] == 1 and next_room.doors[2] == 1:
+                return 1
+
+        return 0
 
         #curr_room = self.current
 
