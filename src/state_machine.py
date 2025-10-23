@@ -39,18 +39,26 @@ class StateMachineHandler():
             self.data.player.next_room_position = out
             
             if(self.data.space_pressed):
-                if( self.data.player.next_room_status ==0):
+                self.data.space_pressed = False
+                if( self.data.player.next_room_status ==-1):
+                    print("Gen new rooms")
                     self.data.state_machine.generate_random_rooms_flag = True
+                    self.cursor_selection_mode = False
 
+                    self.room_selection_mode = True
+                elif( self.data.player.next_room_status ==1):
+                    
+                    self.data.player.next_room_status =0
+                    print("On bouge a la new room")
                     self.data.player.x = self.data.player.next_room_position[0]
                     self.data.player.y =self.data.player.next_room_position[1]
-                
-                    
-                    self.cursor_selection_mode = False
-                elif(self.data.player.next_room_status ==1):
-
                     self.data.player.inventory.steps_left += -1
-                    print("Good to go")
+                    
+                    
+                elif(self.data.player.next_room_status ==2):
+                    
+                    
+                    print("Locked to go")
                     self.cursor_selection_mode = False
         elif(self.room_selection_mode):
             

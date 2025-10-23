@@ -10,7 +10,7 @@ import random
 
 class RoomGrid():
     def __init__(self,data):
-
+        self.space_counter = 0
         self.data = data
         self.grid = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
         
@@ -75,13 +75,13 @@ class RoomGrid():
         return [name for name in names]
 
 
-    def create_room_instance(self, name):
+    def create_room_instance(self, name,rotation=0):
         out = self.data.player.next_room_position
         x = out[0]
         y = out[1]
 
         """Instancie une Room à partir du JSON."""
-        return Room(name,self.rooms_data, x, y,"")
+        return Room(name,self.rooms_data, x, y,rotation)
 
     def generateRandomRooms(self):
         if(self.data.state_machine.generate_random_rooms_flag):
@@ -90,6 +90,7 @@ class RoomGrid():
             self.data.state_machine.room_selection_mode  = True
 
             rooms = self.draw_random_rooms()
+            # il fqut remplacer create_room_instance out impleme
             self.randomGeneratedRooms = [self.create_room_instance(r) for r in rooms]
             
 
