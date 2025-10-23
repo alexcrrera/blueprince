@@ -18,13 +18,13 @@ class RoomGrid():
         self.remaining_rooms = list(self.rooms_data.keys())
 
         entranceHallPos = [2,8]
-        entranceHall = Room("Entrance_Hall",self.rooms_data ,entranceHallPos[0],entranceHallPos[1],"")
+        entranceHall = Room("Entrance_Hall",self.rooms_data ,entranceHallPos[0],entranceHallPos[1],0)
         antechamberPos = [2,0]
         
-        antechamber = Room("Antechamber",self.rooms_data ,antechamberPos[0],antechamberPos[1],"")
+        antechamber = Room("Antechamber",self.rooms_data ,antechamberPos[0],antechamberPos[1],0)
 
-        testRoom2 = Room("Parlor",self.rooms_data,entranceHallPos[0]-1,entranceHallPos[1],"")
-        testRoom = Room("Parlor",self.rooms_data,entranceHallPos[0]+1,entranceHallPos[1],"")
+        testRoom2 = Room("Parlor",self.rooms_data,entranceHallPos[0]-1,entranceHallPos[1],0)
+        testRoom = Room("Parlor",self.rooms_data,entranceHallPos[0]+1,entranceHallPos[1],0)
         self.grid[testRoom2.x][testRoom2.y] = testRoom2
         self.grid[testRoom.x][testRoom.y] = testRoom
         self.grid[entranceHall.x][entranceHall.y] = entranceHall
@@ -35,15 +35,29 @@ class RoomGrid():
         self.current_room = self.grid[self.data.player.x][self.data.player.y]
         self.next_room = self.grid[self.data.player.next_room_position[0]][self.data.player.next_room_position[1]]
     
-        self.next_room_status = -1 # vide #0 ouverte
-        
+        self.next_room_status = -1
+        # -1 = empty, 0 = wall, 1 = unlocked, 2 = locked, 3 = locked twice
+
     def checkRoomConnection(self):
-        
         if(self.next_room is None):
             return(-1)
-        
+        if(self.data.player.direction == 1): # Nord
+            if(self.next_room.doors[3] == 1):
+                return(1)
 
-        curr_room = self.data
+        if(self.data.player.direction == 2): # Ouest
+            if(self.next_room.doors[0] == 1):
+                return(1)
+
+        if(self.data.player.direction == 3): # Sud
+            if(self.next_room.doors[1] == 1):
+                return(1)
+
+        if(self.data.player.direction == 0): # Est
+            if(self.next_room.doors[2] == 1):
+                return(1)
+
+        #curr_room = self.current
 
     def draw_random_rooms(self, n=3):
         """Retourne n chambres tirées aléatoirement selon leur rareté."""

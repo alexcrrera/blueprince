@@ -20,7 +20,7 @@ class Player:
          # valeur par défaut d’après l’énoncé
         self.inventory = Inventory()
 
-        self.direction = 1
+        self.direction = 1 # 0 = Est, 1 = Nord, 2 = Ouest, 3 = Sud
         
         self.next_room_position = [self.x,self.y-1]
         self.next_room_status = 0 # 0 = vide, 1 = existe

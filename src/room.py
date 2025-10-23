@@ -20,7 +20,7 @@ class Room:
     - des portes (nord, sud, est, ouest)
     """
 
-    def __init__(self, name,room_attributes,x,y,src):
+    def __init__(self, name,room_attributes,x,y,rotation):
         """
         data = dictionnaire venant du JSON
         """
@@ -31,16 +31,21 @@ class Room:
         self.cost = data["cost"]
         self.image_path = f"assets/images/rooms/{data['image']}"
 
+        # Array [Est, Nord, Ouest, Sud] - 0 = pas de porte, 1 = porte
+        self.doors = [0, 0, 0, 0]
+        direction_map = {"E": 0, "N": 1, "W": 2, "S": 3}
+        for d in data["doors"]:
+            if d in direction_map:
+                self.doors[direction_map[d]] = 1
 
-        self.doors = {d: Door() for d in data["doors"]}
         self.door_status = random.randint(0, 2) 
-        self.room_rotation = 0
+        self.room_rotation = rotation
         # portes ouvertes au premier niveau
         if(y==8): # 1er  niveau
             self.door_status = 0 #ouverte
 
         # portes fermees a double tour
-        if(y==0): ##final level
+        if(y==0): #final level
             self.door_status = 2  #porte fermee a double tour
 
         self.items = [Item(i, "consommable") for i in data["items"]]
