@@ -65,7 +65,7 @@ ICON_IMAGE  = pygame.image.load(ICON_IMAGE_DIR)
 
 SELECTOR_IMAGE_DIR =  "assets/images/selector.png"
 SELECTOR_IMAGE = pygame.image.load(SELECTOR_IMAGE_DIR).convert_alpha()
-
+NEXT_ROOM_SHOW = False
 
 ENTRANCE_HALL_IMAGE_DIR = "assets/images/rooms/Entrance_Hall.jpg"
 ENTRANCE_HALL_IMAGE = pygame.image.load(ENTRANCE_HALL_IMAGE_DIR).convert_alpha()

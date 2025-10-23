@@ -22,10 +22,11 @@ class RoomGrid():
         antechamberPos = [2,0]
         
         antechamber = Room("Antechamber",self.rooms_data ,antechamberPos[0],antechamberPos[1],0)
-
+        testRoom3 =  Room("Parlor",self.rooms_data,entranceHallPos[0]+2,entranceHallPos[1],0)
         testRoom2 = Room("Parlor",self.rooms_data,entranceHallPos[0]-1,entranceHallPos[1],0)
         testRoom = Room("Parlor",self.rooms_data,entranceHallPos[0]+1,entranceHallPos[1],0)
         self.grid[testRoom2.x][testRoom2.y] = testRoom2
+        self.grid[testRoom3.x][testRoom3.y] = testRoom3
         self.grid[testRoom.x][testRoom.y] = testRoom
         self.grid[entranceHall.x][entranceHall.y] = entranceHall
         self.grid[antechamber.x][antechamber.y] = antechamber
