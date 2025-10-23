@@ -56,6 +56,7 @@ class RoomGrid():
         if(self.data.player.direction == 0): # Est
             if(self.next_room.doors[2] == 1):
                 return(1)
+        return(0)
 
         #curr_room = self.current
 
