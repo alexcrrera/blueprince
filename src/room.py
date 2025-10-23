@@ -59,6 +59,16 @@ class Room:
         else:
             raise ValueError("Direction invalide (utilise N, S, E ou W).")
 
+    def rotate_90_trigo(self):
+        """
+        Fait tourner la pièce de 90° dans le sens trigonométrique :
+        - Met à jour les portes [E, N, W, S]
+        - Incrémente room_rotation (dans le sens anti-horaire)
+        """
+        # [E, N, W, S] devient [N, W, S, E]
+        self.doors = [self.doors[1], self.doors[2], self.doors[3], self.doors[0]]
+        self.room_rotation = (self.room_rotation + 1) % 4
+
     def connect(self, direction: str, other_room):
         """Connecte cette pièce à une autre dans une direction donnée."""
 
