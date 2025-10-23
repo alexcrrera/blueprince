@@ -62,5 +62,12 @@ class StateMachineHandler():
                     print("Locked to go")
                     self.cursor_selection_mode = False
         elif(self.room_selection_mode):
-            
+            if(self.data.enter_pressed):
+                self.data.enter_pressed = False
+                x = self.data.player.next_room_position[0]
+                y = self.data.player.next_room_position[1]
+                self.data.gridHandler.grid[x][y] = self.data.gridHandler.randomGeneratedRooms[self.data.counter_room_selection_cursor]
+                self.room_selection_mode = False
+                self.cursor_selection_mode = True
+
             pass
