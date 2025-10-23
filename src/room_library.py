@@ -51,10 +51,10 @@ class RoomGrid():
         if self.next_room is None:
             if(current_room.doors[self.data.player.direction]==1):
               
-                return -2
+                return -1 # we can generate it 
                 
             else:
-                return -1
+                return -2 # a wall
 
        
         next_room = self.next_room
