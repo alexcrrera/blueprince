@@ -28,6 +28,7 @@ class HandleData:
         self.cursor_visible = True
 
         self.counter_room_selection_cursor =0
+        self.enter_pressed = False
 
 
        

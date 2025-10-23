@@ -29,6 +29,8 @@ class HandleInputs:
                     self.data.click_play = True
                     self.data.space_pressed = True
 
+                if event.key == pygame.K_ENTER:
+                    self.data.enter_pressed = True   
 
                 if event.key == pygame.K_d:   
                     self.data.player.direction = 0
