@@ -19,7 +19,7 @@ screenHeight = DEFAULT_SCREEN_HEIGHT #taille image vertical par défaut
 #Colors (R, G, B)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-
+GREEN = (0,0,255)
 # Game settings
 TARGET_FPS = 60
 splitRatioScreen = 0.33 # ratio entre côté gauche et droite
@@ -63,9 +63,6 @@ ICON_IMAGE_DIR = "assets/images/icon.png"
 ICON_IMAGE  = pygame.image.load(ICON_IMAGE_DIR)
 
 
-SELECTOR_IMAGE_DIR =  "assets/images/selector.png"
-SELECTOR_IMAGE = pygame.image.load(SELECTOR_IMAGE_DIR).convert_alpha()
-NEXT_ROOM_SHOW = False
 
 ENTRANCE_HALL_IMAGE_DIR = "assets/images/rooms/Entrance_Hall.jpg"
 ENTRANCE_HALL_IMAGE = pygame.image.load(ENTRANCE_HALL_IMAGE_DIR).convert_alpha()
@@ -136,3 +133,8 @@ ROOM_INFO_PADDING = 20
 ROOM_INFO_ORIGIN = [(ORIGIN_TILE[0]+2*ROOM_TILE_SIZE)//1,screenHeight-ROOM_INFO_PADDING]
 
 
+SELECTOR_IMAGE_DIR =  "assets/images/selector.png"
+SELECTOR_IMAGE = pygame.image.load(SELECTOR_IMAGE_DIR).convert_alpha()
+NEXT_ROOM_SHOW = False
+RANDOM_CURSOR_WIDTH = 6
+RANDOM_CURSOR_WIDTH_COLOR = GREEN

@@ -196,6 +196,7 @@ class HandleGridUI():
         
         self.screen.blit(rotated_image, (x, y))
         
+
     def drawNextRoom(self):
         
         if(not(self.data.state_machine.cursor_selection_mode) or not params.NEXT_ROOM_SHOW):
@@ -253,6 +254,18 @@ class HandleGridUI():
                 pygame.draw.rect(self.screen, (150, 150,150), (x, y, params.RANDOM_GROUP_TILE_SIZE, params.RANDOM_GROUP_TILE_SIZE), 1)
             
 
+    def showRandomSelectionCursor(self):
+        if(not self.data.state_machine.room_selection_mode):
+            return
+        x0 = params.ORIGIN_ROOM_RANDOM_GROUP[0]
+        y0 = params.ORIGIN_ROOM_RANDOM_GROUP[1]
+        y = y0
+        i = self.data.counter_room_selection_cursor
+        x = x0 + i*(params.RANDOM_GROUP_TILE_SIZE+params.HORIZONTAL_PADDING_RANDOM_GROUP)
+        pygame.draw.rect(self.screen, params.RANDOM_CURSOR_WIDTH_COLOR, (x, y, params.RANDOM_GROUP_TILE_SIZE, params.RANDOM_GROUP_TILE_SIZE), params.RANDOM_CURSOR_WIDTH)
+       
+
+
     def updateGrid(self):
 
         for row in range(params.ROOM_GRID_SIZE_VERTICAL):
@@ -272,3 +285,4 @@ class HandleGridUI():
         self.showCursor()
         self.drawNextRoom()
         self.showRandomRooms()
+        self.showRandomSelectionCursor()

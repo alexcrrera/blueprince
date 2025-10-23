@@ -43,7 +43,20 @@ class HandleInputs:
                 if event.key == pygame.K_s:
                     self.data.small_click_play = True
                     self.data.player.direction = 3
+                if event.key == pygame.K_RIGHT:
+                    
+                    if(self.data.state_machine.room_selection_mode):
 
+                        self.data.counter_room_selection_cursor +=1
+                        if(self.data.counter_room_selection_cursor >=3):
+                             self.data.counter_room_selection_cursor = 0
+                if event.key == pygame.K_LEFT:
+                
+                    if(self.data.state_machine.room_selection_mode):
+                      
+                        self.data.counter_room_selection_cursor -=1
+                        if(self.data.counter_room_selection_cursor <0):
+                             self.data.counter_room_selection_cursor = 2
             if event.type == pygame.KEYUP:
                 self.key_pressed[event.key] = False
 

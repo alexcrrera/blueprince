@@ -27,6 +27,8 @@ class HandleData:
         self.space_pressed = False
         self.cursor_visible = True
 
+        self.counter_room_selection_cursor =0
+
 
        
         self.manor = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
