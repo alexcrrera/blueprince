@@ -1,6 +1,6 @@
 import pygame
 from src import params
-
+import time
 import math
 
 import os
@@ -46,14 +46,19 @@ class HandleScreen:
     def __init__(self):
         """Initialisation"""
 
+        ICON_IMAGE_DIR = "assets/images/icon.png"
+        ICON_IMAGE  = pygame.image.load(ICON_IMAGE_DIR)
 
         self.width, self.height= params.DEFAULT_SCREEN_WIDTH,params.DEFAULT_SCREEN_HEIGHT
 
         self.screen = pygame.display.set_mode((self.width, self.height))
        
 
-        pygame.display.set_icon(params.ICON_IMAGE)
+        pygame.display.set_icon(ICON_IMAGE)
+
         pygame.display.set_caption("Blue Prince Emulation")
+        print("starting")
+        time.sleep(0.5)
         os.environ['SDL_VIDEO_CENTERED'] = '1'
     
 
@@ -167,7 +172,11 @@ class HandleGridUI():
     def __init__(self,data,screen):
         self.data = data
         self.screen = screen
+        
+    
 
+        SELECTOR_IMAGE_DIR =  "assets/images/selector.png"
+        self.SELECTOR_IMAGE = pygame.image.load(SELECTOR_IMAGE_DIR).convert_alpha()
 
 
     def showBigTile(self):
@@ -192,7 +201,7 @@ class HandleGridUI():
             pygame.draw.rect(self.screen, (255, 0,0), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
             return
         
-        scaled_image = pygame.transform.scale(params.SELECTOR_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
+        scaled_image = pygame.transform.scale(self.SELECTOR_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
         rot =  90*(self.data.player.direction-1)
         rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
         

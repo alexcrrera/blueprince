@@ -1,11 +1,8 @@
 import math
-import pygame
+
 import json
 import os
 
-if not pygame.get_init():
-    pygame.init()
-pygame.display.set_mode((1, 1))  # Hidden 1×1 window just for convert()
 
 
 # Screen settings
@@ -69,17 +66,6 @@ PLAY_MUSIC_START = False #play music at start
 IMAGE_CONVERSION_SIZE = 500
 
 #TODO REPLACE WITH DICT
-ICON_IMAGE_DIR = "assets/images/icon.png"
-ICON_IMAGE  = pygame.image.load(ICON_IMAGE_DIR)
-
-
-
-ENTRANCE_HALL_IMAGE_DIR = "assets/images/rooms/Entrance_Hall.jpg"
-ENTRANCE_HALL_IMAGE = pygame.image.load(ENTRANCE_HALL_IMAGE_DIR).convert_alpha()
-
-
-ANTECHAMBER_IMAGE_DIR = "assets/images/rooms/Antechamber.jpg"
-ANTECHAMBER_HALL_IMAGE = pygame.image.load(ANTECHAMBER_IMAGE_DIR).convert_alpha()
 
 
 # UI
@@ -143,8 +129,6 @@ ROOM_INFO_PADDING = 20
 ROOM_INFO_ORIGIN = [(ORIGIN_TILE[0]+2*ROOM_TILE_SIZE)//1,screenHeight-ROOM_INFO_PADDING]
 
 
-SELECTOR_IMAGE_DIR =  "assets/images/selector.png"
-SELECTOR_IMAGE = pygame.image.load(SELECTOR_IMAGE_DIR).convert_alpha()
 NEXT_ROOM_SHOW = False
 RANDOM_CURSOR_WIDTH = 6
 RANDOM_CURSOR_WIDTH_COLOR = GREEN
