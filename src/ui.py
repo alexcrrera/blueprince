@@ -56,7 +56,7 @@ class HandleScreen:
         ICON_IMAGE  = pygame.image.load(ICON_IMAGE_DIR)
 
         BACKGROUND_DIR =  "assets/images/ui/background.png"
-        self.BACKGROUND = pygame.image.load(BACKGROUND_DIR)
+    
 
         self.width, self.height= params.DEFAULT_SCREEN_WIDTH,params.DEFAULT_SCREEN_HEIGHT
 
@@ -66,16 +66,18 @@ class HandleScreen:
         pygame.display.set_icon(ICON_IMAGE)
 
         pygame.display.set_caption("Blue Prince Emulation")
+
+        BACKGROUND = pygame.image.load(BACKGROUND_DIR).convert_alpha()
+        scale = pygame.transform.scale(BACKGROUND, (params.screenWidth, params.screenHeight))
+        self.BACKGROUND = scale
+
         print("starting")
         time.sleep(0.5)
         os.environ['SDL_VIDEO_CENTERED'] = '1'
     
 
     def drawBackground(self):
-        scale = pygame.transform.scale(self.BACKGROUND, (params.screenWidth, params.screenHeight))
-        
-        
-        self.screen.blit(scale, (0, 0))
+        self.screen.blit(self.BACKGROUND, (0, 0))
 
     def update(self):
         self.drawBackground()
@@ -200,13 +202,9 @@ class HandleGridUI():
         if(curr_room is None):
             return
   
-        curr_room_image = curr_room.image_path
-        img = pygame.image.load(curr_room_image).convert_alpha()
-        scaled_image = pygame.transform.scale(img, (params.BIG_TILE, params.BIG_TILE) )
-        rot =  90*(curr_room.room_rotation)
-                        
-        rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
-        self.screen.blit(rotated_image, (params.ORIGIN_BIG_TILE[0], params.ORIGIN_BIG_TILE[1]))
+        curr_room_image = curr_room.returnImage()
+  
+        self.screen.blit(curr_room_image, (params.ORIGIN_BIG_TILE[0], params.ORIGIN_BIG_TILE[1]))
        
 
     def showCursor(self):
@@ -244,14 +242,10 @@ class HandleGridUI():
             pygame.draw.rect(self.screen, (150, 150,150), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
             return
     
-        curr_room_image = curr_room.image_path
-        img = pygame.image.load(curr_room_image).convert_alpha()
-        scaled_image = pygame.transform.scale(img, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
-
-        rot =  90*(curr_room.room_rotation)
-        rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
-       
-        self.screen.blit(rotated_image, (x, y))
+        curr_room_image = curr_room.returnImage()
+        
+   
+        self.screen.blit(curr_room_image, (x, y))
 
 
 

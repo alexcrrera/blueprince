@@ -30,6 +30,7 @@ class RoomGrid():
         self.grid[testRoom.x][testRoom.y] = testRoom
         self.grid[entranceHall.x][entranceHall.y] = entranceHall
         self.grid[antechamber.x][antechamber.y] = antechamber
+        self.gridImages = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
         self.randomGeneratedRooms = []
 
 

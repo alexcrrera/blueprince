@@ -2,7 +2,7 @@ from src.door import Door
 from src.item import Item
 
 from src import params
-
+import pygame
 
 
 import random
@@ -50,6 +50,18 @@ class Room:
 
         self.items = [Item(i, "consommable") for i in data["items"]]
         self.x, self.y = x, y
+
+        img = pygame.image.load(self.image_path).convert_alpha()
+        scaled_image = pygame.transform.scale(img, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
+
+
+        rot =  90*(self.room_rotation)
+        self.IMAGE = pygame.transform.rotozoom(scaled_image, rot, 1)
+         
+       
+    
+    def returnImage(self):
+        return(self.IMAGE)
         
 
     def add_door(self, direction: str, level_lock: int = 0):
