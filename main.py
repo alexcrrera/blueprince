@@ -45,11 +45,12 @@ class Game:
 
 
         self.backgroundHandler.update()
+        self.screenHandler.update()
         self.gridUIHandler.update()
         
         self.playerHandler.update()
         self.running = self.dataHandler.keep_running
-        self.screenHandler.update()
+        
         self.textHandler.update()
         self.inputHandler.update()
          

@@ -17,7 +17,10 @@ class HandleBackground:
         self.leftColor = params.DARK_BLUE_COLOR
         self.rightColor = params.WHITE
         self.splitRatio = params.splitRatioScreen  # 33%
+  
+        
 
+       
     def draw(self):
         """
         Crée le fond de l'interface
@@ -26,15 +29,18 @@ class HandleBackground:
         width, height = self.surface.get_size()
         leftWidth = int(width * self.splitRatio)
 
-        pygame.draw.rect(self.surface, self.leftColor, (0, 0, leftWidth, height))
-        pygame.draw.rect(self.surface, self.rightColor, (leftWidth, 0, width - leftWidth, height))
+        #pygame.draw.rect(self.surface, self.leftColor, (0, 0, leftWidth, height))
+        #pygame.draw.rect(self.surface, self.rightColor, (leftWidth, 0, width - leftWidth, height))
         
         
         x0 =params.ORIGIN_SPECIAL_ITEMS[0]
         y0 = params.ORIGIN_SPECIAL_ITEMS[1]
         w = params.SPECIAL_ITEMS_SIZE[0]
         h = params.SPECIAL_ITEMS_SIZE[1]
-        pygame.draw.rect(self.surface, params.SPECIAL_ITEMS_COLOR, (x0,y0,w,h))
+        #pygame.draw.rect(self.surface, params.SPECIAL_ITEMS_COLOR, (x0,y0,w,h))
+
+        
+        
 
 
 
@@ -49,6 +55,9 @@ class HandleScreen:
         ICON_IMAGE_DIR = "assets/images/icon.png"
         ICON_IMAGE  = pygame.image.load(ICON_IMAGE_DIR)
 
+        BACKGROUND_DIR =  "assets/images/ui/background.png"
+        self.BACKGROUND = pygame.image.load(BACKGROUND_DIR)
+
         self.width, self.height= params.DEFAULT_SCREEN_WIDTH,params.DEFAULT_SCREEN_HEIGHT
 
         self.screen = pygame.display.set_mode((self.width, self.height))
@@ -62,7 +71,14 @@ class HandleScreen:
         os.environ['SDL_VIDEO_CENTERED'] = '1'
     
 
+    def drawBackground(self):
+        scale = pygame.transform.scale(self.BACKGROUND, (params.screenWidth, params.screenHeight))
+        
+        
+        self.screen.blit(scale, (0, 0))
+
     def update(self):
+        self.drawBackground()
         pass
 
 
