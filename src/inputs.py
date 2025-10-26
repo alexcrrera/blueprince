@@ -1,11 +1,11 @@
 from src import params
-
+from src import handler
 import pygame
 
 
-class HandleInputs:
+class HandleInputs(handler.BaseHandler):
     def __init__(self,data):
-        self.data = data
+        super().__init__(data)
         # Dictionary to track key presses
         self.key_pressed = {}
 
@@ -19,6 +19,7 @@ class HandleInputs:
             if event.type == pygame.QUIT:
                 self.key_pressed["QUIT"] = True
                 self.data.keep_running = False
+                print("exit")
 
             if event.type == pygame.KEYDOWN:
                 self.key_pressed[event.key] = True
@@ -30,7 +31,10 @@ class HandleInputs:
                     self.data.space_pressed = True
 
                 if event.key == pygame.K_RETURN:
-                    self.data.enter_pressed = True   
+                    if(self.data.state_machine.room_selection_mode):
+                        self.data.enter_pressed = True
+                    else:
+                        self.data.enter_pressed = False  
 
                 if event.key == pygame.K_d:   
                     self.data.player.direction = 0
@@ -59,6 +63,7 @@ class HandleInputs:
                         self.data.counter_room_selection_cursor -=1
                         if(self.data.counter_room_selection_cursor <0):
                              self.data.counter_room_selection_cursor = 2
+
             if event.type == pygame.KEYUP:
                 self.key_pressed[event.key] = False
 

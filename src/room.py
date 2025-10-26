@@ -60,8 +60,7 @@ class Room:
          
        
     
-    def returnImage(self):
-        return(self.IMAGE)
+
         
 
     def add_door(self, direction: str, level_lock: int = 0):

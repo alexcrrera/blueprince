@@ -1,9 +1,9 @@
 from src import params
-
-class StateMachineHandler():
+from src import handler
+class StateMachineHandler(handler.BaseHandler):
 
     def __init__(self,data):
-        self.data = data
+        super().__init__(data)
         self.room_selection_mode = False
         self.cursor_selection_mode = True
         self.inventory_mode = False

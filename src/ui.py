@@ -4,6 +4,7 @@ import time
 import math
 
 import os
+from src import handler
 
 class HandleBackground:
     """
@@ -202,7 +203,7 @@ class HandleGridUI():
         if(curr_room is None):
             return
   
-        curr_room_image = curr_room.returnImage()
+        curr_room_image = curr_room.IMAGE
   
         self.screen.blit(curr_room_image, (params.ORIGIN_BIG_TILE[0], params.ORIGIN_BIG_TILE[1]))
        
@@ -242,7 +243,7 @@ class HandleGridUI():
             pygame.draw.rect(self.screen, (150, 150,150), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
             return
     
-        curr_room_image = curr_room.returnImage()
+        curr_room_image = curr_room.IMAGE
         
    
         self.screen.blit(curr_room_image, (x, y))
@@ -307,3 +308,20 @@ class HandleGridUI():
         self.drawNextRoom()
         self.showRandomRooms()
         self.showRandomSelectionCursor()
+
+
+    
+
+class HandleUI(handler.Handlerception):
+
+    def __init__(self, data):
+        super().__init__(data)
+
+    def addHandler(self,handler):
+        self.handlingFunctions.append(handler)
+
+
+    def update(self):
+        super().update()
+        pygame.display.flip()
+            

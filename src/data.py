@@ -4,10 +4,11 @@
 from src import params
 from src import room_library
 from src import state_machine
-
-class HandleData:
+from src import handler
+class HandleData(handler.BaseHandler):
     
     def __init__(self,player):
+        super().__init__(self)
         self.keep_running = True
         self.player = player
         self.state_machine =  state_machine.StateMachineHandler(self)
@@ -30,7 +31,7 @@ class HandleData:
         self.counter_room_selection_cursor =0
         self.enter_pressed = False
 
-
+        self.data.keep_running = True
        
         self.manor = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
 
