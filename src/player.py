@@ -12,7 +12,7 @@ class Player:
     """
 
     def __init__(self, start_pos=(2, 8)):
-            
+        
         #lool
         self.position = start_pos
         self.x = self.position[0]

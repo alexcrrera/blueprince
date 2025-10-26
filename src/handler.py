@@ -14,7 +14,7 @@ class BaseHandler(ABC):
     Classe abstraite servant de modèle pour tous les gestionnaires (UI, son, entrée, etc.)
     """
 
-    def __init__(self,data):
+    def __init__(self,data=None):
         """
         :param data: référence à l'objet HandleData (facultatif)
         """

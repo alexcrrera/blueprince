@@ -6,47 +6,7 @@ import math
 import os
 from src import handler
 
-class HandleBackground:
-    """
-    Création de la base de l'interface
 
-    """
-
-    def __init__(self, surface: pygame.Surface):
-        """Initialisation"""
-        self.surface = surface
-        self.leftColor = params.DARK_BLUE_COLOR
-        self.rightColor = params.WHITE
-        self.splitRatio = params.splitRatioScreen  # 33%
-  
-        
-
-       
-    def draw(self):
-        """
-        Crée le fond de l'interface
-        - Gauche 33%: noir
-        - Doite 67%: blanc"""
-        width, height = self.surface.get_size()
-        leftWidth = int(width * self.splitRatio)
-
-        #pygame.draw.rect(self.surface, self.leftColor, (0, 0, leftWidth, height))
-        #pygame.draw.rect(self.surface, self.rightColor, (leftWidth, 0, width - leftWidth, height))
-        
-        
-        x0 =params.ORIGIN_SPECIAL_ITEMS[0]
-        y0 = params.ORIGIN_SPECIAL_ITEMS[1]
-        w = params.SPECIAL_ITEMS_SIZE[0]
-        h = params.SPECIAL_ITEMS_SIZE[1]
-        #pygame.draw.rect(self.surface, params.SPECIAL_ITEMS_COLOR, (x0,y0,w,h))
-
-        
-        
-
-
-
-    def update(self):
-        self.draw()
 
 
 class HandleScreen:
@@ -75,6 +35,7 @@ class HandleScreen:
         print("starting")
         time.sleep(0.5)
         os.environ['SDL_VIDEO_CENTERED'] = '1'
+        
     
 
     def drawBackground(self):
@@ -87,11 +48,11 @@ class HandleScreen:
 
 
 
-class HandleText():
-    def __init__(self,screen,clock,data):
-        self.data = data
+class HandleText(handler.BaseHandler):
+    def __init__(self,data,screen):
+        super().__init__(data)
 
-        self.clock = clock
+        
         self.screen = screen
 
        
@@ -158,7 +119,7 @@ class HandleText():
         
         self.draw_text(self.special_text, (params.PADDING, params.PADDING), font=self.special_font, color=(255, 200, 0))
 
-        fps_text = f"FPS: {int(self.clock.get_fps())}"
+        fps_text = f"FPS: {int(self.data.clock.get_fps())}"
         self.draw_text(fps_text, (params.screenWidth//2 - params.PADDING -  self.small_font.size(fps_text)[0],  params.screenHeight - params.PADDING),font=self.small_font,color=params.BLACK)
 
 
@@ -187,9 +148,9 @@ class HandleText():
 
 
 
-class HandleGridUI():
+class HandleGridUI(handler.BaseHandler):
     def __init__(self,data,screen):
-        self.data = data
+        super().__init__(data)
         self.screen = screen
         
     
@@ -310,12 +271,12 @@ class HandleGridUI():
         self.showRandomSelectionCursor()
 
 
-    
-
 class HandleUI(handler.Handlerception):
 
     def __init__(self, data):
         super().__init__(data)
+
+
 
     def addHandler(self,handler):
         self.handlingFunctions.append(handler)

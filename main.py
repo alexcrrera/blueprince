@@ -26,29 +26,29 @@ class Game:
         self.screenHandler = ui.HandleScreen()
         self.clock = pygame.time.Clock()
         self.playerHandler = player.Player()
-        self.dataHandler = data.HandleData(self.playerHandler)
+
+        self.dataHandler = data.HandleData(self.playerHandler,self.clock)
 
 
-        self.textHandler = ui.HandleText(self.screenHandler.screen,self.clock,self.dataHandler)
+        self.textHandler = ui.HandleText(self.dataHandler,self.screenHandler.screen)
         
-     
-        self.backgroundHandler = ui.HandleBackground(self.screenHandler.screen)
         self.audioHandler = sound.HandleSound(self.dataHandler)
         self.inputHandler = inputs.HandleInputs(self.dataHandler)
 
-        self.running = True
+        
 
         
         self.gridUIHandler = ui.HandleGridUI(self.dataHandler,self.screenHandler.screen)
         
         self.interfaceHandler = ui.HandleUI(self.dataHandler)
+
         self.interfaceHandler.addHandler(self.screenHandler)
-        self.interfaceHandler.addHandler(self.backgroundHandler)
         self.interfaceHandler.addHandler(self.gridUIHandler)
         self.interfaceHandler.addHandler(self.inputHandler)
-        
         self.interfaceHandler.addHandler(self.textHandler)
-      
+
+
+        self.running = True
        
     def update(self):
 
