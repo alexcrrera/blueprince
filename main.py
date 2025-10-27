@@ -40,7 +40,7 @@ class Game:
         
         self.gridUIHandler = ui.HandleGridUI(self.dataHandler,self.screenHandler.screen)
         
-        self.interfaceHandler = ui.HandleUI(self.dataHandler)
+        self.interfaceHandler = ui.HandleUI(self.dataHandler,self.screenHandler.screen)
 
         self.interfaceHandler.addHandler(self.screenHandler)
         self.interfaceHandler.addHandler(self.gridUIHandler)

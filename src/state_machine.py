@@ -30,6 +30,27 @@ class StateMachineHandler(handler.BaseHandler):
             out =[self.data.player.x+dx,self.data.player.y+dy]
 
 
+    
+
+            x,y = out[0],out[1]
+            if(x<0): # côté gauche
+                out[0] = out[0]+2
+                self.data.player.direction = 0
+                
+            if(x>params.ROOM_GRID_SIZE_HORIZONTAL-1):
+                out[0] = out[0]-2
+                self.data.player.direction = 2
+
+            if(y<0):
+                out[1] += 2
+                self.data.player.direction =3
+
+
+            if(y>params.ROOM_GRID_SIZE_VERTICAL-1):
+                out[1] +=-2
+                self.data.player.direction =1
+
+
             out[0] = min(out[0],params.ROOM_GRID_SIZE_HORIZONTAL-1)
             out[0] = max(0,out[0])
 
@@ -42,7 +63,7 @@ class StateMachineHandler(handler.BaseHandler):
                 self.data.space_pressed = False
                 if( self.data.player.next_room_status ==-1):
                   
-                    print("Gen new rooms")
+                    
                     self.data.state_machine.generate_random_rooms_flag = True
                     self.cursor_selection_mode = False
 
@@ -50,7 +71,7 @@ class StateMachineHandler(handler.BaseHandler):
                 elif( self.data.player.next_room_status ==1):
                     
                     self.data.player.next_room_status =0
-                    print("On bouge a la new room")
+                
                     self.data.player.x = self.data.player.next_room_position[0]
                     self.data.player.y =self.data.player.next_room_position[1]
                     self.data.player.inventory.steps_left += -1
@@ -71,3 +92,7 @@ class StateMachineHandler(handler.BaseHandler):
                 self.cursor_selection_mode = True
 
             pass
+
+
+
+

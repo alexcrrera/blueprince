@@ -97,7 +97,7 @@ class Inventory:
 
     def update(self):
         self.ui_items = [self.steps_left,self.gold,self.gems, self.keys,self.dice]
-
+        
 
     def __repr__(self):
         # Affiche les objets de l'inventaire - TEST

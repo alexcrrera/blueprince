@@ -117,23 +117,23 @@ class HandleText(handler.BaseHandler):
     def draw(self):
         self.drawNextRoomInfo()
         
-        self.draw_text(self.special_text, (params.PADDING, params.PADDING), font=self.special_font, color=(255, 200, 0))
+        self.draw_text(self.special_text, (params.PADDING, params.PADDING//4), font=self.special_font, color=(255, 200, 0))
 
         fps_text = f"FPS: {int(self.data.clock.get_fps())}"
         self.draw_text(fps_text, (params.screenWidth//2 - params.PADDING -  self.small_font.size(fps_text)[0],  params.screenHeight - params.PADDING),font=self.small_font,color=params.BLACK)
 
 
     def updateInventoryUI(self):
-        self.draw_text(params.INVENTORY_TEXT, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]), font=self.inventory_font, color=params.BLACK)
+        #self.draw_text(params.INVENTORY_TEXT, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]), font=self.inventory_font, color=params.BLACK)
         
         padding = [i*params.INVENTORY_ITEMS_PADDING for i in range(1,7)]
         
         for i in range(0,5):
             text = str(self.data.player.inventory.ui_items[i])
-            self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[i]), font=self.inventory_font, color=params.BLACK,center=True)
-        text = str(params.DIRECTION_CARDINAL[self.data.player.direction])
+            self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[i]), font=self.inventory_font, color=params.WHITE,center=True)
+        #text = str(params.DIRECTION_CARDINAL[self.data.player.direction])
 
-        self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[5]), font=self.inventory_font, color=params.BLACK,center=True)
+        #self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[5]), font=self.inventory_font, color=params.WHITE,center=True)
 
         
 
@@ -273,8 +273,10 @@ class HandleGridUI(handler.BaseHandler):
 
 class HandleUI(handler.Handlerception):
 
-    def __init__(self, data):
+    def __init__(self,data ,screen):
+        
         super().__init__(data)
+        self.screen = screen
 
 
 
@@ -282,7 +284,42 @@ class HandleUI(handler.Handlerception):
         self.handlingFunctions.append(handler)
 
 
+    def gameOver(self):
+        """Affiche l'écran de fin de partie."""
+        if(not(self.data.game_over[0])):
+            return
+            
+    # Remplit l'écran en rouge
+        self.screen.fill((150, 0, 0))
+
+        # Crée les polices
+        big_font = pygame.font.Font(params.SPECIAL_TEXT_DIR, 100)
+        small_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, 40)
+
+        # Texte principal
+        game_over_text = big_font.render("GAME OVER", True, params.WHITE)
+        text_rect = game_over_text.get_rect(center=(params.screenWidth // 2, params.screenHeight // 2 - 50))
+
+        # Texte secondaire
+        gType = self.data.game_over[1]
+        txt = ""
+        if(gType==1):
+            txt = "you ran out of steps..."
+        elif(gType==2):
+            txt = "oops, you locked yourself out!"
+        small_text = small_font.render(txt, True, params.WHITE)
+        small_rect = small_text.get_rect(center=(params.screenWidth // 2, params.screenHeight // 2 + 50))
+
+        # Affiche les deux textes
+        self.screen.blit(game_over_text, text_rect)
+        self.screen.blit(small_text, small_rect)
+
+        
+
     def update(self):
         super().update()
+
+
+        self.gameOver()
         pygame.display.flip()
             

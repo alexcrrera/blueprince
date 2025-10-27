@@ -28,7 +28,7 @@ class BaseHandler(ABC):
         Chaque gestionnaire doit implémenter sa logique de mise à jour ici.
         """
         pass
-
+    
     def __repr__(self):
         """Nom lisible pour debug."""
         return f"<{self.__class__.__name__}>"

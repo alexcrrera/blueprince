@@ -27,8 +27,9 @@ class HandleInputs(handler.BaseHandler):
                 if event.key == pygame.K_m:
                     self.data.music_play = not self.data.music_play
                 if event.key == pygame.K_SPACE:
-                    self.data.click_play = True
-                    self.data.space_pressed = True
+                     if(self.data.state_machine.cursor_selection_mode):
+                        self.data.click_play = True
+                        self.data.space_pressed = True
 
                 if event.key == pygame.K_RETURN:
                     if(self.data.state_machine.room_selection_mode):
@@ -49,11 +50,13 @@ class HandleInputs(handler.BaseHandler):
                 if event.key == pygame.K_s:
                     self.data.small_click_play = True
                     self.data.player.direction = 3
+
                 if event.key == pygame.K_RIGHT:
                     
                     if(self.data.state_machine.room_selection_mode):
 
                         self.data.counter_room_selection_cursor +=1
+                        
                         if(self.data.counter_room_selection_cursor >=3):
                              self.data.counter_room_selection_cursor = 0
                 if event.key == pygame.K_LEFT:
