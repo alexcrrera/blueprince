@@ -38,7 +38,7 @@ class RoomGrid():
         self.next_room = self.grid[self.data.player.next_room_position[0]][self.data.player.next_room_position[1]]
     
         self.next_room_status = -1
-        # -1 = empty, 0 = wall, 1 = unlocked, 2 = locked, 3 = locked twice
+        #  -1 = empty, 0 = wall, 1 = unlocked, 2 = locked, 3 = locked twice
 
     def checkRoomConnection(self):
 #               ↑                      
@@ -48,14 +48,16 @@ class RoomGrid():
 #               |                        
 #               S (3)                    
 #               ↓                           
-        current_room = self.current_room   
+        current_room = self.current_room  
+        if(current_room is None) :
+            return -2
         if self.next_room is None:
             if(current_room.doors[self.data.player.direction]==1):
               
                 return -1 # we can generate it 
                 
             else:
-                return -2 # a wall
+                return -2 # we can generate it 
 
        
         next_room = self.next_room

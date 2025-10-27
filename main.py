@@ -52,11 +52,12 @@ class Game:
        
     def update(self):
 
-        self.dataHandler.update()
+        
         self.playerHandler.update()
    
         self.audioHandler.update()
         self.interfaceHandler.update()
+        self.dataHandler.update()
         
         
  

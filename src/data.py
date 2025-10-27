@@ -35,14 +35,16 @@ class HandleData(handler.BaseHandler):
 
         self.clock = clock
 
-        self.game_over = [False,-1]
+        self.game_over = [False,-1,0]
     
        
-        self.manor = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
 
     def update(self):
         if(self.player.inventory.steps_left==0):
             self.game_over = [True,1]
+        
+        if(self.player.x==2 and self.player.y ==0):
+            self.game_over = [True,2]
        
         
         self.state_machine.update()

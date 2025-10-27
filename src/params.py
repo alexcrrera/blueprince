@@ -31,7 +31,7 @@ GREEN = (0,0,255)
 TARGET_FPS = 60
 splitRatioScreen = 0.33 # ratio entre côté gauche et droite
 
-INITIAL_STEPS = 2
+INITIAL_STEPS = 70
 INTIAL_GOLD = 0
 INITIAL_GEMS = 2
 INTIAL_KEY =0

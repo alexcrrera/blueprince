@@ -16,6 +16,7 @@ class HandleInputs(handler.BaseHandler):
         self.key_pressed = {}  # reset for this frame
 
         for event in pygame.event.get():
+            
             if event.type == pygame.QUIT:
                 self.key_pressed["QUIT"] = True
                 self.data.keep_running = False
@@ -26,10 +27,16 @@ class HandleInputs(handler.BaseHandler):
                 
                 if event.key == pygame.K_m:
                     self.data.music_play = not self.data.music_play
+                
+                
                 if event.key == pygame.K_SPACE:
-                     if(self.data.state_machine.cursor_selection_mode):
+                    if(self.data.state_machine.cursor_selection_mode):
                         self.data.click_play = True
                         self.data.space_pressed = True
+                    else:
+                        self.data.space_pressed = False
+
+
 
                 if event.key == pygame.K_RETURN:
                     if(self.data.state_machine.room_selection_mode):

@@ -36,6 +36,9 @@ class BaseHandler(ABC):
 
 
 class Handlerception(BaseHandler):
+    """Fonction principale qui appelle tous les handlers
+    
+    """
     def __init__(self, data):
         super().__init__(data)
         self.handlingFunctions = list()

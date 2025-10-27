@@ -160,7 +160,7 @@ class HandleGridUI(handler.BaseHandler):
 
 
     def showBigTile(self):
-        curr_room = self.data.manor[self.data.player.x][self.data.player.y]
+        curr_room = self.data.gridHandler.grid[self.data.player.x][self.data.player.y]
         if(curr_room is None):
             return
   
@@ -197,7 +197,7 @@ class HandleGridUI(handler.BaseHandler):
 
 
     def drawRoom(self,x0,y0):
-        curr_room = self.data.manor[x0][y0]
+        curr_room = self.data.gridHandler.grid[x0][y0]
         x = x0*params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
         y =  y0 * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
         if(curr_room is None):
@@ -286,7 +286,7 @@ class HandleUI(handler.Handlerception):
 
     def gameOver(self):
         """Affiche l'écran de fin de partie."""
-        if(not(self.data.game_over[0])):
+        if(not(self.data.game_over[0] and self.data.game_over[1]==1) ):
             return
             
     # Remplit l'écran en rouge
@@ -301,12 +301,9 @@ class HandleUI(handler.Handlerception):
         text_rect = game_over_text.get_rect(center=(params.screenWidth // 2, params.screenHeight // 2 - 50))
 
         # Texte secondaire
-        gType = self.data.game_over[1]
-        txt = ""
-        if(gType==1):
-            txt = "you ran out of steps..."
-        elif(gType==2):
-            txt = "oops, you locked yourself out!"
+        
+        txt = "you ran out of steps..."
+       
         small_text = small_font.render(txt, True, params.WHITE)
         small_rect = small_text.get_rect(center=(params.screenWidth // 2, params.screenHeight // 2 + 50))
 
@@ -314,12 +311,38 @@ class HandleUI(handler.Handlerception):
         self.screen.blit(game_over_text, text_rect)
         self.screen.blit(small_text, small_rect)
 
+    def winGame(self):
+        """Affiche l'écran de fin de partie."""
+        if(not(self.data.game_over[0] and self.data.game_over[1]==2) ):
+            return
         
+
+    # Remplit l'écran en rouge
+        self.screen.fill((0, 150, 0))
+
+        # Crée les polices
+        big_font = pygame.font.Font(params.SPECIAL_TEXT_DIR, 100)
+        small_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, 40)
+
+        # Texte principal
+        game_over_text = big_font.render("YOU WIN", True, params.WHITE)
+        text_rect = game_over_text.get_rect(center=(params.screenWidth // 2, params.screenHeight // 2 - 50))
+
+     
+        txt = "you can try again if you have nothing else to do!"
+        small_text = small_font.render(txt, True, params.WHITE)
+        small_rect = small_text.get_rect(center=(params.screenWidth // 2, params.screenHeight // 2 + 50))
+
+        # Affiche les deux textes
+        self.screen.blit(game_over_text, text_rect)
+        self.screen.blit(small_text, small_rect)
+
 
     def update(self):
         super().update()
 
 
         self.gameOver()
+        self.winGame()
         pygame.display.flip()
             
