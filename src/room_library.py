@@ -167,6 +167,7 @@ class RoomGrid():
 
             r_out =    list()
             index = 0
+            gem_cost_0 = False
             exclude = list() # rooms a temp. exclure pour eviter doublons
             #print("Starting room generation")
             while(index<3):
@@ -179,7 +180,7 @@ class RoomGrid():
                         r,name = self.draw_random_room(self.data.player.direction,exclude)
                         attemps +=1
                        # print("New room: ",name)
-                        if(attemps>100):
+                        if(attemps>200):
                             raise TypeError("Not enough rooms included oops")
                         if(r is None):
                             raise TypeError("Ooops you generated an empty room")
@@ -208,6 +209,8 @@ class RoomGrid():
                                     intra_good = False
                            
 
+                            if(index==2 and not(gem_cost_0)):
+                                intra_good = False # il faut au moins une pièce avec un coût de 0 gèmmes
                                     
 
 
@@ -226,6 +229,8 @@ class RoomGrid():
                 exclude.append(name)
                 r_out.append(r)
                 
+                if(r.cost<1):
+                    gem_cost_0 = True
 
                 print(r.__repr__())
                 index +=1
