@@ -58,6 +58,7 @@ class StateMachineHandler(handler.BaseHandler):
     def cursorHandler(self):
         if( self.data.player.next_room_status ==-1): #VIDE
             self.data.state_machine.generate_random_rooms_flag = True
+            self.data.gridHandler.generateRandomRooms()
             self.mode = 1 
        
 
