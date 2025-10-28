@@ -9,8 +9,9 @@
             "E",
             "W",
             "S"
-            
         ],
+        "placement_condition": 0,
+        "q": 1,
         "items": []
     },
     "Antechamber": {
@@ -24,6 +25,8 @@
             "E",
             "W"
         ],
+         "placement_condition": 0,
+        "q": 1,
         "items": []
     },
     "Hallway": {
@@ -36,6 +39,8 @@
             "E",
             "W"
         ],
+         "placement_condition": 0,
+        "q": 1,
         "items": []
     },
     "Boudoir": {
@@ -47,6 +52,8 @@
             "S",
             "W"
         ],
+         "placement_condition": 0,
+        "q": 1,
         "items": [
             "clé"
         ]
@@ -60,6 +67,8 @@
             "S",
             "W"
         ],
+         "placement_condition": 0,
+        "q": 1,
         "items": [
             "gemme"
         ]
@@ -72,6 +81,8 @@
         "doors": [
             "S"
         ],
+         "placement_condition": 0,
+        "q": 1,
         "items": [
             "or"
         ]
@@ -85,6 +96,8 @@
             "S",
             "N"
         ],
+         "placement_condition": 0,
+        "q": 1,
         "items": [
             "pelle"
         ]
@@ -99,6 +112,8 @@
             "S",
             "W"
         ],
+         "placement_condition": 0,
+        "q": 1,
         "items": [
             "clé"
         ]
@@ -112,9 +127,39 @@
             "S",
             "W"
         ],
+        "placement_condition": 0,
+        "q": 1,
         "items": [
             "gemme",
             "clé"
         ]
+    },
+    "Weight_Room": {
+        "image": "Weight_Room.jpg",
+        "color": "rouge",
+        "rarity": 0,
+        "cost": 0,
+        "doors": [
+            "N",
+            "E",
+            "W",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": []
+    },
+    "Kitchen": {
+        "image": "Kitchen.jpg",
+        "color": "bleue",
+        "rarity": 0,
+        "cost": 1,
+        "doors": [
+            "W",
+            "S"
+        ],
+        "placement_condition": 1,
+        "q": 1,
+        "items": []
     }
 }

@@ -9,15 +9,13 @@ sys.path.append(os.path.join(parent_dir, "src"))
 
 import params  # Now params.py is accessible
 
-
 # --- Configuration ---
 INPUT_FOLDER = os.path.join(parent_dir, "assets", "images", "images_webp")
-OUTPUT_FOLDER = os.path.join(parent_dir, "assets", "images","rooms")
+OUTPUT_FOLDER = os.path.join(parent_dir, "assets", "images", "rooms")
 JSON_FILE = os.path.join(parent_dir, "src", "rooms.json")
 
 FORCED_SIZE = (params.IMAGE_CONVERSION_SIZE, params.IMAGE_CONVERSION_SIZE)
 PRESERVE_ASPECT = True  # Set False to stretch
-
 
 # --- Ensure output folder exists ---
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
@@ -48,7 +46,7 @@ def save_json(data, json_path):
 def convert_webp_to_jpg(input_folder, output_folder):
     """
     Converts all .webp images to .jpg and forces them to a fixed square size.
-    Also updates rooms.json with {room_name: image_file}.
+    Also updates rooms.json with full room entries if missing.
     """
     room_data = load_or_create_json(JSON_FILE)
 
@@ -81,8 +79,17 @@ def convert_webp_to_jpg(input_folder, output_folder):
 
                 # --- Update JSON if missing ---
                 if base_name not in room_data:
-                    room_data[base_name] = jpg_filename
-                    print(f"➕ Added to JSON: {base_name} → {jpg_filename}")
+                    room_data[base_name] = {
+                        "image": jpg_filename,
+                        "color": "bleue",
+                        "rarity": 0,
+                        "cost": 0,
+                        "doors": ["N", "E", "W", "S"],
+                        "placement_condition": 0,
+                        "q": 1,
+                        "items": []
+                    }
+                    print(f"➕ Added new room entry: {base_name}")
 
         except Exception as e:
             print(f"❌ Error converting {filename}: {e}")
