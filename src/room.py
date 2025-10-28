@@ -25,7 +25,7 @@ class Room:
         data = dictionnaire venant du JSON
         """
 
-        print("Created: ",name)
+        #print("Created: ",name)
         data =  room_attributes[name]
         self.name = name
         self.color = data["color"]
@@ -42,24 +42,25 @@ class Room:
 
         self.door_status = random.randint(0, 2) 
         
+        self.room_rotation = 0
 
         if(orientation is None):
             turn = 0
             self.room_rotation = 0
         else:
             if(orientation == 0):
-                 self.room_rotation = 3
+                   # pour affichage
                  turn = 3
             else:
                 turn = orientation -1
-                self.room_rotation = orientation-1
+                # pour affichage
         
-     
-            
+        
         for _ in range(turn):
             self.rotate_90_trigo()
 
-           
+        #print("Orientation start:",orientation," - turs to perform: ",turn,"Final Room rotation: ",self.room_rotation)
+            
 
         # portes ouvertes au premier niveau
         if(y==8): # 1er  niveau
@@ -80,22 +81,25 @@ class Room:
         scaled_image = pygame.transform.scale(img, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
 
 
-        rot =  90*(self.room_rotation)
+        rot =  90*(self.room_rotation)  # pour affichage
         self.IMAGE = pygame.transform.rotozoom(scaled_image, rot, 1)
 
-    def rotate_90_trigo(self):
+    def rotate_90_trigo(self,keepRef=True):
         """
         Fait tourner la pièce de 90° dans le sens trigonométrique :
         - Met à jour les portes [E, N, W, S]
         - Incrémente room_rotation (dans le sens anti-horaire)
         """
-        print("turnion")
+        
         
         # [E, N, W, S] devient [N, W, S, E]
         self.doors = [self.doors[3], self.doors[0], self.doors[1], self.doors[2]]
-      
+        self.room_rotation = (self.room_rotation +1)%4
         
+      
         self.update_image()
+        
+      
     def generate_objects_for_room(room):
         """Ajoute des objets à une pièce selon sa couleur et sa rareté."""
         chance = random.random()

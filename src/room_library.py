@@ -140,7 +140,7 @@ class RoomGrid():
 
             r_out =    list()
             index = 0
-            print("Starting room generation")
+            #print("Starting room generation")
             while(index<3):
 
                 intra_good = False
@@ -150,34 +150,39 @@ class RoomGrid():
                         rt = 0
                         r,name = self.draw_random_room(self.data.player.direction)
                         if(r is None):
-                            raise TypeError("Nonr")
-                        print("STARTING CHECK FOR ",name," - rot: ",r.room_rotation)
+                            raise TypeError("Ooops you generated an empty room")
+                        #print("STARTING CHECK FOR ",name," - rot: ",r.room_rotation)
                         for i in range(3): # faire max 3 rotations
-                            print(i, " - Rotation ", rt,self.checkRoomConnection(r)==1,r.doors,"dire",self.data.player.direction)
+                           # print(i, " - Rotation ", rt, " is there a door?", self.checkRoomConnection(r)==1,r.doors)
                             x,y = self.data.player.next_room_position
                             if self.checkRoomConnection(r)==1:
                                 intra_good = True
 
                             if(x==0 and r.doors[2]==1): #cote gauche
                                 intra_good = False
+                                #print("door west not good")
                             if(y==params.ROOM_GRID_SIZE_VERTICAL-1 and r.doors[3]==1): #cote gauche 
                                 intra_good = False
+                                #print("door south not good")
                             if(x==params.ROOM_GRID_SIZE_HORIZONTAL-1 and r.doors[0]==1):
                                 intra_good = False
+                                #print("door east not good")
                             if(y==0 and r.doors[1]==1): #cote gauche 
                                 intra_good = False
+                                #print("door north not good")
                            
 
                             if(not intra_good):
-                                rt +=1 
-                                print("lalala")
+                                rt +=1
+                                #print("turning room outside of creation")
+                               
                                 r.rotate_90_trigo()
-
+                                
                             if(intra_good):
                                 break # room suits us
 
 
-                print(name,r.room_rotation,index)
+                #print(name,r.room_rotation,index)
                             
                 
                 r_out.append(r)
