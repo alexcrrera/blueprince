@@ -26,7 +26,7 @@ screenHeight = DEFAULT_SCREEN_HEIGHT #taille image vertical par défaut
 #Colors (R, G, B)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-GREEN = (0,0,255)
+GREEN = (0,255,0)
 # Game settings
 TARGET_FPS = 60
 splitRatioScreen = 0.33 # ratio entre côté gauche et droite
@@ -58,6 +58,18 @@ SFX_DIR =  AUDIO_DIR + "/mainTrack.mp3"
 CLICK_1_AUDIO_DIR = AUDIO_DIR + "/longclick.mp3"
 SHORT_CLICK_AUDIO_DIR = AUDIO_DIR + "/click1.mp3"
 
+
+
+sfx_json_path = os.path.join("src", "sfx.json")
+SFX_DICT = {}
+
+if os.path.exists(sfx_json_path):
+    with open(sfx_json_path, "r", encoding="utf-8") as f:
+        SFX_DICT = json.load(f)
+else:
+    print(" No SFX loaded!")
+
+    
 
 PLAY_MUSIC_START = False #play music at start
 
@@ -124,10 +136,11 @@ ORIGIN_BIG_TILE = [screenWidth-BIG_TILE,screenHeight-BIG_TILE]
 
 
 
-ROOM_INFO_PADDING = 20
-ROOM_INFO_ORIGIN = [(ORIGIN_TILE[0]+2*ROOM_TILE_SIZE)//1,screenHeight-ROOM_INFO_PADDING]
+ROOM_INFO_PADDING = 80
+ROOM_INFO_ORIGIN = [(ORIGIN_TILE[0]+1.5*ROOM_TILE_SIZE)//1,screenHeight-ROOM_INFO_PADDING]
+
 
 
 NEXT_ROOM_SHOW = False
 RANDOM_CURSOR_WIDTH = 6
-RANDOM_CURSOR_WIDTH_COLOR = GREEN
+RANDOM_CURSOR_WIDTH_COLOR = WHITE

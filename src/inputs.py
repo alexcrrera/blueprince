@@ -41,6 +41,7 @@ class HandleInputs(handler.BaseHandler):
                 if event.key == pygame.K_RETURN:
                     if(self.data.state_machine.room_selection_mode):
                         self.data.enter_pressed = True
+                        self.data.click_play = True
                     else:
                         self.data.enter_pressed = False  
 
@@ -61,6 +62,7 @@ class HandleInputs(handler.BaseHandler):
                 if event.key == pygame.K_RIGHT:
                     
                     if(self.data.state_machine.room_selection_mode):
+                        self.data.small_click_play = True
 
                         self.data.counter_room_selection_cursor +=1
                         
@@ -69,6 +71,7 @@ class HandleInputs(handler.BaseHandler):
                 if event.key == pygame.K_LEFT:
                 
                     if(self.data.state_machine.room_selection_mode):
+                        self.data.small_click_play = True
                       
                         self.data.counter_room_selection_cursor -=1
                         if(self.data.counter_room_selection_cursor <0):

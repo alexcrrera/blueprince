@@ -109,7 +109,7 @@ class HandleText(handler.BaseHandler):
         elif(stat==0 ):
              txt="There's a wall..."
         elif(stat==-2):
-            txt="Another wall..."
+            txt="That's a nice  wall..."
         self.draw_text(txt, (params.ROOM_INFO_ORIGIN[0], params.ROOM_INFO_ORIGIN[1]), font=self.small_font, color=(255, 200, 0))
 
 

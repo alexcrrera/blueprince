@@ -1,0 +1,9 @@
+{
+    "click1": "assets/audio/sfx/click1.mp3",
+    "click2": "assets/audio/sfx/click2.mp3",
+    "click3": "assets/audio/sfx/click3.mp3",
+    "longclick": "assets/audio/sfx/longclick.mp3",
+    "thunder1": "assets/audio/sfx/thunder1.mp3",
+    "thunder2": "assets/audio/sfx/thunder2.mp3",
+    "thunder3": "assets/audio/sfx/thunder3.mp3"
+}
