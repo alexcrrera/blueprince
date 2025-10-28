@@ -73,7 +73,7 @@ class HandleText(handler.BaseHandler):
         self.small_font = pygame.font.Font(params.SMALL_TEXT_DIR, params.SMALL_FONT_SIZE) 
         self.alt_default_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.ALT_DEFAULT_SIZE) 
         self.inventory_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.INVENTORY_TEXT_SIZE) 
-
+        self.random_group_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.RANDOM_ROOM_TEXT_SIZE) 
 
 
     def draw_text(self, text, position, font=None, color=params.TEXT_COLOR,center=False):
@@ -135,12 +135,30 @@ class HandleText(handler.BaseHandler):
 
         #self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[5]), font=self.inventory_font, color=params.WHITE,center=True)
 
+    def drawRandomRoomInfo(self):
+         
+        if(self.data.state_machine.mode==1):
+           
+            rooms = self.data.gridHandler.randomGeneratedRooms
+            x0,y0 = params.ORIGIN_ROOM_RANDOM_TEXT
+            x0 += params.RANDOM_GROUP_TILE_SIZE//2
+            padding = 0
+            
+            for (i,r) in enumerate(rooms):
+                text = r.cleaned_name
+                if(i == self.data.counter_room_selection_cursor):
+                    colr = params.WHITE
+                else:
+                    colr = params.GRAY
+                self.draw_text(text, (x0+padding,y0), font=self.random_group_font, color=colr,center=True)
+                padding +=params.HORIZONTAL_PADDING_RANDOM_GROUP + params.RANDOM_GROUP_TILE_SIZE
         
 
     def update(self):
 
         self.draw()
         self.updateInventoryUI()
+        self.drawRandomRoomInfo()
         
 
         
@@ -164,7 +182,7 @@ class HandleGridUI(handler.BaseHandler):
         if(curr_room is None):
             return
   
-        curr_room_image = curr_room.IMAGE
+        curr_room_image = curr_room.BIG_IMAGE
   
         self.screen.blit(curr_room_image, (params.ORIGIN_BIG_TILE[0], params.ORIGIN_BIG_TILE[1]))
        
@@ -201,7 +219,7 @@ class HandleGridUI(handler.BaseHandler):
         x = x0*params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
         y =  y0 * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
         if(curr_room is None):
-            pygame.draw.rect(self.screen, (150, 150,150), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
+            #pygame.draw.rect(self.screen, params.WHITE, (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
             return
     
         curr_room_image = curr_room.IMAGE
@@ -258,11 +276,17 @@ class HandleGridUI(handler.BaseHandler):
                 
                 
             
-                
+    def showManorBg(self)           :
+        x0,y0 = params.ORIGIN_TILE
+        w = params.ROOM_GRID_SIZE_HORIZONTAL*params.ROOM_TILE_SIZE
+        h = params.ROOM_GRID_SIZE_VERTICAL*params.ROOM_TILE_SIZE
+        pygame.draw.rect(self.screen, params.BLACK, (x0, y0,w, h), 0)
+
        
        # pygame.display.flip()
 
     def update(self):
+        self.showManorBg()
         self.updateGrid()
         self.showBigTile()
         self.showCursor()

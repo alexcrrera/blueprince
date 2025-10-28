@@ -38,7 +38,7 @@ class Room:
         # 3 = rare
         self.cost = data["cost"]
         self.image_path = f"assets/images/rooms/{data['image']}"
-
+        self.cleaned_name = self.returnNameWithoutUnderscore()
         # Array [Est, Nord, Ouest, Sud] - 0 = pas de porte, 1 = porte
         self.doors = [0, 0, 0, 0]
         direction_map = {"E": 0, "N": 1, "W": 2, "S": 3}
@@ -84,7 +84,17 @@ class Room:
         self.update_image()
         
          
-       
+    def returnNameWithoutUnderscore(self):
+        name = self.name
+        out = ""
+        for l in name:
+            if l == "_":
+                out += " "
+            else:
+                out +=l
+        return(out)
+    
+    
     def update_image(self):
         img = pygame.image.load(self.image_path).convert_alpha()
         scaled_image = pygame.transform.scale(img, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
@@ -92,6 +102,14 @@ class Room:
 
         rot =  90*(self.room_rotation)  # pour affichage
         self.IMAGE = pygame.transform.rotozoom(scaled_image, rot, 1)
+
+
+        img = pygame.image.load(self.image_path).convert_alpha()
+        scaled_image = pygame.transform.scale(img, (params.BIG_TILE, params.BIG_TILE))
+
+
+        rot =  90*(self.room_rotation)  # pour affichage
+        self.BIG_IMAGE = pygame.transform.rotozoom(scaled_image, rot, 1)
 
     def rotate_90_trigo(self,keepRef=True):
         """
