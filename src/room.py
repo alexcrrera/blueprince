@@ -30,6 +30,12 @@ class Room:
         self.name = name
         self.color = data["color"]
         self.rarity = data["rarity"]
+        self.q = data["q"]
+        self.placement_condition = data["placement_condition"]
+        # 0 = common
+        # 1 = standard
+        # 2 = unusual
+        # 3 = rare
         self.cost = data["cost"]
         self.image_path = f"assets/images/rooms/{data['image']}"
 

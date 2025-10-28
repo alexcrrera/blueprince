@@ -89,9 +89,8 @@ class RoomGrid():
 
         return 0
 
-        #curr_room = self.current
 
-    def draw_random_room(self, initial_rotation):
+    def draw_random_room(self, initial_rotation,exclusions):
 
         """
         Retourne UNE seule chambre tirée aléatoirement selon sa rareté,
@@ -102,7 +101,7 @@ class RoomGrid():
         pool = []
         for name, data in self.rooms_data.items():
             # Ignore les pièces interdites
-            if name in excluded_rooms:
+            if name in excluded_rooms or name in exclusions:
                 continue
             # Plus la rareté est élevée, moins la pièce apparaît
             weight = 1 / (3 ** data["rarity"])
@@ -132,6 +131,32 @@ class RoomGrid():
         """Instancie une Room à partir du JSON."""
         return Room(name,self.rooms_data, x, y,rotation)
 
+
+    def checkPlacememtCondition(self,room):
+        """Vérifie si nous respectons les conditions de placement
+        0: Aucune condition
+        1: Si dans coins
+        2: si dans extrêmités
+
+        """
+        x,y = room.x,room.y
+
+        if(room.placement_condition==0):
+            return 1
+        
+        if(room.placement_condition==1):
+            c1 = x== 0 and y ==0 #coin haut gauche
+            c2 = x== 0 and y == params.ROOM_GRID_SIZE_VERTICAL-1  #coin bas gauche
+            c3 = x == params.ROOM_GRID_SIZE_HORIZONTAL-1 and y == 0 #coin droite haut
+            c4 = x == params.ROOM_GRID_SIZE_HORIZONTAL-1 and y == params.ROOM_GRID_SIZE_VERTICAL-1 #coin droite bas
+            
+            if(c1 or c2 or c3 or c4):
+                return 1
+            
+
+        return -1
+
+        
     def generateRandomRooms(self):
         if(self.data.state_machine.generate_random_rooms_flag):
             
@@ -140,15 +165,17 @@ class RoomGrid():
 
             r_out =    list()
             index = 0
+            exclude = list() # rooms a temp. exclure pour eviter doublons
             #print("Starting room generation")
             while(index<3):
 
                 intra_good = False
             
-
                 while(not intra_good):
                         rt = 0
-                        r,name = self.draw_random_room(self.data.player.direction)
+                        r,name = self.draw_random_room(self.data.player.direction,exclude)
+
+                        print("New room: ",name)
                         if(r is None):
                             raise TypeError("Ooops you generated an empty room")
                         #print("STARTING CHECK FOR ",name," - rot: ",r.room_rotation)
@@ -171,6 +198,13 @@ class RoomGrid():
                                 intra_good = False
                                 #print("door north not good")
                            
+                            
+                            if(r.placement_condition==1 and self.checkPlacememtCondition(r)!=1):
+                                    intra_good = False
+                           
+
+                                    
+
 
                             if(not intra_good):
                                 rt +=1
@@ -184,8 +218,10 @@ class RoomGrid():
 
                 #print(name,r.room_rotation,index)
                             
-                
+                exclude.append(name)
                 r_out.append(r)
+
+                print(r.__repr__())
                 index +=1
             
 
