@@ -87,7 +87,7 @@ def convert_webp_to_jpg(input_folder, output_folder):
                         "doors": ["N", "E", "W", "S"],
                         "placement_condition": 0,
                         "q": 1,
-                        "items": []
+                        "items": {}
                     }
                     print(f"➕ Added new room entry: {base_name}")
 

@@ -12,7 +12,8 @@
         ],
         "placement_condition": 0,
         "q": 1,
-        "items": []
+        "possible_items": {},
+        "items": {}
     },
     "Antechamber": {
         "image": "Antechamber.jpg",
@@ -25,9 +26,9 @@
             "E",
             "W"
         ],
-         "placement_condition": 0,
+        "placement_condition": 0,
         "q": 1,
-        "items": []
+        "items": {}
     },
     "Hallway": {
         "image": "Hallway.jpg",
@@ -39,9 +40,10 @@
             "E",
             "W"
         ],
-         "placement_condition": 0,
+        "placement_condition": 0,
         "q": 1,
-        "items": []
+        "possible_items": {},
+        "items": {}
     },
     "Boudoir": {
         "image": "Boudoir.jpg",
@@ -52,11 +54,10 @@
             "S",
             "W"
         ],
-         "placement_condition": 0,
+        "placement_condition": 0,
         "q": 1,
-        "items": [
-            "clé"
-        ]
+        "possible_items": {},
+        "items": {}
     },
     "Parlor": {
         "image": "Parlor.jpg",
@@ -67,11 +68,10 @@
             "S",
             "W"
         ],
-         "placement_condition": 0,
-        "q": 1,
-        "items": [
-            "gemme"
-        ]
+        "placement_condition": 0,
+        "q": 2,
+        "possible_items": {},
+        "items": {}
     },
     "Mail_Room": {
         "image": "Mail_Room.jpg",
@@ -81,11 +81,10 @@
         "doors": [
             "S"
         ],
-         "placement_condition": 0,
+        "placement_condition": 0,
+        "possible_items": {},
         "q": 1,
-        "items": [
-            "or"
-        ]
+        "items": {}
     },
     "Workshop": {
         "image": "Workshop.jpg",
@@ -96,11 +95,9 @@
             "S",
             "N"
         ],
-         "placement_condition": 0,
+        "placement_condition": 0,
         "q": 1,
-        "items": [
-            "pelle"
-        ]
+        "items": {}
     },
     "Security": {
         "image": "Security.jpg",
@@ -112,11 +109,9 @@
             "S",
             "W"
         ],
-         "placement_condition": 0,
+        "placement_condition": 0,
         "q": 1,
-        "items": [
-            "clé"
-        ]
+        "items": {}
     },
     "Billiard_Room": {
         "image": "Billiard_Room.jpg",
@@ -129,10 +124,8 @@
         ],
         "placement_condition": 0,
         "q": 1,
-        "items": [
-            "gemme",
-            "clé"
-        ]
+        "items": {}
+
     },
     "Weight_Room": {
         "image": "Weight_Room.jpg",
@@ -147,7 +140,7 @@
         ],
         "placement_condition": 0,
         "q": 1,
-        "items": []
+        "items": {}
     },
     "Kitchen": {
         "image": "Kitchen.jpg",
@@ -160,6 +153,18 @@
         ],
         "placement_condition": 1,
         "q": 1,
-        "items": []
+        "items": {}
+    },
+    "Vault": {
+        "image": "Vault.jpg",
+        "color": "bleue",
+        "rarity": 3,
+        "cost": 3,
+        "doors": [
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {"or":40}
     }
 }

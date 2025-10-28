@@ -42,6 +42,7 @@ class Room:
         # Array [Est, Nord, Ouest, Sud] - 0 = pas de porte, 1 = porte
         self.doors = [0, 0, 0, 0]
         direction_map = {"E": 0, "N": 1, "W": 2, "S": 3}
+        
         for d in data["doors"]:
             if d in direction_map:
                 self.doors[direction_map[d]] = 1

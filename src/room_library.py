@@ -103,6 +103,8 @@ class RoomGrid():
             # Ignore les pièces interdites
             if name in excluded_rooms or name in exclusions:
                 continue
+            if(self.rooms_data[name]["q"]<1): # chambre plus dispo
+                continue
             # Plus la rareté est élevée, moins la pièce apparaît
             weight = 1 / (3 ** data["rarity"])
             pool.append((name, weight))
@@ -170,12 +172,15 @@ class RoomGrid():
             while(index<3):
 
                 intra_good = False
+                attemps = 0
             
                 while(not intra_good):
                         rt = 0
                         r,name = self.draw_random_room(self.data.player.direction,exclude)
-
-                        print("New room: ",name)
+                        attemps +=1
+                       # print("New room: ",name)
+                        if(attemps>100):
+                            raise TypeError("Not enough rooms included oops")
                         if(r is None):
                             raise TypeError("Ooops you generated an empty room")
                         #print("STARTING CHECK FOR ",name," - rot: ",r.room_rotation)
@@ -220,6 +225,7 @@ class RoomGrid():
                             
                 exclude.append(name)
                 r_out.append(r)
+                
 
                 print(r.__repr__())
                 index +=1
@@ -233,6 +239,16 @@ class RoomGrid():
 
         return "\n".join(room.__repr__() for row in self.grid for room in row if room)
     
+
+
+    def handleRoomEffects(self,x,y):
+        
+        self.grid[x][y] = self.randomGeneratedRooms[self.data.counter_room_selection_cursor]
+        newRoom = self.grid[x][y]
+        self.rooms_data[newRoom.name]["q"] +=-1 
+
+
+
     def update(self):
 
         self.generateRandomRooms()

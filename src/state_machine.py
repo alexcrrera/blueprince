@@ -74,6 +74,9 @@ class StateMachineHandler(handler.BaseHandler):
             self.mode = 2  #porte bloquee a 1 tour
 
 
+
+
+
     def update(self):
 
         if(self.mode ==0): # cursor mode
@@ -88,10 +91,14 @@ class StateMachineHandler(handler.BaseHandler):
                 self.data.enter_pressed = False
                 x = self.data.player.next_room_position[0]
                 y = self.data.player.next_room_position[1]
-                self.data.gridHandler.grid[x][y] = self.data.gridHandler.randomGeneratedRooms[self.data.counter_room_selection_cursor]
+
+                
+                self.data.gridHandler.handleRoomEffects(x,y)
                 self.room_selection_mode = False
                 self.cursor_selection_mode = True
                 self.mode = 0
+
+               
 
             pass
 
