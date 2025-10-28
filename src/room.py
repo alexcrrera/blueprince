@@ -42,7 +42,7 @@ class Room:
         # Array [Est, Nord, Ouest, Sud] - 0 = pas de porte, 1 = porte
         self.doors = [0, 0, 0, 0]
         direction_map = {"E": 0, "N": 1, "W": 2, "S": 3}
-        
+
         for d in data["doors"]:
             if d in direction_map:
                 self.doors[direction_map[d]] = 1
@@ -77,7 +77,9 @@ class Room:
         if(y==0): #final level
             self.door_status = 2  #porte fermee a double tour
 
-        self.items = [Item(i, "consommable") for i in data["items"]]
+    
+        self.items = data["items"]
+
         self.x, self.y = x, y
         self.update_image()
         
@@ -97,7 +99,6 @@ class Room:
         - Met à jour les portes [E, N, W, S]
         - Incrémente room_rotation (dans le sens anti-horaire)
         """
-        
         
         # [E, N, W, S] devient [N, W, S, E]
         self.doors = [self.doors[3], self.doors[0], self.doors[1], self.doors[2]]

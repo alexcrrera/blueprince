@@ -247,6 +247,18 @@ class RoomGrid():
         newRoom = self.grid[x][y]
         self.rooms_data[newRoom.name]["q"] +=-1 
 
+        items_room = self.rooms_data[newRoom.name]["items"]
+        
+
+        if(not  items_room is None):
+            gold = items_room.get("gold") 
+            if(gold is not None):
+                self.data.player.inventory.gold += gold
+            
+        
+
+
+
 
 
     def update(self):
