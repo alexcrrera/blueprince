@@ -41,7 +41,8 @@ class Room:
                 self.doors[direction_map[d]] = 1
 
         self.door_status = random.randint(0, 2) 
-        self.room_rotation = 0
+        
+
         if(orientation is None):
             turn = 0
             self.room_rotation = 0
@@ -51,6 +52,7 @@ class Room:
                  turn = 3
             else:
                 turn = orientation -1
+                self.room_rotation = orientation-1
         
      
             
