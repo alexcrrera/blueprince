@@ -35,6 +35,8 @@ class HandleData(handler.BaseHandler):
 
         self.clock = clock
 
+        self.redraft_pressed = False
+        
         self.game_over = [False,-1,0]
     
        
@@ -42,9 +44,11 @@ class HandleData(handler.BaseHandler):
     def update(self):
         if(self.player.inventory.steps_left==0):
             self.game_over = [True,1]
+            self.state_machine.mode = -1
         
         if(self.player.x==2 and self.player.y ==0):
             self.game_over = [True,2]
+            self.state_machine.mode = -1
        
         
         self.state_machine.update()

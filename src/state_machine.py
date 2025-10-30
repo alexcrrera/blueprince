@@ -87,18 +87,31 @@ class StateMachineHandler(handler.BaseHandler):
                 self.cursorHandler()
                 
         elif(self.mode==1): # mode selection chambre
-            if(self.data.enter_pressed):
+
+            if(self.data.redraft_pressed ):
+                self.data.redraft_pressed = False
+                self.data.player.inventory.dice +=-1
+                self.data.state_machine.generate_random_rooms_flag = True
+                self.data.gridHandler.generateRandomRooms()   
+                print("tf")
+
+            elif(self.data.enter_pressed):
                 self.data.enter_pressed = False
+                room = self.data.gridHandler.randomGeneratedRooms[self.data.counter_room_selection_cursor]
+                cost = room.cost
+                if(self.data.player.inventory.gems-cost<0):
+                    return
                 x = self.data.player.next_room_position[0]
                 y = self.data.player.next_room_position[1]
 
                 
-                self.data.gridHandler.handleRoomEffects(x,y)
+                self.data.gridHandler.handlenewRoom(x,y)
                 self.room_selection_mode = False
                 self.cursor_selection_mode = True
                 self.mode = 0
 
-               
+        elif(self.mode ==2):
+            pass
 
             pass
 

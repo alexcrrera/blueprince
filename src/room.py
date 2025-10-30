@@ -56,18 +56,16 @@ class Room:
             self.room_rotation = 0
         else:
             if(orientation == 0):
-                   # pour affichage
+
                  turn = 3
             else:
                 turn = orientation -1
                 # pour affichage
         
-        
         for _ in range(turn):
             self.rotate_90_trigo()
 
         #print("Orientation start:",orientation," - turs to perform: ",turn,"Final Room rotation: ",self.room_rotation)
-            
 
         # portes ouvertes au premier niveau
         if(y==8): # 1er  niveau
@@ -77,13 +75,26 @@ class Room:
         if(y==0): #final level
             self.door_status = 2  #porte fermee a double tour
 
-    
+        self.possible_items = data["possible_items"]
         self.items = data["items"]
+        self.randomObjectsGeneration()
+
+
+        print("Items: ",self.items)
 
         self.x, self.y = x, y
+
         self.update_image()
         
-         
+    
+    def randomObjectsGeneration(self):
+        # chaque objet associé a une rareté de 0,1,2,3
+       
+        for key, value in self.possible_items.items():
+            print(key + " " + str(value))
+        #weight = 1 / (3 ** data["rarity"])
+        pass
+
     def returnNameWithoutUnderscore(self):
         name = self.name
         out = ""

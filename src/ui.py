@@ -74,25 +74,33 @@ class HandleText(handler.BaseHandler):
         self.alt_default_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.ALT_DEFAULT_SIZE) 
         self.inventory_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.INVENTORY_TEXT_SIZE) 
         self.random_group_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.RANDOM_ROOM_TEXT_SIZE) 
+        self.dice_suggestion_font  = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.DICE_SUGGESTION_TEXT_SIZE) 
 
+    def draw_text(self, text, position, font=None, color=params.TEXT_COLOR, center=False, rotation=0):
+    # Choose default font if none given
+        if font is None:
+            font = self.default_font
 
-    def draw_text(self, text, position, font=None, color=params.TEXT_COLOR,center=False):
-          # Render the text surface
+        # Render text surface
         rendered_text = font.render(text, True, color)
+
+        # Apply rotation if specified
+        if rotation != 0:
+            rendered_text = pygame.transform.rotate(rendered_text, rotation)
+
+        # Get rect after rotation (important — rotated text has new dimensions)
         text_rect = rendered_text.get_rect()
 
-       
-        rendered_text = font.render(text, True, color)
-        text_rect = rendered_text.get_rect()
-
+        # Position text
         if center:
-            # Center only horizontally
-            text_rect.centerx = position[0]
-            text_rect.top = position[1]
+            # Center both horizontally and vertically
+            text_rect.center = position
         else:
             text_rect.topleft = position
 
+        # Draw the text
         self.screen.blit(rendered_text, text_rect)
+
 
     def drawNextRoomInfo(self):
         stat = self.data.player.next_room_status
@@ -154,11 +162,51 @@ class HandleText(handler.BaseHandler):
                 padding +=params.HORIZONTAL_PADDING_RANDOM_GROUP + params.RANDOM_GROUP_TILE_SIZE
         
 
+    def showRandomRoomCost(self):
+        if(not self.data.state_machine.mode==1):
+            return
+        rooms = self.data.gridHandler.randomGeneratedRooms
+        x0,y0 = params.ORIGIN_RANDOM_ROOM_COST
+        x0 += (params.RANDOM_GROUP_TILE_SIZE *0.3)//1
+        for i in range(3):
+            cost = rooms[i].cost
+
+            txt = "costs " +  str(cost) 
+            add = "" if cost ==1 else "s"
+            txt +=" gem" + add
+
+            if(self.data.player.inventory.gems - cost>=0):
+                col = params.WHITE
+            else:
+                col = params.RED
+            self.draw_text(txt, (x0,y0), font=self.alt_default_font, color=col)
+            
+            x0 += params.RANDOM_GROUP_TILE_SIZE+params.HORIZONTAL_PADDING_RANDOM_GROUP
+        
+
+    def showDiceSuggestion(self):
+        """Suggere l'utilisation du dé pour regénérer les chambres"""
+        
+        if(not self.data.state_machine.mode == 1):
+            return
+        if(not(self.data.player.inventory.dice >0)):
+            col = params.RED
+            txt = "No dices left"
+        else:
+            txt = "Press R to use a dice to redraft"
+            col = params.WHITE    
+        x,y = params.DICE_TEXT_SUGGESTION_ORIGIN
+        self.draw_text(txt,(x,y),font= self.dice_suggestion_font,rotation=270,color=col)
+
+    
+
     def update(self):
 
         self.draw()
         self.updateInventoryUI()
         self.drawRandomRoomInfo()
+        self.showDiceSuggestion()
+        self.showRandomRoomCost()
         
 
         
@@ -255,6 +303,7 @@ class HandleGridUI(handler.BaseHandler):
                 pygame.draw.rect(self.screen, (150, 150,150), (x, y, params.RANDOM_GROUP_TILE_SIZE, params.RANDOM_GROUP_TILE_SIZE), 1)
             
 
+    
     def showRandomSelectionCursor(self):
         if(not self.data.state_machine.room_selection_mode):
             return

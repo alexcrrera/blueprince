@@ -246,7 +246,7 @@ class RoomGrid():
     
 
 
-    def handleRoomEffects(self,x,y):
+    def handlenewRoom(self,x,y):
         
         self.grid[x][y] = self.randomGeneratedRooms[self.data.counter_room_selection_cursor]
         newRoom = self.grid[x][y]
@@ -255,10 +255,7 @@ class RoomGrid():
         items_room = self.rooms_data[newRoom.name]["items"]
         
 
-        if(not  items_room is None):
-            gold = items_room.get("gold") 
-            if(gold is not None):
-                self.data.player.inventory.gold += gold
+    
             
         
 
