@@ -75,6 +75,8 @@ class HandleText(handler.BaseHandler):
         self.inventory_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.INVENTORY_TEXT_SIZE) 
         self.random_group_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.RANDOM_ROOM_TEXT_SIZE) 
         self.dice_suggestion_font  = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.DICE_SUGGESTION_TEXT_SIZE) 
+        self.enter_suggestion_font =  pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.ENTER_SUGGESTION_TEXT_SIZE) 
+
 
     def draw_text(self, text, position, font=None, color=params.TEXT_COLOR, center=False, rotation=0):
     # Choose default font if none given
@@ -198,7 +200,12 @@ class HandleText(handler.BaseHandler):
         x,y = params.DICE_TEXT_SUGGESTION_ORIGIN
         self.draw_text(txt,(x,y),font= self.dice_suggestion_font,rotation=270,color=col)
 
-    
+    def showEnterTextSuggestion(self):
+        if(not self.data.state_machine.mode == 1):
+            return  
+        x,y = params.ORIGIN_PRESS_ENTER_TEXT
+        txt  = "Press ENTER to choose a room!"
+        self.draw_text(txt,(x,y),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
 
     def update(self):
 
@@ -207,6 +214,7 @@ class HandleText(handler.BaseHandler):
         self.drawRandomRoomInfo()
         self.showDiceSuggestion()
         self.showRandomRoomCost()
+        self.showEnterTextSuggestion()
         
 
         
