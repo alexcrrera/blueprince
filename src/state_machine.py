@@ -101,6 +101,7 @@ class StateMachineHandler(handler.BaseHandler):
                 cost = room.cost
                 if(self.data.player.inventory.gems-cost<0):
                     return
+                self.data.player.inventory.gems+=-cost
                 x = self.data.player.next_room_position[0]
                 y = self.data.player.next_room_position[1]
 
