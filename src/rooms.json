@@ -49,8 +49,8 @@
     "Boudoir": {
         "image": "Boudoir.jpg",
         "color": "rose",
-        "rarity": 1,
-        "cost": 1,
+        "rarity": 0,
+        "cost": 0,
         "doors": [
             "S",
             "W"
@@ -63,7 +63,7 @@
     "Parlor": {
         "image": "Parlor.jpg",
         "color": "gris",
-        "rarity": 1,
+        "rarity": 0,
         "cost": 1,
         "doors": [
             "S",
@@ -84,7 +84,7 @@
         ],
         "placement_condition": 0,
         "possible_items": {},
-        "q": 1,
+        "q": 5,
         "items": {}
     },
     "Workshop": {
@@ -105,21 +105,21 @@
         "image": "Security.jpg",
         "color": "verte",
         "rarity": 1,
-        "cost": 1,
+        "cost": 0,
         "doors": [
             "E",
             "S",
             "W"
         ],
         "placement_condition": 0,
-        "q": 1,
+        "q": 4,
         "possible_items": {},
         "items": {}
     },
     "Billiard_Room": {
         "image": "Billiard_Room.jpg",
         "color": "verte",
-        "rarity": 1,
+        "rarity": 0,
         "cost": 0,
         "doors": [
             "S",
@@ -142,7 +142,7 @@
             "S"
         ],
         "placement_condition": 0,
-        "q": 1,
+        "q": 10,
         "possible_items": {},
         "items": {}
     },
@@ -150,7 +150,7 @@
         "image": "Kitchen.jpg",
         "color": "bleue",
         "rarity": 0,
-        "cost": 1,
+        "cost": 0,
         "doors": [
             "W",
             "S"
@@ -164,7 +164,7 @@
         "image": "Vault.jpg",
         "color": "bleue",
         "rarity": 0,
-        "cost": 3,
+        "cost": 0,
         "doors": [
             "S"
         ],

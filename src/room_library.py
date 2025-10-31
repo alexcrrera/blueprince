@@ -97,23 +97,31 @@ class RoomGrid():
         en excluant certaines pièces (par défaut : Antechamber, Entrance_Hall).
         """
         excluded_rooms = ["Antechamber", "Entrance_Hall"]
-
+        #print("Exclusions: ", exclusions)
         pool = []
         for name, data in self.rooms_data.items():
             # Ignore les pièces interdites
             if name in excluded_rooms or name in exclusions:
                 continue
-            if(self.rooms_data[name]["q"]<1): # chambre plus dispo
+            q = self.rooms_data[name]["q"]
+            if(q<1): # chambre plus dispo
+              #  print("no q  ", name)
                 continue
 
             condition = data["placement_condition"]
             x,y = self.data.player.next_room_position[0],self.data.player.next_room_position[1]
+
             if not((self.checkPlacememtCondition(x0=x,y0=y,cond=condition)==1)):
+               #@ print("pas boonne post POUR ", name)
                 continue
+
+           
             # Plus la rareté est élevée, moins la pièce apparaît
             weight = 1 / (3 ** data["rarity"])
             pool.append((name, weight))
 
+
+        #print("Pool: ",pool)
         if not pool:
             raise ValueError("Aucune pièce disponible pour le tirage (toutes exclues).")
 
@@ -181,48 +189,52 @@ class RoomGrid():
             r_out =    list()
             index = 0
             gem_cost_0 = False
-            exclude = list() # rooms a temp. exclure pour eviter doublons
-            #print("Starting room generation")
+            exclude = set() # rooms a temp. exclure pour eviter doublons
+        #    print("Starting room generation COMPLETE============")
             while(index<3):
 
                 intra_good = False
                 attemps = 0
-            
+                prev_room = ""
+             #   print("START GEN OOMS")
                 while(not intra_good):
                         rt = 0
+
+                        
                         r,name = self.draw_random_room(self.data.player.direction,exclude)
                         attemps +=1
-                       # print("New room: ",name)
+                      #  print("New room: ",name)
                         if(attemps>200):
                             raise TypeError("Not enough rooms included oops")
                         if(r is None):
                             raise TypeError("Ooops you generated an empty room")
                         #print("STARTING CHECK FOR ",name," - rot: ",r.room_rotation)
+
                         for i in range(3): # faire max 3 rotations
                            # print(i, " - Rotation ", rt, " is there a door?", self.checkRoomConnection(r)==1,r.doors)
                             x,y = self.data.player.next_room_position
                             if self.checkRoomConnection(r)==1:
+                              #  print("Door connection")
                                 intra_good = True
 
                             if(x==0 and r.doors[2]==1): #cote gauche
                                 intra_good = False
-                                #print("door west not good")
+                               # print("door west not good")
                             if(y==params.ROOM_GRID_SIZE_VERTICAL-1 and r.doors[3]==1): #cote gauche 
                                 intra_good = False
-                                #print("door south not good")
+                               # print("door south not good")
                             if(x==params.ROOM_GRID_SIZE_HORIZONTAL-1 and r.doors[0]==1):
                                 intra_good = False
-                                #print("door east not good")
+                              #  print("door east not good")
                             if(y==0 and r.doors[1]==1): #cote gauche 
                                 intra_good = False
-                                #print("door north not good")
+                              #  print("door north not good")
                            
-                            
-                            if(r.placement_condition==1 and self.checkPlacememtCondition(r)!=1):
-                                    intra_good = False
+         
                            
 
                             if(index==2 and not(gem_cost_0)):
+                              #  print("Need a 0 cost room")
                                 intra_good = False # il faut au moins une pièce avec un coût de 0 gèmmes
                                     
 
@@ -233,13 +245,19 @@ class RoomGrid():
                                
                                 r.rotate_90_trigo()
                                 
+                                
                             if(intra_good):
                                 break # room suits us
+                        if(not intra_good):
+                         #   print("Removing from pool: ",name)
 
+
+                            exclude.add(name)
+                            
 
                 #print(name,r.room_rotation,index)
                             
-                exclude.append(name)
+                exclude.add(name)
                 r_out.append(r)
                 
                 if(r.cost<1):
@@ -263,8 +281,9 @@ class RoomGrid():
         
         self.grid[x][y] = self.randomGeneratedRooms[self.data.counter_room_selection_cursor]
         newRoom = self.grid[x][y]
+        print("q b4: ",self.rooms_data[newRoom.name]["q"])
         self.rooms_data[newRoom.name]["q"] +=-1 
-
+        print("q ater: ",self.rooms_data[newRoom.name]["q"])
         items_room = self.rooms_data[newRoom.name]["items"]
         
 
