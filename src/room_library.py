@@ -105,6 +105,11 @@ class RoomGrid():
                 continue
             if(self.rooms_data[name]["q"]<1): # chambre plus dispo
                 continue
+
+            condition = data["placement_condition"]
+            x,y = self.data.player.next_room_position[0],self.data.player.next_room_position[1]
+            if not((self.checkPlacememtCondition(x0=x,y0=y,cond=condition)==1)):
+                continue
             # Plus la rareté est élevée, moins la pièce apparaît
             weight = 1 / (3 ** data["rarity"])
             pool.append((name, weight))
@@ -134,19 +139,27 @@ class RoomGrid():
         return Room(name,self.rooms_data, x, y,rotation)
 
 
-    def checkPlacememtCondition(self,room):
+    def checkPlacememtCondition(self,room=None,x0=-1,y0=-1,cond=-1):
         """Vérifie si nous respectons les conditions de placement
         0: Aucune condition
         1: Si dans coins
         2: si dans extrêmités
 
-        """
-        x,y = room.x,room.y
 
-        if(room.placement_condition==0):
+        """
+
+        if(room==None):
+            x = x0
+            y = y0
+            condition = cond
+        else:
+
+            x,y = room.x,room.y
+            condition = room.placement_condition
+        if(condition==0):
             return 1
         
-        if(room.placement_condition==1):
+        if(condition==1):
             c1 = x== 0 and y ==0 #coin haut gauche
             c2 = x== 0 and y == params.ROOM_GRID_SIZE_VERTICAL-1  #coin bas gauche
             c3 = x == params.ROOM_GRID_SIZE_HORIZONTAL-1 and y == 0 #coin droite haut
