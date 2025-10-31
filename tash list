@@ -1,0 +1,123 @@
+[33mecf7deb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mcopy1[m[33m)[m HEAD@{0}: checkout: moving from main to copy1
+[33m975f308[m[33m ([m[1;32mmain[m[33m)[m HEAD@{1}: Branch: renamed refs/heads/new-branch to refs/heads/main
+[33m975f308[m[33m ([m[1;32mmain[m[33m)[m HEAD@{3}: commit (initial): Initial commit
+[33mecf7deb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mcopy1[m[33m)[m HEAD@{4}: commit: fix gem cost when selected
+[33maa48ccd[m HEAD@{5}: commit: add press enter text suggestion
+[33mb6c0bdd[m HEAD@{6}: commit: implemented redrafting and gem cost handling (UI included)
+[33m15f856e[m HEAD@{7}: commit: add at least one gemless room check
+[33m18d9656[m HEAD@{8}: commit: UI update add room name
+[33m3f6ca91[m HEAD@{9}: commit: add Vault gold test
+[33m3b3db9d[m HEAD@{10}: commit: add room effects handling modif possible items and definitive items per room
+[33me1f93c1[m HEAD@{11}: commit: add icons & updt JSON to add placement condition and quantity
+[33mcc4f3f1[m HEAD@{12}: commit: add special placement handling and removed repetition when drafting
+[33m5748949[m HEAD@{13}: commit: improved sound handling
+[33me51c0cf[m HEAD@{14}: commit: fixed bug for UI display of random generated rooms
+[33mfc3bd64[m HEAD@{15}: commit: fixed bug
+[33m2748920[m HEAD@{16}: commit: added room orientation but buggy
+[33m2830030[m HEAD@{17}: commit: improved state machine handling and implemented WIN screen
+[33mc492e81[m HEAD@{18}: commit: saved UML
+[33m2c13d93[m HEAD@{19}: commit: DrawIO pour ULM
+[33m69e2e97[m HEAD@{20}: commit: fixed UI and added game over screen
+[33mad170a5[m HEAD@{21}: commit: cleaned up handlers
+[33m11d3516[m HEAD@{22}: commit: cleaned up redundancies and added asbtract class for handlers
+[33m9e75768[m HEAD@{23}: commit: Improved performance by 10x
+[33mad03e51[m HEAD@{24}: commit: bg update
+[33m03357e9[m HEAD@{25}: commit: screen centered fix
+[33me47c484[m HEAD@{26}: commit: add icon and update json
+[33m2461d29[m HEAD@{27}: commit: add room selection
+[33me37dcc8[m HEAD@{28}: commit: fix new room / wall handling
+[33meb9ded7[m HEAD@{29}: commit: add check walls before creating rooms
+[33m9456b67[m HEAD@{30}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33ma193baf[m HEAD@{31}: commit: add ENTER input handling
+[33m2708bf0[m HEAD@{32}: commit: add UI selection of next room (random)
+[33md60f839[m HEAD@{33}: commit: add next room toggle
+[33mb724a72[m HEAD@{34}: commit: fixed intra-room movement
+[33mcc32074[m HEAD@{35}: commit: fix missing wall status
+[33m3f9df47[m HEAD@{36}: commit: update interface illuestrator
+[33ma9ca112[m HEAD@{37}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m25657c2[m HEAD@{38}: commit: improved UI text and simplified update process for next_room
+[33m229d13a[m HEAD@{39}: commit: add state machine work and in between-room movement
+[33m06c3207[m HEAD@{40}: commit: fix ui
+[33mef7f9d2[m HEAD@{41}: commit: add room generation + ui
+[33m371438a[m HEAD@{42}: commit: room images
+[33m32f51b2[m HEAD@{43}: commit: migrated RoomGrid handler to data
+[33meda26ae[m HEAD@{44}: commit: UI cleanup + next room handlng
+[33me07ce24[m HEAD@{45}: commit: add status portes lors de création
+[33m7884c58[m HEAD@{46}: commit: add state_machine and fix playerx,y
+[33mde919e7[m HEAD@{47}: checkout: moving from pre-edo-err to copy1
+[33md6e7171[m[33m ([m[1;31morigin/pre-edo-err[m[33m, [m[1;32mpre-edo-err[m[33m)[m HEAD@{48}: commit: fix position call
+[33m084db94[m HEAD@{49}: commit: Alex: created state machine to handle events
+[33m1e53388[m HEAD@{50}: commit: change name
+[33m8d25006[m HEAD@{51}: commit: add cardinal visualisation
+[33mc9e1f4c[m HEAD@{52}: commit: fix call issue in steps_left
+[33me786fab[m HEAD@{53}: commit: update input handling for selector
+[33m1e15204[m HEAD@{54}: commit: update ui image handling
+[33mf1cff6b[m HEAD@{55}: commit: implemented initial room generation from JSON
+[33me2c6e9c[m HEAD@{56}: commit: updt room class and handle json data
+[33mdb68453[m HEAD@{57}: commit: rplc Manor with room_library
+[33m4228f8e[m HEAD@{58}: commit: add room dict and json update
+[33m072ee88[m HEAD@{59}: commit: Update .gitignore
+[33mbb18aba[m HEAD@{60}: commit: rem \n branch test
+[33m90ade5a[m HEAD@{61}: checkout: moving from copy1 to pre-edo-err
+[33m90ade5a[m HEAD@{62}: checkout: moving from main to copy1
+[33m756659a[m[33m ([m[1;31morigin/main[m[33m)[m HEAD@{63}: checkout: moving from copy1 to main
+[33m90ade5a[m HEAD@{64}: commit: fix
+[33m7d49e7a[m HEAD@{65}: checkout: moving from copy to copy1
+[33m6a9894e[m[33m ([m[1;31morigin/copy[m[33m, [m[1;32mcopy[m[33m)[m HEAD@{66}: checkout: moving from main to copy
+[33m756659a[m[33m ([m[1;31morigin/main[m[33m)[m HEAD@{67}: commit (merge): merge
+[33m7d49e7a[m HEAD@{68}: checkout: moving from copy to main
+[33m6a9894e[m[33m ([m[1;31morigin/copy[m[33m, [m[1;32mcopy[m[33m)[m HEAD@{69}: commit: update icon
+[33m7d49e7a[m HEAD@{70}: checkout: moving from main to copy
+[33m7d49e7a[m HEAD@{71}: commit: add ctrl for player wasd
+[33m0fbb599[m HEAD@{72}: commit: test JSON for room dir handling
+[33mcd51fa9[m HEAD@{73}: commit: add audio effects for inputs
+[33m0bf69f4[m HEAD@{74}: commit: import json img dir
+[33m5c73f62[m HEAD@{75}: commit: fix data call
+[33ma3efbb2[m HEAD@{76}: commit: un rem
+[33ma068c62[m HEAD@{77}: commit: test Room classes
+[33m97fc0ca[m HEAD@{78}: commit: add dictionnary implementation
+[33m36491bb[m HEAD@{79}: commit: rem
+[33md9c9802[m HEAD@{80}: commit: rem
+[33m9a42bfd[m HEAD@{81}: commit: rem tests
+[33m824aba3[m HEAD@{82}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m09ea12e[m HEAD@{83}: commit: test commit
+[33m4f787e9[m HEAD@{84}: commit: add Player position coordinates explicit
+[33mdc57bad[m HEAD@{85}: commit: rem redundancy
+[33m9772d63[m HEAD@{86}: commit: fix converter rem imgs duplicates
+[33m565894a[m HEAD@{87}: commit: fix dir
+[33m59aeebd[m HEAD@{88}: commit: rem icons
+[33m142e0fa[m HEAD@{89}: commit: update interface inventory
+[33m54f03b0[m HEAD@{90}: commit: add UI inventory
+[33m3ad8616[m HEAD@{91}: commit: add inventory ui basics update params
+[33m3a09c92[m HEAD@{92}: commit: add inventory params
+[33m4d9bc78[m HEAD@{93}: commit: Update icon.ai
+[33md44bb55[m HEAD@{94}: commit: add room selector
+[33m703aea5[m HEAD@{95}: commit: Add icon
+[33medb6dd7[m HEAD@{96}: commit: temp fix of imags
+[33m5cb3f39[m HEAD@{97}: commit: fix file name
+[33m473c63a[m HEAD@{98}: commit: add icon converter registry room
+[33m58e0476[m HEAD@{99}: commit: rem "_Icon" when converting
+[33mc8bdd47[m HEAD@{100}: commit: added manor ui handling
+[33ma3fb848[m HEAD@{101}: commit: Antechamber icon created
+[33m69ea100[m HEAD@{102}: commit: add images dir fix init
+[33m3f87091[m HEAD@{103}: commit: add blue fix flip multiple t imes
+[33m58dd26f[m HEAD@{104}: commit: add images dir
+[33m6318bfd[m HEAD@{105}: commit: Create gameMaster.py
+[33m8a2824b[m HEAD@{106}: commit: illustator upd
+[33m17d4320[m HEAD@{107}: commit: updated paths force size from TILE parameter
+[33ma3ae32b[m HEAD@{108}: commit: add icon
+[33mf2f3a5a[m HEAD@{109}: commit: webp to jpg converter script
+[33m117311a[m HEAD@{110}: commit: entrance hall icon
+[33mad7d44b[m HEAD@{111}: commit: add interface ui design file
+[33me96ddec[m HEAD@{112}: commit: add flag update tiles
+[33m6927bb7[m HEAD@{113}: commit: modified room tile size and origin
+[33m21ece30[m HEAD@{114}: commit: fix position origin and rem redundancy
+[33m55d4e3e[m HEAD@{115}: commit: create grid handler and repr call for tests
+[33md70e169[m HEAD@{116}: commit: grid generator add repr
+[33m8d2eba3[m HEAD@{117}: commit: add room position
+[33mf39cec3[m HEAD@{118}: commit: rem music at start
+[33mfe11e20[m HEAD@{119}: commit: update naming and test class
+[33m4a1e1fb[m HEAD@{120}: commit: add class to main for tests
+[33m5cfe864[m HEAD@{121}: commit: add param tile manager
+[33m70484ca[m HEAD@{122}: commit: add position data to Room class
+[33m
