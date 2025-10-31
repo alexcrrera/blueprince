@@ -13,7 +13,7 @@
         "placement_condition": 0,
         "q": 1,
         "possible_items": {"gold":20},
-        "items": {}
+        "items": {"gold":20, "gems": 30,"keys":1, "rabbits_foot":1}
     },
     "Antechamber": {
         "image": "Antechamber.jpg",
@@ -29,7 +29,7 @@
         "placement_condition": 0,
         "q": 1,
         "possible_items": {"gold":20},
-        "items": {}
+        "items": {"gold":20, "gems": 30}
     },
     "Hallway": {
         "image": "Hallway.jpg",

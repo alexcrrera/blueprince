@@ -76,8 +76,12 @@ class HandleText(handler.BaseHandler):
         self.random_group_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.RANDOM_ROOM_TEXT_SIZE) 
         self.dice_suggestion_font  = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.DICE_SUGGESTION_TEXT_SIZE) 
         self.enter_suggestion_font =  pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.ENTER_SUGGESTION_TEXT_SIZE) 
+        self.room_info_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.ROOM_TEXT_SIZE) 
+        self.items_size_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, params.ITEM_TEXT_SIZE) 
 
+        self.you_found_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, params.YOU_FOUND_TEXT_SIZE) 
 
+        self.items_cursor =  pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.YOU_FOUND_TEXT_SIZE) 
     def draw_text(self, text, position, font=None, color=params.TEXT_COLOR, center=False, rotation=0):
     # Choose default font if none given
         if font is None:
@@ -185,6 +189,50 @@ class HandleText(handler.BaseHandler):
             
             x0 += params.RANDOM_GROUP_TILE_SIZE+params.HORIZONTAL_PADDING_RANDOM_GROUP
         
+    def showCurrentRoomInfo(self):
+        if(not self.data.state_machine.mode == 0):
+            return  
+        x,y = self.data.player.x,self.data.player.y
+        current_room =self.data.gridHandler.grid[x][y]
+        txt = current_room.returnNameWithoutUnderscore()
+        x0,y0 = params.ORIGIN_ROOM_TEXT_INFO[0],params.ORIGIN_ROOM_TEXT_INFO[1]
+        self.draw_text(txt, (x0,y0), font=self.room_info_font)
+
+
+        x0,y0 = params.ORIGIN_YOU_FOUND_TEXT[0], params.ORIGIN_YOU_FOUND_TEXT[1]
+        txt = "You found:"
+        self.draw_text(txt, (x0,y0), font=self.you_found_font)
+
+        
+
+    def showItemsInRoom(self):
+        if(not self.data.state_machine.mode == 0):
+            return
+        x0 = params.ORIGIN_ITEMS_IN_ROOM[0]
+        y0 =params.ORIGIN_ITEMS_IN_ROOM[1]
+        x,y = self.data.player.x,self.data.player.y
+        current_room =self.data.gridHandler.grid[x][y]
+       # print("itemasdas: ",current_room.name)
+        data = current_room.items
+        
+        descript_dict = params.ITEMS_DESCRIPTION_DICT
+        count_items = len(current_room.items)
+        if(count_items==0):
+            txt = "Nothing!"
+            self.draw_text(txt,(x0,y0),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
+            return
+        
+        for key, value in data.items():
+
+            desc = descript_dict[key]
+    
+            txt = desc[0] +" :  x" + str(value) + "  (" +desc[1]  + ")"
+            #print("items: ",txt)
+            self.draw_text(txt, (x0,y0), font=self.items_size_font)
+            y0 += params.ITEMS_IN_ROOM_PADDING
+        
+        
+        
 
     def showDiceSuggestion(self):
         """Suggere l'utilisation du dé pour regénérer les chambres"""
@@ -207,11 +255,30 @@ class HandleText(handler.BaseHandler):
         txt  = "Press ENTER to choose a room!"
         self.draw_text(txt,(x,y),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
 
+
+    def showItemsCursor(self):
+        if(not self.data.state_machine.mode == 0):
+            return  
+        x,y = self.data.player.x,self.data.player.y
+        current_room =self.data.gridHandler.grid[x][y]
+
+        count_items = len(current_room.items)
+        if(count_items==0):
+           
+            return
+        x0,y0 = params.CURSOR_ITEMS_ORIGIN[0],params.CURSOR_ITEMS_ORIGIN[1]
+        txt = ">"
+        y0 += params.ITEMS_IN_ROOM_PADDING*self.data.counter_inventory
+        self.draw_text(txt,(x0,y0),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
     def update(self):
 
         self.draw()
+        self.showItemsCursor()
+        self.showItemsInRoom()
+        self.showCurrentRoomInfo()
         self.updateInventoryUI()
         self.drawRandomRoomInfo()
+        self.showItemsInRoom()
         self.showDiceSuggestion()
         self.showRandomRoomCost()
         self.showEnterTextSuggestion()
@@ -350,6 +417,7 @@ class HandleGridUI(handler.BaseHandler):
         self.drawNextRoom()
         self.showRandomRooms()
         self.showRandomSelectionCursor()
+      
 
 
 class HandleUI(handler.Handlerception):

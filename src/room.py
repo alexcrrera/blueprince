@@ -95,13 +95,13 @@ class Room:
         if(orientation is not None):
             self.door_status[(orientation+2)%4] = 1 # la porte par laquelle on én génère la chambre a déjà été ouverte...
             
-        print("Door's status is ", self.door_status, " - doors: ",self.doors )
+        #print("Door's status is ", self.door_status, " - doors: ",self.doors )
         self.possible_items = data["possible_items"]
         self.items = data["items"]
-        self.randomObjectsGeneration()
+        #self.randomObjectsGeneration()
 
 
-        #print("Items: ",self.items)
+        print("Items: ",self.items)
 
         self.x, self.y = x, y
 

@@ -38,6 +38,9 @@ class HandleData(handler.BaseHandler):
         self.redraft_pressed = False
         self.door_locked_play = False
         self.game_over = [False,-1,0]
+
+
+        self.counter_inventory = 0
     
        
 

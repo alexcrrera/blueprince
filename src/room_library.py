@@ -189,7 +189,7 @@ class RoomGrid():
             index = 0
             gem_cost_0 = False
             exclude = set() # rooms a temp. exclure pour eviter doublons
-            print("Starting room generation COMPLETE============")
+           # print("Starting room generation COMPLETE============")
             while(index<3):
 
                 intra_good = False
@@ -207,13 +207,13 @@ class RoomGrid():
                             raise TypeError("Not enough rooms included oops")
                         if(r is None):
                             raise TypeError("Ooops you generated an empty room")
-                        print("STARTING CHECK FOR ",name," - rot: ",r.room_rotation)
+                      #  print("STARTING CHECK FOR ",name," - rot: ",r.room_rotation)
 
                         for i in range(3): # faire max 3 rotations
                            # print(i, " - Rotation ", rt, " is there a door?", self.checkRoomConnection(r)==1,r.doors)
                             x,y = self.data.player.next_room_position
                             if self.checkRoomConnection(r)==1:
-                                print("Door connection, i: ", i)
+                           #     print("Door connection, i: ", i)
                                 intra_good = True
 
                             if(x==0 and r.doors[2]==1): #cote gauche
@@ -233,7 +233,7 @@ class RoomGrid():
                            
 
                             if(index==2 and not(gem_cost_0)):
-                                print("Need a 0 cost room")
+                             #   print("Need a 0 cost room")
                                 intra_good = False # il faut au moins une pièce avec un coût de 0 gèmmes
                                     
 
@@ -247,15 +247,15 @@ class RoomGrid():
                                 
                             if(intra_good):
                                 break # room suits us
-                        print("Turned twice no good")
+                      #  print("Turned twice no good")
                         if(not intra_good):
-                            print("Removing from pool: ",name)
+                         #   print("Removing from pool: ",name)
 
 
                             exclude.add(name)
                             
 
-                print("added: ",name,r.room_rotation,index)
+                #print("added: ",name,r.room_rotation,index)
                             
                 exclude.add(name)
                 r_out.append(r)
