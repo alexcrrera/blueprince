@@ -52,9 +52,6 @@ class RoomGrid():
             next_room = self.next_room  # si aucun argument passe alors on check room connection avec next room
         #sinon on compare avec la chambre passee en argument
             
-
-
-
         current_room = self.current_room
         if(current_room is None) :
             return -2
@@ -286,9 +283,11 @@ class RoomGrid():
         dir_opposed = (dir +2)%4
         next_room_door_status = next_room.door_status[dir_opposed]
 
-        if(current_room.y==params.ROOM_GRID_SIZE_VERTICAL-1):
-            current_room_door_status = 1
-            
+
+
+        if(current_room_door_status == 1):
+            current_room_door_status == 1
+             
         else:
             current_room_door_status = max(current_room_door_status,next_room_door_status)
 
