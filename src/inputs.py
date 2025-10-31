@@ -30,7 +30,7 @@ class HandleInputs(handler.BaseHandler):
                 
                 
                 if event.key == pygame.K_SPACE:
-                    if(self.data.state_machine.cursor_selection_mode):
+                    if(self.data.state_machine.mode==0):
                         self.data.click_play = True
                         self.data.space_pressed = True
                     else:
@@ -52,19 +52,25 @@ class HandleInputs(handler.BaseHandler):
                     else:
                         self.data.enter_pressed = False  
 
-                if event.key == pygame.K_d:   
-                    self.data.player.direction = 0
-                    self.data.small_click_play = True
+                if event.key == pygame.K_d: 
+                    if(self.data.state_machine.mode==0):  
+                        self.data.player.direction = 0
+                        self.data.small_click_play = True
+                    
+
                 if event.key == pygame.K_w:
-                    self.data.player.direction= 1
-                    self.data.small_click_play = True
+                    if(self.data.state_machine.mode==0):  
+                        self.data.player.direction= 1
+                        self.data.small_click_play = True
                 if event.key == pygame.K_a:
-                    self.data.small_click_play = True
-                    self.data.player.direction = 2
+                     if(self.data.state_machine.mode==0):  
+                        self.data.small_click_play = True
+                        self.data.player.direction = 2
                        
                 if event.key == pygame.K_s:
-                    self.data.small_click_play = True
-                    self.data.player.direction = 3
+                     if(self.data.state_machine.mode==0):  
+                        self.data.small_click_play = True
+                        self.data.player.direction = 3
 
 
                 if event.key == pygame.K_DOWN:

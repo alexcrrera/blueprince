@@ -67,7 +67,7 @@ class HandleText(handler.BaseHandler):
         self.right_text = "Right info"
         self.special_text = "Day One"
 
-
+        self.room_status_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, params.ROOM_INFO_TEXT_SIZE)  
         self.default_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, params.DEFAULT_FONT_SIZE)  
         self.special_font = pygame.font.Font(params.SPECIAL_TEXT_DIR, params.SPECIAL_FONT_SIZE)  
         self.small_font = pygame.font.Font(params.SMALL_TEXT_DIR, params.SMALL_FONT_SIZE) 
@@ -124,7 +124,7 @@ class HandleText(handler.BaseHandler):
              txt="There's a wall..."
         elif(stat==-2):
             txt="That's a nice  wall..."
-        self.draw_text(txt, (params.ROOM_INFO_ORIGIN[0], params.ROOM_INFO_ORIGIN[1]), font=self.small_font, color=(255, 200, 0))
+        self.draw_text(txt, (params.ROOM_INFO_ORIGIN[0], params.ROOM_INFO_ORIGIN[1]), font=self.room_status_font, color=(255, 200, 0))
 
 
 
