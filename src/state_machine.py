@@ -69,9 +69,13 @@ class StateMachineHandler(handler.BaseHandler):
             self.data.player.y =self.data.player.next_room_position[1]
             self.data.player.inventory.steps_left += -1
                     
-        elif(self.data.player.next_room_status ==2): 
-            print("Locked to go")
-            self.mode = 2  #porte bloquee a 1 tour
+        elif(self.data.player.next_room_status ==2 or self.data.player.next_room_status ==3): 
+            if(self.data.player.inventory.keys>0):
+                self.data.player.inventory.keys += -1
+                print("Used one key")
+                self.data.gridHandler.openDoor()
+            
+           
 
 
 
@@ -102,11 +106,12 @@ class StateMachineHandler(handler.BaseHandler):
                 if(self.data.player.inventory.gems-cost<0):
                     return
                 self.data.player.inventory.gems+=-cost
+
                 x = self.data.player.next_room_position[0]
                 y = self.data.player.next_room_position[1]
 
-                
                 self.data.gridHandler.handlenewRoom(x,y)
+
                 self.room_selection_mode = False
                 self.cursor_selection_mode = True
                 self.mode = 0

@@ -41,13 +41,16 @@ class Room:
         self.cleaned_name = self.returnNameWithoutUnderscore()
         # Array [Est, Nord, Ouest, Sud] - 0 = pas de porte, 1 = porte
         self.doors = [0, 0, 0, 0]
+        self.door_status = list()
+
         direction_map = {"E": 0, "N": 1, "W": 2, "S": 3}
 
         for d in data["doors"]:
             if d in direction_map:
                 self.doors[direction_map[d]] = 1
 
-        self.door_status = random.randint(0, 2) 
+        
+        
         
         self.room_rotation = 0
 
@@ -66,23 +69,44 @@ class Room:
             self.rotate_90_trigo()
 
         #print("Orientation start:",orientation," - turs to perform: ",turn,"Final Room rotation: ",self.room_rotation)
+        self.door_status = list()
+        y_max = params.ROOM_GRID_SIZE_VERTICAL-1 #= 8
 
-        # portes ouvertes au premier niveau
-        if(y==8): # 1er  niveau
-            self.door_status = 0 #ouverte
+        weights = [1/(3**(y_max-y)),1/(3**(y-y_max//2)),1/(3**y)]
+        print("w: ", weights)
+        # ainsi proportionnel à la profondeur du manoi
 
-        # portes fermees a double tour
-        if(y==0): #final level
-            self.door_status = 2  #porte fermee a double tour
+        choices = [1, 2, 3]
+ 
+        for d in self.doors:
+            
+            if d == 1:
+                inter_status = random.choices(choices, weights=weights, k=1)[0]
+                
 
+                if(y==y_max):
+                    inter_status = 1
+
+                if(y==0):
+                    inter_status = 3
+                self.door_status.append(inter_status)    
+            else:
+                self.door_status.append(-1) # pas de porte disponible donc pas de statuts
+        if(orientation is not None):
+            self.door_status[(orientation+2)%4] = 1 # la porte par laquelle on én génère la chambre a déjà été ouverte...
+            
+        print("Door's status is ", self.door_status, " - doors: ",self.doors )
         self.possible_items = data["possible_items"]
         self.items = data["items"]
         self.randomObjectsGeneration()
 
 
-        print("Items: ",self.items)
+        #print("Items: ",self.items)
 
         self.x, self.y = x, y
+
+
+        
 
         self.update_image()
         
