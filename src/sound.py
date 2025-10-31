@@ -65,4 +65,11 @@ class HandleSound:
             i = random.randint(1, 3)
             rand_audio = "click" + str(i)
             self.play_sfx(rand_audio)
-        pass
+
+        if(self.data.door_locked_play):
+            self.data.door_locked_play = False
+            i = random.randint(1, 2)
+            rand_audio = "door_lock_" + str(i)
+            self.play_sfx(rand_audio)
+            
+            pass

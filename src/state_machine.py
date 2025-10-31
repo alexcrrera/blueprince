@@ -73,6 +73,7 @@ class StateMachineHandler(handler.BaseHandler):
             if(self.data.player.inventory.keys>0):
                 self.data.player.inventory.keys += -1
                 print("Used one key")
+                self.data.door_locked_play = True
                 self.data.gridHandler.openDoor()
             
            
