@@ -119,6 +119,8 @@ class HandleText(handler.BaseHandler):
             txt="Next room is locked - press  space to enter to use a key"
         elif(stat==3):
              txt="Next room is locked twice - press  space to enter to use one key"
+        elif(stat==4):
+             txt="I like to boogie"
        
         elif(stat==0 ):
              txt="There's a wall..."

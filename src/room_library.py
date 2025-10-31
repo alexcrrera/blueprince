@@ -69,14 +69,15 @@ class RoomGrid():
             else:
                 return 0 #wall of 2nd type
 
-
-        
-
         # check s'il y a une porte existente
         
         dir_opposed = (dir+2)%4
+        curr_door_stat = current_room.door_status[dir]
+        next_door_stat = next_room.door_status[dir_opposed]
+
         if(current_room.doors[dir] ==1 and  next_room.doors[dir_opposed]==1):
-                return(current_room.door_status[dir])
+                out = max(curr_door_stat,next_door_stat)
+                return(out)
       
 
         return 0
@@ -126,13 +127,6 @@ class RoomGrid():
 
         room = self.create_room_instance(name,initial_rotation) # -1 car les images sont orientées vers le haut (N) par défaut
         return [room,name]
-
-
-
-    def openDoor(self):
-        current_room  = self.current_room
-        dir = self.data.player.direction
-        current_room.door_status[dir] += -1
 
 
 
@@ -269,7 +263,14 @@ class RoomGrid():
 
         
             self.randomGeneratedRooms = r_out
-            
+
+    def openDoor(self):
+        current_room  = self.current_room
+        dir = self.data.player.direction
+        current_room.door_status[dir] += -1
+        print("Door status: ",current_room.door_status[dir] )
+        
+
 
     def updateDoors(self):
 
@@ -295,9 +296,7 @@ class RoomGrid():
         next_room.door_status[dir_opposed] = current_room_door_status
 
 
-
     def __repr__(self):
-
         return "\n".join(room.__repr__() for row in self.grid for room in row if room)
     
 
@@ -321,7 +320,7 @@ class RoomGrid():
 
 
     def update(self):
-        self.updateDoors()
+        #self.updateDoors()
 
         self.generateRandomRooms()
         self.data.manor = self.grid

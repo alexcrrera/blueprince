@@ -65,14 +65,13 @@ class Room:
                 turn = orientation -1
                 # pour affichage
         
-        for _ in range(turn):
-            self.rotate_90_trigo()
+        
 
         #print("Orientation start:",orientation," - turs to perform: ",turn,"Final Room rotation: ",self.room_rotation)
         self.door_status = list()
         y_max = params.ROOM_GRID_SIZE_VERTICAL-1 #= 8
-
-        weights = [1/(3**(y_max-y)),1/(3**(y-y_max//2)),1/(3**y)]
+        weights = [1/(3**(y_max-y)),1/(3),1/(3**y)]
+        #weights = [1/(3**(y_max-y)),1/(3**(y-y_max//2)),1/(3**y)]
         print("w: ", weights)
         # ainsi proportionnel à la profondeur du manoi
 
@@ -92,10 +91,16 @@ class Room:
                 self.door_status.append(inter_status)    
             else:
                 self.door_status.append(-1) # pas de porte disponible donc pas de statuts
+
         if(orientation is not None):
             self.door_status[(orientation+2)%4] = 1 # la porte par laquelle on én génère la chambre a déjà été ouverte...
-            
-        #print("Door's status is ", self.door_status, " - doors: ",self.doors )
+        else:
+            self.door_status[3] = 1
+
+
+        for _ in range(turn):
+            self.rotate_90_trigo()    
+        print("Door's status is ", self.door_status, " - doors: ",self.doors )
         self.possible_items = data["possible_items"]
         self.items = data["items"]
         #self.randomObjectsGeneration()
@@ -156,7 +161,8 @@ class Room:
         # [E, N, W, S] devient [N, W, S, E]
         self.doors = [self.doors[3], self.doors[0], self.doors[1], self.doors[2]]
         self.room_rotation = (self.room_rotation +1)%4
-        
+        print("dada: ",self.door_status)
+        self.door_status =[self.door_status[3], self.door_status[0], self.door_status[1], self.door_status[2]]
       
         self.update_image()
         
