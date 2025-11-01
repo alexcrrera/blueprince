@@ -4,9 +4,7 @@ class StateMachineHandler(handler.BaseHandler):
 
     def __init__(self,data):
         super().__init__(data)
-        self.room_selection_mode = False
-        self.cursor_selection_mode = True
-        self.inventory_mode = False
+    
         self.generate_random_rooms_flag = False
 
         self.mode = 0 # 0 cursor selection, 1 random room generation
@@ -56,8 +54,9 @@ class StateMachineHandler(handler.BaseHandler):
         self.data.gridHandler.update() #mettre a jour 
 
 
-    def cursorHandler(self):
-        if( self.data.player.next_room_status ==-1): #VIDE
+    def cursorSpacePressed(self):
+        self.data.space_pressed = False
+        if(self.data.player.next_room_status ==-1): #VIDE
             self.data.state_machine.generate_random_rooms_flag = True
             self.data.gridHandler.generateRandomRooms()
             self.mode = 1 
@@ -68,7 +67,9 @@ class StateMachineHandler(handler.BaseHandler):
             self.data.player.next_room_status =0
             self.data.player.x = self.data.player.next_room_position[0]
             self.data.player.y =self.data.player.next_room_position[1]
+            
             self.data.player.inventory.steps_left += -1
+           # self.data.gridHandler.update()
                     
         elif(self.data.player.next_room_status ==2 or self.data.player.next_room_status ==3): 
             if(self.data.player.inventory.keys>0):
@@ -78,7 +79,28 @@ class StateMachineHandler(handler.BaseHandler):
                 self.data.gridHandler.openDoor()
             
            
+    def handleRedraft(self):
+        self.data.redraft_pressed = False
+        self.data.player.inventory.dice +=-1
+        self.data.state_machine.generate_random_rooms_flag = True
+        self.data.gridHandler.generateRandomRooms() 
+    
+    def handleRoomSelectedWithEnter(self):
+        self.data.enter_pressed = False
+        room = self.data.gridHandler.randomGeneratedRooms[self.data.counter_room_selection_cursor]
+        cost = room.cost
+        if(self.data.player.inventory.gems-cost<0):
+            return
+        self.data.player.inventory.gems+=-cost
 
+        x = self.data.player.next_room_position[0]
+        y = self.data.player.next_room_position[1]
+
+        self.data.gridHandler.handlenewRoom(x,y)
+
+        self.room_selection_mode = False
+        self.cursor_selection_mode = True
+        self.mode = 0
 
     def update(self):
 
@@ -86,35 +108,16 @@ class StateMachineHandler(handler.BaseHandler):
             self.nextRoomCursor() # place le curseur tel que la prochaine chambre est choisie
 
             if(self.data.space_pressed):
-                self.data.space_pressed = False
-                self.cursorHandler()
+                self.cursorSpacePressed()
                 
         elif(self.mode==1): # mode selection chambre
-
+            # 
             if(self.data.redraft_pressed ):
-                self.data.redraft_pressed = False
-                self.data.player.inventory.dice +=-1
-                self.data.state_machine.generate_random_rooms_flag = True
-                self.data.gridHandler.generateRandomRooms()   
+                  self.handleRedraft()
                 
-                
-
             elif(self.data.enter_pressed):
-                self.data.enter_pressed = False
-                room = self.data.gridHandler.randomGeneratedRooms[self.data.counter_room_selection_cursor]
-                cost = room.cost
-                if(self.data.player.inventory.gems-cost<0):
-                    return
-                self.data.player.inventory.gems+=-cost
-
-                x = self.data.player.next_room_position[0]
-                y = self.data.player.next_room_position[1]
-
-                self.data.gridHandler.handlenewRoom(x,y)
-
-                self.room_selection_mode = False
-                self.cursor_selection_mode = True
-                self.mode = 0
+                self.handleRoomSelectedWithEnter()
+                
 
         elif(self.mode ==2):
             pass

@@ -17,19 +17,13 @@ class RoomGrid():
         self.rooms_data  = params.DICT_ROOM_ATTRIBUTES #dict with room attributes
         self.remaining_rooms = list(self.rooms_data.keys())
 
-        entranceHallPos = [2,8]
-        entranceHall = Room("Entrance_Hall",self.rooms_data ,entranceHallPos[0],entranceHallPos[1])
-        antechamberPos = [2,0]
+  
+        entranceHall = Room("Entrance_Hall",self.rooms_data ,2,8)
+        antechamber = Room("Antechamber",self.rooms_data ,2,0)
         
-        antechamber = Room("Antechamber",self.rooms_data ,antechamberPos[0],antechamberPos[1])
-        # testRoom3 =  Room("Parlor",self.rooms_data,entranceHallPos[0]+2,entranceHallPos[1],0)
-        # testRoom2 = Room("Parlor",self.rooms_data,entranceHallPos[0]-1,entranceHallPos[1],0)
-        # testRoom = Room("Parlor",self.rooms_data,entranceHallPos[0]+1,entranceHallPos[1],0)
-        # self.grid[testRoom2.x][testRoom2.y] = testRoom2
-        # self.grid[testRoom3.x][testRoom3.y] = testRoom3
-        # self.grid[testRoom.x][testRoom.y] = testRoom
         self.grid[entranceHall.x][entranceHall.y] = entranceHall
         self.grid[antechamber.x][antechamber.y] = antechamber
+
         self.gridImages = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
         self.randomGeneratedRooms = []
 
@@ -41,15 +35,6 @@ class RoomGrid():
         #  -1 = empty, 0 = wall, 1 = unlocked, 2 = locked, 3 = locked twice
 
     def checkRoomDoorStatus(self):
-#               ↑                      
-#               N (1)                      
-#               |                      
-#     W (2) ← - ● - → E (0)            
-#               |                        
-#               S (3)                    
-#               ↓    
-#   
-        
         next_room = self.next_room  
         current_room = self.current_room
         
@@ -69,48 +54,37 @@ class RoomGrid():
 
         # check s'il y a une porte existente
         
-        
         curr_door_stat = current_room.door_status[dir]
         next_door_stat = next_room.door_status[dir_opposed]
         #self.data.debug_text = str(current_room.doors)
        
         # verification statut portes
+        print("NEW ROOM:",next_room)
         if(current_room.doors[dir] ==1 and  next_room.doors[dir_opposed]==1):#if door exists 
                 if(curr_door_stat==1 or next_door_stat ==1 ):
                     next_room.door_status[dir_opposed] = 1
                     current_room.door_status[dir] = 1
-                   # print( "c: ", curr_door_stat, "\t n:  ",next_door_stat, "- out mp")
+                    print( "c: ", curr_door_stat, "\t n:  ",next_door_stat, "- out mp")
                     return 1
                 else:
                     out = max(curr_door_stat,next_door_stat)
                     current_room.door_status[dir] = out
                     next_room.door_status[dir_opposed] = out
-                   # print( "c: ", curr_door_stat, "\t n:  ",next_door_stat, "- out: ",out)
+                    print( "c: ", curr_door_stat, "\t n:  ",next_door_stat, "- out: ",out)
                     return(out)
-      
-
+    
         return 0
 
 
     def checkDoorsConnectionExists(self,room):
         """1 = Door exists 0 else"""
-#               ↑                      
-#               N (1)                      
-#               |                      
-#     W (2) ← - ● - → E (0)            
-#               |                        
-#               S (3)                    
-#               ↓    
 #   
         current_room = self.current_room
         next_room = room
 
-
         dir =  self.data.player.direction
 
-        
-        
-
+    
         # check s'il y a une porte existente
         
         dir_opposed = (dir+2)%4
@@ -217,7 +191,7 @@ class RoomGrid():
         if(self.data.state_machine.generate_random_rooms_flag):
             
             self.data.state_machine.generate_random_rooms_flag = False
-            self.data.state_machine.room_selection_mode  = True
+        
 
             r_out =    list()
             index = 0
@@ -328,32 +302,23 @@ class RoomGrid():
 
 
     def handlenewRoom(self,x,y):
-        
+        """"Ap"""
         self.grid[x][y] = self.randomGeneratedRooms[self.data.counter_room_selection_cursor]
         newRoom = self.grid[x][y]
+        print("NEW ROOM STATUS:",newRoom.door_status)
        # print("q b4: ",self.rooms_data[newRoom.name]["q"])
         self.rooms_data[newRoom.name]["q"] +=-1 
         #print("q ater: ",self.rooms_data[newRoom.name]["q"])
         items_room = self.rooms_data[newRoom.name]["items"]
         
 
-    
-            
-        
-
-
-
 
 
     def update(self):
         
-
-
-        self.generateRandomRooms()
         self.data.manor = self.grid
 
         self.current_room = self.grid[self.data.player.x][self.data.player.y]
-
         self.next_room = self.grid[self.data.player.next_room_position[0]][self.data.player.next_room_position[1]]
         self.data.player.next_room_status = self.checkRoomDoorStatus()
        

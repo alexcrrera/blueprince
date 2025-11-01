@@ -46,7 +46,7 @@ class HandleInputs(handler.BaseHandler):
 
 
                 if event.key == pygame.K_RETURN:
-                    if(self.data.state_machine.room_selection_mode):
+                    if(self.data.state_machine.mode==1):
                         self.data.enter_pressed = True
                         self.data.click_play = True
                     else:

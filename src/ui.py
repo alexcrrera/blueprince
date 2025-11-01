@@ -323,23 +323,24 @@ class HandleGridUI(handler.BaseHandler):
        
 
     def showCursor(self):
-       
+        
         x = self.data.player.x*params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
         y =  self.data.player.y * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
-        if(not(self.data.state_machine.cursor_selection_mode)):
-            pygame.draw.rect(self.screen, (255, 0,0), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
-            return
+        
         
         scaled_image = pygame.transform.scale(self.SELECTOR_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
         rot =  90*(self.data.player.direction-1)
         rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
         
+        pygame.draw.rect(self.screen, params.WHITE, (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
         self.screen.blit(rotated_image, (x, y))
+
+
         
 
     def drawNextRoom(self):
         
-        if(not(self.data.state_machine.cursor_selection_mode) or not params.NEXT_ROOM_SHOW):
+        if(not(self.data.state_machine.mode==0) or not params.NEXT_ROOM_SHOW):
             
             return
         x0 = self.data.player.next_room_position[0]
@@ -366,7 +367,7 @@ class HandleGridUI(handler.BaseHandler):
 
 
     def showRandomRooms(self):
-        if(not(self.data.state_machine.room_selection_mode)):
+        if(not(self.data.state_machine.mode==1)):
             return
         x0 = params.ORIGIN_ROOM_RANDOM_GROUP[0]
         y0 = params.ORIGIN_ROOM_RANDOM_GROUP[1]
@@ -392,7 +393,7 @@ class HandleGridUI(handler.BaseHandler):
 
     
     def showRandomSelectionCursor(self):
-        if(not self.data.state_machine.room_selection_mode):
+        if(not self.data.state_machine.mode==1):
             return
         x0 = params.ORIGIN_ROOM_RANDOM_GROUP[0]
         y0 = params.ORIGIN_ROOM_RANDOM_GROUP[1]
