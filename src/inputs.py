@@ -54,23 +54,28 @@ class HandleInputs(handler.BaseHandler):
 
                 if event.key == pygame.K_d: 
                     if(self.data.state_machine.mode==0):  
+                        
                         self.data.player.direction = 0
                         self.data.small_click_play = True
+                        self.data.gridHandler.updateRoomAndNextRoom()
                     
 
                 if event.key == pygame.K_w:
                     if(self.data.state_machine.mode==0):  
                         self.data.player.direction= 1
                         self.data.small_click_play = True
+                        self.data.gridHandler.updateRoomAndNextRoom()
                 if event.key == pygame.K_a:
                      if(self.data.state_machine.mode==0):  
                         self.data.small_click_play = True
                         self.data.player.direction = 2
+                        self.data.gridHandler.updateRoomAndNextRoom()
                        
                 if event.key == pygame.K_s:
                      if(self.data.state_machine.mode==0):  
                         self.data.small_click_play = True
                         self.data.player.direction = 3
+                        self.data.gridHandler.updateRoomAndNextRoom()
 
 
                 if event.key == pygame.K_DOWN:
@@ -84,6 +89,7 @@ class HandleInputs(handler.BaseHandler):
                         var = min(count_items,params.MAX_ITEMS_SHOW)
                         if(self.data.counter_inventory>var):
                             self.data.counter_inventory = 0
+                            
                         
                 if event.key == pygame.K_UP:
                     if(self.data.state_machine.mode==0):

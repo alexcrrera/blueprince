@@ -64,7 +64,7 @@ class RoomGrid():
                 if(curr_door_stat==1 or next_door_stat ==1 ):
                     next_room.door_status[dir_opposed] = 1
                     current_room.door_status[dir] = 1
-                    print( "c: ", curr_door_stat, "\t n:  ",next_door_stat, "- out mp")
+                    #print( "c: ", curr_door_stat, "\t n:  ",next_door_stat, "- out mp")
                     return 1
                 else:
                     out = max(curr_door_stat,next_door_stat)
@@ -313,12 +313,14 @@ class RoomGrid():
         
 
 
+    def updateRoomAndNextRoom(self):
+        self.current_room = self.grid[self.data.player.x][self.data.player.y]
+        self.next_room = self.grid[self.data.player.next_room_position[0]][self.data.player.next_room_position[1]]
+        self.data.player.next_room_status = self.checkRoomDoorStatus()
+       
 
     def update(self):
         
         self.data.manor = self.grid
 
-        self.current_room = self.grid[self.data.player.x][self.data.player.y]
-        self.next_room = self.grid[self.data.player.next_room_position[0]][self.data.player.next_room_position[1]]
-        self.data.player.next_room_status = self.checkRoomDoorStatus()
-       
+        self.updateRoomAndNextRoom()

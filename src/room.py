@@ -194,5 +194,5 @@ class Room:
 
     def __repr__(self):
         # Affiche le nom, la couleur, la rareté et le coût - TEST
-        return f"<Room {self.name} ({self.color}) r={self.rarity} c={self.cost}>"
+        return f"<{self.name} ({self.color}) DStat={self.door_status}>"
     

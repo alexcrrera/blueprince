@@ -67,7 +67,8 @@ class StateMachineHandler(handler.BaseHandler):
             self.data.player.next_room_status =0
             self.data.player.x = self.data.player.next_room_position[0]
             self.data.player.y =self.data.player.next_room_position[1]
-            
+            self.nextRoomCursor()
+            self.data.gridHandler.updateRoomAndNextRoom()
             self.data.player.inventory.steps_left += -1
            # self.data.gridHandler.update()
                     
