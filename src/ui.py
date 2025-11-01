@@ -108,6 +108,15 @@ class HandleText(handler.BaseHandler):
         self.screen.blit(rendered_text, text_rect)
 
 
+
+
+    def drawDebugText(self):
+        txt= self.data.debug_text
+
+        
+        x0,y0 = params.ORIGIN_DEBUG_TEXT[0],params.ORIGIN_DEBUG_TEXT[1]
+        self.draw_text(txt, (x0,y0), font=self.small_font, color=(255, 200, 0))
+
     def drawNextRoomInfo(self):
         stat = self.data.player.next_room_status
         txt = ""
@@ -272,8 +281,9 @@ class HandleText(handler.BaseHandler):
         txt = ">"
         y0 += params.ITEMS_IN_ROOM_PADDING*self.data.counter_inventory
         self.draw_text(txt,(x0,y0),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
-    def update(self):
 
+    def update(self):
+        self.drawDebugText()
         self.draw()
         self.showItemsCursor()
         self.showItemsInRoom()

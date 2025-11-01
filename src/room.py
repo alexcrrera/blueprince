@@ -70,8 +70,13 @@ class Room:
         #print("Orientation start:",orientation," - turs to perform: ",turn,"Final Room rotation: ",self.room_rotation)
         self.door_status = list()
         y_max = params.ROOM_GRID_SIZE_VERTICAL-1 #= 8
-        weights = [1/(3**(y_max-y)),1/(3),1/(3**y)]
-        #weights = [1/(3**(y_max-y)),1/(3**(y-y_max//2)),1/(3**y)]
+        #weights = [1/(3**(y_max-y)),1/(3),1/(3**y)]
+        w_unlocked = 1/(3**(y_max-y))
+        w_double_lock = 1/(3**y)
+        w_single_lock = 1/2*(w_unlocked + w_double_lock)/2
+       
+        weights = [w_unlocked,w_single_lock,w_double_lock]
+    
         print("w: ", weights)
         # ainsi proportionnel à la profondeur du manoi
 
@@ -88,25 +93,25 @@ class Room:
 
                 if(y==0):
                     inter_status = 3
+
                 self.door_status.append(inter_status)    
             else:
-                self.door_status.append(-1) # pas de porte disponible donc pas de statuts
+                self.door_status.append(0) # pas de porte disponible donc pas de statuts
 
-        if(orientation is not None):
-            self.door_status[(orientation+2)%4] = 1 # la porte par laquelle on én génère la chambre a déjà été ouverte...
-        else:
-            self.door_status[3] = 1
+       # if(orientation is not None):
+            #self.door_status[(orientation+2)%4] = 1 # la porte par laquelle on én génère la chambre a déjà été ouverte...
+ 
 
 
         for _ in range(turn):
             self.rotate_90_trigo()    
-        print("Door's status is ", self.door_status, " - doors: ",self.doors )
+       # print("Door's status is ", self.door_status, " - doors: ",self.doors )
         self.possible_items = data["possible_items"]
         self.items = data["items"]
         #self.randomObjectsGeneration()
 
 
-        print("Items: ",self.items)
+        #print("Items: ",self.items)
 
         self.x, self.y = x, y
 
@@ -161,7 +166,7 @@ class Room:
         # [E, N, W, S] devient [N, W, S, E]
         self.doors = [self.doors[3], self.doors[0], self.doors[1], self.doors[2]]
         self.room_rotation = (self.room_rotation +1)%4
-        print("dada: ",self.door_status)
+       # print("dada: ",self.door_status)
         self.door_status =[self.door_status[3], self.door_status[0], self.door_status[1], self.door_status[2]]
       
         self.update_image()

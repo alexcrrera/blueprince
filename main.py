@@ -44,14 +44,14 @@ class Game:
 
         self.interfaceHandler.addHandler(self.screenHandler)
         self.interfaceHandler.addHandler(self.gridUIHandler)
-        self.interfaceHandler.addHandler(self.inputHandler)
         self.interfaceHandler.addHandler(self.textHandler)
 
 
         self.running = True
        
     def update(self):
-
+        
+        self.inputHandler.update()
         
         self.playerHandler.update()
    

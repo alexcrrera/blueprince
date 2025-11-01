@@ -55,6 +55,7 @@ class StateMachineHandler(handler.BaseHandler):
 
         self.data.gridHandler.update() #mettre a jour 
 
+
     def cursorHandler(self):
         if( self.data.player.next_room_status ==-1): #VIDE
             self.data.state_machine.generate_random_rooms_flag = True
@@ -79,9 +80,6 @@ class StateMachineHandler(handler.BaseHandler):
            
 
 
-
-
-
     def update(self):
 
         if(self.mode ==0): # cursor mode
@@ -98,7 +96,8 @@ class StateMachineHandler(handler.BaseHandler):
                 self.data.player.inventory.dice +=-1
                 self.data.state_machine.generate_random_rooms_flag = True
                 self.data.gridHandler.generateRandomRooms()   
-                print("tf")
+                
+                
 
             elif(self.data.enter_pressed):
                 self.data.enter_pressed = False

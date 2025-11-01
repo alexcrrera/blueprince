@@ -64,7 +64,7 @@
         "image": "Parlor.jpg",
         "color": "gris",
         "rarity": 0,
-        "cost": 1,
+        "cost": 0,
         "doors": [
             "S",
             "W"
@@ -91,7 +91,7 @@
         "image": "Workshop.jpg",
         "color": "brune",
         "rarity": 2,
-        "cost": 2,
+        "cost":0,
         "doors": [
             "S",
             "N"

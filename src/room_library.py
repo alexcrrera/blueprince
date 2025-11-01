@@ -40,28 +40,26 @@ class RoomGrid():
         self.next_room_status = -1
         #  -1 = empty, 0 = wall, 1 = unlocked, 2 = locked, 3 = locked twice
 
-    def checkRoomConnection(self,next_room=2):
+    def checkRoomDoorStatus(self):
 #               ↑                      
 #               N (1)                      
 #               |                      
 #     W (2) ← - ● - → E (0)            
 #               |                        
 #               S (3)                    
-#               ↓         
-        if(next_room==2):
-            next_room = self.next_room  # si aucun argument passe alors on check room connection avec next room
-        #sinon on compare avec la chambre passee en argument
-            
+#               ↓    
+#   
+        
+        next_room = self.next_room  
         current_room = self.current_room
-        if(current_room is None) :
-            return -2
         
         dir =  self.data.player.direction
-        
+        dir_opposed = (dir+2)%4
+        #  -1 = empty, 0 = wall, 1 = unlocked, 2 = locked, 3 = locked twice
         if next_room is None:
-            if(current_room.doors[self.data.player.direction]==1):
-                
-                if(current_room.door_status[dir]==1):
+            if(current_room.doors[self.data.player.direction]==1): #if door exists 
+               # print( "c: ", current_room.door_status[dir],"- out mp")
+                if(current_room.door_status[dir]==1): # if door is open
                     return -1 # we can generate it 
                 else:
                     return current_room.door_status[dir]
@@ -71,17 +69,59 @@ class RoomGrid():
 
         # check s'il y a une porte existente
         
-        dir_opposed = (dir+2)%4
+        
         curr_door_stat = current_room.door_status[dir]
         next_door_stat = next_room.door_status[dir_opposed]
-
-        if(current_room.doors[dir] ==1 and  next_room.doors[dir_opposed]==1):
-                out = max(curr_door_stat,next_door_stat)
-                return(out)
+        #self.data.debug_text = str(current_room.doors)
+       
+        # verification statut portes
+        if(current_room.doors[dir] ==1 and  next_room.doors[dir_opposed]==1):#if door exists 
+                if(curr_door_stat==1 or next_door_stat ==1 ):
+                    next_room.door_status[dir_opposed] = 1
+                    current_room.door_status[dir] = 1
+                   # print( "c: ", curr_door_stat, "\t n:  ",next_door_stat, "- out mp")
+                    return 1
+                else:
+                    out = max(curr_door_stat,next_door_stat)
+                    current_room.door_status[dir] = out
+                    next_room.door_status[dir_opposed] = out
+                   # print( "c: ", curr_door_stat, "\t n:  ",next_door_stat, "- out: ",out)
+                    return(out)
       
 
         return 0
 
+
+    def checkDoorsConnectionExists(self,room):
+        """1 = Door exists 0 else"""
+#               ↑                      
+#               N (1)                      
+#               |                      
+#     W (2) ← - ● - → E (0)            
+#               |                        
+#               S (3)                    
+#               ↓    
+#   
+        current_room = self.current_room
+        next_room = room
+
+
+        dir =  self.data.player.direction
+
+        
+        
+
+        # check s'il y a une porte existente
+        
+        dir_opposed = (dir+2)%4
+
+        # verification statut portes
+        if(current_room.doors[dir] ==1 and  next_room.doors[dir_opposed]==1):
+                
+                return 1
+      
+
+        return 0
 
     def draw_random_room(self, initial_rotation,exclusions):
 
@@ -114,7 +154,7 @@ class RoomGrid():
             pool.append((name, weight))
 
 
-        print("Pool: ",pool)
+     #   print("Pool: ",pool)
         if not pool:
             raise ValueError("Aucune pièce disponible pour le tirage (toutes exclues).")
 
@@ -196,18 +236,18 @@ class RoomGrid():
                         
                         r,name = self.draw_random_room(self.data.player.direction,exclude)
                         attemps +=1
-                        #print("New room: ",name)
+                       # print("New room: ",name)
                         if(attemps>200):
                             raise TypeError("Not enough rooms included oops")
                         if(r is None):
                             raise TypeError("Ooops you generated an empty room")
-                      #  print("STARTING CHECK FOR ",name," - rot: ",r.room_rotation)
+                        #print("STARTING CHECK FOR ",name," - rot: ",r.room_rotation)
 
-                        for i in range(3): # faire max 3 rotations
-                           # print(i, " - Rotation ", rt, " is there a door?", self.checkRoomConnection(r)==1,r.doors)
+                        for i in range(4): # faire max 3 rotations
+                         #   print(i, " - Rotation ", rt, " is there a door?", self.checkDoorsConnectionExists(r)==1,r.doors)
                             x,y = self.data.player.next_room_position
-                            if self.checkRoomConnection(r)==1:
-                           #     print("Door connection, i: ", i)
+                            if self.checkDoorsConnectionExists(r)==1:
+                            #    print("Door connection, i: ", i)
                                 intra_good = True
 
                             if(x==0 and r.doors[2]==1): #cote gauche
@@ -249,15 +289,16 @@ class RoomGrid():
                             exclude.add(name)
                             
 
-                #print("added: ",name,r.room_rotation,index)
+               # print("added: ",name,r.room_rotation,index)
                             
                 exclude.add(name)
+               
                 r_out.append(r)
                 
                 if(r.cost<1):
                     gem_cost_0 = True
 
-                print(r.__repr__())
+                #print(r.__repr__())
                 index +=1
             
 
@@ -268,32 +309,17 @@ class RoomGrid():
         current_room  = self.current_room
         dir = self.data.player.direction
         current_room.door_status[dir] += -1
-        print("Door status: ",current_room.door_status[dir] )
-        
-
-
-    def updateDoors(self):
-
-        current_room  = self.current_room
-        next_room = self.next_room
+       # print("Door status: ",current_room.door_status[dir] )
+        dir =  self.data.player.direction
+        next_room =  self.next_room  
         if(next_room is None):
             return
+        
+        dir_opposed = (dir+2)%4
+        next_room.door_status[dir_opposed] = max(1,next_room.door_status[dir_opposed]-1)
+    
+        
 
-        dir = self.data.player.direction
-        current_room_door_status = current_room.door_status[dir]
-        dir_opposed = (dir +2)%4
-        next_room_door_status = next_room.door_status[dir_opposed]
-
-
-
-        if(current_room_door_status == 1):
-            current_room_door_status == 1
-             
-        else:
-            current_room_door_status = max(current_room_door_status,next_room_door_status)
-
-        current_room.door_status[dir] = current_room_door_status
-        next_room.door_status[dir_opposed] = current_room_door_status
 
 
     def __repr__(self):
@@ -305,9 +331,9 @@ class RoomGrid():
         
         self.grid[x][y] = self.randomGeneratedRooms[self.data.counter_room_selection_cursor]
         newRoom = self.grid[x][y]
-        print("q b4: ",self.rooms_data[newRoom.name]["q"])
+       # print("q b4: ",self.rooms_data[newRoom.name]["q"])
         self.rooms_data[newRoom.name]["q"] +=-1 
-        print("q ater: ",self.rooms_data[newRoom.name]["q"])
+        #print("q ater: ",self.rooms_data[newRoom.name]["q"])
         items_room = self.rooms_data[newRoom.name]["items"]
         
 
@@ -320,7 +346,8 @@ class RoomGrid():
 
 
     def update(self):
-        #self.updateDoors()
+        
+
 
         self.generateRandomRooms()
         self.data.manor = self.grid
@@ -328,5 +355,5 @@ class RoomGrid():
         self.current_room = self.grid[self.data.player.x][self.data.player.y]
 
         self.next_room = self.grid[self.data.player.next_room_position[0]][self.data.player.next_room_position[1]]
+        self.data.player.next_room_status = self.checkRoomDoorStatus()
        
-        self.data.player.next_room_status = self.checkRoomConnection()

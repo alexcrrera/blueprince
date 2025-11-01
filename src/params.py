@@ -36,8 +36,8 @@ splitRatioScreen = 0.33 # ratio entre côté gauche et droite
 
 INITIAL_STEPS = 70
 INTIAL_GOLD = 0
-INITIAL_GEMS = 5
-INTIAL_KEY =10
+INITIAL_GEMS = 500
+INTIAL_KEY =100
 INTIAL_DICE = 1
 
 
@@ -182,3 +182,6 @@ MAX_ITEMS_SHOW = 3 #montrer max MAX_ITEMS_SHOW items dans l'inventaire
 
 
 CURSOR_ITEMS_ORIGIN = [ORIGIN_ITEMS_IN_ROOM[0]-15,ORIGIN_ITEMS_IN_ROOM[1]-5]
+
+
+ORIGIN_DEBUG_TEXT = [CURSOR_ITEMS_ORIGIN[0],3*screenHeight//2]
