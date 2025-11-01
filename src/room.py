@@ -29,16 +29,15 @@ class Room:
         data =  room_attributes[name]
         self.name = name
         self.color = data["color"]
-        self.rarity = data["rarity"]
+        self.rarity = data["rarity"] # 0 = common ,  1 = standard , 2 = unusual ,  3 = rare
         self.q = data["q"]
         self.placement_condition = data["placement_condition"]
-        # 0 = common
-        # 1 = standard
-        # 2 = unusual
-        # 3 = rare
+        
         self.cost = data["cost"]
         self.image_path = f"assets/images/rooms/{data['image']}"
+
         self.cleaned_name = self.returnNameWithoutUnderscore()
+
         # Array [Est, Nord, Ouest, Sud] - 0 = pas de porte, 1 = porte
         self.doors = [0, 0, 0, 0]
         self.door_status = list()
@@ -49,7 +48,7 @@ class Room:
             if d in direction_map:
                 self.doors[direction_map[d]] = 1
 
-        
+
         
         
         self.room_rotation = 0
@@ -77,7 +76,7 @@ class Room:
        
         weights = [w_unlocked,w_single_lock,w_double_lock]
     
-        print("w: ", weights)
+        #print("w: ", weights)
         # ainsi proportionnel à la profondeur du manoi
 
         choices = [1, 2, 3]
@@ -108,6 +107,8 @@ class Room:
        # print("Door's status is ", self.door_status, " - doors: ",self.doors )
         self.possible_items = data["possible_items"]
         self.items = data["items"]
+
+
         #self.randomObjectsGeneration()
 
 
@@ -119,6 +120,10 @@ class Room:
         
 
         self.update_image()
+
+
+
+    
         
     
     def randomObjectsGeneration(self):
