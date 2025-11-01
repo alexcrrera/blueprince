@@ -12,8 +12,8 @@
         ],
         "placement_condition": 0,
         "q": 1,
-        "possible_items": {"gold":20},
-        "items": {"gold":20, "gems": 30,"keys":1, "rabbits_foot":1}
+        "possible_items": {},
+        "items": {}
     },
     "Antechamber": {
         "image": "Antechamber.jpg",
@@ -28,8 +28,8 @@
         ],
         "placement_condition": 0,
         "q": 1,
-        "possible_items": {"gold":20},
-        "items": {"gold":20, "gems": 30}
+        "possible_items": {},
+        "items": {}
     },
     "Hallway": {
         "image": "Hallway.jpg",
@@ -43,13 +43,13 @@
         ],
         "placement_condition": 0,
         "q": 1,
-        "possible_items": {},
+        "possible_items": {"gold":[1,0], "gems":[1,0],"apple":[1,0]},
         "items": {}
     },
     "Boudoir": {
         "image": "Boudoir.jpg",
         "color": "rose",
-        "rarity": 0,
+        "rarity": 1,
         "cost": 0,
         "doors": [
             "S",
@@ -57,7 +57,7 @@
         ],
         "placement_condition": 0,
         "q": 1,
-        "possible_items": {},
+        "possible_items": {"keys":[2,1],"gold":[5,1],"gems":[1,0]},
         "items": {}
     },
     "Parlor": {
@@ -71,25 +71,25 @@
         ],
         "placement_condition": 0,
         "q": 2,
-        "possible_items": {},
+        "possible_items": {"apple":[1,0]},
         "items": {}
     },
     "Mail_Room": {
         "image": "Mail_Room.jpg",
         "color": "bleue",
-        "rarity": 1,
+        "rarity": 2,
         "cost": 0,
         "doors": [
             "S"
         ],
         "placement_condition": 0,
-        "possible_items": {},
+        "possible_items": {"gold":[2,0],"metal_detector":[1,0]},
         "q": 5,
         "items": {}
     },
     "Workshop": {
         "image": "Workshop.jpg",
-        "color": "brune",
+        "color": "bleue",
         "rarity": 2,
         "cost":0,
         "doors": [
@@ -98,14 +98,14 @@
         ],
         "placement_condition": 0,
         "q": 1,
-        "possible_items": {},
-        "items": {}
+        "possible_items": {"gold":[5,1], "rabbits_foot":[1,0],"metal_detector":[1,0],"shovel":[1,0],"lockpick":[1,0]},
+        "items": {"dig_spots":[2,0]}
     },
     "Security": {
         "image": "Security.jpg",
-        "color": "verte",
+        "color": "bleue",
         "rarity": 1,
-        "cost": 0,
+        "cost": 1,
         "doors": [
             "E",
             "S",
@@ -113,7 +113,7 @@
         ],
         "placement_condition": 0,
         "q": 4,
-        "possible_items": {},
+        "possible_items": {"apple":[2,0],"banana":[1,0],"gold":[6,1],"gems":[2,0],"lockpick":[1,0]},
         "items": {}
     },
     "Billiard_Room": {
@@ -127,7 +127,7 @@
         ],
         "placement_condition": 0,
         "q": 1,
-        "possible_items": {},
+        "possible_items": {"keys":[2,0]},
         "items": {}
     },
     "Weight_Room": {
@@ -164,16 +164,14 @@
         "image": "Vault.jpg",
         "color": "bleue",
         "rarity": 0,
-        "cost": 0,
+        "cost": 3,
         "doors": [
             "S"
         ],
         "placement_condition": 0,
         "q": 1,
         "possible_items": {},
-        "items": {
-            "gold": 40
-        }
+        "items": {"gold": [40,0]}
     
         
     }

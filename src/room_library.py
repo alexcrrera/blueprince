@@ -283,6 +283,8 @@ class RoomGrid():
         """"Ap"""
         self.grid[x][y] = self.randomGeneratedRooms[self.data.counter_room_selection_cursor]
         newRoom = self.grid[x][y]
+
+        print(newRoom.name,": Items : ",newRoom.items, " - actions: ", newRoom.actions)
     #    print("NEW ROOM STATUS:",newRoom.door_status)
        # print("q b4: ",self.rooms_data[newRoom.name]["q"])
         self.rooms_data[newRoom.name]["q"] +=-1 

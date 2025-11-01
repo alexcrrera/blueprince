@@ -101,18 +101,22 @@ class Room:
             #self.door_status[(orientation+2)%4] = 1 # la porte par laquelle on én génère la chambre a déjà été ouverte...
  
 
-
+        
+        
         for _ in range(turn):
             self.rotate_90_trigo()    
        # print("Door's status is ", self.door_status, " - doors: ",self.doors )
         self.possible_items = data["possible_items"]
-        self.items = data["items"]
+        self.def_items = data["items"]
+        self.items = {}
+        self.actions = {}
 
 
         #self.randomObjectsGeneration()
+   
+        self.addItems()
 
-
-        #print("Items: ",self.items)
+        
 
         self.x, self.y = x, y
 
@@ -123,16 +127,43 @@ class Room:
 
 
 
-    
-        
-    
-    def randomObjectsGeneration(self):
-        # chaque objet associé a une rareté de 0,1,2,3
-       
-        for key, value in self.possible_items.items():
-            print(key + " " + str(value))
-        #weight = 1 / (3 ** data["rarity"])
+    def addItems(self):
+        descriptor = params.ITEMS_DESCRIPTION_DICT
+        for key,val in self.possible_items.items():
+            print("Adding to", self.name, ": ", key)
+
+            rarity_item = int(descriptor.get(key)[3])
+            print("Rarity: ", rarity_item)
+            
+            rand_choice =  random.randint(0,rarity_item+1)
+            if(rand_choice == 0): #item pas présent dans la salle
+                continue
+
+            if val[1] == 0:
+                item_q = val[0]
+            else:
+                item_q = random.randint(0,val[0])
+
+
+            if key in self.items:
+                self.items[key] += item_q
+            else:
+                self.items[key] = item_q
+            
+        for key,val in self.def_items.items():
+            item_q = val[0]
+            if key in self.items:
+                self.items[key] += item_q
+            else:
+                self.items[key] = item_q
+
+            self.sortItems()
+
+    def sortItems(self):
+         
         pass
+    
+
 
     def returnNameWithoutUnderscore(self):
         name = self.name
