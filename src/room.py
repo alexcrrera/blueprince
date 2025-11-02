@@ -117,8 +117,7 @@ class Room:
         self.generateItems()
         self.inventory = RoomInventory(self.items,self.actions)
 
-        self.items = True
-
+      
         
         #self.room_inventory = Inventory()
 
@@ -148,7 +147,8 @@ class Room:
             if val[1] == 0:
                 item_q = val[0]
             else:
-                item_q = random.randint(0,val[0])
+                item_q = random.randint(1,val[0])
+
 
 
             if key in self.items:

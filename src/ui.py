@@ -248,9 +248,11 @@ class HandleText(handler.BaseHandler):
 
         self.actions_length = len(current_room.inventory.actions)
         self.actions_descriptor = []
+        self.actions = []
         for key, value in actions.items():
             desc = descript_dict[key]
             self.actions_descriptor.append(desc[4])
+            self.actions.append(key)
 
             
     
@@ -262,7 +264,7 @@ class HandleText(handler.BaseHandler):
 
         self.items_descriptor = []
         for key, value in data.items():
-
+            
             desc = descript_dict[key]
             self.items_descriptor.append(desc[4])
             txt = desc[0] +" :  x" + str(value) + "  (" +desc[1]  + ")"
@@ -292,7 +294,7 @@ class HandleText(handler.BaseHandler):
     def showEnterTextSuggestion(self):
         if(self.data.state_machine.mode == 0):
             if(self.actions_length + self.items_length >0):
-                txt  = "Press F to interact" + " - " + str( self.data.counter_inventory) 
+                txt  = "Press F to interact"# + " - " + str( self.data.counter_inventory) 
             else:
                 txt = ""
         elif(self.data.state_machine.mode == 1):
@@ -315,21 +317,32 @@ class HandleText(handler.BaseHandler):
             return
         self.data.counter_inventory = min(self.data.counter_inventory,len(current_room.inventory.items) + len(current_room.inventory.actions)-1)
         x0,y0 = params.CURSOR_ITEMS_ORIGIN[0],params.CURSOR_ITEMS_ORIGIN[1]
-     
-       
+
+        
+        
+
+        col = params.LIGHT_GRAY
         if(self.data.counter_inventory>=self.actions_length):
 
             txt = ">" + self.items_descriptor[self.data.counter_inventory-self.actions_length]
+        
         else:
+
             if(len(self.actions_descriptor)>0):
                 txt = ">" + self.actions_descriptor[self.data.counter_inventory]
+                action = self.actions[self.data.counter_inventory]
+
+                if(not self.data.gridHandler.checkIsInteractionPossible(action)):
+                      col = params.RED
             else:
                 
                 return
+            
         y0 += params.ITEMS_IN_ROOM_PADDING*self.data.counter_inventory
 
+        
 
-        self.draw_text(txt,(x0,y0),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
+        self.draw_text(txt,(x0,y0),font= self.enter_suggestion_font,color=col)
 
     def update(self):
         self.drawDebugText()

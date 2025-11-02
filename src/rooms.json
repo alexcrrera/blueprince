@@ -90,14 +90,14 @@
     "Workshop": {
         "image": "Workshop.jpg",
         "color": "bleue",
-        "rarity": 2,
+        "rarity": 0,
         "cost":0,
         "doors": [
             "S",
             "N"
         ],
         "placement_condition": 0,
-        "q": 1,
+        "q": 10,
         "possible_items": {"gold":[5,1], "rabbits_foot":[1,0],"metal_detector":[1,0],"shovel":[1,0],"lockpick":[1,0]},
         "items": {"dig_spots":[2,0]}
     },

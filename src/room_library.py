@@ -276,6 +276,19 @@ class RoomGrid():
         dir_opposed = (dir+2)%4
         next_room.door_status[dir_opposed] = max(1,next_room.door_status[dir_opposed]-1)
     
+
+    def checkIsInteractionPossible(self,action):
+        current_room  = self.current_room
+        inventory = self.data.player.inventory.items
+        if action == "dig_spots":
+            if "shovel" not in inventory:
+                return 0
+            else:
+                return 1
+
+    def handleActions(self,key):
+        print("Im doing: ",key )
+
     def __repr__(self):
         return "\n".join(room.__repr__() for row in self.grid for room in row if room)
     

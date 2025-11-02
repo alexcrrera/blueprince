@@ -73,6 +73,10 @@ class StateMachineHandler(handler.BaseHandler):
             self.nextRoomCursor()
             self.data.gridHandler.updateRoomAndNextRoom()
             self.data.player.inventory.steps_left += -1
+
+            self.data.counter_inventory = 0
+
+            
            # self.data.gridHandler.update()
                     
         elif(self.data.player.next_room_status ==2 or self.data.player.next_room_status ==3): 
@@ -89,6 +93,7 @@ class StateMachineHandler(handler.BaseHandler):
         self.data.player.inventory.dice +=-1
         self.data.state_machine.generate_random_rooms_flag = True
         self.data.gridHandler.generateRandomRooms() 
+
     
     def handleRoomSelectedWithEnter(self):
         self.data.enter_pressed = False
@@ -106,6 +111,9 @@ class StateMachineHandler(handler.BaseHandler):
         self.room_selection_mode = False
         self.cursor_selection_mode = True
         self.mode = 0
+
+
+
 
     def handleInteraction(self):
         if(not self.data.interact_pressed):
@@ -134,12 +142,21 @@ class StateMachineHandler(handler.BaseHandler):
         for key,val in items_dict.items():
             print(ind,cursor_pos)
             if ind == cursor_pos:
+                self.data.player.inventory.addItem(key,val)
                 current_room.inventory.removeItems(key,val)
                 return
             ind+=1
 
-
-
+    def interactWithAction(self,current_room,cursor_pos):
+        ind = 0
+        actions_dict = current_room.inventory.actions.copy()
+        for key,val in actions_dict.items():
+            print(ind,cursor_pos)
+            if ind == cursor_pos:
+                self.data.gridHandler.handleActions(key)
+                current_room.inventory.removeActions(key,1)
+                return
+            ind+=1
             
 
 

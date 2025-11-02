@@ -25,6 +25,8 @@ class Inventory:
         self.permanent_items = []
 
 
+    
+
 
     def getItemQ(self,key):
 
@@ -35,24 +37,13 @@ class Inventory:
             return self.items.get(key)
    
     def update(self):
+        self.gold = self.getItemQ("gold")
+        self.gems = self.getItemQ("gems")
+        self.steps_left = self.getItemQ("steps_left")
+        self.dice = self.getItemQ("dice")
+        self.keys = self.getItemQ("keys")
         self.ui_items = [self.steps_left,self.gold, self.gems, self.keys,self.dice]
         
-
-
-
-    def __repr__(self):
-        # Affiche les objets de l'inventaire - TEST
-        return f"Inventory gems={self.gems} keys={self.keys} dice={self.dice} gold={self.gold} permanent_items={self.permanent_items}"
-    
-
-
-class RoomInventory(Inventory):
-
-    def __init__(self, items_dict,actions_dict):
-        super().__init__(items_dict)
-        self.actions = actions_dict
-        
-
 
     def addItem(self,key,q):
         if(key not in self.items):
@@ -77,10 +68,41 @@ class RoomInventory(Inventory):
 
 
 
- 
     def __repr__(self):
         # Affiche les objets de l'inventaire - TEST
         return f"Inventory gems={self.gems} keys={self.keys} dice={self.dice} gold={self.gold} permanent_items={self.permanent_items}"
+    
+
+
+class RoomInventory(Inventory):
+
+    def __init__(self, items_dict,actions_dict):
+        super().__init__(items_dict)
+        self.actions = actions_dict
+        
+
+
+
+
+    def addAction(self,key,q):
+        if(key not in self.actions):
+            self.actions[key]= q
+        else:
+            self.actions[key] +=q
+    
+
+    def removeActions(self,key,q):
+        print("Reomving", key, " x ", q)
+        if(key not in self.actions):
+            raise TypeError("Can't remove remove what's not there!")
+        else:
+            self.actions[key] -=q
+
+
+            if(self.actions[key]<=0):
+                self.actions.pop(key, None)
+            
+                print("CAREFUL REMOVING MORE THAN WE HAVE !")
 
         
     def getActionQ(self,key):
