@@ -37,7 +37,7 @@ splitRatioScreen = 0.33 # ratio entre côté gauche et droite
 INITIAL_STEPS = 70
 INTIAL_GOLD = 0
 INITIAL_GEMS = 2
-INTIAL_KEY =0
+INTIAL_KEY =10
 INTIAL_DICE = 0
 
 

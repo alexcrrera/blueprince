@@ -130,10 +130,9 @@ class Room:
     def addItems(self):
         descriptor = params.ITEMS_DESCRIPTION_DICT
         for key,val in self.possible_items.items():
-            print("Adding to", self.name, ": ", key)
-
+            
             rarity_item = int(descriptor.get(key)[3])
-            print("Rarity: ", rarity_item)
+            
             
             rand_choice =  random.randint(0,rarity_item+1)
             if(rand_choice == 0): #item pas présent dans la salle
@@ -160,7 +159,20 @@ class Room:
             self.sortItems()
 
     def sortItems(self):
-         
+        descriptor = params.ITEMS_DESCRIPTION_DICT
+        items_out = {}
+        for key,val in self.items.items():
+            if(descriptor.get(key)[2]=="a"):
+                print("Adding action ", key, " to ",self.name)
+                self.actions[key] = val
+                
+                
+            if(descriptor.get(key)[2]=="p" or descriptor.get(key)[2]=="t"):
+                items_out[key] = val
+
+
+            
+        self.items = items_out
         pass
     
 
