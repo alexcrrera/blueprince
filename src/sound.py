@@ -72,4 +72,12 @@ class HandleSound:
             rand_audio = "door_lock_" + str(i)
             self.play_sfx(rand_audio)
             
+        if(self.data.enter_room_play):
+            self.data.enter_room_play = False
+           # self.play_sfx("door_open")
+
+        if(self.data.enter_room_play):
+            print("dfo")
+            self.data.enter_room_play = False
+            self.play_sfx("lockpick")
             pass

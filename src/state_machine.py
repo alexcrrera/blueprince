@@ -57,12 +57,15 @@ class StateMachineHandler(handler.BaseHandler):
     def cursorSpacePressed(self):
         self.data.space_pressed = False
         if(self.data.player.next_room_status ==-1): #VIDE
+           
             self.data.state_machine.generate_random_rooms_flag = True
             self.data.gridHandler.generateRandomRooms()
             self.mode = 1 
        
 
         elif(self.data.player.next_room_status ==1): # OUVERT
+            self.data.enter_room_play = True
+      
             self.mode = 0
             self.data.player.next_room_status =0
             self.data.player.x = self.data.player.next_room_position[0]
@@ -73,11 +76,12 @@ class StateMachineHandler(handler.BaseHandler):
            # self.data.gridHandler.update()
                     
         elif(self.data.player.next_room_status ==2 or self.data.player.next_room_status ==3): 
-            if(self.data.player.inventory.keys>0):
-                self.data.player.inventory.keys += -1
-                print("Used one key")
-                self.data.door_locked_play = True
-                self.data.gridHandler.openDoor()
+
+                if(self.data.player.inventory.keys>0):
+                    self.data.player.inventory.keys += -1
+                    print("Used one key")
+                    self.data.door_locked_play = True
+                    self.data.gridHandler.openDoor()
             
            
     def handleRedraft(self):

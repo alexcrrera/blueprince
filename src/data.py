@@ -27,10 +27,12 @@ class HandleData(handler.BaseHandler):
         self.small_click_play = False
         self.toggle_up = False
         self.space_pressed = False
+ 
         self.cursor_visible = True
 
         self.counter_room_selection_cursor =0
         self.enter_pressed = False
+        self.enter_room_play = False
 
         self.clock = clock
 
