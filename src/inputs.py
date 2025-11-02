@@ -45,6 +45,12 @@ class HandleInputs(handler.BaseHandler):
                         self.data.redraft_pressed = False
 
 
+                if event.key == pygame.K_f:
+                    if(self.data.state_machine.mode==0):
+                        self.data.interact_pressed = True
+                    else:
+                        self.data.interact_pressed = False
+
                 if event.key == pygame.K_RETURN:
                     if(self.data.state_machine.mode==1):
                         self.data.enter_pressed = True
@@ -85,7 +91,7 @@ class HandleInputs(handler.BaseHandler):
                         self.data.counter_inventory += +1
                         x,y = self.data.player.x,self.data.player.y
                         current_room =self.data.gridHandler.grid[x][y]
-                        count_items = len(current_room.items) + len(current_room.actions)
+                        count_items = len(current_room.inventory.items) + len(current_room.inventory.actions)
                         var = min(count_items,params.MAX_ITEMS_SHOW)
                         if(self.data.counter_inventory>=var):
                             self.data.counter_inventory = 0
@@ -96,7 +102,7 @@ class HandleInputs(handler.BaseHandler):
                         self.data.counter_inventory += -1
                         x,y = self.data.player.x,self.data.player.y
                         current_room =self.data.gridHandler.grid[x][y]
-                        count_items = len(current_room.items)+ len(current_room.actions)
+                        count_items = len(current_room.inventory.items)+ len(current_room.inventory.actions)
                         var = min(count_items,params.MAX_ITEMS_SHOW)
                         if(self.data.counter_inventory<0):
                             self.data.counter_inventory = var-1

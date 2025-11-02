@@ -4,7 +4,7 @@ from src.item import Item
 from src import params
 import pygame
 
-
+from src.inventory import Inventory,RoomInventory
 import random
 
 
@@ -114,9 +114,14 @@ class Room:
 
         #self.randomObjectsGeneration()
    
-        self.addItems()
+        self.generateItems()
+        self.inventory = RoomInventory(self.items,self.actions)
+
+        self.items = True
 
         
+        #self.room_inventory = Inventory()
+
 
         self.x, self.y = x, y
 
@@ -127,10 +132,8 @@ class Room:
 
 
 
-    def addItems(self,add_items=None):
 
-        
-
+    def generateItems(self,add_items=None):
 
         descriptor = params.ITEMS_DESCRIPTION_DICT
         for key,val in self.possible_items.items():

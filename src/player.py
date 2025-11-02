@@ -18,7 +18,9 @@ class Player:
         self.x = self.position[0]
         self.y = self.position[1]
          # valeur par défaut d’après l’énoncé
-        self.inventory = Inventory()
+
+        starting_inventory = params.INITIAL_ITEMS_DICT
+        self.inventory = Inventory(starting_inventory)
 
         self.direction = 1 # 0 = Est, 1 = Nord, 2 = Ouest, 3 = Sud
         

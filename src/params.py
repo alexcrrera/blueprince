@@ -40,6 +40,14 @@ INITIAL_GEMS = 2
 INTIAL_KEY =10
 INTIAL_DICE = 67
 
+INITIAL_ITEMS_DICT ={
+    "steps_left": INITIAL_STEPS,
+    "gems": INITIAL_GEMS,
+    "gold": INTIAL_GOLD,
+    "keys": INTIAL_KEY,
+    "dice": INTIAL_DICE
+
+}
 
 
 json_path = os.path.join("src", "rooms.json")
@@ -183,8 +191,8 @@ ITEMS_DESCRIPTION_DICT = {
     "metal_detector": ["Metal detector","Increases chances of finding extra gold or keys","p",3,"TAKE"],
     "dig_spots": ["Dig spot", "Use the shovel to dig and find items","a",0,"DIG"],
     "chest": ["Chest", "Use a key to open and find items", "a",3,"OPEN"],
-    "shovel": ["Shovel", "You will need this to dig", "p",3,"TAKE"]
-   
+    "shovel": ["Shovel", "You will need this to dig", "p",3,"TAKE"],
+    "dice": ["Dice","Use this to redraw rooms when drafting", "t",3,"TAKE"]
     }
 
 

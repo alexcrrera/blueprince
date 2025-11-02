@@ -107,6 +107,42 @@ class StateMachineHandler(handler.BaseHandler):
         self.cursor_selection_mode = True
         self.mode = 0
 
+    def handleInteraction(self):
+        if(not self.data.interact_pressed):
+            return
+
+        #self.data.interact_play = True
+        self.data.interact_pressed =  False
+        current_room = self.data.gridHandler.current_room
+        count_items = len(current_room.inventory.items) + len(current_room.inventory.actions)
+
+        if(count_items==0):
+            return
+
+        cursor_pos = self.data.counter_inventory
+
+
+        if(cursor_pos > len(current_room.inventory.actions)-1):
+            cursor_pos_rel = cursor_pos - len(current_room.inventory.actions)
+            self.interactWithItem(current_room,cursor_pos_rel)
+        else:
+            self.interactWithAction(current_room,cursor_pos)
+
+    def interactWithItem(self,current_room,cursor_pos):
+        ind = 0
+        items_dict = current_room.inventory.items.copy()
+        for key,val in items_dict.items():
+            print(ind,cursor_pos)
+            if ind == cursor_pos:
+                current_room.inventory.removeItems(key,val)
+                return
+            ind+=1
+
+
+
+            
+
+
     def update(self):
 
         if(self.mode ==0): # cursor mode
@@ -114,6 +150,8 @@ class StateMachineHandler(handler.BaseHandler):
 
             if(self.data.space_pressed):
                 self.cursorSpacePressed()
+            else:
+                self.handleInteraction()
                 
         elif(self.mode==1): # mode selection chambre
             # 

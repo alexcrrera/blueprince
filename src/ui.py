@@ -235,18 +235,18 @@ class HandleText(handler.BaseHandler):
         x,y = self.data.player.x,self.data.player.y
         current_room =self.data.gridHandler.grid[x][y]
        # print("itemasdas: ",current_room.name)
-        data = current_room.items
-        actions = current_room.actions
+        data = current_room.inventory.items
+        actions = current_room.inventory.actions
         
         descript_dict = params.ITEMS_DESCRIPTION_DICT
-        count_items = len(current_room.items) + len(current_room.actions)
+        count_items = len(current_room.inventory.items) + len(current_room.inventory.actions)
         if(count_items==0):
             txt = "Nothing!"
             self.draw_text(txt,(x0,y0),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
             return
         
 
-        self.actions_length = len(current_room.actions)
+        self.actions_length = len(current_room.inventory.actions)
         self.actions_descriptor = []
         for key, value in actions.items():
             desc = descript_dict[key]
@@ -292,7 +292,7 @@ class HandleText(handler.BaseHandler):
     def showEnterTextSuggestion(self):
         if(self.data.state_machine.mode == 0):
             if(self.actions_length + self.items_length >0):
-                txt  = "Press ENTER to interact"
+                txt  = "Press F to interact" + " - " + str( self.data.counter_inventory) 
             else:
                 txt = ""
         elif(self.data.state_machine.mode == 1):
@@ -310,10 +310,10 @@ class HandleText(handler.BaseHandler):
         x,y = self.data.player.x,self.data.player.y
         current_room =self.data.gridHandler.grid[x][y]
 
-        count_items = len(current_room.items)
+        count_items = len(current_room.inventory.items )+ len(current_room.inventory.actions)
         if(count_items==0):
             return
-        self.data.counter_inventory = min(self.data.counter_inventory,len(current_room.items) + len(current_room.actions)-1)
+        self.data.counter_inventory = min(self.data.counter_inventory,len(current_room.inventory.items) + len(current_room.inventory.actions)-1)
         x0,y0 = params.CURSOR_ITEMS_ORIGIN[0],params.CURSOR_ITEMS_ORIGIN[1]
      
        
