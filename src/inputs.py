@@ -85,9 +85,9 @@ class HandleInputs(handler.BaseHandler):
                         self.data.counter_inventory += +1
                         x,y = self.data.player.x,self.data.player.y
                         current_room =self.data.gridHandler.grid[x][y]
-                        count_items = len(current_room.items)
+                        count_items = len(current_room.items) + len(current_room.actions)
                         var = min(count_items,params.MAX_ITEMS_SHOW)
-                        if(self.data.counter_inventory>var):
+                        if(self.data.counter_inventory>=var):
                             self.data.counter_inventory = 0
                             
                         
@@ -96,10 +96,14 @@ class HandleInputs(handler.BaseHandler):
                         self.data.counter_inventory += -1
                         x,y = self.data.player.x,self.data.player.y
                         current_room =self.data.gridHandler.grid[x][y]
-                        count_items = len(current_room.items)
+                        count_items = len(current_room.items)+ len(current_room.actions)
                         var = min(count_items,params.MAX_ITEMS_SHOW)
                         if(self.data.counter_inventory<0):
-                            self.data.counter_inventory = var
+                            self.data.counter_inventory = var-1
+
+
+
+
 
                         
                 if event.key == pygame.K_RIGHT:

@@ -82,6 +82,12 @@ class HandleText(handler.BaseHandler):
         self.you_found_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, params.YOU_FOUND_TEXT_SIZE) 
 
         self.items_cursor =  pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.YOU_FOUND_TEXT_SIZE) 
+
+        self.items_length = 0
+        self.actions_length = 0
+
+        self.items_descriptor = []
+        self.actions_descriptor = []
     def draw_text(self, text, position, font=None, color=params.TEXT_COLOR, center=False, rotation=0):
     # Choose default font if none given
         if font is None:
@@ -225,22 +231,41 @@ class HandleText(handler.BaseHandler):
         current_room =self.data.gridHandler.grid[x][y]
        # print("itemasdas: ",current_room.name)
         data = current_room.items
+        actions = current_room.actions
         
         descript_dict = params.ITEMS_DESCRIPTION_DICT
-        count_items = len(current_room.items)
+        count_items = len(current_room.items) + len(current_room.actions)
         if(count_items==0):
             txt = "Nothing!"
             self.draw_text(txt,(x0,y0),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
             return
         
-        for key, value in data.items():
 
+        self.actions_length = len(current_room.actions)
+        self.actions_descriptor = []
+        for key, value in actions.items():
             desc = descript_dict[key]
+            self.actions_descriptor.append(desc[4])
+
+            
     
             txt = desc[0] +" :  x" + str(value) + "  (" +desc[1]  + ")"
             #print("items: ",txt)
             self.draw_text(txt, (x0,y0), font=self.items_size_font)
             y0 += params.ITEMS_IN_ROOM_PADDING
+
+
+        self.items_descriptor = []
+        for key, value in data.items():
+
+            desc = descript_dict[key]
+            self.items_descriptor.append(desc[4])
+            txt = desc[0] +" :  x" + str(value) + "  (" +desc[1]  + ")"
+            #print("items: ",txt)
+            self.draw_text(txt, (x0,y0), font=self.items_size_font)
+            y0 += params.ITEMS_IN_ROOM_PADDING
+        
+        self.items_length = len(data)
         
         
         
@@ -260,10 +285,17 @@ class HandleText(handler.BaseHandler):
         self.draw_text(txt,(x,y),font= self.dice_suggestion_font,rotation=270,color=col)
 
     def showEnterTextSuggestion(self):
-        if(not self.data.state_machine.mode == 1):
-            return  
+        if(self.data.state_machine.mode == 0):
+            if(self.actions_length + self.items_length >0):
+                txt  = "Press ENTER to interact"
+            else:
+                txt = ""
+        elif(self.data.state_machine.mode == 1):
+            txt  = "Press ENTER to choose a room!"
+        else:
+            txt  = ""
         x,y = params.ORIGIN_PRESS_ENTER_TEXT
-        txt  = "Press ENTER to choose a room!"
+        
         self.draw_text(txt,(x,y),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
 
 
@@ -275,17 +307,29 @@ class HandleText(handler.BaseHandler):
 
         count_items = len(current_room.items)
         if(count_items==0):
-           
             return
+        self.data.counter_inventory = min(self.data.counter_inventory,len(current_room.items) + len(current_room.actions)-1)
         x0,y0 = params.CURSOR_ITEMS_ORIGIN[0],params.CURSOR_ITEMS_ORIGIN[1]
-        txt = ">"
+     
+       
+        if(self.data.counter_inventory>=self.actions_length):
+
+            txt = ">" + self.items_descriptor[self.data.counter_inventory-self.actions_length]
+        else:
+            if(len(self.actions_descriptor)>0):
+                txt = ">" + self.actions_descriptor[self.data.counter_inventory]
+            else:
+                
+                return
         y0 += params.ITEMS_IN_ROOM_PADDING*self.data.counter_inventory
+
+
         self.draw_text(txt,(x0,y0),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
 
     def update(self):
         self.drawDebugText()
         self.draw()
-        self.showItemsCursor()
+        
         self.showItemsInRoom()
         self.showCurrentRoomInfo()
         self.updateInventoryUI()
@@ -294,6 +338,7 @@ class HandleText(handler.BaseHandler):
         self.showDiceSuggestion()
         self.showRandomRoomCost()
         self.showEnterTextSuggestion()
+        self.showItemsCursor()
         
 
         

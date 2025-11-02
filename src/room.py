@@ -127,7 +127,11 @@ class Room:
 
 
 
-    def addItems(self):
+    def addItems(self,add_items=None):
+
+        
+
+
         descriptor = params.ITEMS_DESCRIPTION_DICT
         for key,val in self.possible_items.items():
             
@@ -149,14 +153,22 @@ class Room:
             else:
                 self.items[key] = item_q
             
-        for key,val in self.def_items.items():
+
+        if add_items is None:
+            add_items = self.def_items
+
+
+        for key,val in add_items.items():
+
             item_q = val[0]
             if key in self.items:
                 self.items[key] += item_q
             else:
                 self.items[key] = item_q
 
-            self.sortItems()
+
+        self.sortItems()
+        self.possible_items = {}
 
     def sortItems(self):
         descriptor = params.ITEMS_DESCRIPTION_DICT
@@ -167,7 +179,7 @@ class Room:
                 self.actions[key] = val
                 
                 
-            if(descriptor.get(key)[2]=="p" or descriptor.get(key)[2]=="t"):
+            if(descriptor.get(key)[2]=="p" or descriptor.get(key)[2]=="t"): #if object is temporary or permanent we keep is as item
                 items_out[key] = val
 
 

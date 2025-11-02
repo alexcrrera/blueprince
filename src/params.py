@@ -38,7 +38,7 @@ INITIAL_STEPS = 70
 INTIAL_GOLD = 0
 INITIAL_GEMS = 2
 INTIAL_KEY =10
-INTIAL_DICE = 0
+INTIAL_DICE = 67
 
 
 
@@ -173,25 +173,25 @@ ITEM_TEXT_SIZE = 20
 
 ITEMS_DESCRIPTION_DICT = {
 
-    "gold": ["Gold","Use it to buy items","t",0], 
-    "gems": ["Gems","Use it to buy special rooms","t",0],
-    "rabbits_foot": ["Rabbit's foot", "Greater chance of finding items","p",3],
-    "keys": ["Keys","Useful for opening doors and chests","p",0],
-    "apple": ["Apple", "Restores 2 steps", "t","2",2],
-    "banana": ["Banana", "Restores 3 steps", "t","2",2],
-    "lockpick": ["Lockpick", "You can now use the lockpick to open doors", "p",3],
-    "metal_detector": ["Metal detector","Increases chances of finding extra gold or keys","a",3],
-    "dig_spots": ["Dig spot", "Use the shovel (P) to dig and find items","a",3],
-    "chest": ["Chest", "Use a key (K) to open and find items", "a",3],
-    "shovel": ["Shovel", "You will need this to dig", "p",3]
+    "gold": ["Gold","Use it to buy items","t",0,"TAKE"], 
+    "gems": ["Gems","Use it to buy special rooms","t",0,"TAKE"],
+    "rabbits_foot": ["Rabbit's foot", "Greater chance of finding items","p",3,"TAKE"],
+    "keys": ["Keys","Useful for opening doors and chests","p",0,"TAKE"],
+    "apple": ["Apple", "Restores 2 steps", "t",2,"TAKE"],
+    "banana": ["Banana", "Restores 3 steps", "t",2,"TAKE"],
+    "lockpick": ["Lockpick", "You can now use the lockpick to open doors", "p",3,"TAKE"],
+    "metal_detector": ["Metal detector","Increases chances of finding extra gold or keys","p",3,"TAKE"],
+    "dig_spots": ["Dig spot", "Use the shovel to dig and find items","a",0,"DIG"],
+    "chest": ["Chest", "Use a key to open and find items", "a",3,"OPEN"],
+    "shovel": ["Shovel", "You will need this to dig", "p",3,"TAKE"]
    
     }
 
 
-MAX_ITEMS_SHOW = 3 #montrer max MAX_ITEMS_SHOW items dans l'inventaire
+MAX_ITEMS_SHOW = 69 #montrer max MAX_ITEMS_SHOW items dans l'inventaire
 
 
-CURSOR_ITEMS_ORIGIN = [ORIGIN_ITEMS_IN_ROOM[0]-15,ORIGIN_ITEMS_IN_ROOM[1]-5]
+CURSOR_ITEMS_ORIGIN = [ORIGIN_ITEMS_IN_ROOM[0]-100,ORIGIN_ITEMS_IN_ROOM[1]-5]
 
 
 ORIGIN_DEBUG_TEXT = [CURSOR_ITEMS_ORIGIN[0],3*screenHeight//2]
