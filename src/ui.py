@@ -160,8 +160,13 @@ class HandleText(handler.BaseHandler):
         padding = [i*params.INVENTORY_ITEMS_PADDING for i in range(1,7)]
         
         for i in range(0,5):
-            text = str(self.data.player.inventory.ui_items[i])
-            self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[i]), font=self.inventory_font, color=params.WHITE,center=True)
+            q  =self.data.player.inventory.ui_items[i]
+            text = str(q)
+            if(q==0):
+                col = params.RED
+            else:
+                col = params.WHITE
+            self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[i]), font=self.inventory_font, color=col,center=True)
         #text = str(params.DIRECTION_CARDINAL[self.data.player.direction])
 
         #self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[5]), font=self.inventory_font, color=params.WHITE,center=True)
