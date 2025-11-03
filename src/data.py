@@ -40,7 +40,7 @@ class HandleData(handler.BaseHandler):
         self.door_locked_play = False
         self.game_over = [False,-1,0]
         self.interact_pressed = False
-
+        self.interact_play = False
         self.counter_inventory = 0
 
         self.debug_text = ""
@@ -61,7 +61,6 @@ class HandleData(handler.BaseHandler):
         
         
 
-        
 
         txt  = "You " +descript_dict[4].lower()+ " "
         if q == 1:

@@ -81,3 +81,7 @@ class HandleSound:
             self.data.enter_room_play = False
             self.play_sfx("lockpick")
             pass
+    
+        if(self.data.interact_play):
+            self.data.interact_play = False
+            self.play_sfx("grab")

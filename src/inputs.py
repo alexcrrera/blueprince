@@ -48,6 +48,7 @@ class HandleInputs(handler.BaseHandler):
                 if event.key == pygame.K_f:
                     if(self.data.state_machine.mode==0):
                         self.data.interact_pressed = True
+                        self.data.interact_play = True
                     else:
                         self.data.interact_pressed = False
 
