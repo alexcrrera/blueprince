@@ -30,6 +30,8 @@ GREEN = (0,255,0)
 GRAY = (100,100,100)
 LIGHT_GRAY = (200,200,200)
 RED = (220,0,0)
+
+YELLOW = (255, 200, 0)
 # Game settings
 TARGET_FPS = 10
 splitRatioScreen = 0.33 # ratio entre côté gauche et droite
@@ -38,7 +40,7 @@ INITIAL_STEPS = 70
 INTIAL_GOLD = 0
 INITIAL_GEMS = 2
 INTIAL_KEY =10
-INTIAL_DICE = 67
+INTIAL_DICE = 2
 
 INITIAL_ITEMS_DICT ={
     "steps_left": INITIAL_STEPS,
@@ -165,8 +167,24 @@ DICE_SUGGESTION_TEXT_SIZE = 15
 
 ORIGIN_RANDOM_ROOM_COST = [ORIGIN_ROOM_RANDOM_GROUP[0],ORIGIN_ROOM_RANDOM_GROUP[1]-30]
 
+
+
+
+
+
+
 ORIGIN_PRESS_ENTER_TEXT = [(ORIGIN_RANDOM_ROOM_COST[0] + 1*RANDOM_GROUP_TILE_SIZE + HORIZONTAL_PADDING_RANDOM_GROUP)//1,ORIGIN_ROOM_RANDOM_GROUP[1]-100]
 ENTER_SUGGESTION_TEXT_SIZE = 20
+
+
+
+
+ORIGIN_HISTORY = [ORIGIN_PRESS_ENTER_TEXT[0],ORIGIN_PRESS_ENTER_TEXT[1]+700]
+HISTORY_TITLES_SIZE = 30
+
+
+
+
 
 ORIGIN_ROOM_TEXT_INFO = [750,350]
 ROOM_TEXT_SIZE = 50
@@ -184,15 +202,16 @@ ITEMS_DESCRIPTION_DICT = {
     "gold": ["Gold","Use it to buy items","t",0,"TAKE"], 
     "gems": ["Gems","Use it to buy special rooms","t",0,"TAKE"],
     "rabbits_foot": ["Rabbit's foot", "Greater chance of finding items","p",3,"TAKE"],
-    "keys": ["Keys","Useful for opening doors and chests","p",0,"TAKE"],
+    "keys": ["Keys","Useful for opening doors and chests","t",0,"TAKE"],
     "apple": ["Apple", "Restores 2 steps", "t",2,"TAKE"],
     "banana": ["Banana", "Restores 3 steps", "t",2,"TAKE"],
     "lockpick": ["Lockpick", "You can now use the lockpick to open doors", "p",3,"TAKE"],
-    "metal_detector": ["Metal detector","Increases chances of finding extra gold or keys","p",3,"TAKE"],
+    "metal_detector": ["Metal Detector","Increases chances of finding extra gold or keys","p",3,"TAKE"],
     "dig_spots": ["Dig spot", "Use the shovel to dig and find items","a",0,"DIG"],
     "chest": ["Chest", "Use a key to open and find items", "a",3,"OPEN"],
     "shovel": ["Shovel", "You will need this to dig", "p",3,"TAKE"],
-    "dice": ["Dice","Use this to redraw rooms when drafting", "t",3,"TAKE"]
+    "dice": ["Dice","Use this to redraw rooms when drafting", "t",3,"TAKE"],
+    "steps_left": ["Step", "If you are seeing this text then something went really wrong", "t",0,"USE"]
     }
 
 

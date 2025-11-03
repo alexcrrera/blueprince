@@ -44,11 +44,50 @@ class HandleData(handler.BaseHandler):
         self.counter_inventory = 0
 
         self.debug_text = ""
+        self.history_text = "You enter a manor"
+
+
+
     
-       
+    def cleanNameRemoveS(self,name):
+        if name.endswith("s"):
+            return name[:-1]
+        return name
+    
+    def updateHistory(self,what,q):
+        descript_dict = params.ITEMS_DESCRIPTION_DICT.get(what)
+        if q == 0:
+            return
+        
+        
+
+        
+
+        txt  = "You " +descript_dict[4].lower()+ " "
+        if q == 1:
+
+          
+            thing = self.cleanNameRemoveS(descript_dict[0])
+            if descript_dict[2] == "t":
+                
+                txt += "one "
+                txt +=thing.lower()
+            else:
+                txt += " the "
+                txt +=thing
+        else:
+            txt+= str(q) + " x"  + " "
+            txt +=descript_dict[0].lower()
+            
+        
+        
+        
+        is_s = "s" if q > 1 else ""
+        txt +=is_s
+        self.history_text =txt
 
     def update(self):
-        if(self.player.inventory.steps_left==0):
+        if(self.player.inventory.getItemQ("steps_left")==0):
             self.game_over = [True,1]
             self.state_machine.mode = -1
         

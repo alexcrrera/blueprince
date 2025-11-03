@@ -81,6 +81,8 @@ class HandleText(handler.BaseHandler):
 
         self.you_found_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, params.YOU_FOUND_TEXT_SIZE) 
 
+        self.history_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, params.HISTORY_TITLES_SIZE) 
+
         self.items_cursor =  pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.YOU_FOUND_TEXT_SIZE) 
 
         self.items_length = 0
@@ -88,6 +90,7 @@ class HandleText(handler.BaseHandler):
 
         self.items_descriptor = []
         self.actions_descriptor = []
+        
     def draw_text(self, text, position, font=None, color=params.TEXT_COLOR, center=False, rotation=0):
     # Choose default font if none given
         if font is None:
@@ -141,7 +144,7 @@ class HandleText(handler.BaseHandler):
              txt="There's a wall..."
         elif(stat==-2):
             txt="That's a nice  wall..."
-        self.draw_text(txt, (params.ROOM_INFO_ORIGIN[0], params.ROOM_INFO_ORIGIN[1]), font=self.room_status_font, color=(255, 200, 0))
+        self.draw_text(txt, (params.ROOM_INFO_ORIGIN[0], params.ROOM_INFO_ORIGIN[1]), font=self.room_status_font, color=params.YELLOW)
 
 
 
@@ -203,7 +206,7 @@ class HandleText(handler.BaseHandler):
             add = "" if cost ==1 else "s"
             txt +=" gem" + add
 
-            if(self.data.player.inventory.gems - cost>=0):
+            if(self.data.player.inventory.getItemQ("gems") - cost>=0):
                 col = params.WHITE
             else:
                 col = params.RED
@@ -250,6 +253,7 @@ class HandleText(handler.BaseHandler):
         self.actions_descriptor = []
         self.actions = []
         for key, value in actions.items():
+            
             desc = descript_dict[key]
             self.actions_descriptor.append(desc[4])
             self.actions.append(key)
@@ -282,7 +286,7 @@ class HandleText(handler.BaseHandler):
         
         if(not self.data.state_machine.mode == 1):
             return
-        if(not(self.data.player.inventory.dice >0)):
+        if(not(self.data.player.inventory.getItemQ("dice") >0)):
             col = params.RED
             txt = "No dices left"
         else:
@@ -344,9 +348,22 @@ class HandleText(handler.BaseHandler):
 
         self.draw_text(txt,(x0,y0),font= self.enter_suggestion_font,color=col)
 
+
+   
+
+    def showHistory(self):
+        
+    
+        
+        x,y = params.ORIGIN_HISTORY
+        txt = self.data.history_text
+        self.draw_text(txt,(x,y),font= self.history_font,color=params.WHITE)
+
+
     def update(self):
         self.drawDebugText()
         self.draw()
+        self.showHistory()
         
         self.showItemsInRoom()
         self.showCurrentRoomInfo()

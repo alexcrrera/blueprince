@@ -45,6 +45,7 @@ class Game:
         self.interfaceHandler.addHandler(self.screenHandler)
         self.interfaceHandler.addHandler(self.gridUIHandler)
         self.interfaceHandler.addHandler(self.textHandler)
+        self.dataHandler.UI = self.textHandler
 
 
         self.running = True

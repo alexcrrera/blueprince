@@ -11,16 +11,13 @@ class Inventory:
     # C'est comme un sac à dos
     
     def __init__(self,items_dict):
+
         # Ressources de base
         self.items = items_dict
-        self.gold = self.getItemQ("gold")
-        self.gems = self.getItemQ("gems")
-        self.steps_left = self.getItemQ("steps_left")
-        self.dice = self.getItemQ("dice")
-        self.keys = self.getItemQ("keys")
 
-        self.ui_items = [self.steps_left,self.gold,self.gems, self.keys,self.dice] #for inventory ui
+    
 
+        self.ui_items = [0,0,0,0]
         # Objets permanents (pelle, marteau, etc.)
         self.permanent_items = []
 
@@ -37,12 +34,12 @@ class Inventory:
             return self.items.get(key)
    
     def update(self):
-        self.gold = self.getItemQ("gold")
-        self.gems = self.getItemQ("gems")
-        self.steps_left = self.getItemQ("steps_left")
-        self.dice = self.getItemQ("dice")
-        self.keys = self.getItemQ("keys")
-        self.ui_items = [self.steps_left,self.gold, self.gems, self.keys,self.dice]
+        gold = self.getItemQ("gold")
+        gems = self.getItemQ("gems")
+        steps_left = self.getItemQ("steps_left")
+        dice = self.getItemQ("dice")
+        keys = self.getItemQ("keys")
+        self.ui_items = [steps_left,gold, gems, keys,dice]
         
 
     def addItem(self,key,q):
@@ -52,9 +49,11 @@ class Inventory:
             self.items[key] +=q
 
 
-    def removeItems(self,key,q):
+    def removeItems(self,key,q,data,keep_item=False):
+        self.data = data
 
         print("Reomving", key, " x ", q)
+        self.data.updateHistory(key,q)
         if(key not in self.items):
             raise TypeError("Can't remove remove what's not there!")
         else:
@@ -62,7 +61,10 @@ class Inventory:
 
 
             if(self.items[key]<=0):
-                self.items.pop(key, None)
+                if not keep_item:
+                    self.items.pop(key, None)
+                else:
+                    self.items[key] = 0 # keeps in inventory at 0
             
                 print("CAREFUL REMOVING MORE THAN WE HAVE !")
 
@@ -70,7 +72,7 @@ class Inventory:
 
     def __repr__(self):
         # Affiche les objets de l'inventaire - TEST
-        return f"Inventory gems={self.gems} keys={self.keys} dice={self.dice} gold={self.gold} permanent_items={self.permanent_items}"
+        return f"Inventory gems={self.gems} dice={self.dice} gold={self.gold} permanent_items={self.permanent_items}"
     
 
 

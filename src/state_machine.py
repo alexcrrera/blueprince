@@ -54,6 +54,8 @@ class StateMachineHandler(handler.BaseHandler):
         self.data.gridHandler.update() #mettre a jour 
 
 
+
+
     def cursorSpacePressed(self):
         self.data.space_pressed = False
         if(self.data.player.next_room_status ==-1): #VIDE
@@ -72,25 +74,34 @@ class StateMachineHandler(handler.BaseHandler):
             self.data.player.y =self.data.player.next_room_position[1]
             self.nextRoomCursor()
             self.data.gridHandler.updateRoomAndNextRoom()
-            self.data.player.inventory.steps_left += -1
 
+            self.data.player.inventory.removeItems("steps_left",1,self.data)
             self.data.counter_inventory = 0
 
             
            # self.data.gridHandler.update()
                     
-        elif(self.data.player.next_room_status ==2 or self.data.player.next_room_status ==3): 
+        elif(self.data.player.next_room_status ==2): 
 
-                if(self.data.player.inventory.keys>0):
-                    self.data.player.inventory.keys += -1
-                    print("Used one key")
+                if(self.data.player.inventory.getItemQ("keys")>0):
+                    if(not self.data.player.inventory.getItemQ("lockpick")>0):
+                        self.data.player.inventory.removeItems("keys",1,self.data)
+                        
                     self.data.door_locked_play = True
                     self.data.gridHandler.openDoor()
+        
+        elif(self.data.player.next_room_status ==3): 
+
+                if(self.data.player.inventory.getItemQ("keys")>0):
+                        self.data.player.inventory.removeItems("keys",1,self.data)
+                       
+                        self.data.door_locked_play = True
+                        self.data.gridHandler.openDoor()
             
            
     def handleRedraft(self):
         self.data.redraft_pressed = False
-        self.data.player.inventory.dice +=-1
+        self.data.player.inventory.removeItems("dice",1,self.data,keep_item=True)
         self.data.state_machine.generate_random_rooms_flag = True
         self.data.gridHandler.generateRandomRooms() 
 
@@ -99,9 +110,9 @@ class StateMachineHandler(handler.BaseHandler):
         self.data.enter_pressed = False
         room = self.data.gridHandler.randomGeneratedRooms[self.data.counter_room_selection_cursor]
         cost = room.cost
-        if(self.data.player.inventory.gems-cost<0):
+        if(self.data.player.inventory.getItemQ("gems")-cost<0):
             return
-        self.data.player.inventory.gems+=-cost
+        self.data.player.inventory.removeItems("gems",cost,self.data,keep_item=True)
 
         x = self.data.player.next_room_position[0]
         y = self.data.player.next_room_position[1]
@@ -143,7 +154,7 @@ class StateMachineHandler(handler.BaseHandler):
             print(ind,cursor_pos)
             if ind == cursor_pos:
                 self.data.player.inventory.addItem(key,val)
-                current_room.inventory.removeItems(key,val)
+                current_room.inventory.removeItems(key,val,self.data)
                 return
             ind+=1
 

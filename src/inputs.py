@@ -39,7 +39,7 @@ class HandleInputs(handler.BaseHandler):
 
                 if event.key == pygame.K_r:
                 
-                    if(self.data.state_machine.mode==1 and self.data.player.inventory.dice > 0):
+                    if(self.data.state_machine.mode==1 and self.data.player.inventory.getItemQ("dice") > 0):
                         self.data.redraft_pressed = True
                     else:
                         self.data.redraft_pressed = False
