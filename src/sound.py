@@ -85,3 +85,11 @@ class HandleSound:
         if(self.data.interact_play):
             self.data.interact_play = False
             self.play_sfx("grab")
+
+        if(self.data.shovel_play):
+            self.data.shovel_play = False
+            self.play_sfx("shovel")
+
+        if(self.data.room_redraft_play):
+            self.data.room_redraft_play = False
+            self.play_sfx("redraft")

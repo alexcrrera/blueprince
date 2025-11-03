@@ -45,6 +45,8 @@ class HandleData(handler.BaseHandler):
 
         self.debug_text = ""
         self.history_text = "You enter a manor"
+        self.room_redraft_play = False
+        self.shovel_play = False
 
 
 

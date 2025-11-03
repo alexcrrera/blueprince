@@ -100,6 +100,7 @@ class StateMachineHandler(handler.BaseHandler):
             
            
     def handleRedraft(self):
+        self.data.room_redraft_play = True
         self.data.redraft_pressed = False
         self.data.player.inventory.removeItems("dice",1,self.data,keep_item=True)
         self.data.state_machine.generate_random_rooms_flag = True
@@ -146,8 +147,8 @@ class StateMachineHandler(handler.BaseHandler):
             self.interactWithItem(current_room,cursor_pos_rel)
         else:
 
-            
             self.interactWithAction(current_room,cursor_pos)
+            
 
     def interactWithItem(self,current_room,cursor_pos):
         ind = 0

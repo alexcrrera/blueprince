@@ -299,6 +299,8 @@ class RoomGrid():
 
     def handleActions(self,key):
         print("Im doing: ",key )
+        if key == "dig_spots":
+            self.data.shovel_play = True
 
     def __repr__(self):
         return "\n".join(room.__repr__() for row in self.grid for room in row if room)
