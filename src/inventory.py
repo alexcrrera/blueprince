@@ -69,6 +69,17 @@ class Inventory:
                 print("CAREFUL REMOVING MORE THAN WE HAVE !")
 
 
+    def getSpecialItems(self):
+        special_items = {}
+        for key in self.items:
+            descriptor = params.ITEMS_DESCRIPTION_DICT.get(key)
+            if(descriptor[2]=="p"): #
+                
+                
+                special_items[key] = self.items.get(key)
+        
+        return special_items
+
 
     def __repr__(self):
         # Affiche les objets de l'inventaire - TEST

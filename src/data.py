@@ -54,6 +54,10 @@ class HandleData(handler.BaseHandler):
             return name[:-1]
         return name
     
+
+    def updateDebugText(self,txt):
+        self.history_text =txt
+    
     def updateHistory(self,what,q):
         descript_dict = params.ITEMS_DESCRIPTION_DICT.get(what)
         if q == 0:
@@ -61,12 +65,12 @@ class HandleData(handler.BaseHandler):
         
         
 
-
         txt  = "You " +descript_dict[4].lower()+ " "
+        thing = self.cleanNameRemoveS(descript_dict[0])
         if q == 1:
 
           
-            thing = self.cleanNameRemoveS(descript_dict[0])
+            
             if descript_dict[2] == "t":
                 
                 txt += "one "
@@ -76,7 +80,7 @@ class HandleData(handler.BaseHandler):
                 txt +=thing
         else:
             txt+= str(q) + " x"  + " "
-            txt +=descript_dict[0].lower()
+            txt +=thing.lower()
             
         
         

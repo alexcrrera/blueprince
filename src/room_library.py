@@ -24,10 +24,15 @@ class RoomGrid():
         self.next_room_status = -1
         #  -1 = empty, 0 = wall, 1 = unlocked, 2 = locked, 3 = locked twice
 
+
+
+
     def checkRoomDoorStatus(self):
         next_room = self.next_room  
         current_room = self.current_room
         
+
+
         dir =  self.data.player.direction
         dir_opposed = (dir+2)%4
         #  -1 = empty, 0 = wall, 1 = unlocked, 2 = locked, 3 = locked twice
@@ -281,10 +286,16 @@ class RoomGrid():
         current_room  = self.current_room
         inventory = self.data.player.inventory.items
         if action == "dig_spots":
-            if "shovel" not in inventory:
-                return 0
+            if not "shovel" in inventory:
+                return "You need a shovel to dig here"
+        
+        if action == "chest":
+            if ("keys" in inventory and inventory["keys"]>0) or "hammer" in inventory:
+                return "ok"
             else:
-                return 1
+                return "You need a key or a hammer to open the chest"
+        return "ok"
+
 
     def handleActions(self,key):
         print("Im doing: ",key )

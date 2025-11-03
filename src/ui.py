@@ -174,6 +174,22 @@ class HandleText(handler.BaseHandler):
 
         #self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[5]), font=self.inventory_font, color=params.WHITE,center=True)
 
+
+    def showSpecialItems(self):
+        x0,y0 = params.ORIGIN_SPECIAL_ITEMS
+        
+        padding = params.SPECIAL_ITEMS_PADDING
+        special_items = self.data.player.inventory.getSpecialItems()
+        
+        for key,val in special_items.items():
+            if(val>0):
+                descript = params.ITEMS_DESCRIPTION_DICT.get(key)
+                txt = descript[0] 
+                self.draw_text(txt, (x0,y0+padding), font=self.items_size_font, color=params.WHITE)
+                padding += params.ITEMS_IN_ROOM_PADDING
+        if(len(special_items)==0):
+            txt = "No special items in inventory"
+            self.draw_text(txt, (x0,y0+padding), font=self.items_size_font, color=params.LIGHT_GRAY)
     def drawRandomRoomInfo(self):
          
         if(self.data.state_machine.mode==1):
@@ -336,7 +352,7 @@ class HandleText(handler.BaseHandler):
                 txt = ">" + self.actions_descriptor[self.data.counter_inventory]
                 action = self.actions[self.data.counter_inventory]
 
-                if(not self.data.gridHandler.checkIsInteractionPossible(action)):
+                if(not self.data.gridHandler.checkIsInteractionPossible(action)=="ok"):
                       col = params.RED
             else:
                 
@@ -374,7 +390,7 @@ class HandleText(handler.BaseHandler):
         self.showRandomRoomCost()
         self.showEnterTextSuggestion()
         self.showItemsCursor()
-        
+        self.showSpecialItems()
 
         
 

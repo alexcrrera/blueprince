@@ -85,13 +85,6 @@ class Room:
             
             if d == 1:
                 inter_status = random.choices(choices, weights=weights, k=1)[0]
-                
-
-                if(y==y_max):
-                    inter_status = 1
-
-                if(y==0):
-                    inter_status = 3
 
                 self.door_status.append(inter_status)    
             else:
@@ -124,12 +117,28 @@ class Room:
 
         self.x, self.y = x, y
 
+        y0 = params.ROOM_GRID_SIZE_VERTICAL-1
+        if(y ==y0):
+            self.updateDoors(-1,1)
+        if(y == y0-1):
+            self.updateDoors(3,1) # porte du sud forcément ouverte (si pas un mur)
 
-        
+
+
+        if(y ==0):
+            self.updateDoors(-1,3)
+        if(y == 1):
+            self.updateDoors(1,3) # porte du sud forcément ouverte (si pas un mur)
 
         self.update_image()
 
-
+    def updateDoors(self,door,status):
+        print("Before: ",self.door_status)
+        for i in range(len(self.door_status)):
+            if self.doors[i] == door or door == -1:
+                 if(self.door_status[i]!=0):
+                    self.door_status[i] = status
+        print("After: ",self.door_status)
 
 
     def generateItems(self,add_items=None):
@@ -172,6 +181,12 @@ class Room:
 
         self.sortItems()
         self.possible_items = {}
+
+
+        
+
+
+
 
     def sortItems(self):
         descriptor = params.ITEMS_DESCRIPTION_DICT

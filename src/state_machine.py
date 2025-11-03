@@ -145,6 +145,8 @@ class StateMachineHandler(handler.BaseHandler):
             cursor_pos_rel = cursor_pos - len(current_room.inventory.actions)
             self.interactWithItem(current_room,cursor_pos_rel)
         else:
+
+            
             self.interactWithAction(current_room,cursor_pos)
 
     def interactWithItem(self,current_room,cursor_pos):
@@ -161,11 +163,16 @@ class StateMachineHandler(handler.BaseHandler):
     def interactWithAction(self,current_room,cursor_pos):
         ind = 0
         actions_dict = current_room.inventory.actions.copy()
-        for key,val in actions_dict.items():
+        for action,val in actions_dict.items():
             print(ind,cursor_pos)
             if ind == cursor_pos:
-                self.data.gridHandler.handleActions(key)
-                current_room.inventory.removeActions(key,1)
+                reply = self.data.gridHandler.checkIsInteractionPossible(action)
+                if(reply=="ok"):
+                    
+                    self.data.gridHandler.handleActions(action)
+                    current_room.inventory.removeActions(action,1)
+                else:
+                    self.data.updateDebugText(reply)
                 return
             ind+=1
             

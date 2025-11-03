@@ -127,7 +127,7 @@ SPECIAL_ITEMS_COLOR = DARK_BLUE_COLOR
 
 
 INVENTORY_SEPARATION = [150,100]
-ORIGIN_INVENTORY = [1825,110]
+ORIGIN_INVENTORY = [1825,125]
 INVENTORY_ITEMS_PADDING = 46
 INVENTORY_TEXT_SIZE = 30
 
@@ -199,19 +199,20 @@ ITEM_TEXT_SIZE = 20
 
 ITEMS_DESCRIPTION_DICT = {
 
-    "gold": ["Gold","Use it to buy items","t",0,"TAKE"], 
+    "gold": ["Coins","Use it to buy items","t",0,"TAKE","USE"], 
     "gems": ["Gems","Use it to buy special rooms","t",0,"TAKE"],
-    "rabbits_foot": ["Rabbit's foot", "Greater chance of finding items","p",3,"TAKE"],
-    "keys": ["Keys","Useful for opening doors and chests","t",0,"TAKE"],
+    "rabbits_foot": ["Rabbit's foot", "Greater chance of finding items","p",3,"TAKE","NAN"],
+    "keys": ["Keys","Useful for opening doors and chests","t",0,"TAKE","USE"],
     "apple": ["Apple", "Restores 2 steps", "t",2,"TAKE"],
     "banana": ["Banana", "Restores 3 steps", "t",2,"TAKE"],
     "lockpick": ["Lockpick", "You can now use the lockpick to open doors", "p",3,"TAKE"],
     "metal_detector": ["Metal Detector","Increases chances of finding extra gold or keys","p",3,"TAKE"],
     "dig_spots": ["Dig spot", "Use the shovel to dig and find items","a",0,"DIG"],
-    "chest": ["Chest", "Use a key to open and find items", "a",3,"OPEN"],
-    "shovel": ["Shovel", "You will need this to dig", "p",3,"TAKE"],
-    "dice": ["Dice","Use this to redraw rooms when drafting", "t",3,"TAKE"],
-    "steps_left": ["Step", "If you are seeing this text then something went really wrong", "t",0,"USE"]
+    "chest": ["Chest", "Use a key to open and find items", "a",3,"OPEN","NAN"],
+    "shovel": ["Shovel", "You will need this to dig", "p",3,"TAKE","USE"],
+    "dice": ["Dice","Use this to redraw rooms when drafting", "t",3,"TAKE","USE"],
+    "steps_left": ["Step", "If you are seeing this text then something went really wrong", "t",0,"USE","TAKE"],
+    "hammer": ["Hammer","Use this to break open chests without keys","p",3,"TAKE","USE"]
     }
 
 
@@ -222,3 +223,10 @@ CURSOR_ITEMS_ORIGIN = [ORIGIN_ITEMS_IN_ROOM[0]-100,ORIGIN_ITEMS_IN_ROOM[1]-5]
 
 
 ORIGIN_DEBUG_TEXT = [CURSOR_ITEMS_ORIGIN[0],3*screenHeight//2]
+
+
+PADDINGS_SPECIAL_ITEMS = 350
+
+ORIGIN_SPECIAL_ITEMS = [screenWidth-PADDINGS_SPECIAL_ITEMS, screenHeight*0.4]
+SPECIAL_ITEMS_TEXT_SIZE = 30
+SPECIAL_ITEMS_PADDING = INVENTORY_ITEMS_PADDING
