@@ -91,7 +91,7 @@ class HandleText(handler.BaseHandler):
         self.items_descriptor = []
         self.actions_descriptor = []
         
-    def draw_text(self, text, position, font=None, color=params.TEXT_COLOR, center=False, rotation=0):
+    def showText(self, text, position, font=None, color=params.TEXT_COLOR, center=False, rotation=0):
     # Choose default font if none given
         if font is None:
             font = self.default_font
@@ -117,16 +117,14 @@ class HandleText(handler.BaseHandler):
         self.screen.blit(rendered_text, text_rect)
 
 
-
-
     def drawDebugText(self):
         txt= self.data.debug_text
 
         
         x0,y0 = params.ORIGIN_DEBUG_TEXT[0],params.ORIGIN_DEBUG_TEXT[1]
-        self.draw_text(txt, (x0,y0), font=self.small_font, color=(255, 200, 0))
+        self.showText(txt, (x0,y0), font=self.small_font, color=(255, 200, 0))
 
-    def drawNextRoomInfo(self):
+    def showNextRoomInfo(self):
         stat = self.data.player.next_room_status
         txt = ""
         if(stat==-1):
@@ -144,21 +142,21 @@ class HandleText(handler.BaseHandler):
              txt="There's a wall..."
         elif(stat==-2):
             txt="That's a nice  wall..."
-        self.draw_text(txt, (params.ROOM_INFO_ORIGIN[0], params.ROOM_INFO_ORIGIN[1]), font=self.room_status_font, color=params.YELLOW)
+        self.showText(txt, (params.ROOM_INFO_ORIGIN[0], params.ROOM_INFO_ORIGIN[1]), font=self.room_status_font, color=params.YELLOW)
 
 
 
     def draw(self):
-        self.drawNextRoomInfo()
         
-        self.draw_text(self.special_text, (params.PADDING, params.PADDING//4), font=self.special_font, color=(255, 200, 0))
+        
+        self.showText(self.special_text, (params.PADDING, params.PADDING//4), font=self.special_font, color=(255, 200, 0))
 
         fps_text = f"FPS: {int(self.data.clock.get_fps())}"
-        self.draw_text(fps_text, (params.screenWidth//2 - params.PADDING -  self.small_font.size(fps_text)[0],  params.screenHeight - params.PADDING),font=self.small_font,color=params.BLACK)
+        self.showText(fps_text, (params.screenWidth//2 - params.PADDING -  self.small_font.size(fps_text)[0],  params.screenHeight - params.PADDING),font=self.small_font,color=params.BLACK)
 
 
-    def updateInventoryUI(self):
-        #self.draw_text(params.INVENTORY_TEXT, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]), font=self.inventory_font, color=params.BLACK)
+    def showPlayerInventoryItems(self):
+        #self.showText(params.INVENTORY_TEXT, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]), font=self.inventory_font, color=params.BLACK)
         
         padding = [i*params.INVENTORY_ITEMS_PADDING for i in range(1,7)]
         
@@ -169,10 +167,10 @@ class HandleText(handler.BaseHandler):
                 col = params.RED
             else:
                 col = params.WHITE
-            self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[i]), font=self.inventory_font, color=col,center=True)
+            self.showText(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[i]), font=self.inventory_font, color=col,center=True)
         #text = str(params.DIRECTION_CARDINAL[self.data.player.direction])
 
-        #self.draw_text(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[5]), font=self.inventory_font, color=params.WHITE,center=True)
+        #self.showText(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[5]), font=self.inventory_font, color=params.WHITE,center=True)
 
 
     def showSpecialItems(self):
@@ -185,11 +183,11 @@ class HandleText(handler.BaseHandler):
             if(val>0):
                 descript = params.ITEMS_DESCRIPTION_DICT.get(key)
                 txt = descript[0] 
-                self.draw_text(txt, (x0,y0+padding), font=self.items_size_font, color=params.WHITE)
+                self.showText(txt, (x0,y0+padding), font=self.items_size_font, color=params.WHITE)
                 padding += params.ITEMS_IN_ROOM_PADDING
         if(len(special_items)==0):
             txt = "No special items in inventory"
-            self.draw_text(txt, (x0,y0+padding), font=self.items_size_font, color=params.LIGHT_GRAY)
+            self.showText(txt, (x0,y0+padding), font=self.items_size_font, color=params.LIGHT_GRAY)
     def drawRandomRoomInfo(self):
          
         if(self.data.state_machine.mode==1):
@@ -205,7 +203,7 @@ class HandleText(handler.BaseHandler):
                     colr = params.WHITE
                 else:
                     colr = params.GRAY
-                self.draw_text(text, (x0+padding,y0), font=self.random_group_font, color=colr,center=True)
+                self.showText(text, (x0+padding,y0), font=self.random_group_font, color=colr,center=True)
                 padding +=params.HORIZONTAL_PADDING_RANDOM_GROUP + params.RANDOM_GROUP_TILE_SIZE
         
 
@@ -226,7 +224,7 @@ class HandleText(handler.BaseHandler):
                 col = params.WHITE
             else:
                 col = params.RED
-            self.draw_text(txt, (x0,y0), font=self.alt_default_font, color=col)
+            self.showText(txt, (x0,y0), font=self.alt_default_font, color=col)
             
             x0 += params.RANDOM_GROUP_TILE_SIZE+params.HORIZONTAL_PADDING_RANDOM_GROUP
         
@@ -237,12 +235,12 @@ class HandleText(handler.BaseHandler):
         current_room =self.data.gridHandler.grid[x][y]
         txt = current_room.returnNameWithoutUnderscore()
         x0,y0 = params.ORIGIN_ROOM_TEXT_INFO[0],params.ORIGIN_ROOM_TEXT_INFO[1]
-        self.draw_text(txt, (x0,y0), font=self.room_info_font)
+        self.showText(txt, (x0,y0), font=self.room_info_font)
 
 
         x0,y0 = params.ORIGIN_YOU_FOUND_TEXT[0], params.ORIGIN_YOU_FOUND_TEXT[1]
         txt = "You found:"
-        self.draw_text(txt, (x0,y0), font=self.you_found_font)
+        self.showText(txt, (x0,y0), font=self.you_found_font)
 
         
 
@@ -261,7 +259,7 @@ class HandleText(handler.BaseHandler):
         count_items = len(current_room.inventory.items) + len(current_room.inventory.actions)
         if(count_items==0):
             txt = "Nothing!"
-            self.draw_text(txt,(x0,y0),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
+            self.showText(txt,(x0,y0),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
             return
         
 
@@ -278,7 +276,7 @@ class HandleText(handler.BaseHandler):
     
             txt = desc[0] +" :  x" + str(value) + "  (" +desc[1]  + ")"
             #print("items: ",txt)
-            self.draw_text(txt, (x0,y0), font=self.items_size_font)
+            self.showText(txt, (x0,y0), font=self.items_size_font)
             y0 += params.ITEMS_IN_ROOM_PADDING
 
 
@@ -289,7 +287,7 @@ class HandleText(handler.BaseHandler):
             self.items_descriptor.append(desc[4])
             txt = desc[0] +" :  x" + str(value) + "  (" +desc[1]  + ")"
             #print("items: ",txt)
-            self.draw_text(txt, (x0,y0), font=self.items_size_font)
+            self.showText(txt, (x0,y0), font=self.items_size_font)
             y0 += params.ITEMS_IN_ROOM_PADDING
         
         self.items_length = len(data)
@@ -309,7 +307,7 @@ class HandleText(handler.BaseHandler):
             txt = "Press R to use a dice to redraft"
             col = params.WHITE    
         x,y = params.DICE_TEXT_SUGGESTION_ORIGIN
-        self.draw_text(txt,(x,y),font= self.dice_suggestion_font,rotation=270,color=col)
+        self.showText(txt,(x,y),font= self.dice_suggestion_font,rotation=270,color=col)
 
     def showEnterTextSuggestion(self):
         if(self.data.state_machine.mode == 0):
@@ -323,7 +321,7 @@ class HandleText(handler.BaseHandler):
             txt  = ""
         x,y = params.ORIGIN_PRESS_ENTER_TEXT
         
-        self.draw_text(txt,(x,y),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
+        self.showText(txt,(x,y),font= self.enter_suggestion_font,color=params.LIGHT_GRAY)
 
 
     def showItemsCursor(self):
@@ -362,28 +360,24 @@ class HandleText(handler.BaseHandler):
 
         
 
-        self.draw_text(txt,(x0,y0),font= self.enter_suggestion_font,color=col)
-
+        self.showText(txt,(x0,y0),font= self.enter_suggestion_font,color=col)
 
    
 
     def showHistory(self):
-        
-    
-        
         x,y = params.ORIGIN_HISTORY
         txt = self.data.history_text
-        self.draw_text(txt,(x,y),font= self.history_font,color=params.WHITE)
+        self.showText(txt,(x,y),font= self.history_font,color=params.WHITE)
 
 
     def update(self):
         self.drawDebugText()
         self.draw()
         self.showHistory()
-        
-        self.showItemsInRoom()
+        self.showNextRoomInfo()
+
         self.showCurrentRoomInfo()
-        self.updateInventoryUI()
+        self.showPlayerInventoryItems()
         self.drawRandomRoomInfo()
         self.showItemsInRoom()
         self.showDiceSuggestion()
@@ -401,30 +395,23 @@ class HandleGridUI(handler.BaseHandler):
     def __init__(self,data,screen):
         super().__init__(data)
         self.screen = screen
-        
-    
 
-        SELECTOR_IMAGE_DIR =  "assets/images/selector.png"
-        self.SELECTOR_IMAGE = pygame.image.load(SELECTOR_IMAGE_DIR).convert_alpha()
+        self.cursor_image = pygame.image.load(params.CURSOR_IMAGE_DIR).convert_alpha()
 
 
-    def showBigTile(self):
-        curr_room = self.data.gridHandler.grid[self.data.player.x][self.data.player.y]
-        if(curr_room is None):
+    def showBigRoom(self):
+        room = self.data.gridHandler.grid[self.data.player.x][self.data.player.y]
+        if(room is None):
             return
-  
-        curr_room_image = curr_room.BIG_IMAGE
-  
-        self.screen.blit(curr_room_image, (params.ORIGIN_BIG_TILE[0], params.ORIGIN_BIG_TILE[1]))
-       
+        image = room.BIG_IMAGE
+        self.screen.blit(image, (params.ORIGIN_BIG_TILE[0], params.ORIGIN_BIG_TILE[1]))
 
     def showCursor(self):
-        
         x = self.data.player.x*params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
         y =  self.data.player.y * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
         
         
-        scaled_image = pygame.transform.scale(self.SELECTOR_IMAGE, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
+        scaled_image = pygame.transform.scale(self.cursor_image, (params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE))
         rot =  90*(self.data.player.direction-1)
         rotated_image = pygame.transform.rotozoom(scaled_image, rot, 1)
         
@@ -432,37 +419,21 @@ class HandleGridUI(handler.BaseHandler):
         self.screen.blit(rotated_image, (x, y))
 
 
-        
 
-    def drawNextRoom(self):
-        
-        if(not(self.data.state_machine.mode==0) or not params.NEXT_ROOM_SHOW):
-            
-            return
-        x0 = self.data.player.next_room_position[0]
-        y0 = self.data.player.next_room_position[1]
-        x= x0*params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
-        y =  y0 * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
-        pygame.draw.rect(self.screen, (0, 255,0), (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
+    def showRoom(self,x0,y0):
+        room = self.data.gridHandler.grid[x0][y0]
 
-
-    def drawRoom(self,x0,y0):
-        curr_room = self.data.gridHandler.grid[x0][y0]
         x = x0*params.ROOM_TILE_SIZE + params.ORIGIN_TILE[0]
-        y =  y0 * params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
-        if(curr_room is None):
-            #pygame.draw.rect(self.screen, params.WHITE, (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 1)
+        y = y0 *params.ROOM_TILE_SIZE + params.ORIGIN_TILE[1]
+
+        if(room is None):
             return
     
-        curr_room_image = curr_room.IMAGE
+        image = room.IMAGE
         
-   
-        self.screen.blit(curr_room_image, (x, y))
+        self.screen.blit(image, (x, y))
 
-
-
-
-    def showRandomRooms(self):
+    def showRandomDraftedRooms(self):
         if(not(self.data.state_machine.mode==1)):
             return
         x0 = params.ORIGIN_ROOM_RANDOM_GROUP[0]
@@ -472,8 +443,9 @@ class HandleGridUI(handler.BaseHandler):
         for i,room in enumerate(self.data.gridHandler.randomGeneratedRooms):
             if(room is not None):
                 x = x0 + i*(params.RANDOM_GROUP_TILE_SIZE+params.HORIZONTAL_PADDING_RANDOM_GROUP)
-                curr_room_image = room.image_path
-                img = pygame.image.load(curr_room_image).convert_alpha()
+                
+                img = pygame.image.load(room.image_path).convert_alpha()
+
                 scaled_image = pygame.transform.scale(img, (params.RANDOM_GROUP_TILE_SIZE, params.RANDOM_GROUP_TILE_SIZE))
 
                 rot =  90*(room.room_rotation)
@@ -482,13 +454,10 @@ class HandleGridUI(handler.BaseHandler):
                 self.screen.blit(rotated_image, (x, y))
 
 
-                
             else:
                 pygame.draw.rect(self.screen, (150, 150,150), (x, y, params.RANDOM_GROUP_TILE_SIZE, params.RANDOM_GROUP_TILE_SIZE), 1)
             
-
-    
-    def showRandomSelectionCursor(self):
+    def showRoomSelectionCursor(self):
         if(not self.data.state_machine.mode==1):
             return
         x0 = params.ORIGIN_ROOM_RANDOM_GROUP[0]
@@ -498,57 +467,52 @@ class HandleGridUI(handler.BaseHandler):
         x = x0 + i*(params.RANDOM_GROUP_TILE_SIZE+params.HORIZONTAL_PADDING_RANDOM_GROUP)
         pygame.draw.rect(self.screen, params.RANDOM_CURSOR_WIDTH_COLOR, (x, y, params.RANDOM_GROUP_TILE_SIZE, params.RANDOM_GROUP_TILE_SIZE), params.RANDOM_CURSOR_WIDTH)
        
-
-
-    def updateGrid(self):
-
-        for row in range(params.ROOM_GRID_SIZE_VERTICAL):
-            for col in range(params.ROOM_GRID_SIZE_HORIZONTAL):
-                self.drawRoom(col,row)
-                
-                
-                
-            
-    def showManorBg(self)           :
+    def showGrid(self):
+        self.showGridBackground()
+        for y in range(params.ROOM_GRID_SIZE_VERTICAL):
+            for x in range(params.ROOM_GRID_SIZE_HORIZONTAL):
+                self.showRoom(x,y)
+                  
+    def showGridBackground(self)           :
         x0,y0 = params.ORIGIN_TILE
         w = params.ROOM_GRID_SIZE_HORIZONTAL*params.ROOM_TILE_SIZE
         h = params.ROOM_GRID_SIZE_VERTICAL*params.ROOM_TILE_SIZE
         pygame.draw.rect(self.screen, params.BLACK, (x0, y0,w, h), 0)
 
-       
-       # pygame.display.flip()
+
 
     def update(self):
-        self.showManorBg()
-        self.updateGrid()
-        self.showBigTile()
+
+        self.showGrid()
+        self.showBigRoom()
+       
+        self.showRandomDraftedRooms()
+        self.showRoomSelectionCursor()
         self.showCursor()
-        self.drawNextRoom()
-        self.showRandomRooms()
-        self.showRandomSelectionCursor()
       
 
 
+
+
+
+
 class HandleUI(handler.Handlerception):
+    """Gestionnaire principal de l'interface utilisateur.
+    Gère l'affichage des différents éléments UI à l'écran."""
 
     def __init__(self,data ,screen):
-        
         super().__init__(data)
         self.screen = screen
 
 
 
-    def addHandler(self,handler):
-        self.handlingFunctions.append(handler)
-
-
-    def gameOver(self):
+    def showGameOverScreen(self):
         """Affiche l'écran de fin de partie."""
         if(not(self.data.game_over[0] and self.data.game_over[1]==1) ):
             return
             
-    # Remplit l'écran en rouge
-        self.screen.fill((150, 0, 0))
+        # Remplit l'écran en rouge
+        self.screen.fill(params.RED)
 
         # Crée les polices
         big_font = pygame.font.Font(params.SPECIAL_TEXT_DIR, 100)
@@ -569,13 +533,14 @@ class HandleUI(handler.Handlerception):
         self.screen.blit(game_over_text, text_rect)
         self.screen.blit(small_text, small_rect)
 
-    def winGame(self):
+
+
+    def showWinGameScreen(self):
         """Affiche l'écran de fin de partie."""
         if(not(self.data.game_over[0] and self.data.game_over[1]==2) ):
             return
         
-
-    # Remplit l'écran en rouge
+        # Remplit l'écran en rouge
         self.screen.fill((0, 150, 0))
 
         # Crée les polices
@@ -585,7 +550,6 @@ class HandleUI(handler.Handlerception):
         # Texte principal
         game_over_text = big_font.render("YOU WIN", True, params.WHITE)
         text_rect = game_over_text.get_rect(center=(params.screenWidth // 2, params.screenHeight // 2 - 50))
-
      
         txt = "you can try again if you have nothing else to do!"
         small_text = small_font.render(txt, True, params.WHITE)
@@ -599,8 +563,7 @@ class HandleUI(handler.Handlerception):
     def update(self):
         super().update()
 
-
-        self.gameOver()
-        self.winGame()
+        self.showGameOverScreen()
+        self.showWinGameScreen()
         pygame.display.flip()
             

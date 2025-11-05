@@ -93,6 +93,9 @@ IMAGE_CONVERSION_SIZE = 500
 #TODO REPLACE WITH DICT
 
 
+
+CURSOR_IMAGE_DIR =  "assets/images/ui/cursor.png"
+
 # UI
 
 DIRECTION_CARDINAL = ["E","N","W","S"] # 0 = East, 1 = North...

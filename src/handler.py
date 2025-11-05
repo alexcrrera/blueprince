@@ -44,6 +44,8 @@ class Handlerception(BaseHandler):
         self.handlingFunctions = list()
 
 
+    def addHandler(self,handler):
+        self.handlingFunctions.append(handler)
 
     def update(self):
         for h in self.handlingFunctions:
