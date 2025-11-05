@@ -101,14 +101,13 @@ class Room:
        # print("Door's status is ", self.door_status, " - doors: ",self.doors )
         self.possible_items = data["possible_items"]
         self.def_items = data["items"]
-        self.items = {}
-        self.actions = {}
+     
 
 
         #self.randomObjectsGeneration()
-   
+        self.inventory = RoomInventory({},{})
         self.generateItems()
-        self.inventory = RoomInventory(self.items,self.actions)
+        
 
       
         
@@ -141,10 +140,22 @@ class Room:
         print("After: ",self.door_status)
 
 
-    def generateItems(self,add_items=None):
+
+
+
+    def generateItems(self,def_items=None,possible_items=None,action_based=False):
+        # si on ne passe pas en argument def_items, alors def_items = self.def_items
+        # même chose pour possible_items
+
+        # cela veut dire qu'il suffit de passer en argument def_items={}  si on ne souhaite pas ajouter d'items definitifs
+        if possible_items is None:
+            possible_items = self.possible_items
 
         descriptor = params.ITEMS_DESCRIPTION_DICT
-        for key,val in self.possible_items.items():
+        txt = "You found:"
+        t0 = txt
+
+        for key,val in possible_items.items():
             
             rarity_item = int(descriptor.get(key)[3])
             
@@ -152,35 +163,46 @@ class Room:
             rand_choice =  random.randint(0,rarity_item+1)
             if(rand_choice == 0): #item pas présent dans la salle
                 continue
-
+            
+            
             if val[1] == 0:
                 item_q = val[0]
             else:
                 item_q = random.randint(1,val[0])
 
 
+            print("To add item: ",key," x",item_q, "dict: ",{key:item_q})
+            self.inventory.addItem(key,item_q)
 
-            if key in self.items:
-                self.items[key] += item_q
-            else:
-                self.items[key] = item_q
-            
+            item = descriptor.get(key)[0].lower()
 
-        if add_items is None:
-            add_items = self.def_items
+            txt +=" " + str(item_q) + " x " + item + "s"
+            if not item_q>1:
+                txt = txt[:-1] if txt.endswith("s") else txt
+            txt +=","
 
 
-        for key,val in add_items.items():
+        
+        if txt.endswith(","):
+            txt = txt[:-1]
+
+        if def_items is None:
+            def_items = self.def_items
+
+
+        print("·Def items to add: ",def_items)
+        
+        for key,val in def_items.items():
 
             item_q = val[0]
-            if key in self.items:
-                self.items[key] += item_q
-            else:
-                self.items[key] = item_q
+            self.inventory.addItem(key,item_q)
 
-
+        if(txt==t0):
+            txt = "You found nothing."
         self.sortItems()
+
         self.possible_items = {}
+        return(txt)
 
 
         
@@ -191,10 +213,10 @@ class Room:
     def sortItems(self):
         descriptor = params.ITEMS_DESCRIPTION_DICT
         items_out = {}
-        for key,val in self.items.items():
+        for key,val in self.inventory.items.items():
             if(descriptor.get(key)[2]=="a"):
                 print("Adding action ", key, " to ",self.name)
-                self.actions[key] = val
+                self.inventory.actions[key] = val
                 
                 
             if(descriptor.get(key)[2]=="p" or descriptor.get(key)[2]=="t"): #if object is temporary or permanent we keep is as item
@@ -202,7 +224,7 @@ class Room:
 
 
             
-        self.items = items_out
+        self.inventory.items = items_out
         pass
     
 
