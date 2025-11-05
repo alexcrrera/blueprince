@@ -256,7 +256,7 @@ class Room:
         rot =  90*(self.room_rotation)  # pour affichage
         self.BIG_IMAGE = pygame.transform.rotozoom(scaled_image, rot, 1)
 
-    def rotate_90_trigo(self,keepRef=True):
+    def rotate_90_trigo(self):
         """
         Fait tourner la pièce de 90° dans le sens trigonométrique :
         - Met à jour les portes [E, N, W, S]
@@ -272,25 +272,7 @@ class Room:
         self.update_image()
         
       
-    def generate_objects_for_room(room):
-        """Ajoute des objets à une pièce selon sa couleur et sa rareté."""
-        chance = random.random()
-
-        # Simple test d'ajout d'objets selon la couleur
-        # TODO: Regarder comment gérer la rareté
-        if room.color == "bleue":
-            if chance < 0.3:
-                room.add_object(Item("gemme", "consommable"))
-        elif room.color == "verte":
-            if chance < 0.5:
-                room.add_object(Item("clé", "consommable"))
-            elif chance < 0.7:
-                room.add_object(Item("pelle", "permanent"))
-        elif room.color == "jaune":
-            room.add_object(Item("or", "consommable"))
-        elif room.color == "rouge":
-            # Pièce dangereuse: retirent des pas, etc. (non implémenté)
-            pass
+   
 
     def __repr__(self):
         # Affiche le nom, la couleur, la rareté et le coût - TEST

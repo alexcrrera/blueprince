@@ -52,7 +52,7 @@ class Inventory:
     def removeItems(self,key,q,data,keep_item=False):
         self.data = data
 
-        print("Reomving", key, " x ", q)
+        print("Removing", key, " x ", q)
         self.data.updateHistory(key,q)
         if(key not in self.items):
             raise TypeError("Can't remove remove what's not there!")
@@ -98,6 +98,7 @@ class RoomInventory(Inventory):
 
 
     def addAction(self,key,q):
+        print("Adding action: ", key, " x ", q)
         if(key not in self.actions):
             self.actions[key]= q
         else:
@@ -105,7 +106,7 @@ class RoomInventory(Inventory):
     
 
     def removeActions(self,key,q):
-        print("Reomving", key, " x ", q)
+        print("Removing action: ", key, " x ", q)
         if(key not in self.actions):
             raise TypeError("Can't remove remove what's not there!")
         else:

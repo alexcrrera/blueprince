@@ -49,6 +49,9 @@ class HandleData(handler.BaseHandler):
         self.shovel_play = False
 
 
+        self.mail_play = False
+
+
 
     
     def cleanNameRemoveS(self,name):
@@ -60,7 +63,7 @@ class HandleData(handler.BaseHandler):
     def updateDebugText(self,txt):
         self.history_text =txt
     
-    def updateHistory(self,what,q):
+    def updateHistory(self,what,q,user_action=False):
         descript_dict = params.ITEMS_DESCRIPTION_DICT.get(what)
         if q == 0:
             return
