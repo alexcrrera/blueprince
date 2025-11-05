@@ -297,10 +297,24 @@ class RoomGrid():
         return "ok"
 
 
-    def handleActions(self,key):
+    def generateBox(self,box_type):
+        possible_items = params.POSSIBLE_ITEMS_PER_ACTION_DICT.get(box_type,{}) #si non inclus alors liste vide, evite crash
+        current_room  = self.current_room
+
+        if box_type == "dig_spots":
+            found_text = current_room.generateItems(def_items={} ,possible_items=possible_items,action_based=True)
+           
+            self.data.updateDebugText(found_text)
+            print("gen: ",found_text)
+            
+
+
+    def doAction(self,key):
         print("Im doing: ",key )
+
         if key == "dig_spots":
             self.data.shovel_play = True
+            self.generateBox(key)
 
     def __repr__(self):
         return "\n".join(room.__repr__() for row in self.grid for room in row if room)
@@ -310,7 +324,7 @@ class RoomGrid():
         self.grid[x][y] = self.randomGeneratedRooms[self.data.counter_room_selection_cursor]
         newRoom = self.grid[x][y]
 
-        print(newRoom.name,": Items : ",newRoom.items, " - actions: ", newRoom.actions)
+        print(newRoom.name,": Items : ",newRoom.inventory.items, " - actions: ", newRoom.inventory.actions)
     #    print("NEW ROOM STATUS:",newRoom.door_status)
        # print("q b4: ",self.rooms_data[newRoom.name]["q"])
         self.rooms_data[newRoom.name]["q"] +=-1 

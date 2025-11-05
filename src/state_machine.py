@@ -166,11 +166,12 @@ class StateMachineHandler(handler.BaseHandler):
         actions_dict = current_room.inventory.actions.copy()
         for action,val in actions_dict.items():
             print(ind,cursor_pos)
+
             if ind == cursor_pos:
                 reply = self.data.gridHandler.checkIsInteractionPossible(action)
                 if(reply=="ok"):
                     
-                    self.data.gridHandler.handleActions(action)
+                    self.data.gridHandler.doAction(action)
                     current_room.inventory.removeActions(action,1)
                 else:
                     self.data.updateDebugText(reply)
