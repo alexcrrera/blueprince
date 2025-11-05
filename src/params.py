@@ -199,10 +199,10 @@ ITEM_TEXT_SIZE = 20
 
 ITEMS_DESCRIPTION_DICT = {
 
-    "gold": ["Coins","Use it to buy items","t",0,"TAKE","USE"], 
-    "gems": ["Gems","Use it to buy special rooms","t",0,"TAKE"],
+    "gold": ["Coin","Use it to buy items","t",0,"TAKE","USE"], 
+    "gems": ["Gem","Use it to buy special rooms","t",0,"TAKE"],
     "rabbits_foot": ["Rabbit's foot", "Greater chance of finding items","p",3,"TAKE","NAN"],
-    "keys": ["Keys","Useful for opening doors and chests","t",0,"TAKE","USE"],
+    "keys": ["Key","Useful for opening doors and chests","t",0,"TAKE","USE"],
     "apple": ["Apple", "Restores 2 steps", "t",2,"TAKE"],
     "banana": ["Banana", "Restores 3 steps", "t",2,"TAKE"],
     "lockpick": ["Lockpick", "You can now use the lockpick to open doors", "p",3,"TAKE"],
@@ -214,6 +214,11 @@ ITEMS_DESCRIPTION_DICT = {
     "steps_left": ["Step", "If you are seeing this text then something went really wrong", "t",0,"USE","TAKE"],
     "hammer": ["Hammer","Use this to break open chests without keys","p",3,"TAKE","USE"]
     }
+
+
+POSSIBLE_ITEMS_PER_ACTION_DICT = {
+    "dig_spots": {"gold":[5,1],"keys":[5,1],"gems":[5,1]},
+}
 
 
 MAX_ITEMS_SHOW = 69 #montrer max MAX_ITEMS_SHOW items dans l'inventaire
