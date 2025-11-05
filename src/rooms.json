@@ -85,7 +85,7 @@
         "placement_condition": 0,
         "possible_items": {"gold":[2,0],"metal_detector":[1,0]},
         "q": 5,
-        "items": {}
+        "items": {"package":[1,0]}
     },
     "Workshop": {
         "image": "Workshop.jpg",

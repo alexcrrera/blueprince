@@ -164,7 +164,8 @@ class StateMachineHandler(handler.BaseHandler):
     def interactWithAction(self,current_room,cursor_pos):
         ind = 0
         actions_dict = current_room.inventory.actions.copy()
-        for action,val in actions_dict.items():
+
+        for action,_ in actions_dict.items():
             print(ind,cursor_pos)
 
             if ind == cursor_pos:

@@ -212,12 +212,14 @@ ITEMS_DESCRIPTION_DICT = {
     "shovel": ["Shovel", "You will need this to dig", "p",3,"TAKE","USE"],
     "dice": ["Dice","Use this to redraw rooms when drafting", "t",3,"TAKE","USE"],
     "steps_left": ["Step", "If you are seeing this text then something went really wrong", "t",0,"USE","TAKE"],
-    "hammer": ["Hammer","Use this to break open chests without keys","p",3,"TAKE","USE"]
+    "hammer": ["Hammer","Use this to break open chests without keys","p",3,"TAKE","USE"],
+    "package": ["Package","A mysterious package. Who knows what is inside?","a",0,"OPEN","USE"]
     }
 
 
 POSSIBLE_ITEMS_PER_ACTION_DICT = {
     "dig_spots": {"gold":[5,1],"keys":[5,1],"gems":[5,1]},
+    "package": {"gold":[10,2],"keys":[3,1],"gems":[2,1],"rabbits_foot":[1,1]},
 }
 
 

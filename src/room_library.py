@@ -301,11 +301,10 @@ class RoomGrid():
         possible_items = params.POSSIBLE_ITEMS_PER_ACTION_DICT.get(box_type,{}) #si non inclus alors liste vide, evite crash
         current_room  = self.current_room
 
-        if box_type == "dig_spots":
-            found_text = current_room.generateItems(def_items={} ,possible_items=possible_items,action_based=True)
+        found_text = current_room.generateItems(def_items={} ,possible_items=possible_items,action_based=True)
            
-            self.data.updateDebugText(found_text)
-            print("gen: ",found_text)
+        self.data.updateDebugText(found_text)
+        print("gen: ",found_text)
             
 
 
@@ -314,6 +313,10 @@ class RoomGrid():
 
         if key == "dig_spots":
             self.data.shovel_play = True
+            self.generateBox(key)
+            
+        if key == "package":
+            self.data.mail_play = True    
             self.generateBox(key)
 
     def __repr__(self):

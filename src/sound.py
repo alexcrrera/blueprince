@@ -93,3 +93,7 @@ class HandleSound:
         if(self.data.room_redraft_play):
             self.data.room_redraft_play = False
             self.play_sfx("redraft")
+
+        if(self.data.mail_play):
+            self.data.mail_play = False
+            self.play_sfx("package")
