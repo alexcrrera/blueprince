@@ -28,7 +28,7 @@ def load_or_create_json(json_path):
             try:
                 data = json.load(f)
             except json.JSONDecodeError:
-                print("⚠️ JSON file was empty or invalid, recreating it.")
+                print(" JSON file was empty or invalid, recreating it.")
                 data = {}
     else:
         data = {}
@@ -40,7 +40,7 @@ def save_json(data, json_path):
     """Saves the JSON dictionary neatly formatted."""
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
-    print(f"💾 Updated JSON file: {json_path}")
+    print(f" Updated JSON file: {json_path}")
 
 
 def convert_webp_to_jpg(input_folder, output_folder):
@@ -75,7 +75,7 @@ def convert_webp_to_jpg(input_folder, output_folder):
                     output_img = img.resize(FORCED_SIZE, Image.LANCZOS)
 
                 output_img.save(jpg_path, "JPEG", quality=95)
-                print(f"✅ Converted: {filename} → {jpg_filename}")
+                print(f" Converted: {filename} → {jpg_filename}")
 
                 # --- Update JSON if missing ---
                 if base_name not in room_data:
@@ -87,23 +87,25 @@ def convert_webp_to_jpg(input_folder, output_folder):
                         "doors": ["N", "E", "W", "S"],
                         "placement_condition": 0,
                         "q": 1,
-                        "items": {}
+                        "items": {},
+                        "possible_items": {},
+                        "description": ""
                     }
-                    print(f"➕ Added new room entry: {base_name}")
+                    print(f" Added new room entry: {base_name}")
 
         except Exception as e:
-            print(f"❌ Error converting {filename}: {e}")
+            print(f" Error converting {filename}: {e}")
 
     # Save updated JSON file
     save_json(room_data, JSON_FILE)
-    print("🎉 Conversion complete!")
+    print(" Conversion complete!")
 
 
 # --- Run conversion ---
 if __name__ == "__main__":
-    print(f"🔧 Using forced size: {FORCED_SIZE}")
-    print(f"📂 Input:  {INPUT_FOLDER}")
-    print(f"📁 Output: {OUTPUT_FOLDER}")
-    print(f"🧾 JSON:   {JSON_FILE}\n")
+    print(f" Using forced size: {FORCED_SIZE}")
+    print(f" Input:  {INPUT_FOLDER}")
+    print(f" Output: {OUTPUT_FOLDER}")
+    print(f" JSON:   {JSON_FILE}\n")
 
     convert_webp_to_jpg(INPUT_FOLDER, OUTPUT_FOLDER)

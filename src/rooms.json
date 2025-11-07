@@ -13,7 +13,8 @@
         "placement_condition": 0,
         "q": 1,
         "possible_items": {},
-        "items": {}
+        "items": {},
+        "description": ""
     },
     "Antechamber": {
         "image": "Antechamber.jpg",
@@ -29,7 +30,8 @@
         "placement_condition": 0,
         "q": 1,
         "possible_items": {},
-        "items": {}
+        "items": {},
+        "description": ""
     },
     "Hallway": {
         "image": "Hallway.jpg",
@@ -43,8 +45,22 @@
         ],
         "placement_condition": 0,
         "q": 1,
-        "possible_items": {"gold":[1,0], "gems":[1,0],"apple":[1,0]},
-        "items": {}
+        "possible_items": {
+            "gold": [
+                1,
+                0
+            ],
+            "gems": [
+                1,
+                0
+            ],
+            "apple": [
+                1,
+                0
+            ]
+        },
+        "items": {},
+        "description": ""
     },
     "Boudoir": {
         "image": "Boudoir.jpg",
@@ -57,8 +73,22 @@
         ],
         "placement_condition": 0,
         "q": 1,
-        "possible_items": {"keys":[2,1],"gold":[5,1],"gems":[1,0]},
-        "items": {}
+        "possible_items": {
+            "keys": [
+                2,
+                1
+            ],
+            "gold": [
+                5,
+                1
+            ],
+            "gems": [
+                1,
+                0
+            ]
+        },
+        "items": {},
+        "description": "Gain steps when entering"
     },
     "Parlor": {
         "image": "Parlor.jpg",
@@ -71,8 +101,14 @@
         ],
         "placement_condition": 0,
         "q": 2,
-        "possible_items": {"apple":[1,0]},
-        "items": {}
+        "possible_items": {
+            "apple": [
+                1,
+                0
+            ]
+        },
+        "items": {},
+        "description": ""
     },
     "Mail_Room": {
         "image": "Mail_Room.jpg",
@@ -83,23 +119,65 @@
             "S"
         ],
         "placement_condition": 0,
-        "possible_items": {"gold":[2,0],"metal_detector":[1,0]},
+        "possible_items": {
+            "gold": [
+                2,
+                0
+            ],
+            "metal_detector": [
+                1,
+                0
+            ]
+        },
         "q": 5,
-        "items": {"package":[1,0]}
+        "items": {
+            "package": [
+                1,
+                0
+            ]
+        },
+        "description": "Find useful packages here"
     },
     "Workshop": {
         "image": "Workshop.jpg",
         "color": "bleue",
         "rarity": 0,
-        "cost":0,
+        "cost": 0,
         "doors": [
             "S",
             "N"
         ],
         "placement_condition": 0,
         "q": 10,
-        "possible_items": {"gold":[5,1], "rabbits_foot":[1,0],"metal_detector":[1,0],"shovel":[1,0],"lockpick":[1,0]},
-        "items": {"dig_spots":[2,0]}
+        "possible_items": {
+            "gold": [
+                5,
+                1
+            ],
+            "rabbits_foot": [
+                1,
+                0
+            ],
+            "metal_detector": [
+                1,
+                0
+            ],
+            "shovel": [
+                1,
+                0
+            ],
+            "lockpick": [
+                1,
+                0
+            ]
+        },
+        "items": {
+            "dig_spots": [
+                2,
+                0
+            ]
+        },
+        "description": "Find useful items and digging spots here"
     },
     "Security": {
         "image": "Security.jpg",
@@ -113,8 +191,30 @@
         ],
         "placement_condition": 0,
         "q": 4,
-        "possible_items": {"apple":[2,0],"banana":[1,0],"gold":[6,1],"gems":[2,0],"lockpick":[1,0]},
-        "items": {}
+        "possible_items": {
+            "apple": [
+                2,
+                0
+            ],
+            "banana": [
+                1,
+                0
+            ],
+            "gold": [
+                6,
+                1
+            ],
+            "gems": [
+                2,
+                0
+            ],
+            "lockpick": [
+                1,
+                0
+            ]
+        },
+        "items": {},
+        "description": ""
     },
     "Billiard_Room": {
         "image": "Billiard_Room.jpg",
@@ -127,13 +227,19 @@
         ],
         "placement_condition": 0,
         "q": 1,
-        "possible_items": {"keys":[2,0]},
-        "items": {}
+        "possible_items": {
+            "keys": [
+                2,
+                0
+            ]
+        },
+        "items": {},
+        "description": ""
     },
     "Weight_Room": {
         "image": "Weight_Room.jpg",
         "color": "rouge",
-        "rarity": 0,
+        "rarity": 3,
         "cost": 0,
         "doors": [
             "N",
@@ -142,9 +248,10 @@
             "S"
         ],
         "placement_condition": 0,
-        "q": 10,
+        "q": 1,
         "possible_items": {},
-        "items": {}
+        "items": {},
+        "description": "Lose half of your steps when drafted "
     },
     "Kitchen": {
         "image": "Kitchen.jpg",
@@ -158,7 +265,8 @@
         "placement_condition": 1,
         "q": 1,
         "possible_items": {},
-        "items": {}
+        "items": {},
+        "description": "Buy food here"
     },
     "Vault": {
         "image": "Vault.jpg",
@@ -171,8 +279,95 @@
         "placement_condition": 0,
         "q": 1,
         "possible_items": {},
-        "items": {"gold": [40,0]}
-    
-        
+        "items": {
+            "gold": [
+                40,
+                0
+            ]
+        },
+        "description": "Find coins here"
+    },
+    "Chapel": {
+        "image": "Chapel.jpg",
+        "color": "rouge",
+        "rarity": 0,
+        "cost": 0,
+        "doors": [
+            "W",
+            "S",
+            "E"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "possible_items": {
+            "gems": [
+                2,
+                1
+            ],
+            "gold": [
+                14,
+                1
+            ]
+        },
+        "items": {},
+        "description": "Lose a coin when entering"
+    },
+    "Darkroom": {
+        "image": "Darkroom.jpg",
+        "color": "red",
+        "rarity": 1,
+        "cost": 0,
+        "doors": [
+            "E",
+            "W",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {},
+        "possible_items": {
+            "gems": [
+                2,
+                1
+            ],
+            "keys": [
+                1,
+                1
+            ],
+            "lockpick": [
+                1,
+                0
+            ]
+        },
+        "description": "Makes everything dark when drafted"
+    },
+    "Lavatory": {
+        "image": "Lavatory.jpg",
+        "color": "rouge",
+        "rarity": 1,
+        "cost": 0,
+        "doors": [
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {},
+        "possible_items": {},
+        "description": "A dead end..."
+    },
+    "Bedroom": {
+        "image": "Bedroom.jpg",
+        "color": "rose",
+        "rarity": 0,
+        "cost": 0,
+        "doors": [
+            "W",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {},
+        "possible_items": {"apple":[1,1],"dice":[1,1],"keys":[1,1], "gold":[3,1]},
+        "description": "Gain 2 steps when entering"
     }
 }
