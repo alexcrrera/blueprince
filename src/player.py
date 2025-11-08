@@ -11,16 +11,19 @@ class Player:
     - inventory : objets et ressources
     """
 
-    def __init__(self, start_pos=(2, 8)):
+    def __init__(self, data):
+        self.data = data
+
         
         #lool
-        self.position = start_pos
+        self.position = (2, 8)
         self.x = self.position[0]
         self.y = self.position[1]
          # valeur par défaut d’après l’énoncé
 
         starting_inventory = params.INITIAL_ITEMS_DICT
-        self.inventory = Inventory(starting_inventory)
+        
+        self.inventory = Inventory(starting_inventory,self.data,is_self_player=True)
 
         self.direction = 1 # 0 = Est, 1 = Nord, 2 = Ouest, 3 = Sud
         
@@ -45,3 +48,7 @@ class Player:
         self.position = (self.x,self.y)
      
         self.inventory.update()
+
+
+    def addData(self,data):
+        self.data = data
