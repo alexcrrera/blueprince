@@ -33,7 +33,7 @@ class HandleScreen:
         self.BACKGROUND = scale
 
         print("starting")
-        time.sleep(0.5)
+
         os.environ['SDL_VIDEO_CENTERED'] = '1'
         
     
@@ -76,7 +76,7 @@ class HandleText(handler.BaseHandler):
         self.random_group_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.RANDOM_ROOM_TEXT_SIZE) 
         self.dice_suggestion_font  = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.DICE_SUGGESTION_TEXT_SIZE) 
         self.enter_suggestion_font =  pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.ENTER_SUGGESTION_TEXT_SIZE) 
-        self.room_info_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.ROOM_TEXT_SIZE) 
+        self.items_in_room_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.ROOM_TEXT_SIZE) 
         self.items_size_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, params.ITEM_TEXT_SIZE) 
 
         self.you_found_font = pygame.font.Font(params.DEFAULT_TEXT_DIR, params.YOU_FOUND_TEXT_SIZE) 
@@ -85,6 +85,9 @@ class HandleText(handler.BaseHandler):
 
         self.items_cursor =  pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.YOU_FOUND_TEXT_SIZE) 
 
+        self.room_description_font = pygame.font.Font(params.ALT_DEFAULT_TEXT_DIR, params.DESCRIPTION_TEXT_SIZE)
+
+      
         self.items_length = 0
         self.actions_length = 0
 
@@ -173,7 +176,7 @@ class HandleText(handler.BaseHandler):
         #self.showText(text, (params.ORIGIN_INVENTORY[0], params.ORIGIN_INVENTORY[1]+padding[5]), font=self.inventory_font, color=params.WHITE,center=True)
 
 
-    def showSpecialItems(self):
+    def showPlayerSpecialItems(self):
         x0,y0 = params.ORIGIN_SPECIAL_ITEMS
         
         padding = params.SPECIAL_ITEMS_PADDING
@@ -188,7 +191,8 @@ class HandleText(handler.BaseHandler):
         if(len(special_items)==0):
             txt = "No special items in inventory"
             self.showText(txt, (x0,y0+padding), font=self.items_size_font, color=params.LIGHT_GRAY)
-    def drawRandomRoomInfo(self):
+
+    def showRandomRoomsNames(self):
          
         if(self.data.state_machine.mode==1):
            
@@ -203,7 +207,7 @@ class HandleText(handler.BaseHandler):
                     colr = params.WHITE
                 else:
                     colr = params.GRAY
-                self.showText(text, (x0+padding,y0), font=self.random_group_font, color=colr,center=True)
+                self.showText(text, (x0+padding,y0), font=self.room_description_font, color=colr,center=True)
                 padding +=params.HORIZONTAL_PADDING_RANDOM_GROUP + params.RANDOM_GROUP_TILE_SIZE
         
 
@@ -228,25 +232,31 @@ class HandleText(handler.BaseHandler):
             
             x0 += params.RANDOM_GROUP_TILE_SIZE+params.HORIZONTAL_PADDING_RANDOM_GROUP
         
-    def showCurrentRoomInfo(self):
+    def showCurrentRoomName(self):
+        """Affiche le nom de la pièce actuelle."""
         if(not self.data.state_machine.mode == 0):
             return  
         x,y = self.data.player.x,self.data.player.y
         current_room =self.data.gridHandler.grid[x][y]
         txt = current_room.returnNameWithoutUnderscore()
         x0,y0 = params.ORIGIN_ROOM_TEXT_INFO[0],params.ORIGIN_ROOM_TEXT_INFO[1]
-        self.showText(txt, (x0,y0), font=self.room_info_font)
+        self.showText(txt, (x0,y0), font=self.items_in_room_font)
 
 
-        x0,y0 = params.ORIGIN_YOU_FOUND_TEXT[0], params.ORIGIN_YOU_FOUND_TEXT[1]
-        txt = "You found:"
-        self.showText(txt, (x0,y0), font=self.you_found_font)
+        
 
         
 
     def showItemsInRoom(self):
         if(not self.data.state_machine.mode == 0):
             return
+        
+        # texte "you found:"
+        x0,y0 = params.ORIGIN_YOU_FOUND_TEXT[0], params.ORIGIN_YOU_FOUND_TEXT[1]
+        txt = "You found:"
+        self.showText(txt, (x0,y0), font=self.you_found_font)
+
+
         x0 = params.ORIGIN_ITEMS_IN_ROOM[0]
         y0 =params.ORIGIN_ITEMS_IN_ROOM[1]
         x,y = self.data.player.x,self.data.player.y
@@ -304,7 +314,7 @@ class HandleText(handler.BaseHandler):
             col = params.RED
             txt = "No dices left"
         else:
-            txt = "Press R to use a dice to redraft"
+            txt = "Press R to use a die to redraft"
             col = params.WHITE    
         x,y = params.DICE_TEXT_SUGGESTION_ORIGIN
         self.showText(txt,(x,y),font= self.dice_suggestion_font,rotation=270,color=col)
@@ -362,12 +372,21 @@ class HandleText(handler.BaseHandler):
 
         self.showText(txt,(x0,y0),font= self.enter_suggestion_font,color=col)
 
-   
+    def showRandomRoomDescription(self):
+        if(not self.data.state_machine.mode==1):
+            return
+        rooms = self.data.gridHandler.randomGeneratedRooms
+        x0,y0 = params.ORIGIN_RANDOM_ROOM_GROUP_DESCRIPTION
+        x0 += (params.RANDOM_GROUP_TILE_SIZE *0.3)//1
+        room = rooms[self.data.counter_room_selection_cursor]
+        description = room.description
+       
+        self.showText(description, (x0,y0), font=self.room_description_font, color=params.WHITE,center=True)
 
     def showHistory(self):
         x,y = params.ORIGIN_HISTORY
         txt = self.data.history_text
-        self.showText(txt,(x,y),font= self.history_font,color=params.WHITE)
+        self.showText(txt,(x,y),font= self.history_font,color=params.WHITE,center=True)
 
 
     def update(self):
@@ -376,15 +395,16 @@ class HandleText(handler.BaseHandler):
         self.showHistory()
         self.showNextRoomInfo()
 
-        self.showCurrentRoomInfo()
+        self.showCurrentRoomName()
         self.showPlayerInventoryItems()
-        self.drawRandomRoomInfo()
+        self.showRandomRoomsNames()
         self.showItemsInRoom()
         self.showDiceSuggestion()
         self.showRandomRoomCost()
         self.showEnterTextSuggestion()
         self.showItemsCursor()
-        self.showSpecialItems()
+        self.showPlayerSpecialItems()
+        self.showRandomRoomDescription()
 
         
 
@@ -428,6 +448,15 @@ class HandleGridUI(handler.BaseHandler):
 
         if(room is None):
             return
+        
+        if(self.data.dark_room_effect==True):
+            if not room.name == "Dark_Room" :
+                return
+        
+        
+            # Dessiner une pièce noire pour l'effet Dark_Room
+        #pygame.draw.rect(self.screen, params.BLACK, (x, y, params.ROOM_TILE_SIZE, params.ROOM_TILE_SIZE), 0)
+        
     
         image = room.IMAGE
         
