@@ -20,17 +20,21 @@ class Room:
     - des portes (nord, sud, est, ouest)
     """
 
-    def __init__(self, name,room_attributes,x,y,orientation=None):
+    def __init__(self, name,room_attributes,x,y,orientation=None,data=None):
         """
         data = dictionnaire venant du JSON
         """
 
+
+
         #print("Created: ",name)
+        self.data = data
         data =  room_attributes[name]
         self.name = name
         self.color = data["color"]
         self.rarity = data["rarity"] # 0 = common ,  1 = standard , 2 = unusual ,  3 = rare
         self.q = data["q"]
+        self.description = data["description"]
         self.placement_condition = data["placement_condition"]
         
         self.cost = data["cost"]
@@ -41,6 +45,7 @@ class Room:
         # Array [Est, Nord, Ouest, Sud] - 0 = pas de porte, 1 = porte
         self.doors = [0, 0, 0, 0]
         self.door_status = list()
+
 
         direction_map = {"E": 0, "N": 1, "W": 2, "S": 3}
 
@@ -105,7 +110,7 @@ class Room:
 
 
         #self.randomObjectsGeneration()
-        self.inventory = RoomInventory({},{})
+        self.inventory = RoomInventory({},{},self.data)
         self.generateItems()
         
 
@@ -131,13 +136,16 @@ class Room:
 
         self.update_image()
 
+
+
+
     def updateDoors(self,door,status):
-        print("Before: ",self.door_status)
+
         for i in range(len(self.door_status)):
             if self.doors[i] == door or door == -1:
                  if(self.door_status[i]!=0):
                     self.door_status[i] = status
-        print("After: ",self.door_status)
+    
 
 
 
@@ -158,7 +166,20 @@ class Room:
         for key,val in possible_items.items():
             
             rarity_item = int(descriptor.get(key)[3])
-            
+
+
+            if(key == "gold" or key == "keys"):
+                print("item ",key)
+
+                if (not self.data.player is None):
+                    if(self.data.player.inventory.getItemQ("metal_detector")>0):
+                        rarity_item = max(0,rarity_item-1) # on augmente les chances de trouver des items rares
+       
+
+            if (not self.data.player is None):
+                if(self.data.player.inventory.getItemQ("rabbits_foot")>0):
+                    print("Lucky rabbit's foot found - increasing chances of finding items")
+                    rarity_item = max(0,rarity_item-1) # on augmente les chances de trouver des items rares - effet cumulé avec metal detector
             
             rand_choice =  random.randint(0,rarity_item+1)
             if(rand_choice == 0): #item pas présent dans la salle
@@ -171,7 +192,7 @@ class Room:
                 item_q = random.randint(1,val[0])
 
 
-            print("To add item: ",key," x",item_q, "dict: ",{key:item_q})
+            #print("To add item: ",key," x",item_q, "dict: ",{key:item_q})
             self.inventory.addItem(key,item_q)
 
             item = descriptor.get(key)[0].lower()
@@ -190,7 +211,7 @@ class Room:
             def_items = self.def_items
 
 
-        print("·Def items to add: ",def_items)
+  
         
         for key,val in def_items.items():
 
@@ -226,7 +247,7 @@ class Room:
             
         self.inventory.items = items_out
         pass
-    
+
 
 
     def returnNameWithoutUnderscore(self):
@@ -251,7 +272,6 @@ class Room:
 
         img = pygame.image.load(self.image_path).convert_alpha()
         scaled_image = pygame.transform.scale(img, (params.BIG_TILE, params.BIG_TILE))
-
 
         rot =  90*(self.room_rotation)  # pour affichage
         self.BIG_IMAGE = pygame.transform.rotozoom(scaled_image, rot, 1)
