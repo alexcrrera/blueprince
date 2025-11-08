@@ -257,6 +257,7 @@ class RoomGrid():
                 exclude.add(name)
                
                 r_out.append(r)
+                self.handleDraftingRoomEffect(r) # gère les effets pour les chambres générées
                 
                 if(r.cost<1):
                     gem_cost_0 = True
@@ -267,6 +268,26 @@ class RoomGrid():
 
         
             self.randomGeneratedRooms = r_out
+
+    def handleDraftingRoomEffect(self,room):
+
+        if room.name == "Weight_Room":
+            player_steps = self.data.player.inventory.getItemQ("steps_left")
+            half_steps = (player_steps-player_steps%2)//2
+
+            self.data.player.inventory.removeItems("steps_left",half_steps)
+            self.data.updateDebugText(f"The Weight Room drains half of your  steps")
+            return
+        
+        
+        
+        if room.name == "Darkroom":
+            self.data.dark_room_effect = True
+            self.data.updateDebugText(f"Everything turns dark...")
+        
+        
+        pass
+
 
     def openDoor(self):
         current_room  = self.current_room
