@@ -56,6 +56,9 @@ class HandleData(handler.BaseHandler):
         self.mail_play = False
 
 
+        self.dark_room_effect = False
+
+
     def addPlayer(self,player):
         self.player = player
 
@@ -69,18 +72,24 @@ class HandleData(handler.BaseHandler):
     def updateDebugText(self,txt):
         self.history_text =txt
     
-    def updateHistory(self,what,q,user_action=False):
+    def updateHistory(self,what,q,verb=None):
+        if verb  is None:
+            verb = "use"
+   
+            
+
         descript_dict = params.ITEMS_DESCRIPTION_DICT.get(what)
+        
         if q == 0:
             return
         
         
 
-        txt  = "You " +descript_dict[4].lower()+ " "
+        txt  = "You " + verb + " "
         thing = self.cleanNameRemoveS(descript_dict[0])
+
         if q == 1:
 
-          
             
             if descript_dict[2] == "t":
                 
