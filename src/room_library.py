@@ -15,8 +15,8 @@ class RoomGrid():
         self.grid = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
         self.rooms_data  = params.DICT_ROOM_ATTRIBUTES #dict with room attributes
 
-        self.grid[2][8] = Room("Entrance_Hall",self.rooms_data ,2,8)
-        self.grid[2][0] = Room("Antechamber",self.rooms_data ,2,0)
+        self.grid[2][8] = Room("Entrance_Hall",self.rooms_data ,2,8,data=self.data)
+        self.grid[2][0] = Room("Antechamber",self.rooms_data ,2,0,data=self.data)
         self.gridImages = [[None for _ in range(params.ROOM_GRID_SIZE_VERTICAL)] for _ in range(params.ROOM_GRID_SIZE_HORIZONTAL)]
         self.randomGeneratedRooms = []
         self.current_room = self.grid[self.data.player.x][self.data.player.y]
@@ -90,7 +90,7 @@ class RoomGrid():
 
         return 0
 
-    def draw_random_room(self, initial_rotation,exclusions):
+    def drawRandomRoom(self, initial_rotation,exclusions):
 
         """
         Retourne UNE seule chambre tirée aléatoirement selon sa rareté,
@@ -132,17 +132,17 @@ class RoomGrid():
             k=1
         )[0]
 
-        room = self.create_room_instance(name,initial_rotation) # -1 car les images sont orientées vers le haut (N) par défaut
+        room = self.createRoomTemp(name,initial_rotation) # -1 car les images sont orientées vers le haut (N) par défaut
         return [room,name]
 
-    def create_room_instance(self, name,rotation=0):
+    def createRoomTemp(self, name,rotation=0):
         out = self.data.player.next_room_position
         x = out[0]
         y = out[1]
         
 
         """Instancie une Room à partir du JSON."""
-        return Room(name,self.rooms_data, x, y,rotation)
+        return Room(name,self.rooms_data, x, y,rotation,data=self.data)
 
     def checkPlacememtCondition(self,room=None,x0=-1,y0=-1,cond=-1):
         """Vérifie si nous respectons les conditions de placement
@@ -197,7 +197,7 @@ class RoomGrid():
                         rt = 0
 
                         
-                        r,name = self.draw_random_room(self.data.player.direction,exclude)
+                        r,name = self.drawRandomRoom(self.data.player.direction,exclude)
                         attemps +=1
                        # print("New room: ",name)
                         if(attemps>200):
@@ -328,16 +328,17 @@ class RoomGrid():
         print("gen: ",found_text)
             
 
-
     def doAction(self,key):
         print("Im doing: ",key )
 
         if key == "dig_spots":
             self.data.shovel_play = True
             self.generateBox(key)
+            self.data.updateDebugText("You dig...")
             
         if key == "package":
             self.data.mail_play = True    
+            self.data.updateDebugText("You open the mysterious package...")
             self.generateBox(key)
 
     def __repr__(self):
@@ -355,6 +356,9 @@ class RoomGrid():
         #print("q ater: ",self.rooms_data[newRoom.name]["q"])
         items_room = self.rooms_data[newRoom.name]["items"]
         
+
+        
+
     def updateRoomAndNextRoom(self):
         self.current_room = self.grid[self.data.player.x][self.data.player.y]
         self.next_room = self.grid[self.data.player.next_room_position[0]][self.data.player.next_room_position[1]]
