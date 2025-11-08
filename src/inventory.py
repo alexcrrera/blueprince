@@ -10,8 +10,9 @@ class Inventory:
     """
     # C'est comme un sac à dos
     
-    def __init__(self,items_dict):
+    def __init__(self,items_dict,data,is_self_player=False):
 
+        self.data = data
         # Ressources de base
         self.items = items_dict
 
@@ -22,8 +23,8 @@ class Inventory:
         self.permanent_items = []
 
 
+        self.isPlayerInventory = is_self_player
     
-
 
     def getItemQ(self,key):
 
@@ -42,32 +43,68 @@ class Inventory:
         self.ui_items = [steps_left,gold, gems, keys,dice]
         
 
-    def addItem(self,key,q):
-        if(key not in self.items):
-            self.items[key]= q
+    def addItem(self,item,q,showHistory=True):
+
+
+        consomables = params.POSSIBLE_CONSUMABLES_DICT
+
+        # si on prend un consommable depuis l'inventaire du joueur
+        if item in consomables and self.isPlayerInventory:
+            self.handleConsommable(item)
+            return
+
+        if(item not in self.items):
+            self.items[item]= q
         else:
-            self.items[key] +=q
+            self.items[item] +=q
 
 
-    def removeItems(self,key,q,data,keep_item=False):
+        descriptor = params.ITEMS_DESCRIPTION_DICT[item]
+
+
+        if not self.isPlayerInventory:
+            return
+
+        else:
+            verb = descriptor[4].lower()
+            self.data.updateHistory(item,q,verb=verb)
+
+
+    def handleConsommable(self,item):
+        consomables = params.POSSIBLE_CONSUMABLES_DICT
+        steps_gained = consomables.get(item).get("costs")
+        self.addItem("steps_left",steps_gained)
+      
+
+   
+
+    
+        
+
+
+    def removeItems(self,item,q,data,keep_item=False,showHistory=True):
         self.data = data
 
-        print("Removing", key, " x ", q)
-        self.data.updateHistory(key,q)
-        if(key not in self.items):
+       
+            
+        if(item not in self.items):
             raise TypeError("Can't remove remove what's not there!")
         else:
-            self.items[key] -=q
+            self.items[item] -=q
 
 
-            if(self.items[key]<=0):
+            if(self.items[item]<=0):
                 if not keep_item:
-                    self.items.pop(key, None)
+                    self.items.pop(item, None)
                 else:
-                    self.items[key] = 0 # keeps in inventory at 0
+                    self.items[item] = 0 # keeps in inventory at 0
             
-                print("CAREFUL REMOVING MORE THAN WE HAVE !")
+        descriptor = params.ITEMS_DESCRIPTION_DICT[item]
 
+        if(self.isPlayerInventory):
+            verb = descriptor[5].lower()
+            self.data.updateHistory(item,q,verb=verb)     
+ 
 
     def getSpecialItems(self):
         special_items = {}
@@ -89,8 +126,8 @@ class Inventory:
 
 class RoomInventory(Inventory):
 
-    def __init__(self, items_dict,actions_dict):
-        super().__init__(items_dict)
+    def __init__(self, items_dict,actions_dict,data):
+        super().__init__(items_dict,data)
         self.actions = actions_dict
         
 
