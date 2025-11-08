@@ -55,7 +55,6 @@ class StateMachineHandler(handler.BaseHandler):
 
 
 
-
     def cursorSpacePressed(self):
         self.data.space_pressed = False
         if(self.data.player.next_room_status ==-1): #VIDE
@@ -66,17 +65,25 @@ class StateMachineHandler(handler.BaseHandler):
        
 
         elif(self.data.player.next_room_status ==1): # OUVERT
+
+            # ON ENTRE DANS LA CHAMBRE
+            
             self.data.enter_room_play = True
       
             self.mode = 0
             self.data.player.next_room_status =0
             self.data.player.x = self.data.player.next_room_position[0]
             self.data.player.y =self.data.player.next_room_position[1]
+
+
             self.nextRoomCursor()
             self.data.gridHandler.updateRoomAndNextRoom()
 
-            self.data.player.inventory.removeItems("steps_left",1,self.data)
+            self.data.player.inventory.removeItems("steps_left",1)
             self.data.counter_inventory = 0
+
+            room = self.data.gridHandler.grid[self.data.player.x][self.data.player.y]
+            self.handleRoomEntryEffects(room)
 
             
            # self.data.gridHandler.update()
@@ -85,15 +92,17 @@ class StateMachineHandler(handler.BaseHandler):
 
                 if(self.data.player.inventory.getItemQ("keys")>0):
                     if(not self.data.player.inventory.getItemQ("lockpick")>0):
-                        self.data.player.inventory.removeItems("keys",1,self.data)
-                        
+                        self.data.updateDebugText(f"You use a key to open the door")
+                        self.data.player.inventory.removeItems("keys",1)
+                    else:
+                        self.data.updateDebugText(f"You use the lockpick and open the door")
                     self.data.door_locked_play = True
                     self.data.gridHandler.openDoor()
         
         elif(self.data.player.next_room_status ==3): 
 
                 if(self.data.player.inventory.getItemQ("keys")>0):
-                        self.data.player.inventory.removeItems("keys",1,self.data)
+                        self.data.player.inventory.removeItems("keys",1,showHistory=False)
                        
                         self.data.door_locked_play = True
                         self.data.gridHandler.openDoor()
@@ -102,7 +111,9 @@ class StateMachineHandler(handler.BaseHandler):
     def handleRedraft(self):
         self.data.room_redraft_play = True
         self.data.redraft_pressed = False
-        self.data.player.inventory.removeItems("dice",1,self.data,keep_item=True)
+        self.data.player.inventory.removeItems("dice",1,keep_item=True)
+        self.data.updateHistory("dice",1,verb="use")
+        
         self.data.state_machine.generate_random_rooms_flag = True
         self.data.gridHandler.generateRandomRooms() 
 
@@ -113,7 +124,8 @@ class StateMachineHandler(handler.BaseHandler):
         cost = room.cost
         if(self.data.player.inventory.getItemQ("gems")-cost<0):
             return
-        self.data.player.inventory.removeItems("gems",cost,self.data,keep_item=True)
+        self.data.player.inventory.removeItems("gems",cost,keep_item=True)
+        self.data.updateHistory("gems",cost,verb="use")
 
         x = self.data.player.next_room_position[0]
         y = self.data.player.next_room_position[1]
@@ -125,6 +137,21 @@ class StateMachineHandler(handler.BaseHandler):
         self.mode = 0
 
 
+        
+        
+
+
+    def handleRoomEntryEffects(self,room):
+        name = room.name
+        if name == "Chapel":
+            # on enleve 1 de gold mais on conserve l'objet dans l'inventaire (0 quantité si aucune monnaie restante)
+            self.data.player.inventory.removeItems("gold",1)
+            self.data.updateDebugText("You lose 1 x coin")
+        
+        if name == "Bedroom":
+            self.data.player.inventory.addItem("steps_left",2)
+            self.data.updateDebugText("You gain 2 x steps")
+            return
 
 
     def handleInteraction(self):
@@ -184,6 +211,7 @@ class StateMachineHandler(handler.BaseHandler):
     def update(self):
 
         if(self.mode ==0): # cursor mode
+            self.data.dark_room_effect = False
             self.nextRoomCursor() # place le curseur tel que la prochaine chambre est choisie
 
             if(self.data.space_pressed):
