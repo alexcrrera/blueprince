@@ -8,11 +8,15 @@ from src import handler
 
 class HandleData(handler.BaseHandler):
     
-    def __init__(self,player,clock):
+    def __init__(self,clock):
         super().__init__()
         
         self.keep_running = True
-        self.player = player
+        self.player = None
+        self.clock = clock
+
+
+    def secondaryInit(self):
         self.state_machine =  state_machine.StateMachineHandler(self)
         self.gridHandler = room_library.RoomGrid(self)
 
@@ -34,7 +38,7 @@ class HandleData(handler.BaseHandler):
         self.enter_pressed = False
         self.enter_room_play = False
 
-        self.clock = clock
+        
 
         self.redraft_pressed = False
         self.door_locked_play = False
@@ -52,6 +56,8 @@ class HandleData(handler.BaseHandler):
         self.mail_play = False
 
 
+    def addPlayer(self,player):
+        self.player = player
 
     
     def cleanNameRemoveS(self,name):
