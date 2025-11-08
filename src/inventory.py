@@ -78,15 +78,16 @@ class Inventory:
 
    
 
-    
-        
 
 
-    def removeItems(self,item,q,data,keep_item=False,showHistory=True):
-        self.data = data
+    def removeItems(self,item,q,keep_item=False,showHistory=True):
+       
 
        
-            
+        if self.isPlayerInventory:
+            keep_item = True
+        else:
+            keep_item = False
         if(item not in self.items):
             raise TypeError("Can't remove remove what's not there!")
         else:
