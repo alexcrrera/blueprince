@@ -40,7 +40,7 @@ INITIAL_STEPS = 70
 INTIAL_GOLD = 0
 INITIAL_GEMS = 2
 INTIAL_KEY =10
-INTIAL_DICE = 2
+INTIAL_DICE = 20
 
 INITIAL_ITEMS_DICT ={
     "steps_left": INITIAL_STEPS,
@@ -140,7 +140,8 @@ ORIGIN_ROOM_RANDOM_GROUP = [(0.7*screenWidth//2)//1,(0.7*screenHeight//2)//1]
 RANDOM_GROUP_TILE_SIZE = 210
 ORIGIN_ROOM_RANDOM_TEXT = [ORIGIN_ROOM_RANDOM_GROUP[0],ORIGIN_ROOM_RANDOM_GROUP[1]+RANDOM_GROUP_TILE_SIZE+10]
 HORIZONTAL_PADDING_RANDOM_GROUP = 60
-RANDOM_ROOM_TEXT_SIZE = 20
+RANDOM_ROOM_TEXT_SIZE = 15
+
 
 
 ROOM_GRID_SIZE_HORIZONTAL = 5
@@ -153,11 +154,15 @@ ORIGIN_TILE = [100,90]
 BIG_TILE = 250
 ORIGIN_BIG_TILE = [screenWidth-BIG_TILE-65,screenHeight-BIG_TILE-65]
 
-
-
 ROOM_INFO_PADDING = 85
 ROOM_INFO_ORIGIN = [(ORIGIN_TILE[0]+0.85*ROOM_TILE_SIZE)//1,screenHeight-ROOM_INFO_PADDING]
 ROOM_INFO_TEXT_SIZE = 14
+
+ORIGIN_RANDOM_ROOM_GROUP_DESCRIPTION = [ORIGIN_ROOM_RANDOM_GROUP[0]+HORIZONTAL_PADDING_RANDOM_GROUP+RANDOM_GROUP_TILE_SIZE*1.25,ORIGIN_ROOM_RANDOM_GROUP[1]+RANDOM_GROUP_TILE_SIZE+90]
+DESCRIPTION_TEXT_SIZE = 20
+
+
+
 
 
 NEXT_ROOM_SHOW = False
@@ -182,7 +187,7 @@ ENTER_SUGGESTION_TEXT_SIZE = 20
 
 
 
-ORIGIN_HISTORY = [ORIGIN_PRESS_ENTER_TEXT[0],ORIGIN_PRESS_ENTER_TEXT[1]+700]
+ORIGIN_HISTORY = [ORIGIN_PRESS_ENTER_TEXT[0]+150,ORIGIN_PRESS_ENTER_TEXT[1]+700]
 HISTORY_TITLES_SIZE = 30
 
 
@@ -201,20 +206,21 @@ ITEM_TEXT_SIZE = 20
 
 
 ITEMS_DESCRIPTION_DICT = {
+    # nom interne: [nom interface, phrase interface, type tempo. ou permanent, rareté, verbe si ajoute par utilisateur]
 
     "gold": ["Coin","Use it to buy items","t",0,"TAKE","USE"], 
-    "gems": ["Gem","Use it to buy special rooms","t",0,"TAKE"],
+    "gems": ["Gem","Use it to buy special rooms","t",0,"TAKE","USE"],
     "rabbits_foot": ["Rabbit's foot", "Greater chance of finding items","p",3,"TAKE","NAN"],
     "keys": ["Key","Useful for opening doors and chests","t",0,"TAKE","USE"],
-    "apple": ["Apple", "Restores 2 steps", "t",2,"TAKE"],
-    "banana": ["Banana", "Restores 3 steps", "t",2,"TAKE"],
-    "lockpick": ["Lockpick", "You can now use the lockpick to open doors", "p",3,"TAKE"],
-    "metal_detector": ["Metal Detector","Increases chances of finding extra gold or keys","p",3,"TAKE"],
-    "dig_spots": ["Dig spot", "Use the shovel to dig and find items","a",0,"DIG"],
+    "apple": ["Apple", "Restores 2 steps", "t",2,"TAKE","BUY"],
+    "banana": ["Banana", "Restores 3 steps", "t",2,"TAKE","BUY"],
+    "lockpick": ["Lockpick", "You can now use the lockpick to open doors", "p",3,"TAKE","USE"],
+    "metal_detector": ["Metal Detector","Increases chances of finding extra gold or keys","p",3,"TAKE","USE"],
+    "dig_spots": ["Dig spot", "Use the shovel to dig and find items","a",0,"DIGT","DIG"],
     "chest": ["Chest", "Use a key to open and find items", "a",3,"OPEN","NAN"],
     "shovel": ["Shovel", "You will need this to dig", "p",3,"TAKE","USE"],
     "dice": ["Dice","Use this to redraw rooms when drafting", "t",3,"TAKE","USE"],
-    "steps_left": ["Step", "If you are seeing this text then something went really wrong", "t",0,"USE","TAKE"],
+    "steps_left": ["Step", "", "t",0,"GAIN","USE"],
     "hammer": ["Hammer","Use this to break open chests without keys","p",3,"TAKE","USE"],
     "package": ["Package","A mysterious package. Who knows what is inside?","a",0,"OPEN","USE"]
     }
@@ -223,6 +229,11 @@ ITEMS_DESCRIPTION_DICT = {
 POSSIBLE_ITEMS_PER_ACTION_DICT = {
     "dig_spots": {"gold":[5,1],"keys":[5,1],"gems":[5,1]},
     "package": {"gold":[10,2],"keys":[3,1],"gems":[2,1],"rabbits_foot":[1,1]},
+}
+
+POSSIBLE_CONSUMABLES_DICT = {
+    "apple":{"costs":2,"gives":2},
+    "banana":{"costs":2,"gives":2},
 }
 
 
