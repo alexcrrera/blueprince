@@ -25,9 +25,16 @@ class Game:
 
         self.screenHandler = ui.HandleScreen()
         self.clock = pygame.time.Clock()
-        self.playerHandler = player.Player()
 
-        self.dataHandler = data.HandleData(self.playerHandler,self.clock)
+        
+        self.dataHandler = data.HandleData(self.clock)
+        self.playerHandler = player.Player(self.dataHandler)
+        self.dataHandler.addPlayer(self.playerHandler)
+        self.dataHandler.secondaryInit()
+
+
+
+        
 
 
         self.textHandler = ui.HandleText(self.dataHandler,self.screenHandler.screen)
