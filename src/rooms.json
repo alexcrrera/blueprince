@@ -57,6 +57,10 @@
             "apple": [
                 1,
                 0
+            ],
+            "trunk": [
+                1,
+                0
             ]
         },
         "items": {},
@@ -120,6 +124,10 @@
         ],
         "placement_condition": 0,
         "possible_items": {
+            "trunk": [
+                1,
+                0
+            ],
             "gold": [
                 2,
                 0
@@ -249,7 +257,12 @@
         ],
         "placement_condition": 0,
         "q": 1,
-        "possible_items": {},
+        "possible_items": {
+            "trunk": [
+                1,
+                0
+            ]
+        },
         "items": {},
         "description": "Lose half of your steps when drafted "
     },
@@ -265,7 +278,16 @@
         "placement_condition": 1,
         "q": 1,
         "possible_items": {},
-        "items": {},
+        "items": {
+            "apple_buy": [
+                5,
+                0
+            ],
+            "banana_buy": [
+                5,
+                0
+            ]
+        },
         "description": "Buy food here"
     },
     "Vault": {
@@ -367,7 +389,44 @@
         "placement_condition": 0,
         "q": 1,
         "items": {},
-        "possible_items": {"apple":[1,1],"dice":[1,1],"keys":[1,1], "gold":[3,1]},
+        "possible_items": {
+            "apple": [
+                1,
+                1
+            ],
+            "dice": [
+                1,
+                1
+            ],
+            "keys": [
+                1,
+                1
+            ],
+            "gold": [
+                3,
+                1
+            ]
+        },
         "description": "Gain 2 steps when entering"
+    },
+    "Locker_Room": {
+        "image": "Locker_Room.jpg",
+        "color": "bleue",
+        "rarity": 0,
+        "cost": 1,
+        "doors": [
+            "N",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {
+            "locker": [
+                4,
+                1
+            ]
+        },
+        "possible_items": {},
+        "description": "Contains useful lockers"
     }
 }
