@@ -45,7 +45,7 @@ class Inventory:
 
     def addItem(self,item,q,showHistory=True):
 
-
+        
         consomables = params.POSSIBLE_CONSUMABLES_DICT
 
         # si on prend un consommable depuis l'inventaire du joueur
@@ -71,8 +71,9 @@ class Inventory:
 
 
     def handleConsommable(self,item):
+        print("adding ",item)
         consomables = params.POSSIBLE_CONSUMABLES_DICT
-        steps_gained = consomables.get(item).get("costs")
+        steps_gained = consomables.get(item).get("gives")
         self.addItem("steps_left",steps_gained)
       
 
