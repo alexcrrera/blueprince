@@ -37,7 +37,7 @@ TARGET_FPS = 10
 splitRatioScreen = 0.33 # ratio entre côté gauche et droite
 
 INITIAL_STEPS = 70
-INTIAL_GOLD = 0
+INTIAL_GOLD = 10
 INITIAL_GEMS = 2
 INTIAL_KEY =10
 INTIAL_DICE = 20
@@ -216,24 +216,35 @@ ITEMS_DESCRIPTION_DICT = {
     "banana": ["Banana", "Restores 3 steps", "t",2,"TAKE","BUY"],
     "lockpick": ["Lockpick", "You can now use the lockpick to open doors", "p",3,"TAKE","USE"],
     "metal_detector": ["Metal Detector","Increases chances of finding extra gold or keys","p",3,"TAKE","USE"],
-    "dig_spots": ["Dig spot", "Use the shovel to dig and find items","a",0,"DIGT","DIG"],
-    "chest": ["Chest", "Use a key to open and find items", "a",3,"OPEN","NAN"],
+    "dig_spots": ["Dig spot", "Use the shovel to dig and find items","a",0,"DIG","DIG"],
+    "trunk": ["Trunk", "Use a key or the hammer to open and find items", "a",3,"OPEN","NAN"],
     "shovel": ["Shovel", "You will need this to dig", "p",3,"TAKE","USE"],
     "dice": ["Dice","Use this to redraw rooms when drafting", "t",3,"TAKE","USE"],
     "steps_left": ["Step", "", "t",0,"GAIN","USE"],
     "hammer": ["Hammer","Use this to break open chests without keys","p",3,"TAKE","USE"],
-    "package": ["Package","A mysterious package. Who knows what is inside?","a",0,"OPEN","USE"]
+    "package": ["Package","A mysterious package. Who knows what is inside?","a",0,"OPEN","USE"],
+    "apple_buy":["Apple", "Buy an apple - 2 coins", "a",0,"BUY","NAN"],
+    "banana_buy":["Banana", "Buy a banana - 3 coins", "a",1,"BUY","NAN"],
+    "cake_buy":["Cake", "Buy a cake - 6 coins", "a",2,"BUY","NAN"],
+    "sandwich_buy":["Sandwich", "Buy a sandwich - 8 coins", "a",3,"BUY","NAN"],
+    "meal_buy":["Meal", "Buy a meal - 15 coins", "a",3,"BUY","NAN"],
+    "locker": ["Locker", "Use a key to open a locke","a",1,"OPEN","OPEN"],
     }
 
 
 POSSIBLE_ITEMS_PER_ACTION_DICT = {
     "dig_spots": {"gold":[5,1],"keys":[5,1],"gems":[5,1]},
-    "package": {"gold":[10,2],"keys":[3,1],"gems":[2,1],"rabbits_foot":[1,1]},
+    "package": {"gold":[10,1],"keys":[3,1],"gems":[2,1],"rabbits_foot":[1,1]},
+    "trunk": {"keys":[3,1], "gems":[4,1], "gold":[3,0], "dice":[2,0],"lockpick":[1,0]},
+    "locker": {"gems":[1,0],"gold":[5,1],"apple":[1,0],"keys":[1,0]}
 }
 
 POSSIBLE_CONSUMABLES_DICT = {
-    "apple":{"costs":2,"gives":2},
-    "banana":{"costs":2,"gives":2},
+    "apple": {"gives":2,"costs":2},
+    "banana": {"gives":3,"costs":3},
+    "cake": {"gives":10,"costs":6},
+    "sandwich": {"gives":15,"costs":8},
+    "meal": {"costs":15,"gives":20},
 }
 
 

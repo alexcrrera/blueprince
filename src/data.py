@@ -57,7 +57,9 @@ class HandleData(handler.BaseHandler):
 
 
         self.dark_room_effect = False
-
+        self.trunk_play = False
+        self.hammer_play = False
+        self.locker_play = False
 
     def addPlayer(self,player):
         self.player = player

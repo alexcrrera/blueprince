@@ -305,16 +305,39 @@ class RoomGrid():
 
     def checkIsInteractionPossible(self,action):
         current_room  = self.current_room
+
         inventory = self.data.player.inventory.items
+       
         if action == "dig_spots":
             if not "shovel" in inventory:
                 return "You need a shovel to dig here"
         
-        if action == "chest":
+        if action == "trunk":
             if ("keys" in inventory and inventory["keys"]>0) or "hammer" in inventory:
                 return "ok"
             else:
-                return "You need a key or a hammer to open the chest"
+                return "You need a key or a hammer to open the trunk"
+            
+        if action == "locker":
+            if ("keys" in inventory and inventory["keys"]>0):
+                return "ok"
+            else:
+                return "You need a key to open the locker"
+
+
+        if "_buy" in action:
+            item = action.replace("_buy", "")
+            print("mew ote,", item)
+
+            if (not item in params.POSSIBLE_CONSUMABLES_DICT):
+                return("Missing reference")
+            cost = params.POSSIBLE_CONSUMABLES_DICT.get(item).get("costs")
+            if(self.data.player.inventory.getItemQ("gold")-cost<0):
+                return("Not enough coins")
+            
+            print("ok to buy:" + str(item))
+
+
         return "ok"
 
 
@@ -328,18 +351,43 @@ class RoomGrid():
         print("gen: ",found_text)
             
 
-    def doAction(self,key):
-        print("Im doing: ",key )
+    def doAction(self,action):
+        print("Im doing: ",action )
 
-        if key == "dig_spots":
+        if action == "dig_spots":
             self.data.shovel_play = True
-            self.generateBox(key)
+            self.generateBox(action)
             self.data.updateDebugText("You dig...")
             
-        if key == "package":
+        if action == "package":
             self.data.mail_play = True    
             self.data.updateDebugText("You open the mysterious package...")
-            self.generateBox(key)
+            self.generateBox(action)
+
+        if action == "locker":
+            self.data.locker_play = True    
+            self.data.updateDebugText("You open the locker...")
+            self.generateBox(action)
+
+        if action == "trunk":
+            self.data.trunk_play = True
+
+            if self.data.player.inventory.getItemQ("hammer")>0:
+                self.data.updateDebugText("You open the trunk using the hammer...")
+                self.data.hammer_play = True
+            else:
+                self.data.player.inventory.removeItems("keys",1)
+
+            self.generateBox(action)
+
+        if "_buy" in action:
+            item = action.replace("_buy", "")
+            cost = params.POSSIBLE_CONSUMABLES_DICT.get(item).get("costs")
+            self.data.player.inventory.addItem(item,1)
+            self.data.player.inventory.removeItems("gold",cost)
+            #self.data.updateDebugText("")
+
+        
 
     def __repr__(self):
         return "\n".join(room.__repr__() for row in self.grid for room in row if room)

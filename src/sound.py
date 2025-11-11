@@ -97,3 +97,15 @@ class HandleSound:
         if(self.data.mail_play):
             self.data.mail_play = False
             self.play_sfx("package")
+
+        if(self.data.hammer_play):
+            self.data.hammer_play = False
+            self.play_sfx("hammer")
+
+        if(self.data.trunk_play):
+            self.data.trunk_play = False
+            self.play_sfx("trunk")
+
+        if(self.data.locker_play):
+            self.data.locker_play = False
+            self.play_sfx("locker")
