@@ -65,6 +65,9 @@ class HandleData(handler.BaseHandler):
         self.veranda_effect = True
         self.maid_chamber_effect = False
 
+        self.green_house_effect = False
+        self.furnace_effect = True
+
 
     def addPlayer(self,player):
         self.player = player

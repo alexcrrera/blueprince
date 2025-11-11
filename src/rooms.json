@@ -226,7 +226,7 @@
     },
     "Billiard_Room": {
         "image": "Billiard_Room.jpg",
-        "color": "verte",
+        "color": "bleue",
         "rarity": 0,
         "cost": 0,
         "doors": [
@@ -246,7 +246,7 @@
     },
     "Weight_Room": {
         "image": "Weight_Room.jpg",
-        "color": "rouge",
+        "color": "red",
         "rarity": 3,
         "cost": 0,
         "doors": [
@@ -311,7 +311,7 @@
     },
     "Chapel": {
         "image": "Chapel.jpg",
-        "color": "rouge",
+        "color": "red",
         "rarity": 0,
         "cost": 0,
         "doors": [
@@ -365,7 +365,7 @@
     },
     "Lavatory": {
         "image": "Lavatory.jpg",
-        "color": "rouge",
+        "color": "red",
         "rarity": 1,
         "cost": 0,
         "doors": [
@@ -506,7 +506,7 @@
     },
     "Maids_Chamber": {
         "image": "Maids_Chamber.jpg",
-        "color": "rouge",
+        "color": "red",
         "rarity": 0,
         "cost": 0,
         "doors": [
@@ -518,5 +518,53 @@
         "items": {},
         "possible_items": {},
         "description": "When drafted, decreases the chances of finding items"
+    },
+    "Greenhouse": {
+        "image": "Greenhouse.jpg",
+        "color": "green",
+        "rarity": 1,
+        "cost": 1,
+        "doors": [
+            "N",
+            "E",
+            "W",
+            "S"
+        ],
+        "placement_condition": 2,
+        "q": 1,
+        "items": {},
+        "possible_items": {
+            "metal_detector": [
+                1,
+                0
+            ],
+            "shovel": [
+                1,
+                0
+            ],
+            "hammer": [
+                1,
+                0
+            ],
+            "dig_spots": [
+                4,
+                1
+            ]
+        },
+        "description": "You are more likely to draw Green Rooms while drafting"
+    },
+    "Furnace": {
+        "image": "Furnace.jpg",
+        "color": "bleue",
+        "rarity": 0,
+        "cost": 0,
+        "doors": [
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {},
+        "possible_items": {},
+        "description": "Increases the chances of finding red rooms when drafted"
     }
 }

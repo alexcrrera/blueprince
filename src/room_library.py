@@ -117,15 +117,24 @@ class RoomGrid():
                 continue
 
             condition = data["placement_condition"]
+            color = data["color"]
             x,y = self.data.player.next_room_position[0],self.data.player.next_room_position[1]
 
             if not((self.checkPlacememtCondition(x0=x,y0=y,cond=condition)==1)):
                #@ print("pas boonne post POUR ", name)
                 continue
 
-           
+            rarity = data["rarity"]
+            if(color == "green" and  self.data.green_house_effect):
+                
+                rarity = max(0,rarity-1)
+
+            if(color == "red" and  self.data.furnace_effect):
+             
+                rarity = max(0,rarity-1)
+
             # Plus la rareté est élevée, moins la pièce apparaît
-            weight = 1 / (3 ** data["rarity"])
+            weight = 1 / (3 ** rarity)
             pool.append((name, weight))
 
 
@@ -314,7 +323,11 @@ class RoomGrid():
         if room.name == "Maids_Chamber":
             self.data.updateDebugText("You now have less chances of finding items...")
             self.data.maid_chamber_effect = True
-        pass
+        
+
+        if room.name == "Furnace":
+            self.data.updateDebugText("You will draw more red rooms now")
+            self.data.furnace_effect= True
 
 
     def openDoor(self):
@@ -432,7 +445,16 @@ class RoomGrid():
     def applyNewRoomEffect(self,room):
 
         if room.name == "Veranda":
-            self.veranda_effect = True
+            
+            self.data.veranda_effect = True
+            self.data.updateDebugText("Green rooms will have more gems")
+
+        if room.name == "Greenhouse":
+            self.data.updateDebugText("You will draw more green rooms now")
+          
+            self.data.green_house_effect= True
+    
+ 
 
 
         
