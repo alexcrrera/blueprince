@@ -26,6 +26,15 @@ class RoomGrid():
 
 
 
+    def countRoomsInManor(self):
+        count = 0
+        for col in self.grid:
+            for room in col:
+                if room is not None:
+                    print("room:", room.name)
+                    count += 1
+        return count
+
 
     def checkRoomDoorStatus(self):
         next_room = self.next_room  
@@ -277,6 +286,14 @@ class RoomGrid():
 
             self.data.player.inventory.removeItems("steps_left",half_steps)
             self.data.updateDebugText(f"The Weight Room drains half of your  steps")
+            return
+        
+        if room.name == "Master_Bedroom":
+            
+            rooms_in_manor = self.countRoomsInManor()
+            self.data.player.inventory.addItem("steps_left",rooms_in_manor)
+            txt = "The Master Bedroom gives you " + str(rooms_in_manor) + " steps"
+            self.data.updateDebugText(txt)
             return
         
         

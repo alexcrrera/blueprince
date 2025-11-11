@@ -428,5 +428,40 @@
         },
         "possible_items": {},
         "description": "Contains useful lockers"
+    },
+    "Master_Bedroom": {
+        "image": "Master_Bedroom.jpg",
+        "color": "rose",
+        "rarity": 3,
+        "cost": 0,
+        "doors": [
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {},
+        "possible_items": {
+            "dice": [
+                2,
+                0
+            ],
+            "gold": [
+                9,
+                1
+            ],
+            "keys": [
+                1,
+                0
+            ],
+            "gems": [
+                3,
+                1
+            ],
+            "lockpick": [
+                1,
+                0
+            ]
+        },
+        "description": "Gain 1 step for each room in the grid when drafted"
     }
 }
