@@ -168,9 +168,21 @@ class Room:
             rarity_item = int(descriptor.get(key)[3])
 
 
-            if(key == "gold" or key == "keys"):
-                print("item ",key)
 
+            # VERANDA EFFET 
+            if self.color == "green" and self.data.veranda_effect :
+                if key == "gems":
+                    rarity_item = max(0,rarity_item-1)
+                    #print("rarity changed for gems: ", rarity_item)
+
+            # EFFET MAIDS_CHAMBER
+            if self.data.maid_chamber_effect:
+                rarity_item +=1
+                #print("new ", key, " rarity: ", rarity_item)
+
+
+            if(key == "gold" or key == "keys"):
+                
                 if (not self.data.player is None):
                     if(self.data.player.inventory.getItemQ("metal_detector")>0):
                         rarity_item = max(0,rarity_item-1) # on augmente les chances de trouver des items rares
@@ -183,7 +195,10 @@ class Room:
             
             rand_choice =  random.randint(0,rarity_item+1)
             if(rand_choice == 0): #item pas présent dans la salle
-                continue
+                continue # item non généré
+
+
+
             
             
             if val[1] == 0:

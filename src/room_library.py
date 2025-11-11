@@ -31,7 +31,6 @@ class RoomGrid():
         for col in self.grid:
             for room in col:
                 if room is not None:
-                    print("room:", room.name)
                     count += 1
         return count
 
@@ -157,7 +156,8 @@ class RoomGrid():
         """Vérifie si nous respectons les conditions de placement
         0: Aucune condition
         1: Si dans coins
-        2: si dans extrêmités
+        2: si dans extrêmités droite ou gauche
+        3: côté EAST uniquement
 
 
         """
@@ -181,7 +181,15 @@ class RoomGrid():
             
             if(c1 or c2 or c3 or c4):
                 return 1
+        
+        if(condition==2):
+            c1 = x== 0 or x == params.ROOM_GRID_SIZE_HORIZONTAL-1
+            if(c1):
+                return 1
             
+        if(condition == 3):
+            if x > (params.ROOM_GRID_SIZE_HORIZONTAL-1)//2:
+                return 1
 
         return -1
    
@@ -209,7 +217,7 @@ class RoomGrid():
                         r,name = self.drawRandomRoom(self.data.player.direction,exclude)
                         attemps +=1
                        # print("New room: ",name)
-                        if(attemps>200):
+                        if(attemps>1000):
                             raise TypeError("Not enough rooms included oops")
                         if(r is None):
                             raise TypeError("Ooops you generated an empty room")
@@ -303,6 +311,9 @@ class RoomGrid():
             self.data.updateDebugText(f"Everything turns dark...")
         
         
+        if room.name == "Maids_Chamber":
+            self.data.updateDebugText("You now have less chances of finding items...")
+            self.data.maid_chamber_effect = True
         pass
 
 
@@ -344,7 +355,7 @@ class RoomGrid():
 
         if "_buy" in action:
             item = action.replace("_buy", "")
-            print("mew ote,", item)
+      
 
             if (not item in params.POSSIBLE_CONSUMABLES_DICT):
                 return("Missing reference")
@@ -352,7 +363,7 @@ class RoomGrid():
             if(self.data.player.inventory.getItemQ("gold")-cost<0):
                 return("Not enough coins")
             
-            print("ok to buy:" + str(item))
+          
 
 
         return "ok"
@@ -365,11 +376,10 @@ class RoomGrid():
         found_text = current_room.generateItems(def_items={} ,possible_items=possible_items,action_based=True)
            
         self.data.updateDebugText(found_text)
-        print("gen: ",found_text)
+        
             
-
     def doAction(self,action):
-        print("Im doing: ",action )
+     
 
         if action == "dig_spots":
             self.data.shovel_play = True
@@ -414,12 +424,17 @@ class RoomGrid():
         self.grid[x][y] = self.randomGeneratedRooms[self.data.counter_room_selection_cursor]
         newRoom = self.grid[x][y]
 
-        print(newRoom.name,": Items : ",newRoom.inventory.items, " - actions: ", newRoom.inventory.actions)
-    #    print("NEW ROOM STATUS:",newRoom.door_status)
-       # print("q b4: ",self.rooms_data[newRoom.name]["q"])
         self.rooms_data[newRoom.name]["q"] +=-1 
-        #print("q ater: ",self.rooms_data[newRoom.name]["q"])
-        items_room = self.rooms_data[newRoom.name]["items"]
+
+
+        self.applyNewRoomEffect(newRoom)
+
+    def applyNewRoomEffect(self,room):
+
+        if room.name == "Veranda":
+            self.veranda_effect = True
+
+
         
 
         

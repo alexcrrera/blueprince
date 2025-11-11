@@ -437,7 +437,7 @@
         "doors": [
             "S"
         ],
-        "placement_condition": 0,
+        "placement_condition": 3,
         "q": 1,
         "items": {},
         "possible_items": {
@@ -463,5 +463,60 @@
             ]
         },
         "description": "Gain 1 step for each room in the grid when drafted"
+    },
+    "Veranda": {
+        "image": "Veranda.jpg",
+        "color": "green",
+        "rarity": 0,
+        "cost": 3,
+        "doors": [
+            "N",
+            "S"
+        ],
+        "placement_condition": 2,
+        "q": 5,
+        "items": {},
+        "possible_items": {
+            "gems": [
+                1,
+                0
+            ],
+            "trunk": [
+                1,
+                0
+            ],
+            "shovel": [
+                1,
+                0
+            ],
+            "hammer": [
+                1,
+                0
+            ],
+            "metal_detector": [
+                1,
+                0
+            ],
+            "dig_spots": [
+                4,
+                1
+            ]
+        },
+        "description": "Greater chance of finding items in Green Rooms."
+    },
+    "Maids_Chamber": {
+        "image": "Maids_Chamber.jpg",
+        "color": "rouge",
+        "rarity": 0,
+        "cost": 0,
+        "doors": [
+            "W",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {},
+        "possible_items": {},
+        "description": "When drafted, decreases the chances of finding items"
     }
 }

@@ -61,6 +61,11 @@ class HandleData(handler.BaseHandler):
         self.hammer_play = False
         self.locker_play = False
 
+
+        self.veranda_effect = True
+        self.maid_chamber_effect = False
+
+
     def addPlayer(self,player):
         self.player = player
 
