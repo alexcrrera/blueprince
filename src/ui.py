@@ -120,13 +120,6 @@ class HandleText(handler.BaseHandler):
         self.screen.blit(rendered_text, text_rect)
 
 
-    def drawDebugText(self):
-        txt= self.data.debug_text
-
-        
-        x0,y0 = params.ORIGIN_DEBUG_TEXT[0],params.ORIGIN_DEBUG_TEXT[1]
-        self.showText(txt, (x0,y0), font=self.small_font, color=(255, 200, 0))
-
     def showNextRoomInfo(self):
         stat = self.data.player.next_room_status
         txt = ""
@@ -261,7 +254,7 @@ class HandleText(handler.BaseHandler):
         y0 =params.ORIGIN_ITEMS_IN_ROOM[1]
         x,y = self.data.player.x,self.data.player.y
         current_room =self.data.gridHandler.grid[x][y]
-       # print("itemasdas: ",current_room.name)
+
         data = current_room.inventory.items
         actions = current_room.inventory.actions
         
@@ -285,7 +278,7 @@ class HandleText(handler.BaseHandler):
             
     
             txt = desc[0] +" :  x" + str(value) + "  (" +desc[1]  + ")"
-            #print("items: ",txt)
+          
             self.showText(txt, (x0,y0), font=self.items_size_font)
             y0 += params.ITEMS_IN_ROOM_PADDING
 
@@ -296,7 +289,7 @@ class HandleText(handler.BaseHandler):
             desc = descript_dict[key]
             self.items_descriptor.append(desc[4])
             txt = desc[0] +" :  x" + str(value) + "  (" +desc[1]  + ")"
-            #print("items: ",txt)
+     
             self.showText(txt, (x0,y0), font=self.items_size_font)
             y0 += params.ITEMS_IN_ROOM_PADDING
         
@@ -390,7 +383,6 @@ class HandleText(handler.BaseHandler):
 
 
     def update(self):
-        self.drawDebugText()
         self.draw()
         self.showHistory()
         self.showNextRoomInfo()
