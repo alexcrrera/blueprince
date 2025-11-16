@@ -175,7 +175,7 @@ class HandleText(handler.BaseHandler):
         """Affiche les FPS."""
 
         fps_text = f"FPS: {int(self.data.clock.get_fps())}"
-        self.showText(fps_text, (params.screenWidth//2 - params.PADDING -  self.small_font.size(fps_text)[0],  params.screenHeight - params.PADDING),font=self.small_font,color=params.BLACK)
+        self.showText(fps_text, (params.screenWidth//2 - params.PADDING_FPS -  self.small_font.size(fps_text)[0],  params.screenHeight - params.PADDING_FPS),font=self.small_font,color=params.BLACK)
 
 
     def showPlayerInventoryItems(self):
