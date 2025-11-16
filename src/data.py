@@ -95,6 +95,7 @@ class HandleData(handler.BaseHandler):
         self.maid_chamber_effect = False
         self.green_house_effect = False
         self.furnace_effect = True
+        self.gymnasium_effet = False # effet nouveau choisit par nous - perte 2 steps par mouvement si chambre drafted
 
 
 

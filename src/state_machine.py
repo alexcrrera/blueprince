@@ -125,8 +125,15 @@ class StateMachineHandler(handler.BaseHandler):
             self.updateNextRoomCursor()
             self.data.gridHandler.updateRoomAndNextRoom()
 
-            # Coût d’entrée
-            self.data.player.inventory.removeItems("steps_left",1)
+            # Coût d’entrée et effet GYMNASIUM
+
+            if(self.data.gymnasium_effet):
+                steps_lost = 2
+            else:
+                steps_lost = 1
+
+
+            self.data.player.inventory.removeItems("steps_left",steps_lost)
             self.data.counter_inventory = 0
 
             # Effets d’entrée dans une salle
