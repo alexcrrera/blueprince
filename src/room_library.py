@@ -258,7 +258,11 @@ class RoomGrid():
         if condition == 3:
             if x > (params.ROOM_GRID_SIZE_HORIZONTAL-1)//2:
                 return 1
-
+        # 4 = uniquement moitié Ouest
+        if condition == 4:
+            if x < (params.ROOM_GRID_SIZE_HORIZONTAL-1)//2:
+                return 1
+            
         return -1
 
 
@@ -318,6 +322,9 @@ class RoomGrid():
                             if(y==0 and new_room.doors[1]==1):
                                 room_is_ok = False #5ème condition non respectée
 
+                            if(new_room.cost<1): # existe chambre telle que coût nul
+                                gem_cost_0 = True
+
                             # 3) Assurer une salle gratuite parmi les trois
                             if(room_index==2 and not gem_cost_0):
                                 room_is_ok = False
@@ -330,16 +337,15 @@ class RoomGrid():
                                 break
 
                         if(not room_is_ok):
-                            exclude.add(name)
+                            exclude.add(name) # chambre non apte, exlue de la pioche (pour ce tirage)
 
-                exclude.add(name)  # empêche doublons
+                exclude.add(name)  # enlève de la pioche possible la chambre que nous venons de tester. Permet plus rapidement de converger
                 room_output.append(new_room)
 
                 # Application effets immédiats
                 self.handleDraftingRoomEffect(new_room) 
                 
-                if(new_room.cost<1): # existe chambre telle que coût nul
-                    gem_cost_0 = True
+                
 
                 room_index += 1
 
