@@ -90,7 +90,7 @@ class Room:
 
         w_unlocked = 1/(3**(y_max-y)) #poid telle qu'aux premières rangées la probabilité de trouver des chambres débloquées est importante
         w_double_lock = 1/(3**y) # poid telle que au fond du manoir le poid pour les portes bloquées à double tour est minimal mais maximal au dernière rangée
-        w_single_lock = 1/2*(w_unlocked + w_double_lock)/2 # le "bloqué à un tour" est la moyenne des deux autres probabilités divisée par deux. 
+        w_single_lock = 1/2*(w_unlocked + w_double_lock)*1.3 # le "bloqué à un tour" est 1.3x  la moyenne des deux autres probabilités. 
        
         weights = [w_unlocked,w_single_lock,w_double_lock]
         choices = [1, 2, 3] #choix possibles: 1: débloquée, 2: bloquée à un tour, 3: bloquée à deux tours
