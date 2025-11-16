@@ -9,7 +9,7 @@ This is the repository for the BluePrince2D project, which aims to create a simp
 Clown the repo:
 
 git clone <https://github.com/alexcrrera/blueprince>
-cd <blueprince>
+cd blueprince
 
 
 
