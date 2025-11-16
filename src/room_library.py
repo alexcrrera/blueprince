@@ -283,7 +283,7 @@ class RoomGrid():
             room_output = []
             room_index = 0
             gem_cost_0 = False
-            exclude = set()  # évite doublons
+            exclude = set()  # évite de réitérer à chaque fois sur des chambres non compatibles
 
             while(room_index<3):
 
@@ -391,7 +391,9 @@ class RoomGrid():
             self.data.updateDebugText("Furnace: you will draw more red rooms now")
             self.data.furnace_effect = True
 
-
+        if room.name == "Gymnasium":
+            self.data.gymnasium_effet = True
+            self.data.updateDebugText("Gymnasium: you will lose 2 steps per movement now")
     def openDoor(self):
         """
         Ouvre une porte :
