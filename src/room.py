@@ -367,7 +367,7 @@ class Room:
       
 
         # mise à jour des conditions limites des portes
-        self.doorHandleEdgeConditions()
+        
 
         # mise à jour de l'image
         self.updateImage()

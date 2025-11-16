@@ -100,9 +100,11 @@ class RoomGrid():
         # Si notre porte est au NORD, alors la prochaine porte à vérifier de la prochaine chambre est celle du SUD
         curr_door_stat = current_room.door_status[dir]
         next_door_stat = next_room.door_status[dir_opposed]
-
+        x = current_room.x
+        y = current_room.y
+        c1 = y == params.ROOM_GRID_SIZE_VERTICAL-1 # si dans la rangée de la ENTRANCE HALL (première), alors porte forcément ouverte
         if(self.checkDoorsConnectionExists(next_room)): # S'il y a deux portes entre les chambres
-                if(curr_door_stat==1 or next_door_stat ==1): # si une porte est ouverte alors les deux le sont - évite devoir reouvrir des portes si on passe "de l'autre côté"
+                if(curr_door_stat==1 or next_door_stat ==1 or c1): # si une porte est ouverte alors les deux le sont - évite devoir reouvrir des portes si on passe "de l'autre côté"
                     next_room.door_status[dir_opposed] = 1
                     current_room.door_status[dir] = 1
                     return 1
@@ -265,10 +267,6 @@ class RoomGrid():
             
         return -1
     
-
-
-
-        
 
 
     def generateRandomRooms(self):
@@ -543,7 +541,7 @@ class RoomGrid():
         self.applyNewRoomEffect(newRoom)
 
     def spreadItemInManoir(self,item,q=1):
-        """Ajoute item dans le manoir, dans chaque chambre, selon rareté item
+        """Ajoute item dans le manoir, dans chaque chambre, selon rareté item et condition spéciale
         Args:
             item (str): objet à ajouter partout
     
