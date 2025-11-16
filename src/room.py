@@ -220,10 +220,13 @@ class Room:
                     rarity_item = max(0,rarity_item-1)
 
             # Tirage pour savoir si l’objet apparaît
-            rand_choice =  random.randint(0,rarity_item+1) # plus la rareté augmente, plus la probilité d'apparaître réduit. Une rareté de 0
-            # est équivalente à une chance de 50% (choix aléatoire entre [0,1])
-            if(rand_choice == 0):
-                continue # objet absent dans chambre
+           
+            # plus la rareté augmente, plus la probilité d'apparaître réduit
+        
+            proba = 1 / (1 + rarity_item * 0.5) # rarity 1: proba de 67%, 2: 50%, 3: 40$. Évite jeu trop compliqué 
+            if random.random() > proba:  #objet non choisit - random.random entre [0,1]
+                continue       
+
 
             # Détermination de la quantité
 
