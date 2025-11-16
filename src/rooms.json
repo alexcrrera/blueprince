@@ -44,7 +44,7 @@
             "W"
         ],
         "placement_condition": 0,
-        "q": 1,
+        "q": 3,
         "possible_items": {
             "gold": [
                 1,
@@ -76,7 +76,7 @@
             "W"
         ],
         "placement_condition": 0,
-        "q": 1,
+        "q": 3,
         "possible_items": {
             "keys": [
                 2,
@@ -104,7 +104,7 @@
             "W"
         ],
         "placement_condition": 0,
-        "q": 2,
+        "q": 3,
         "possible_items": {
             "apple": [
                 1,
@@ -137,7 +137,7 @@
                 0
             ]
         },
-        "q": 5,
+        "q": 2,
         "items": {
             "package": [
                 1,
@@ -156,7 +156,7 @@
             "N"
         ],
         "placement_condition": 0,
-        "q": 10,
+        "q": 2,
         "possible_items": {
             "gold": [
                 5,
@@ -234,7 +234,7 @@
             "W"
         ],
         "placement_condition": 0,
-        "q": 1,
+        "q": 2,
         "possible_items": {
             "keys": [
                 2,
@@ -312,7 +312,7 @@
     "Chapel": {
         "image": "Chapel.jpg",
         "color": "red",
-        "rarity": 0,
+        "rarity": 2,
         "cost": 0,
         "doors": [
             "W",
@@ -366,7 +366,7 @@
     "Lavatory": {
         "image": "Lavatory.jpg",
         "color": "red",
-        "rarity": 1,
+        "rarity": 2,
         "cost": 0,
         "doors": [
             "S"
@@ -419,7 +419,7 @@
             "S"
         ],
         "placement_condition": 0,
-        "q": 1,
+        "q": 2,
         "items": {
             "locker": [
                 4,
@@ -474,7 +474,7 @@
             "S"
         ],
         "placement_condition": 2,
-        "q": 5,
+        "q": 3,
         "items": {},
         "possible_items": {
             "gems": [
@@ -507,7 +507,7 @@
     "Maids_Chamber": {
         "image": "Maids_Chamber.jpg",
         "color": "red",
-        "rarity": 0,
+        "rarity": 1,
         "cost": 0,
         "doors": [
             "W",
@@ -556,7 +556,7 @@
     "Furnace": {
         "image": "Furnace.jpg",
         "color": "bleue",
-        "rarity": 0,
+        "rarity": 1,
         "cost": 0,
         "doors": [
             "S"
@@ -566,5 +566,389 @@
         "items": {},
         "possible_items": {},
         "description": "Increases the chances of finding red rooms when drafted"
+    },
+    "Gymnasium": {
+        "image": "Gymnasium.jpg",
+        "color": "red",
+        "rarity": 3,
+        "cost": 0,
+        "doors": [
+            "E",
+            "W",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {},
+        "possible_items": {
+            "keys": [
+                1,
+                0
+            ],
+            "gold": [
+                3,
+                0
+            ]
+        },
+        "description": "When drafted, makes you lose 2 steps per movement!"
+    },
+    "Courtyard": {
+        "image": "Courtyard.jpg",
+        "color": "green",
+        "rarity": 0,
+        "cost": 1,
+        "doors": [
+            "E",
+            "W",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {},
+        "possible_items": {
+            "metal_detector": [
+                1,
+                0
+            ],
+            "shovel": [
+                1,
+                0
+            ],
+            "trunk": [
+                1,
+                0
+            ],
+            "hammer": [
+                1,
+                0
+            ]
+        },
+        "description": ""
+    },
+    "Passageway": {
+        "image": "Passageway.jpg",
+        "color": "marron",
+        "rarity": 0,
+        "cost": 2,
+        "doors": [
+            "N",
+            "E",
+            "W",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 3,
+        "items": {},
+        "possible_items": {},
+        "description": ""
+    },
+    "West_Wing_Hall": {
+        "image": "West_Wing_Hall.jpg",
+        "color": "marron",
+        "rarity": 1,
+        "cost": 0,
+        "doors": [
+            "E",
+            "W",
+            "S"
+        ],
+        "placement_condition": 4,
+        "q": 2,
+        "items": {},
+        "possible_items": {
+            "apple": [
+                1,
+                0
+            ],
+            "dice": [
+                2,
+                0
+            ],
+            "keys": [
+                1,
+                0
+            ]
+        },
+        "description": ""
+    },
+    "East_Wing_Hall": {
+        "image": "East_Wing_Hall.jpg",
+        "color": "marron",
+        "rarity": 2,
+        "cost": 0,
+        "doors": [
+            "E",
+            "W",
+            "S"
+        ],
+        "placement_condition": 3,
+        "q": 1,
+        "items": {},
+        "possible_items": {
+            "apple": [
+                1,
+                0
+            ],
+            "keys": [
+                1,
+                0
+            ],
+            "gold": [
+                1,
+                0
+            ]
+        },
+        "description": ""
+    },
+    "Corridor": {
+        "image": "Corridor.jpg",
+        "color": "bleue",
+        "rarity": 0,
+        "cost": 0,
+        "doors": [
+            "N",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {},
+        "possible_items": {
+            "apple": [
+                1,
+                0
+            ],
+            "keys": [
+                1,
+                0
+            ],
+            "gold": [
+                2,
+                0
+            ],
+            "gems": [
+                1,
+                0
+            ]
+        },
+        "description": ""
+    },
+    "Aquarium": {
+        "image": "Aquarium.jpg",
+        "color": "alle",
+        "rarity": 2,
+        "cost": 1,
+        "doors": [
+            "E",
+            "W",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {},
+        "possible_items": {
+            "keys": [
+                2,
+                1
+            ],
+            "gems": [
+                1,
+                0
+            ],
+            "shovel": [
+                1,
+                0
+            ]
+        },
+        "description": "Aquarium is every color of room"
+    },
+    "Freezer": {
+        "image": "Freezer.jpg",
+        "color": "bleue",
+        "rarity": 3,
+        "cost": 0,
+        "doors": [
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {},
+        "possible_items": {},
+        "description": "Brrrr...."
+    },
+    "Utility_Closet": {
+        "image": "Utility_Closet.jpg",
+        "color": "bleue",
+        "rarity": 0,
+        "cost": 0,
+        "doors": [
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 2,
+        "items": {},
+        "possible_items": {
+            "locker": [
+                4,
+                1
+            ],
+            "gold": [
+                9,
+                1
+            ],
+            "shovel": [
+                1,
+                0
+            ],
+            "hammer": [
+                1,
+                0
+            ]
+        },
+        "description": ""
+    },
+    "Study": {
+        "image": "Study.jpg",
+        "color": "bleue",
+        "rarity": 2,
+        "cost": 0,
+        "doors": [
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 3,
+        "items": {},
+        "possible_items": {
+            "apple": [
+                2,
+                1
+            ],
+            "dice": [
+                2,
+                0
+            ],
+            "keys": [
+                1,
+                0
+            ],
+            "gold": [
+                5,
+                1
+            ],
+            "trunk": [
+                1,
+                0
+            ]
+        },
+        "description": ""
+    },
+    "Den": {
+        "image": "Den.jpg",
+        "color": "bleue",
+        "rarity": 0,
+        "cost": 1,
+        "doors": [
+            "N",
+            "E",
+            "W",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 4,
+        "items": {},
+        "possible_items": {
+            "dice": [
+                2,
+                0
+            ],
+            "trunk": [
+                1,
+                0
+            ],
+            "rabbits_foot": [
+                1,
+                0
+            ]
+        },
+        "description": ""
+    },
+    "Wine_Cellar": {
+        "image": "Wine_Cellar.jpg",
+        "color": "bleue",
+        "rarity": 0,
+        "cost": 0,
+        "doors": [
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 2,
+        "items": {
+            "gems": [
+                3,
+                0
+            ]
+        },
+        "possible_items": {
+            "dice": [
+                2,
+                0
+            ],
+            "keys": [
+                1,
+                0
+            ],
+            "gold": [
+                3,
+                0
+            ],
+            "trunk": [
+                1,
+                0
+            ],
+            "shovel": [
+                1,
+                0
+            ],
+            "hammer": [
+                1,
+                0
+            ]
+        },
+        "description": ""
+    },
+    "Library": {
+        "image": "Library.jpg",
+        "color": "bleue",
+        "rarity": 1,
+        "cost": 0,
+        "doors": [
+            "W",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 4,
+        "items": {},
+        "possible_items": {
+            "keys": [
+                1,
+                0
+            ],
+            "apple": [
+                1,
+                0
+            ],
+            "gold": [
+                3,
+                0
+            ],
+            "gems": [
+                1,
+                0
+            ],
+            "trunk": [
+                1,
+                0
+            ]
+        },
+        "description": ""
     }
 }

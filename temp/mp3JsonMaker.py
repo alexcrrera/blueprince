@@ -25,7 +25,7 @@ def generate_sfx_json():
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(sfx_dict, f, indent=4, ensure_ascii=False)
 
-    print(f"✅ Created {output_file} with {len(sfx_files)} entries.")
+    print(f" Created {output_file} with {len(sfx_files)} entries.")
 
 
 if __name__ == "__main__":
