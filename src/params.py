@@ -279,9 +279,9 @@ ITEMS_DESCRIPTION_DICT = {
 # ============================================================================
 
 POSSIBLE_ITEMS_PER_ACTION_DICT = {
-    "dig_spots": {"gold":[5,1],"keys":[5,1],"gems":[5,1]},
-    "package": {"gold":[10,1],"keys":[3,1],"gems":[2,1],"rabbits_foot":[1,1]},
-    "trunk": {"keys":[3,1], "gems":[4,1], "gold":[3,0], "dice":[2,0],"lockpick":[1,0]},
+    "dig_spots": {"gold":[5,1],"keys":[3,1],"gems":[2,1]},
+    "package": {"gold":[10,1],"keys":[2,1],"gems":[1,1],"rabbits_foot":[1,1]},
+    "trunk": {"keys":[2,1], "gems":[2,1], "gold":[3,0], "dice":[2,0],"lockpick":[1,0]},
     "locker": {"gems":[1,0],"gold":[5,1],"apple":[1,0],"keys":[1,0]}
 }
 
