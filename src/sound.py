@@ -3,109 +3,181 @@ from src import params
 import random
 
 class HandleSound:
+    """
+    Gère toute la partie audio du jeu :
+        - musique de fond (loop)
+        - effets sonores (SFX)
+        - lecture conditionnelle de sons selon des flags HandleData
+
+    Ce gestionnaire fonctionne entièrement par signaux :
+        - chaque action déclenche un flag dans HandleData (ex: click_play)
+        - HandleSound lit ces flags dans update()
+        - puis joue le son correspondant et remet le flag à False
+
+    Cette approche permet :
+        - un découplage total entre gameplay et audio
+        - un contrôle simple du mix audio
+        - une extensibilité facile (ajout de nouveaux sons)
+    """
+
     def __init__(self,data):
+        """
+        Initialise le gestionnaire audio.
+
+        Args:
+            data: Instance HandleData contenant les flags audio.
+        """
         self.data = data
+        # dir des fichirers
         self.music_path = params.MUSIC_TRACK_DIR
-        self.sfx_folder_path = params.SFX_DIR
+        self.sfx_folder_path = params.SFX_DIR # lié au json du son
         self.sfx_volume = params.SFX_LEVEL
 
-
+        # Contiendra les sons individuels
         self.sfx = {}
-        self.randomStartMusic = random.uniform(0,3500) # un peu moins d'une heure au cas où
-        self.play_music()
 
-        
+        # Démarre la musique à un offset aléatoire, évite répétitivité 
+        self.randomStartMusic = random.uniform(0,3500)
+        self.playMusic() 
 
+        # Dictionnaire des sons défini dans params
         self.sounds = params.SFX_DICT
 
 
 
     # ----------------- Music -----------------
-    def play_music(self):
-        
+    def playMusic(self):
+        """
+        Lance la musique principale en boucle (loop = -1),
+        en commençant à un offset aléatoire.
+        """
         pygame.mixer.music.load(params.MUSIC_TRACK_DIR)
         pygame.mixer.music.set_volume(self.data.music_level)
-        pygame.mixer.music.play(loops=-1, start = self.randomStartMusic)
+        pygame.mixer.music.play(loops=-1, start=self.randomStartMusic)
 
-    def stop_music(self):
-        """Pause la musique"""
+    def stopMusic(self):
+        """
+        Coupe la musique en mettant le volume à 0 (pas un vrai arrêt techniquement)
+        """
         self.data.music_level = 0
         pygame.mixer.music.set_volume(self.data.music_level)
      
 
-    def set_music_volume(self):
-        volume=self.data.music_level
-        """Permet d'ajuster la musique"""
+    def setMusicVolume(self):
+        """
+        Applique la valeur actuelle du volume de la musique.
+        """
+        volume = self.data.music_level
         self.music_volume = volume
         pygame.mixer.music.set_volume(volume)
 
-    # ----------------- Sound Effects -----------------
-    def load_sfx(self, name,dir):
-        self.sounds[name] = dir
 
-    def play_sfx(self, name):
+
+
+    def playSFX(self, name):
+        """
+        Joue un effet sonore
+
+        Args:
+            name (str): Nom du son dans self.sounds.
+        """
         sound = pygame.mixer.Sound(self.sounds.get(name))
         sound.play()
     
 
-    
+
     def update(self):
-        if(not(self.data.music_play)):
-            self.stop_music()
+        """
+        Appelé à chaque frame.
+
+        Vérifie tous les flags audio dans self.data et joue les sons associés.
+        Chaque flag est remis à False après lecture.
+
+        Les sons gérés :
+            - longclick (choix principal)
+            - click1/2/3 (petits clics UI)
+            - door_lock_1/2
+            - lockpick
+            - grab
+            - shovel
+            - redraft
+            - package
+            - hammer
+            - trunk
+            - locker
+        """
+
+        # ---- Gestion musique ----
+        if not self.data.music_play:
+            self.stopMusic()
         else:
             self.data.music_level = params.MUSIC_LEVEL
-            self.set_music_volume()
+            self.setMusicVolume()
 
-        if( self.data.click_play):
-             self.data.click_play = False
-             self.play_sfx("longclick")
+
+        # ---- Gros clic (validation) ----
+        if self.data.click_play:
+            self.data.click_play = False
+            self.playSFX("longclick")
              
-        if(self.data.small_click_play):
+        # ---- Petits clics (déplacement curseur) ----
+        if self.data.small_click_play:
             self.data.small_click_play = False
             i = random.randint(1, 3)
             rand_audio = "click" + str(i)
-            self.play_sfx(rand_audio)
+            self.playSFX(rand_audio)
 
-        if(self.data.door_locked_play):
+        # ---- Porte verrouillée ----
+        if self.data.door_locked_play:
             self.data.door_locked_play = False
+            # il y a deux sons disponibles pour éviter répétition son donc tirage aléatoire
             i = random.randint(1, 2)
             rand_audio = "door_lock_" + str(i)
-            self.play_sfx(rand_audio)
+            self.playSFX(rand_audio)
             
-        if(self.data.enter_room_play):
+        # ---- Entrée dans une pièce ----
+        if self.data.enter_room_play:
             self.data.enter_room_play = False
-           # self.play_sfx("door_open")
+            # Aucun son car embêtant 
 
-        if(self.data.enter_room_play):
-            print("dfo")
-            self.data.enter_room_play = False
-            self.play_sfx("lockpick")
+
+        # ---- Lockpick ----
+        if self.data.lockpick_used_play:  
+            self.data.lockpick_used_play = False
+            self.playSFX("lockpick")
             pass
-    
-        if(self.data.interact_play):
+
+        # ---- Interactions d’objets (ramasser) ----
+        if self.data.interact_play:
             self.data.interact_play = False
-            self.play_sfx("grab")
+            self.playSFX("grab")
 
-        if(self.data.shovel_play):
+        # ---- Creuser ----
+        if self.data.shovel_play:
             self.data.shovel_play = False
-            self.play_sfx("shovel")
+            self.playSFX("shovel")
 
-        if(self.data.room_redraft_play):
+        # ---- Redraft ----
+        if self.data.room_redraft_play:
             self.data.room_redraft_play = False
-            self.play_sfx("redraft")
+            self.playSFX("redraft")
 
-        if(self.data.mail_play):
+        # ---- Package (Mail Room) ----
+        if self.data.mail_play:
             self.data.mail_play = False
-            self.play_sfx("package")
+            self.playSFX("package")
 
-        if(self.data.hammer_play):
+        # ---- Marteau ----
+        if self.data.hammer_play:
             self.data.hammer_play = False
-            self.play_sfx("hammer")
+            self.playSFX("hammer")
 
-        if(self.data.trunk_play):
+        # ---- Coffre ----
+        if self.data.trunk_play:
             self.data.trunk_play = False
-            self.play_sfx("trunk")
+            self.playSFX("trunk")
 
-        if(self.data.locker_play):
+        # ---- Casier (Locker Room) ----
+        if self.data.locker_play:
             self.data.locker_play = False
-            self.play_sfx("locker")
+            self.playSFX("locker")
