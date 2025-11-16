@@ -950,5 +950,76 @@
             ]
         },
         "description": ""
+    },
+    "Office": {
+        "image": "Office.jpg",
+        "color": "bleue",
+        "rarity": 0,
+        "cost": 2,
+        "doors": [
+            "W",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {},
+        "possible_items": {
+            "trunk": [
+                1,
+                0
+            ],
+            "apple": [
+                1,
+                0
+            ],
+            "dice": [
+                2,
+                0
+            ],
+            "gems": [
+                1,
+                0
+            ],
+            "gold": [
+                12,
+                1
+            ]
+        },
+        "description": "Opportunity to earn and spread Gold"
+    },
+    "Patio": {
+        "image": "Patio.jpg",
+        "color": "green",
+        "rarity": 1,
+        "cost": 1,
+        "doors": [
+      
+            "W",
+            "S"
+        ],
+        "placement_condition": 0,
+        "q": 1,
+        "items": {},
+        "possible_items": { "trunk": [
+                1,
+                0
+            ],
+            "apple": [
+                1,
+                0
+            ],
+            "keys": [
+                1,
+                0
+            ],
+            "gems": [
+                3,
+                1
+            ],
+            "shovel": [
+                1,
+                0
+            ], "metal_detector":[1,0]},
+        "description": "Spreads gems in the green rooms when placed in the Mannor"
     }
 }

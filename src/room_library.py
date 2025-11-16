@@ -264,6 +264,11 @@ class RoomGrid():
                 return 1
             
         return -1
+    
+
+
+
+        
 
 
     def generateRandomRooms(self):
@@ -537,6 +542,28 @@ class RoomGrid():
 
         self.applyNewRoomEffect(newRoom)
 
+    def spreadItemInManoir(self,item,q=1):
+        """Ajoute item dans le manoir, dans chaque chambre, selon rareté item
+        Args:
+            item (str): objet à ajouter partout
+    
+        
+        """
+
+        for col in self.grid:
+            for room in col:
+                if room is not None:
+                    if room.color == "green": # effet PATIO: gemmes uiquement dans chambres vertes...
+                        self.current_room.generateItems(def_items={"gems":[q,0]}, possible_items={}, box_generation=True)                        
+                        
+                    else:
+
+                        self.current_room.generateItems(def_items={}, possible_items={item:[q,1]}, box_generation=True)
+
+        item_clean = params.ITEMS_DESCRIPTION_DICT.get(item)[0].lower() # nom item sans majuscule et pour UI
+        txt = "A couple of " + str(item_clean) + "s have been spread accros the Mannor"
+        
+        self.data.updateDebugText(txt)
 
     def applyNewRoomEffect(self,room):
         """
@@ -553,6 +580,13 @@ class RoomGrid():
         if room.name == "Greenhouse":
             self.data.updateDebugText("You will draw more green rooms now")
             self.data.green_house_effect= True
+
+        if room.name == "Office":
+            self.spreadItemInManoir("gold",q=1)
+            
+        if room.name == "Patio":
+            self.spreadItemInManoir("gems",q=1)
+          
    
 
     def updateRoomAndNextRoom(self):
