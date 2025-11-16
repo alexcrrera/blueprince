@@ -75,7 +75,7 @@ class HandleData(handler.BaseHandler):
         self.trunk_play = False #sfx pour coffre
         self.hammer_play = False #sfx pour marteau
         self.locker_play = False #sfx pour ouverture casier
-
+        self.lockpick_used_play = False # sfx pour utilisation lockpick
 
         # Sélection de salle (random draw)
         self.counter_room_selection_cursor = 0 # compteur pour curseur choix chambre choisie 0 = première chambre 2 = dernière (3ème)
