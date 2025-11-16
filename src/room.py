@@ -99,6 +99,10 @@ class Room:
         for d in self.doors:
             if d == 1: # s'il y a une porte
                 inter_status = random.choices(choices, weights=weights, k=1)[0] # choix aléatoire entre les 3 choix possible
+                if self.name == "Corridor":
+                    inter_status = 1 # forcément débloquée - effet CORRIDOR
+                    
+                
                 self.door_status.append(inter_status)
             else:
                 # Pas de porte: statut 0 (mur)
@@ -229,7 +233,6 @@ class Room:
 
 
             # Détermination de la quantité
-
 
             # les objets par chambre dans le Room.json sont définis tq: "item": [q,mode] -> mode = 0: quant. objets dispos=q, mode = 1: quant. objets dispos entre 1,q]
             if val[1] == 0:  # mode 0
