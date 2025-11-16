@@ -8,8 +8,8 @@ This is the repository for the BluePrince2D project, which aims to create a simp
 
 Clown the repo:
 
-git clone <URL_DU_DEPOT>
-cd <nom_du_projet>
+git clone <https://github.com/alexcrrera/blueprince>
+cd <blueprince>
 
 
 
@@ -25,7 +25,7 @@ python main.py
 
 # Game Controls
 
-## Movement / Orientation
+## Movement / Orientation - QWERTY and AZERTY supported
 | Key | Action |
 |------|--------|
 | **W-Z** | Face **North** |
@@ -35,11 +35,12 @@ python main.py
 
 ---
 
-## ⚙️ Interaction
+## Interaction
 | Key | Action |
 |------|--------|
-| **Space** | - Open a door<br>- Enter an existing discovered room<br>- Generate 3 random rooms if the tile is empty |
+| **Space** | - Open a door<br>- Enter an existing discovered room<br>- Generate random rooms if the tile is empty |
 | **Enter** | Confirm the selected room (during room selection) |
+| **F** | Interact with an item (pick up / use) |
 
 ---
 
