@@ -496,6 +496,7 @@ class RoomGrid():
         if action == "locker":
             self.data.locker_play = True    
             self.data.updateDebugText("You open the locker...")
+            self.data.player.inventory.removeItems("keys",1)
             self.generateBox(action)
 
         if action == "trunk":
