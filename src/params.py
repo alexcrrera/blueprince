@@ -271,7 +271,7 @@ ITEMS_DESCRIPTION_DICT = {
     "cake_buy":["Cake", "Buy a cake - 6 coins", "a",2,"BUY","NAN"],
     "sandwich_buy":["Sandwich", "Buy a sandwich - 8 coins", "a",3,"BUY","NAN"],
     "meal_buy":["Meal", "Buy a meal - 15 coins", "a",3,"BUY","NAN"],
-    "locker": ["Locker", "Use a key to open a locke","a",1,"OPEN","OPEN"],
+    "locker": ["Locker", "Use a key to open a locker","a",1,"OPEN","OPEN"],
     }
 
 # ============================================================================
