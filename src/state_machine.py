@@ -144,12 +144,13 @@ class StateMachineHandler(handler.BaseHandler):
         # Cas 3 : porte simple verrou
         elif(self.data.player.next_room_status ==2):
 
-            if(self.data.player.inventory.getItemQ("keys")>0):
-                # utilisation clef ou lockpick
-                if(not self.data.player.inventory.getItemQ("lockpick")>0): #pas de lockpick dans inventaire donc faut utiliser une clef
+            
+            if(self.data.player.inventory.getItemQ("lockpick")>0): #pas de lockpick dans inventaire donc faut utiliser une clef
                     self.data.updateDebugText(f"You use a key to open the door")
                     self.data.player.inventory.removeItems("keys",1)
-                else:
+            else:
+                if(self.data.player.inventory.getItemQ("keys")>0):
+                # utilisation clef ou lockpick   
                     self.data.lockpick_used_play = True #sfx lockpick
                     self.data.updateDebugText(f"You use the lockpick and open the door")
 
